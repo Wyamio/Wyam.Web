@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <title>Wyam - Configuration</title>
+        <meta name="description" content="FluentBootstrap provides extensions, helper classes, model binding, and other goodies to help you use the Bootstrap CSS framework from .NET code." />
+        <meta name="keywords" content="ASP.NET,MVC,ASP.NET MVC,C#,HTML,HtmlHelpers,Web Development,Bootstrap,Twitter Bootstrap,CSS" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+        <link href="/Content/bootstrap-theme.min.css" rel="stylesheet" />
+        <link href="/Content/master.css" rel="stylesheet" />
+        <link href='http://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
+        <script src="/Scripts/jquery-2.1.1.min.js"></script>
+        <script src="/Scripts/bootstrap.min.js"></script>          
+        
+    </head>
+    <body>        
+        <div class="container">
+            <div><a href="/"><img src="/Content/Images/logo.png" class="img-responsive center-block" alt="Wyam"></a></div>
+            <ul class="nav nav-tabs">
+
+                <li role="presentation"><a href="/">Introduction</a></li>
+                <li role="presentation" class="active"><a href="/docs">Documentation</a></li>
+                <li role="presentation" class="pull-right"><a href="https://github.com/daveaglick/Wyam">View on GitHub</a></li>
+            </ul>
+        </div>    
+        <div class="container">
+            
+
+<div class="row">
+    <div class="col-md-8">
+        <h1 class="title">Configuration</h1>
+        <p>The command line Wyam application reads a configuration file typically named <code>config.wyam</code> that sets up the environment and initializes metadata and pipelines. It consists of two parts, the <em>setup</em> and the <em>configuration</em>. These two sections are separated by a line consisting entirely of one or more dashes.</p>
+<p>Both sections of the configuration file are evaluated as C# code, so you can make use of the full C# language and the entire .NET ecosystem. However, it's not necessary to know C# to write Wyam configuration files. The syntax has been carefully crafted to be usable by anyone no matter their level of programming experience.</p>
+<h1>Setup</h1>
+<p>The setup helps establish the Wyam environment and gets evaluated before the rest of the configuration file. It's generally responsible for declaring NuGet packages, assemblies, and namespaces that should be made available to the main configuration body. Any modules that exist in referenced NuGet packages or assemblies will get automatically imported for use in pipelines. Additionally, the objects in NuGet packages and assemblies will be available from the configuration body and any referenced namespaces will be brought into scope. Note that while the setup portion of the configuration file is evaluated as C# code just like the configuration body, it only references a small subset of the .NET class library (basically just enough to set things up).</p>
+<h2>NuGet</h2>
+<p>Wyam can automatically download any NuGet packages you declare in the setup portion of the configuration file. These will then be scanned for modules and be made available to the main configuration body. NuGet packages are configured using the global <code>Packages</code> object and a fluent interface.</p>
+<p><code>Packages.Add(string packageId, string versionSpec = null, bool allowPrereleaseVersions = false, bool allowUnlisted = false)</code> will let you specify a NuGet package to download from the default package source, which is the NuGet.org feed. <code>Packages.AddRepository(string packageSource)</code> will let you define alternate package sources (such as an internal NuGet feed or a feed on MyGet). For example:</p>
+<pre><code>Packages
+    .Add(&quot;Humanizer&quot;)
+    .Add(&quot;Newtonsoft.Json&quot;);
+Packages
+    .AddRepository(&quot;https://www.myget.org/F/roslyn-nightly/&quot;)
+    .Add(&quot;Microsoft.CodeAnalysis&quot;)
+    .Add(&quot;Microsoft.CodeAnalysis.Scripting&quot;);
+</code></pre>
+<p>By default, packages are downloaded to <code>\packages</code>. If you want to change this, set <code>Packages.Path</code> to the relative folder where you want packages to be downloaded.</p>
+<h2>Assemblies</h2>
+<h2>Namespaces</h2>
+<h1>Configuration</h1>
+<p>Configuring such a pipeline is easy, and Wyam configuration files are designed to be simple and straightforward:</p>
+<pre><code>Pipelines.Add(
+    ReadFiles(&quot;*.md&quot;),
+    Markdown(),
+    WriteFiles(&quot;.html&quot;)
+);
+</code></pre>
+<p>However, don't let the simplicity fool you. Wyam configuration files are C# scripts and as such can make use of the full C# language and the entire .NET ecosystem (including built-in support for NuGet). For example, one of the built-in modules lets you write a delegate to transform the input documents for extreme flexibility.</p>
+<p>Note that when supplying modules to the pipeline or to other modules, new instances of the module class are usually required. An astute reader will notice that in the example above modules are being specified with what look like methods. These methods are just shorthand for the actual module class constructors and this convention can be used for any module within the configuration script. The example configuration above could also have been written as:</p>
+<pre><code>Pipelines.Add(
+    new ReadFiles(&quot;*.md&quot;),
+    new Markdown(),
+    new WriteFiles(&quot;.html&quot;)
+);
+</code></pre>
+
+
+    </div>
+    <div class="col-md-4">
+                <h3>Getting Started</h3>
+                <ul class="nav nav-pills nav-stacked">
+                        <li><a href="/docs\getting-started\concepts.html">Concepts</a></li>
+                        <li><a href="/docs\getting-started\installation.html">Installation</a></li>
+                        <li><a href="/docs\getting-started\usage.html">Usage</a></li>
+                        <li class="active"><a href="/docs\getting-started\configuration.html">Configuration</a></li>
+                </ul>
+                <h3>Modules</h3>
+                <ul class="nav nav-pills nav-stacked">
+                        <li><a href="/docs\modules\core-modules.html">Core Modules</a></li>
+                        <li><a href="/docs\modules\json.html">JSON</a></li>
+                        <li><a href="/docs\modules\markdown.html">Markdown</a></li>
+                        <li><a href="/docs\modules\razor.html">Razor</a></li>
+                        <li><a href="/docs\modules\yaml.html">YAML</a></li>
+                </ul>
+
+    </div>
+</div>
+
+        </div>
+        <hr />
+        <div class="container">
+            <p><small>Wyam is crafted by <a href="http://www.daveaglick.com">Dave Glick</a>. <a href="https://github.com/daveaglick/Wyam">Code on GitHub</a>. And yes, this site was entirely generated by Wyam. Check out <a href="https://github.com/daveaglick/Wyam.Web">the site code on GitHub</a> too.</small></p>
+        </div>        
+    </body>
+</html>

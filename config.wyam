@@ -1,0 +1,25 @@
+Assemblies.AddDirectory(@"..\Wyam\Wyam.Modules.Markdown\bin\Debug");
+Assemblies.AddDirectory(@"..\Wyam\Wyam.Modules.Yaml\bin\Debug");
+Assemblies.AddDirectory(@"..\Wyam\Wyam.Modules.Razor\bin\Debug");
+Packages.Add("Bootstrap");
+Packages.Add("jQuery", "[2.1.1]");
+---
+
+Pipelines.Add("Markdown",
+	ReadFiles(@"*.md"),
+	FrontMatter(Yaml()),
+	Markdown(),
+	Razor(),
+	WriteFiles(".html")
+);
+
+Pipelines.Add("Razor",
+	ReadFiles(@"*.cshtml").Where(x => Path.GetFileName(x)[0] != '_'),
+	FrontMatter(Yaml()),
+	Razor(),
+	WriteFiles(".html")
+);
+
+Pipelines.Add("Resources",
+	CopyFiles(@"*").Where(x => Path.GetExtension(x) != ".cshtml" && Path.GetExtension(x) != ".md")
+);

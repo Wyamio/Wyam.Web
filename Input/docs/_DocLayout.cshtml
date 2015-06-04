@@ -1,0 +1,35 @@
+@{
+    Layout = "_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <h1 class="title">@Model.Get("Title")</h1>
+        @RenderBody()
+    </div>
+    <div class="col-md-4">
+        @{
+            string[] topics = new string[]
+            {
+                "Getting Started",
+                "Modules"    
+            };
+            foreach(string topic in topics)
+            {
+                string topicFolder = topic.ToLower().Replace(' ', '-');
+                <h3>@topic</h3>
+                <ul class="nav nav-pills nav-stacked">
+                    @foreach(IDocument doc in Documents
+                        .SelectMany(x => x.Value)
+                        .Where(x => x.Metadata.ContainsKey("FileRelative") && ((string)x.Metadata["FileRelative"]).StartsWith(System.IO.Path.Combine("docs", topicFolder)))
+                        .OrderBy(x => int.Parse((string)x.Metadata.Get("Order", "1000")))
+                        .ThenBy(x => ((string)x.Metadata.Get("Title"))))
+                    {
+                        string active = (string)Model.Get("FileRelative") == (string)doc.Metadata["FileRelative"] ? "active" : null;
+                        <li class="@active"><a href="/@System.IO.Path.ChangeExtension((string)doc.Metadata.Get("FileRelative"), ".html")">@doc.Metadata.Get("Title", @doc.Metadata.Get("FileBase"))</a></li>
+                    }
+                </ul>
+            }
+        }
+    </div>
+</div>
