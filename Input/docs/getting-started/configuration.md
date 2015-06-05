@@ -39,6 +39,12 @@ To make working with your imported packages and assemblies from the configuratio
 
 # Configuration
 
+## Initial Metadata
+
+TODO
+
+## Pipelines
+
 Configuring a pipeline is easy, and Wyam configuration files are designed to be simple and straightforward:
 ```
 Pipelines.Add(
@@ -56,5 +62,16 @@ Pipelines.Add(
 	new ReadFiles("*.md"),
 	new Markdown(),
 	new WriteFiles(".html")
+);
+```
+
+Some modules also accept child modules as part of their processing. For example, the `FrontMatter` module accepts a child module to handle parsing whatever front matter content is found. This way, the same module can be used to recognize front matter without it having to worry about what kind of content the front matter contains (such as YAML or JSON). For example:
+
+```
+Pipelines.Add(
+	ReadFiles("*.md"),
+       FrontMatter(Yaml()),
+	Markdown(),
+	WriteFiles(".html")
 );
 ```
