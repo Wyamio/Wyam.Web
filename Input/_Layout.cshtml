@@ -23,9 +23,9 @@
                     string introductionActive = (string)Model.Get("FileRelative") == "index.cshtml" ? "active" : null;
                     string documentationActive = ((string)Model.Get("FileRelative")).StartsWith("docs\\") ? "active" : null;
                 }
-                <li role="presentation" class="@introductionActive"><a href="/">Introduction</a></li>
-                <li role="presentation" class="@documentationActive"><a href="/docs">Documentation</a></li>
-                <li role="presentation" class="pull-right"><a href="https://github.com/daveaglick/Wyam">View on GitHub</a></li>
+                <li role="presentation" class="@introductionActive"><a href="/">Intro<span class="hidden-xs">duction</span></a></li>
+                <li role="presentation" class="@documentationActive"><a href="/docs">Doc<span class="hidden-xs">umentation</span><span class="visible-xs-inline">s</span></a></li>
+                <li role="presentation" class="pull-right hidden-sm hidden-xs"><a href="https://github.com/daveaglick/Wyam">GitHub</a></li>
             </ul>
         </div>    
         <div class="container">

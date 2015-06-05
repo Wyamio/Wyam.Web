@@ -5,3 +5,12 @@ body {
 .title {
 	font-family: 'Permanent Marker', cursive;
 }
+
+h1 {
+	font-weight: bold;
+}
+
+code {
+	color: #333;
+	background-color: #f5f5f5;
+}

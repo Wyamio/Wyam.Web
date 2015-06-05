@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-        <title>Wyam - Installation</title>
+        <title>Wyam - Helpers</title>
         <meta name="description" content="FluentBootstrap provides extensions, helper classes, model binding, and other goodies to help you use the Bootstrap CSS framework from .NET code." />
         <meta name="keywords" content="ASP.NET,MVC,ASP.NET MVC,C#,HTML,HtmlHelpers,Web Development,Bootstrap,Twitter Bootstrap,CSS" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,8 +31,20 @@
 
 <div class="row">
     <div class="col-md-9">
-        <h1 class="title">Installation</h1>
-        <p>The easiest way to run Wyam is from the command-line. As it becomes more mature, the console application will be made available from GitHub, NuGet, and Chocolatey. For now it must be built from source.</p>
+        <h1 class="title">Helpers</h1>
+        <p>The <code>Wyam.Core.Helpers</code> namespaces contains several static helper classes that have useful methods.</p>
+<h1>PathHelper</h1>
+<hr />
+<ul>
+<li>
+<p><code>string GetRelativePath(string fromPath, string toPath)</code></p>
+<p>This computes a relative path between the supplied paths. If both paths are rooted or they have no common root, the <code>toPath</code> is returned.</p>
+</li>
+<li>
+<p><code>string RemoveExtension(string path)</code></p>
+<p>This removes the extension from a path or file. It returns the input path if no extension is present.</p>
+</li>
+</ul>
 
 
     </div>
@@ -40,7 +52,7 @@
                 <h3>Getting Started</h3>
                 <ul class="nav nav-pills nav-stacked">
                         <li><a href="/docs\getting-started\concepts">Concepts</a></li>
-                        <li class="active"><a href="/docs\getting-started\installation">Installation</a></li>
+                        <li><a href="/docs\getting-started\installation">Installation</a></li>
                         <li><a href="/docs\getting-started\usage">Usage</a></li>
                         <li><a href="/docs\getting-started\configuration">Configuration</a></li>
                         <li><a href="/docs\getting-started\examples">Examples</a></li>
@@ -56,7 +68,7 @@
                 <h3>Advanced</h3>
                 <ul class="nav nav-pills nav-stacked">
                         <li><a href="/docs\advanced\embedded-use">Embedded Use</a></li>
-                        <li><a href="/docs\advanced\helpers">Helpers</a></li>
+                        <li class="active"><a href="/docs\advanced\helpers">Helpers</a></li>
                 </ul>
 
     </div>

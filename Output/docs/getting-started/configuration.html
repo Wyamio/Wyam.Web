@@ -20,69 +20,171 @@
             <div><a href="/"><img src="/Content/Images/logo.png" class="img-responsive center-block" alt="Wyam"></a></div>
             <ul class="nav nav-tabs">
 
-                <li role="presentation"><a href="/">Introduction</a></li>
-                <li role="presentation" class="active"><a href="/docs">Documentation</a></li>
-                <li role="presentation" class="pull-right"><a href="https://github.com/daveaglick/Wyam">View on GitHub</a></li>
+                <li role="presentation"><a href="/">Intro<span class="hidden-xs">duction</span></a></li>
+                <li role="presentation" class="active"><a href="/docs">Doc<span class="hidden-xs">umentation</span><span class="visible-xs-inline">s</span></a></li>
+                <li role="presentation" class="pull-right hidden-sm hidden-xs"><a href="https://github.com/daveaglick/Wyam">GitHub</a></li>
             </ul>
         </div>    
         <div class="container">
             
 
+
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-9">
         <h1 class="title">Configuration</h1>
-        <p>The command line Wyam application reads a configuration file typically named <code>config.wyam</code> that sets up the environment and initializes metadata and pipelines. It consists of two parts, the <em>setup</em> and the <em>configuration</em>. These two sections are separated by a line consisting entirely of one or more dashes.</p>
+        <p>The command line Wyam application reads a configuration file typically named <code>config.wyam</code> (though you can change that with an argument) that sets up the environment and initializes metadata and pipelines. It consists of two parts, the <em>setup</em> and the <em>configuration</em>. These two sections are separated by a line consisting entirely of one or more dashes (<code>---</code>).</p>
 <p>Both sections of the configuration file are evaluated as C# code, so you can make use of the full C# language and the entire .NET ecosystem. However, it's not necessary to know C# to write Wyam configuration files. The syntax has been carefully crafted to be usable by anyone no matter their level of programming experience.</p>
 <h1>Setup</h1>
-<p>The setup helps establish the Wyam environment and gets evaluated before the rest of the configuration file. It's generally responsible for declaring NuGet packages, assemblies, and namespaces that should be made available to the main configuration body. Any modules that exist in referenced NuGet packages or assemblies will get automatically imported for use in pipelines. Additionally, the objects in NuGet packages and assemblies will be available from the configuration body and any referenced namespaces will be brought into scope. Note that while the setup portion of the configuration file is evaluated as C# code just like the configuration body, it only references a small subset of the .NET class library (basically just enough to set things up).</p>
-<h2>NuGet</h2>
-<p>Wyam can automatically download any NuGet packages you declare in the setup portion of the configuration file. These will then be scanned for modules and be made available to the main configuration body. NuGet packages are configured using the global <code>Packages</code> object and a fluent interface.</p>
-<p><code>Packages.Add(string packageId, string versionSpec = null, bool allowPrereleaseVersions = false, bool allowUnlisted = false)</code> will let you specify a NuGet package to download from the default package source, which is the NuGet.org feed. <code>Packages.AddRepository(string packageSource)</code> will let you define alternate package sources (such as an internal NuGet feed or a feed on MyGet). For example:</p>
+<hr />
+<p>The setup helps establish the Wyam environment and gets evaluated before the rest of the configuration file. It's generally responsible for declaring NuGet packages, assemblies, and namespaces that should be made available to the main configuration body. Any modules that exist in referenced NuGet packages or assemblies will get automatically imported for use in pipelines. Additionally, the objects in NuGet packages and assemblies will be available from the configuration body and any specified namespaces will be brought into scope. Note that while the setup portion of the configuration file is evaluated as C# code just like the configuration body, it only references a small subset of the .NET class library (basically just enough to set things up).</p>
+<h2><a name="nuget"></a>NuGet</h2>
+<p>Wyam can automatically install any NuGet packages you declare in the setup portion of the configuration file. These will then be scanned for modules and be made available to the main configuration body. NuGet packages are configured using the global <code>Packages</code> object and a fluent interface.</p>
+<p><code>Packages.Install(string packageId, string versionSpec = null, bool allowPrereleaseVersions = false, bool allowUnlisted = false)</code> will let you specify a NuGet package to download from the default package source, which is the main NuGet.org feed. <code>Packages.Repository(string packageSource)</code> will let you define alternate package sources (such as an internal NuGet feed or a feed on MyGet). You can then continue to chain additional <code>Install(...)</code> calls as before. For example:</p>
 <pre><code>Packages
-    .Add(&quot;Humanizer&quot;)
-    .Add(&quot;Newtonsoft.Json&quot;);
-Packages
-    .AddRepository(&quot;https://www.myget.org/F/roslyn-nightly/&quot;)
-    .Add(&quot;Microsoft.CodeAnalysis&quot;)
-    .Add(&quot;Microsoft.CodeAnalysis.Scripting&quot;);
+    .Install(&quot;Humanizer&quot;)
+    .Install(&quot;Newtonsoft.Json&quot;);
+Packages.Repository(&quot;https://www.myget.org/F/roslyn-nightly/&quot;)
+    .Install(&quot;Microsoft.CodeAnalysis&quot;)
+    .Install(&quot;Microsoft.CodeAnalysis.Scripting&quot;);
 </code></pre>
+<p>From the <code>Install(...)</code> method you can also specify the acceptable package version(s) and whether prerelease and/or unlisted packages should be allowed. The <code>versionSpec</code> argument takes a string that matches the standard NuGet version specifications defined at https://docs.nuget.org/create/versioning</p>
 <p>By default, packages are downloaded to <code>\packages</code>. If you want to change this, set <code>Packages.Path</code> to the relative folder where you want packages to be downloaded.</p>
 <h2>Assemblies</h2>
+<p>In addition to NuGet packages you can also load assemblies. This is accomplished by using the <code>Assemblies</code> property. You can load all the assemblies in a directory with the <code>LoadDirectory(string path, SearchOption searchOption = SearchOption.AllDirectories)</code> method. The specified directory can either be relative to the active directory or absolute. You can also load a single assembly by location with the <code>LoadFile(string path)</code> method and by full name with the <code>Load(string name)</code> method. For example:</p>
+<pre><code>Assemblies
+    .LoadDirectory(@&quot;lib&quot;)
+    .LoadFile(@&quot;foo\bar.dll&quot;)
+    .Load(&quot;SampleAssembly, Version=1.0.2004.0, Culture=neutral, PublicKeyToken=8744b20f8da049e3&quot;);
+</code></pre>
+<p>By default, the following assemblies are already loaded so you don't need to explicity specify them:</p>
+<ul>
+<li><code>System</code></li>
+<li><code>System.Collections.Generic</code></li>
+<li><code>System.Linq</code></li>
+<li><code>System.Core</code></li>
+<li><code>Microsoft.CSharp</code></li>
+<li><code>System.IO</code></li>
+<li><code>System.Diagnostics</code></li>
+<li><code>Wyam.Core</code></li>
+<li><code>Wyam.Abstractions</code></li>
+</ul>
 <h2>Namespaces</h2>
+<p>To make working with your imported packages and assemblies from the configuration portion of the file easier, you'll probably want to bring their namespaces into scope using the <code>Namespaces</code> property and the <code>Using(string ns)</code> method. Once you do, the specified assemblies will be implicity added to the configuration portion of the script. For example:</p>
+<pre><code>Namespaces
+    .Using(&quot;System.Data&quot;)
+    .Using(&quot;System.Xml&quot;);
+</code></pre>
+<p>By default, the following namespaces are already brought into scope so you don't need to explicity specify them:</p>
+<ul>
+<li><code>System</code></li>
+<li><code>System.Collections.Generic</code></li>
+<li><code>System.Linq</code></li>
+<li><code>System.IO</code></li>
+<li><code>System.Diagnostics</code></li>
+<li><code>Wyam.Core</code></li>
+<li><code>Wyam.Core.Configuration</code></li>
+<li><code>Wyam.Core.Modules</code></li>
+<li><code>Wyam.Core.Helpers</code></li>
+<li><code>Wyam.Abstractions</code></li>
+</ul>
 <h1>Configuration</h1>
-<p>Configuring such a pipeline is easy, and Wyam configuration files are designed to be simple and straightforward:</p>
+<hr />
+<h2>Initial Metadata</h2>
+<p>Each pipeline starts with a single document prepopulated with initial metadata you specify in the configuration file. You can use this facility to introduce variables that can influence the way the pipeline behaves. To set initial metadata, just add values to the <code>Metadata</code> property (it's a <code>IDictionary&lt;string, object&gt;</code>). Note that the dictionary values are objects, so you can store simple primitive values or complex structure. For example:</p>
+<pre><code>Metadata[&quot;Foo&quot;] = &quot;Bar&quot;;
+Metadata.Add(&quot;Baz&quot;, new KeyValuePair&lt;string, string&gt;(&quot;abc&quot;, &quot;xyz&quot;)); 
+</code></pre>
+<h2>Pipelines</h2>
+<p>Configuring a pipeline is easy, and Wyam configuration files are designed to be simple and straightforward:</p>
 <pre><code>Pipelines.Add(
     ReadFiles(&quot;*.md&quot;),
     Markdown(),
     WriteFiles(&quot;.html&quot;)
 );
 </code></pre>
-<p>However, don't let the simplicity fool you. Wyam configuration files are C# scripts and as such can make use of the full C# language and the entire .NET ecosystem (including built-in support for NuGet). For example, one of the built-in modules lets you write a delegate to transform the input documents for extreme flexibility.</p>
-<p>Note that when supplying modules to the pipeline or to other modules, new instances of the module class are usually required. An astute reader will notice that in the example above modules are being specified with what look like methods. These methods are just shorthand for the actual module class constructors and this convention can be used for any module within the configuration script. The example configuration above could also have been written as:</p>
+<p>However, don't let the simplicity fool you. Wyam configuration files are C# scripts and as such can make use of the full C# language and the entire .NET ecosystem (including the built-in support for NuGet and other assemblies as explained above). One of the core modules even lets you write a delegate right in your configuration file for extreme flexibility.</p>
+<h3>Explicit Module Instantiation</h3>
+<p>Note that you supply the pipeline with new instances of each module. An astute reader will notice that in the example above, modules are being specified with what look like global methods. These methods are just shorthand for the actual module class constructors and this convention can be used for any module within the configuration script. The example configuration above could also have been written as:</p>
 <pre><code>Pipelines.Add(
     new ReadFiles(&quot;*.md&quot;),
     new Markdown(),
     new WriteFiles(&quot;.html&quot;)
 );
 </code></pre>
+<h3>Child Modules</h3>
+<p>Some modules also accept child modules as part of their processing. For example, the <code>FrontMatter</code> module accepts a child module to handle parsing whatever front matter content is found. This way, the same module can be used to recognize front matter without it having to worry about what kind of content the front matter contains (such as YAML or JSON). For example:</p>
+<pre><code>Pipelines.Add(
+    ReadFiles(&quot;*.md&quot;),
+    FrontMatter(Yaml()),
+    Markdown(),
+    WriteFiles(&quot;.html&quot;)
+);
+</code></pre>
+<h3>Pipeline Names</h3>
+<p>Pipelines can be given names, which makes them easier to identify in trace messages and also makes them easier to refer to within templates (for example, to get all the documents generated by a previous pipeline). Just pass in the name of a pipeline as the first parameter to the <code>Add(...)</code> method. If no name is provided (as above), then pipelines will implicitly be given the names <code>Pipeline 1</code>, <code>Pipeline 2</code>, etc.</p>
+<pre><code>Pipelines.Add(&quot;Markdown&quot;,
+    ReadFiles(&quot;*.md&quot;),
+    FrontMatter(Yaml()),
+    Markdown(),
+    WriteFiles(&quot;.html&quot;)
+);
+</code></pre>
+<h1>Example</h1>
+<hr />
+<p>The full configuration file for this site is given below as an example:</p>
+<pre><code>Assemblies
+    .LoadDirectory(@&quot;..\Wyam\Wyam.Modules.Markdown\bin\Debug&quot;)
+    .LoadDirectory(@&quot;..\Wyam\Wyam.Modules.Yaml\bin\Debug&quot;)
+    .LoadDirectory(@&quot;..\Wyam\Wyam.Modules.Razor\bin\Debug&quot;);
+Packages
+    .Install(&quot;Bootstrap&quot;)
+    .Install(&quot;jQuery&quot;, &quot;[2.1.1]&quot;);
+    
+---
+
+Pipelines.Add(&quot;Markdown&quot;,
+    ReadFiles(@&quot;*.md&quot;),
+    FrontMatter(Yaml()),
+    Markdown(),
+    Razor(),
+    WriteFiles(&quot;.html&quot;)
+);
+
+Pipelines.Add(&quot;Razor&quot;,
+    ReadFiles(@&quot;*.cshtml&quot;).Where(x =&gt; Path.GetFileName(x)[0] != '_'),
+    FrontMatter(Yaml()),
+    Razor(),
+    WriteFiles(&quot;.html&quot;)
+);
+
+Pipelines.Add(&quot;Resources&quot;,
+    CopyFiles(@&quot;*&quot;).Where(x =&gt; Path.GetExtension(x) != &quot;.cshtml&quot; &amp;&amp; Path.GetExtension(x) != &quot;.md&quot;)
+);
+</code></pre>
 
 
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
                 <h3>Getting Started</h3>
                 <ul class="nav nav-pills nav-stacked">
-                        <li><a href="/docs\getting-started\concepts.html">Concepts</a></li>
-                        <li><a href="/docs\getting-started\installation.html">Installation</a></li>
-                        <li><a href="/docs\getting-started\usage.html">Usage</a></li>
-                        <li class="active"><a href="/docs\getting-started\configuration.html">Configuration</a></li>
+                        <li><a href="/docs\getting-started\concepts">Concepts</a></li>
+                        <li><a href="/docs\getting-started\installation">Installation</a></li>
+                        <li><a href="/docs\getting-started\usage">Usage</a></li>
+                        <li class="active"><a href="/docs\getting-started\configuration">Configuration</a></li>
+                        <li><a href="/docs\getting-started\examples">Examples</a></li>
                 </ul>
                 <h3>Modules</h3>
                 <ul class="nav nav-pills nav-stacked">
-                        <li><a href="/docs\modules\core-modules.html">Core Modules</a></li>
-                        <li><a href="/docs\modules\json.html">JSON</a></li>
-                        <li><a href="/docs\modules\markdown.html">Markdown</a></li>
-                        <li><a href="/docs\modules\razor.html">Razor</a></li>
-                        <li><a href="/docs\modules\yaml.html">YAML</a></li>
+                        <li><a href="/docs\modules\core-modules">Core Modules</a></li>
+                        <li><a href="/docs\modules\json">JSON</a></li>
+                        <li><a href="/docs\modules\markdown">Markdown</a></li>
+                        <li><a href="/docs\modules\razor">Razor</a></li>
+                        <li><a href="/docs\modules\yaml">YAML</a></li>
+                </ul>
+                <h3>Advanced</h3>
+                <ul class="nav nav-pills nav-stacked">
+                        <li><a href="/docs\advanced\embedded-use">Embedded Use</a></li>
+                        <li><a href="/docs\advanced\helpers">Helpers</a></li>
                 </ul>
 
     </div>

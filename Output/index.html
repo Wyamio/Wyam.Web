@@ -20,30 +20,34 @@
             <div><a href="/"><img src="/Content/Images/logo.png" class="img-responsive center-block" alt="Wyam"></a></div>
             <ul class="nav nav-tabs">
 
-                <li role="presentation" class="active"><a href="/">Introduction</a></li>
-                <li role="presentation"><a href="/docs">Documentation</a></li>
-                <li role="presentation" class="pull-right"><a href="https://github.com/daveaglick/Wyam">View on GitHub</a></li>
+                <li role="presentation" class="active"><a href="/">Intro<span class="hidden-xs">duction</span></a></li>
+                <li role="presentation"><a href="/docs">Doc<span class="hidden-xs">umentation</span><span class="visible-xs-inline">s</span></a></li>
+                <li role="presentation" class="pull-right hidden-sm hidden-xs"><a href="https://github.com/daveaglick/Wyam">GitHub</a></li>
             </ul>
         </div>    
         <div class="container">
-            <h2 class="title">Wyam is a simple to use, highly modular, and extremely configurable static content generator. It can be used to generate web sites, scaffold development projects, create ebooks, and much more.</h2>
+            <div class="well" style="margin-top: 20px;">
+	<h3><strong>Wyam is a simple to use, highly modular, and extremely configurable static content generator.</strong> It can be used to generate web sites, scaffold development projects, create ebooks, and much more.</h3>
+</div>
 
 <p>It's currently under heavy development, but is usable today. Read on for more information if you want to get started now and help influence it's future direction.</p>
 
-<div class="page-header"><h1>Features</h1></div>
+<h1>Features</h1>
+<hr />
 <ul>
-	<li>Flexible script-based configuration</li>
+	<li>Flexible <a href="/docs/getting-started/configuration">script-based configuration</a></li>
 	<li>Lots of modules for things like reading and writing files, handling frontmatter, and manipulating metadata</li>
 	<li>Integrated YAML parser</li>
 	<li>Support for multiple templating languages including Razor</li>
 	<li>Integrated web server for previewing output</li>
 	<li>Integrated file watching and regeneration</li>
-	<li>Full NuGet support</li>
+	<li>Full <a href="/docs/getting-started/configuration#nuget">NuGet support</a></li>
 	<li>Easily extensible</li>
 	<li>Embeddable engine</li>
 </ul>
 
-<div class="page-header"><h1>Usage</h1></div>
+<h1>Usage</h1>
+<hr />
 <p>The best way to get started is to use the command line application:</p>
 <pre>c:\MySite&gt;<strong>Wyam.exe --clean --preview --watch</strong>
 Loading configuration from c:\MySite\config.wyam.

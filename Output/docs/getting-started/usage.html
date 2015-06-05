@@ -20,36 +20,87 @@
             <div><a href="/"><img src="/Content/Images/logo.png" class="img-responsive center-block" alt="Wyam"></a></div>
             <ul class="nav nav-tabs">
 
-                <li role="presentation"><a href="/">Introduction</a></li>
-                <li role="presentation" class="active"><a href="/docs">Documentation</a></li>
-                <li role="presentation" class="pull-right"><a href="https://github.com/daveaglick/Wyam">View on GitHub</a></li>
+                <li role="presentation"><a href="/">Intro<span class="hidden-xs">duction</span></a></li>
+                <li role="presentation" class="active"><a href="/docs">Doc<span class="hidden-xs">umentation</span><span class="visible-xs-inline">s</span></a></li>
+                <li role="presentation" class="pull-right hidden-sm hidden-xs"><a href="https://github.com/daveaglick/Wyam">GitHub</a></li>
             </ul>
         </div>    
         <div class="container">
             
 
+
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-9">
         <h1 class="title">Usage</h1>
-        <p>Details on the various command line switches</p>
+        <p>You typically run Wyam using the command line application <code>Wyam.exe</code>. If you don't specify any arguments, the root folder will be set to the current folder and if a file named <code>config.wyam</code> is found, it will be used as the configuration file. You can also specify a root folder that's different than the current folder after the <code>Wyam.exe</code> command. For example:</p>
+<pre><code>Wyam.exe
+</code></pre>
+<p>Or:</p>
+<pre><code>Wyam.exe C:\MySite
+</code></pre>
+<p>There are also a number of arguments that allow you to control execution:</p>
+<ul>
+<li>
+<p><code>--config file</code></p>
+<p>This allows you specify a configuration file that's different from the default <code>config.wyam</code>.</p>
+</li>
+<li>
+<p><code>--no-clean</code></p>
+<p>By default the output folder is cleaned on every execution and <em>all</em> files in the folder and all subfolders are deleted. This argument lets you prevent the cleaning and will keep all files in the output folder. Keep in mind that generated files will still get overwritten on every execution.</p>
+</li>
+<li>
+<p><code>--skip-packages</code></p>
+<p>By default NuGet packages are checked every time the application is started. This can be time consuming, particularly if a lot of NuGet packages are specified and/or the NuGet servers are slow in responding. You can turn off NuGet installation with this argument. Local packages will still get used, but any packages not already installed will be ignored.</p>
+</li>
+<li>
+<p><code>--watch</code></p>
+<p>This tells Wyam to watch the input folder for any changes. If any are found, the content is regenerated. Because of the flexible nature of Wyam modules it is impossible to tell which input files impact which output files, so all pipelines have to be rerun from scratch. Specifying this argument will keep Wyam running until a key is pressed.</p>
+</li>
+<li>
+<p><code>--preview [port] [force-ext]</code></p>
+<p>This will start the embedded preview web server on the specified port (or on port 5080 if no port is specified). Be default, the web server has a routing rule for extensionless URLs (that is, if you go to <code>/about</code> and a file <code>/about.html</code> or <code>/about.htm</code> exists, it will be served). To turn this behavior off and force the use of file extensions, specify <code>force-ext</code>. Note that to match the extensionless routing behavior on your web server, some additional configuration may be required. Specifying this argument will keep Wyam running until a key is pressed.</p>
+</li>
+<li>
+<p><code>--log [logfile]</code></p>
+<p>This will log all trace messages to a log file. You can specify the log file with <code>logfile</code> or the file <code>wyam-[datetime].txt</code> will be used if one isn't specified.</p>
+</li>
+<li>
+<p><code>--verbose</code></p>
+<p>This will turn on &quot;verbose mode&quot; and will generate additional trace message useful for debugging.</p>
+</li>
+<li>
+<p><code>--pause</code></p>
+<p>This will pause execution at the start of the program until a key is pressed and is useful for attaching a debugger or synchronizing with other applications.</p>
+</li>
+<li>
+<p><code>--help</code></p>
+<p>This prints out a list of the available command line arguments.</p>
+</li>
+</ul>
 
 
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
                 <h3>Getting Started</h3>
                 <ul class="nav nav-pills nav-stacked">
-                        <li><a href="/docs\getting-started\concepts.html">Concepts</a></li>
-                        <li><a href="/docs\getting-started\installation.html">Installation</a></li>
-                        <li class="active"><a href="/docs\getting-started\usage.html">Usage</a></li>
-                        <li><a href="/docs\getting-started\configuration.html">Configuration</a></li>
+                        <li><a href="/docs\getting-started\concepts">Concepts</a></li>
+                        <li><a href="/docs\getting-started\installation">Installation</a></li>
+                        <li class="active"><a href="/docs\getting-started\usage">Usage</a></li>
+                        <li><a href="/docs\getting-started\configuration">Configuration</a></li>
+                        <li><a href="/docs\getting-started\examples">Examples</a></li>
                 </ul>
                 <h3>Modules</h3>
                 <ul class="nav nav-pills nav-stacked">
-                        <li><a href="/docs\modules\core-modules.html">Core Modules</a></li>
-                        <li><a href="/docs\modules\json.html">JSON</a></li>
-                        <li><a href="/docs\modules\markdown.html">Markdown</a></li>
-                        <li><a href="/docs\modules\razor.html">Razor</a></li>
-                        <li><a href="/docs\modules\yaml.html">YAML</a></li>
+                        <li><a href="/docs\modules\core-modules">Core Modules</a></li>
+                        <li><a href="/docs\modules\json">JSON</a></li>
+                        <li><a href="/docs\modules\markdown">Markdown</a></li>
+                        <li><a href="/docs\modules\razor">Razor</a></li>
+                        <li><a href="/docs\modules\yaml">YAML</a></li>
+                </ul>
+                <h3>Advanced</h3>
+                <ul class="nav nav-pills nav-stacked">
+                        <li><a href="/docs\advanced\embedded-use">Embedded Use</a></li>
+                        <li><a href="/docs\advanced\helpers">Helpers</a></li>
                 </ul>
 
     </div>
