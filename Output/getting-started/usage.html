@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,31 +9,57 @@
         <meta name="keywords" content="ASP.NET,MVC,ASP.NET MVC,C#,HTML,HtmlHelpers,Web Development,Bootstrap,Twitter Bootstrap,CSS" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="/Content/bootstrap.min.css" rel="stylesheet" />
-        <link href="/Content/bootstrap-theme.min.css" rel="stylesheet" />
         <link href="/Content/master.css" rel="stylesheet" />
-        <link href='http://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
         <script src="/Scripts/jquery-2.1.1.min.js"></script>
         <script src="/Scripts/bootstrap.min.js"></script>          
         
     </head>
     <body>        
-        <div class="container">
-            <div><a href="/"><img src="/Content/Images/logo.png" class="img-responsive center-block" alt="Wyam"></a></div>
-            <ul class="nav nav-tabs">
+        <nav class="navbar navbar-default navbar-static-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/"><img alt="Wyam" src="/Content/Images/nav-logo.png"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-main">
+              <ul class="nav navbar-nav">
+                
+                    <li class="active"><a href="/getting-started">Getting Started</a></li>
+                    <li><a href="/modules">Modules</a></li>
+                    <li><a href="/advanced">Advanced</a></li>
+              </ul>              
+              <ul class="nav navbar-nav navbar-right">                
+                <li><a href="https://github.com/daveaglick/Wyam">GitHub</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        
+            <div class="jumbotron">
+    	       <div class="container">
+                   <h1>Usage</h1>
+               </div>
+            </div>
+        
 
-                <li role="presentation"><a href="/">Intro<span class="hidden-xs">duction</span></a></li>
-                <li role="presentation" class="active"><a href="/docs">Doc<span class="hidden-xs">umentation</span><span class="visible-xs-inline">s</span></a></li>
-                <li role="presentation" class="pull-right hidden-sm hidden-xs"><a href="https://github.com/daveaglick/Wyam">GitHub</a></li>
-            </ul>
-        </div>    
-        <div class="container">
-            
-
-
-<div class="row">
-    <div class="col-md-9">
-        <h1 class="title">Usage</h1>
-        <p>You typically run Wyam using the command line application <code>Wyam.exe</code>. If you don't specify any arguments, the root folder will be set to the current folder and if a file named <code>config.wyam</code> is found, it will be used as the configuration file. You can also specify a root folder that's different than the current folder after the <code>Wyam.exe</code> command. For example:</p>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">                        
+                        <ul class="nav nav-pills nav-stacked">
+                                <li><a href="/getting-started\concepts">Concepts</a></li>
+                                <li><a href="/getting-started\installation">Installation</a></li>
+                                <li class="active"><a href="/getting-started\usage">Usage</a></li>
+                                <li><a href="/getting-started\configuration">Configuration</a></li>
+                                <li><a href="/getting-started\examples">Examples</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-9">
+                        <p>You typically run Wyam using the command line application <code>Wyam.exe</code>. If you don't specify any arguments, the root folder will be set to the current folder and if a file named <code>config.wyam</code> is found, it will be used as the configuration file. You can also specify a root folder that's different than the current folder after the <code>Wyam.exe</code> command. For example:</p>
 <pre><code>Wyam.exe
 </code></pre>
 <p>Or:</p>
@@ -79,34 +106,10 @@
 </ul>
 
 
-    </div>
-    <div class="col-md-3">
-                <h3>Getting Started</h3>
-                <ul class="nav nav-pills nav-stacked">
-                        <li><a href="/docs\getting-started\concepts">Concepts</a></li>
-                        <li><a href="/docs\getting-started\installation">Installation</a></li>
-                        <li class="active"><a href="/docs\getting-started\usage">Usage</a></li>
-                        <li><a href="/docs\getting-started\configuration">Configuration</a></li>
-                        <li><a href="/docs\getting-started\examples">Examples</a></li>
-                </ul>
-                <h3>Modules</h3>
-                <ul class="nav nav-pills nav-stacked">
-                        <li><a href="/docs\modules\core-modules">Core Modules</a></li>
-                        <li><a href="/docs\modules\json">JSON</a></li>
-                        <li><a href="/docs\modules\markdown">Markdown</a></li>
-                        <li><a href="/docs\modules\razor">Razor</a></li>
-                        <li><a href="/docs\modules\yaml">YAML</a></li>
-                </ul>
-                <h3>Advanced</h3>
-                <ul class="nav nav-pills nav-stacked">
-                        <li><a href="/docs\advanced\embedded-use">Embedded Use</a></li>
-                        <li><a href="/docs\advanced\helpers">Helpers</a></li>
-                </ul>
-
-    </div>
-</div>
-
-        </div>
+                    </div>
+                </div>
+            </div>
+        
         <hr />
         <div class="container">
             <p><small>Wyam is crafted by <a href="http://www.daveaglick.com">Dave Glick</a>. <a href="https://github.com/daveaglick/Wyam">Code on GitHub</a>. And yes, this site was entirely generated by Wyam. Check out <a href="https://github.com/daveaglick/Wyam.Web">the site code on GitHub</a> too.</small></p>

@@ -1,3 +1,5 @@
+@using Wyam.Core.Helpers
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,29 +10,107 @@
         <meta name="keywords" content="ASP.NET,MVC,ASP.NET MVC,C#,HTML,HtmlHelpers,Web Development,Bootstrap,Twitter Bootstrap,CSS" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="/Content/bootstrap.min.css" rel="stylesheet" />
-        <link href="/Content/bootstrap-theme.min.css" rel="stylesheet" />
         <link href="/Content/master.css" rel="stylesheet" />
-        <link href='http://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
         <script src="/Scripts/jquery-2.1.1.min.js"></script>
         <script src="/Scripts/bootstrap.min.js"></script>          
         @RenderSection("head", required: false)
     </head>
     <body>        
-        <div class="container">
-            <div><a href="/"><img src="/Content/Images/logo.png" class="img-responsive center-block" alt="Wyam"></a></div>
-            <ul class="nav nav-tabs">
+        <nav class="navbar navbar-default navbar-static-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/"><img alt="Wyam" src="/Content/Images/nav-logo.png"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-main">
+              <ul class="nav navbar-nav">
                 @{
-                    string introductionActive = (string)Model.Get("FileRelative") == "index.cshtml" ? "active" : null;
-                    string documentationActive = ((string)Model.Get("FileRelative")).StartsWith("docs\\") ? "active" : null;
+                    string[] navs = new string[]
+                    {
+                        "Getting Started",
+                        "Modules",
+                        "Advanced"    
+                    };
+                    string activeNavFolder = string.Empty;
+                }                
+                @foreach(string nav in navs)
+                {
+                    string navFolder = nav.ToLower().Replace(' ', '-');
+                    string active = ((string)Model.Get("FileRelative")).StartsWith(navFolder) ? "active" : null;
+                    if(active != null)
+                    {
+                        activeNavFolder = navFolder;
+                    }
+                    <li class="@active"><a href="/@navFolder">@nav</a></li>
                 }
-                <li role="presentation" class="@introductionActive"><a href="/">Intro<span class="hidden-xs">duction</span></a></li>
-                <li role="presentation" class="@documentationActive"><a href="/docs">Doc<span class="hidden-xs">umentation</span><span class="visible-xs-inline">s</span></a></li>
-                <li role="presentation" class="pull-right hidden-sm hidden-xs"><a href="https://github.com/daveaglick/Wyam">GitHub</a></li>
-            </ul>
-        </div>    
-        <div class="container">
-            @RenderBody()
-        </div>
+              </ul>              
+              <ul class="nav navbar-nav navbar-right">                
+                <li><a href="https://github.com/daveaglick/Wyam">GitHub</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        
+        @if((string)Model.Get("FileRelative") == "index.cshtml")
+        {
+            <div class="jumbotron jumbotron-intro">
+              <div class="container-background">
+            	  <div class="container">
+            	  	<h1>Wyam is a simple to use, highly modular, and extremely configurable static content generator.</h1>
+            	  </div>
+              </div>
+            </div>
+        }
+        else
+        {
+            <div class="jumbotron">
+    	       <div class="container">
+                   <h1>@Model.Get("Title")</h1>
+               </div>
+            </div>
+        }
+        
+        @{
+            List<KeyValuePair<string, string>> localNavs = activeNavFolder == string.Empty ? new List<KeyValuePair<string, string>>() : AllDocuments
+                .Where(x => x.Metadata.ContainsKey("FileRelative") && !((string)x.Metadata["FileRelative"]).EndsWith("index.md") && ((string)x.Metadata["FileRelative"]).StartsWith(activeNavFolder))
+                .OrderBy(x => int.Parse((string)x.Metadata.Get("Order", "1000")))
+                .ThenBy(x => ((string)x.Metadata.Get("Title")))
+                .Select(x => new KeyValuePair<string, string>(
+                    (string)x.Metadata.Get("Title", x.Metadata.Get("FileBase")),
+                    (string)x.Metadata.Get("FileRelative")))
+                .ToList();   
+        }
+        @if(localNavs.Count == 0)
+        {            
+            <div class="container">
+                @RenderBody()
+            </div>
+        }
+        else
+        {
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">                        
+                        <ul class="nav nav-pills nav-stacked">
+                            @foreach(KeyValuePair<string, string> localNav in localNavs)
+                            {
+                                string localActive = (string)Model.Get("FileRelative") == localNav.Value ? "active" : null;
+                                <li class="@localActive"><a href="/@PathHelper.RemoveExtension(localNav.Value)">@localNav.Key</a></li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="col-md-9">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        }
+        
         <hr />
         <div class="container">
             <p><small>Wyam is crafted by <a href="http://www.daveaglick.com">Dave Glick</a>. <a href="https://github.com/daveaglick/Wyam">Code on GitHub</a>. And yes, this site was entirely generated by Wyam. Check out <a href="https://github.com/daveaglick/Wyam.Web">the site code on GitHub</a> too.</small></p>

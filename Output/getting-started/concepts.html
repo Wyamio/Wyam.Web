@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,31 +9,57 @@
         <meta name="keywords" content="ASP.NET,MVC,ASP.NET MVC,C#,HTML,HtmlHelpers,Web Development,Bootstrap,Twitter Bootstrap,CSS" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="/Content/bootstrap.min.css" rel="stylesheet" />
-        <link href="/Content/bootstrap-theme.min.css" rel="stylesheet" />
         <link href="/Content/master.css" rel="stylesheet" />
-        <link href='http://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
         <script src="/Scripts/jquery-2.1.1.min.js"></script>
         <script src="/Scripts/bootstrap.min.js"></script>          
         
     </head>
     <body>        
-        <div class="container">
-            <div><a href="/"><img src="/Content/Images/logo.png" class="img-responsive center-block" alt="Wyam"></a></div>
-            <ul class="nav nav-tabs">
+        <nav class="navbar navbar-default navbar-static-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/"><img alt="Wyam" src="/Content/Images/nav-logo.png"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-main">
+              <ul class="nav navbar-nav">
+                
+                    <li class="active"><a href="/getting-started">Getting Started</a></li>
+                    <li><a href="/modules">Modules</a></li>
+                    <li><a href="/advanced">Advanced</a></li>
+              </ul>              
+              <ul class="nav navbar-nav navbar-right">                
+                <li><a href="https://github.com/daveaglick/Wyam">GitHub</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        
+            <div class="jumbotron">
+    	       <div class="container">
+                   <h1>Concepts</h1>
+               </div>
+            </div>
+        
 
-                <li role="presentation"><a href="/">Intro<span class="hidden-xs">duction</span></a></li>
-                <li role="presentation" class="active"><a href="/docs">Doc<span class="hidden-xs">umentation</span><span class="visible-xs-inline">s</span></a></li>
-                <li role="presentation" class="pull-right hidden-sm hidden-xs"><a href="https://github.com/daveaglick/Wyam">GitHub</a></li>
-            </ul>
-        </div>    
-        <div class="container">
-            
-
-
-<div class="row">
-    <div class="col-md-9">
-        <h1 class="title">Concepts</h1>
-        <p>The primary concepts in wyam are <em>documents</em>, <em>modules</em>, and <em>pipelines</em>.</p>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">                        
+                        <ul class="nav nav-pills nav-stacked">
+                                <li class="active"><a href="/getting-started\concepts">Concepts</a></li>
+                                <li><a href="/getting-started\installation">Installation</a></li>
+                                <li><a href="/getting-started\usage">Usage</a></li>
+                                <li><a href="/getting-started\configuration">Configuration</a></li>
+                                <li><a href="/getting-started\examples">Examples</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-9">
+                        <p>The primary concepts in wyam are <em>documents</em>, <em>modules</em>, and <em>pipelines</em>.</p>
 <h1>Documents</h1>
 <hr />
 <p>A <em>document</em> is a combination of <em>content</em> and <em>metadata</em> as it makes it's way through the system. The content of a document is what most modules manipulate and is what you will presumably output at the end of the pipeline. The metadata serves as a way to pass information to and from modules to other modules. Once a value is added to the metadata by one module, it can never be removed by a subsequent one (though it can be overwritten). It can be important to note that documents are immutable. Though we often talk about documents being &quot;transformed&quot; or &quot;manipulated&quot; by modules, this isn't strictly accurate. Instead modules return a new copy of the document with different content and/or additional metadata.</p>
@@ -58,34 +85,10 @@
 <p>In the visualization above, the first module may have read some files (in this case 2 files) and stuck some information about those files such as name and path in the document metadata. Then the second module may have transformed the files (for example, from Markdown to HTML).</p>
 
 
-    </div>
-    <div class="col-md-3">
-                <h3>Getting Started</h3>
-                <ul class="nav nav-pills nav-stacked">
-                        <li class="active"><a href="/docs\getting-started\concepts">Concepts</a></li>
-                        <li><a href="/docs\getting-started\installation">Installation</a></li>
-                        <li><a href="/docs\getting-started\usage">Usage</a></li>
-                        <li><a href="/docs\getting-started\configuration">Configuration</a></li>
-                        <li><a href="/docs\getting-started\examples">Examples</a></li>
-                </ul>
-                <h3>Modules</h3>
-                <ul class="nav nav-pills nav-stacked">
-                        <li><a href="/docs\modules\core-modules">Core Modules</a></li>
-                        <li><a href="/docs\modules\json">JSON</a></li>
-                        <li><a href="/docs\modules\markdown">Markdown</a></li>
-                        <li><a href="/docs\modules\razor">Razor</a></li>
-                        <li><a href="/docs\modules\yaml">YAML</a></li>
-                </ul>
-                <h3>Advanced</h3>
-                <ul class="nav nav-pills nav-stacked">
-                        <li><a href="/docs\advanced\embedded-use">Embedded Use</a></li>
-                        <li><a href="/docs\advanced\helpers">Helpers</a></li>
-                </ul>
-
-    </div>
-</div>
-
-        </div>
+                    </div>
+                </div>
+            </div>
+        
         <hr />
         <div class="container">
             <p><small>Wyam is crafted by <a href="http://www.daveaglick.com">Dave Glick</a>. <a href="https://github.com/daveaglick/Wyam">Code on GitHub</a>. And yes, this site was entirely generated by Wyam. Check out <a href="https://github.com/daveaglick/Wyam.Web">the site code on GitHub</a> too.</small></p>
