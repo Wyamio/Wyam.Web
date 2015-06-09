@@ -37,6 +37,8 @@ code {
 	background-size: cover;
 }
 
+.tinynav { display: none }
+
 @media (min-width: 1200px) { 
 	.jumbotron-intro {
 		height: 400px;
@@ -48,4 +50,13 @@ code {
 		background: url('/Content/Images/intro-bg.png') no-repeat center center;
 		height: 400px;
 	}	
+}
+
+@media (max-width: 991px) {	    
+	.tinynav { 
+		display: block;
+	}
+    #local-nav { 
+		display: none;
+	}
 }
