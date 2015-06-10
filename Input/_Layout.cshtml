@@ -45,7 +45,7 @@
                 @foreach(string nav in navs)
                 {
                     string navFolder = nav.ToLower().Replace(' ', '-');
-                    string active = ((string)Model.Get("FileRelative")).StartsWith(navFolder) ? "active" : null;
+                    string active = Model.Of<string>().Get("FileRelative").StartsWith(navFolder) ? "active" : null;
                     if(active != null)
                     {
                         activeNavFolder = navFolder;
@@ -80,16 +80,20 @@
         }
         
         @{
-            List<KeyValuePair<string, string>> localNavs = activeNavFolder == string.Empty ? new List<KeyValuePair<string, string>>() : AllDocuments
-                .Where(x => x.Metadata.ContainsKey("FileRelative") && !((string)x.Metadata["FileRelative"]).EndsWith("index.md") && ((string)x.Metadata["FileRelative"]).StartsWith(activeNavFolder))
-                .OrderBy(x => int.Parse((string)x.Metadata.Get("Order", "1000")))
-                .ThenBy(x => ((string)x.Metadata.Get("Title")))
-                .Select(x => new KeyValuePair<string, string>(
-                    (string)x.Metadata.Get("Title", x.Metadata.Get("FileBase")),
-                    (string)x.Metadata.Get("FileRelative")))
-                .ToList();   
+            List<KeyValuePair<string, string>> subNavs = activeNavFolder == string.Empty || Model.Get<bool>("HideSubNav", false) 
+                ? new List<KeyValuePair<string, string>>()
+                : AllDocuments.Where(x => x.Metadata.ContainsKey("FileRelative")
+                        && !x.Metadata.Of<string>()["FileRelative"].EndsWith("index.md") 
+                        && !x.Metadata.Of<string>()["FileRelative"].EndsWith("index.cshtml") 
+                        && x.Metadata.Of<string>()["FileRelative"].StartsWith(activeNavFolder))
+                    .OrderBy(x => x.Metadata.Get<int>("Order", 1000))
+                    .ThenBy(x => x.Metadata.Get<string>("Title"))
+                    .Select(x => new KeyValuePair<string, string>(
+                        x.Metadata.Get<string>("Title", x.Metadata.Get<string>("FileBase")),
+                        x.Metadata.Get<string>("FileRelative")))
+                    .ToList();   
         }
-        @if(localNavs.Count == 0)
+        @if(subNavs.Count == 0)
         {            
             <div class="container">
                 @RenderBody()
@@ -100,11 +104,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">                        
-                        <ul class="nav nav-pills nav-stacked" id="local-nav">
-                            @foreach(KeyValuePair<string, string> localNav in localNavs)
+                        <ul class="nav nav-pills nav-stacked" id="sub-nav">
+                            @foreach(KeyValuePair<string, string> subNav in subNavs)
                             {
-                                string localActive = (string)Model.Get("FileRelative") == localNav.Value ? "active" : null;
-                                <li class="@localActive"><a href="/@PathHelper.RemoveExtension(localNav.Value)">@localNav.Key</a></li>
+                                string subActive = Model.Get<string>("FileRelative") == subNav.Value ? "active" : null;
+                                <li class="@subActive"><a href="/@PathHelper.RemoveExtension(subNav.Value)">@subNav.Key</a></li>
                             }
                         </ul>
                         <hr class="hidden-md hidden-lg" />
@@ -123,7 +127,7 @@
     </body>
     <script>
       $(function () {
-        $("#local-nav").tinyNav({
+        $("#sub-nav").tinyNav({
             active: 'active'
         });
       });

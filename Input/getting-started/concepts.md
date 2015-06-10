@@ -1,7 +1,8 @@
 Title: Concepts
+Description: Describes the primary concepts of documents, modules, and pipelines.
 Order: 1
 ---
-The primary concepts in wyam are *documents*, *modules*, and *pipelines*. 
+The primary concepts in Wyam are *documents*, *modules*, and *pipelines*. 
 
 # Documents
 ---

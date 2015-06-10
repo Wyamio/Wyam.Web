@@ -56,7 +56,7 @@ code {
 	.tinynav { 
 		display: block;
 	}
-    #local-nav { 
+    #sub-nav { 
 		display: none;
 	}
 }

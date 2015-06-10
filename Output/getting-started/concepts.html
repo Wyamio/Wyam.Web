@@ -54,7 +54,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">                        
-                        <ul class="nav nav-pills nav-stacked" id="local-nav">
+                        <ul class="nav nav-pills nav-stacked" id="sub-nav">
                                 <li class="active"><a href="/getting-started\concepts">Concepts</a></li>
                                 <li><a href="/getting-started\installation">Installation</a></li>
                                 <li><a href="/getting-started\usage">Usage</a></li>
@@ -64,7 +64,7 @@
                         <hr class="hidden-md hidden-lg" />
                     </div>
                     <div class="col-md-9">
-                        <p>The primary concepts in wyam are <em>documents</em>, <em>modules</em>, and <em>pipelines</em>.</p>
+                        <p>The primary concepts in Wyam are <em>documents</em>, <em>modules</em>, and <em>pipelines</em>.</p>
 <h1>Documents</h1>
 <hr />
 <p>A <em>document</em> is a combination of <em>content</em> and <em>metadata</em> as it makes it's way through the system. The content of a document is what most modules manipulate and is what you will presumably output at the end of the pipeline. The metadata serves as a way to pass information to and from modules to other modules. Once a value is added to the metadata by one module, it can never be removed by a subsequent one (though it can be overwritten). It can be important to note that documents are immutable. Though we often talk about documents being &quot;transformed&quot; or &quot;manipulated&quot; by modules, this isn't strictly accurate. Instead modules return a new copy of the document with different content and/or additional metadata.</p>
@@ -101,7 +101,7 @@
     </body>
     <script>
       $(function () {
-        $("#local-nav").tinyNav({
+        $("#sub-nav").tinyNav({
             active: 'active'
         });
       });
