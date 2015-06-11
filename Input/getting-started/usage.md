@@ -23,9 +23,9 @@ There are also a number of arguments that allow you to control execution:
 
   By default the output folder is cleaned on every execution and *all* files in the folder and all subfolders are deleted. This argument lets you prevent the cleaning and will keep all files in the output folder. Keep in mind that generated files will still get overwritten on every execution.
   
-* `--skip-packages`
+* `--update-packages`
 
-  By default NuGet packages are checked every time the application is started. This can be time consuming, particularly if a lot of NuGet packages are specified and/or the NuGet servers are slow in responding. You can turn off NuGet installation with this argument. Local packages will still get used, but any packages not already installed will be ignored.
+  By default, local packages will be used if available and if they satisfy the version specification given in the config file. Use this flag to check the NuGet server for more recent versions of each package and update them if applicable.
 
 * `--watch`
 

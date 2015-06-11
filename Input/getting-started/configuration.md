@@ -1,7 +1,7 @@
 Title: Configuration
 Order: 4
 ---
-The command line Wyam application reads a configuration file typically named `config.wyam` (though you can change that with an argument) that sets up the environment and initializes metadata and pipelines. It consists of two parts, the *setup* and the *configuration*. These two sections are separated by a line consisting entirely of one or more dashes (`---`).
+The command line Wyam application reads a configuration file typically named `config.wyam` (though you can change that with an argument) that sets up the environment and initializes metadata and pipelines. It consists of two parts, the *setup* and the *configuration*. These two sections are separated by a line consisting entirely of one or more equals (`===`).
 
 Both sections of the configuration file are evaluated as C# code, so you can make use of the full C# language and the entire .NET ecosystem. However, it's not necessary to know C# to write Wyam configuration files. The syntax has been carefully crafted to be usable by anyone no matter their level of programming experience.
 
@@ -27,7 +27,12 @@ Packages.Repository("https://www.myget.org/F/roslyn-nightly/")
 
 From the `Install(...)` method you can also specify the acceptable package version(s) and whether prerelease and/or unlisted packages should be allowed. The `versionSpec` argument takes a string that matches the standard NuGet version specifications defined at https://docs.nuget.org/create/versioning
 
-By default, packages are downloaded to `\packages`. If you want to change this, set `Packages.Path` to the relative folder where you want packages to be downloaded.
+By default, packages are downloaded to `\packages`. If you want to change this, set `Packages.Path` to the relative folder where you want packages to be downloaded. For example, you could set this to a system-wide folder if you have several scripts that share the same packages.
+
+Note that some commonly-used module libraries are made available in the command line application by default and don't need to be explicitly specified in the configuration file unless you're using the embedded version of Wyam. These are:
+* `Wyam.Modules.Markdown`
+* `Wyam.Modules.Razor`
+* `Wyam.Modules.Yaml`
 
 ## Assemblies
 
@@ -48,29 +53,8 @@ By default, the following assemblies are already loaded so you don't need to exp
 * `Microsoft.CSharp`
 * `System.IO`
 * `System.Diagnostics`
-* `Wyam.Core`
-* `Wyam.Abstractions`
 
-## Namespaces
-
-To make working with your imported packages and assemblies from the configuration portion of the file easier, you'll probably want to bring their namespaces into scope using the `Namespaces` property and the `Using(string ns)` method. Once you do, the specified assemblies will be implicity added to the configuration portion of the script. For example:
-```
-Namespaces
-    .Using("System.Data")
-	.Using("System.Xml");
-```
-
-By default, the following namespaces are already brought into scope so you don't need to explicity specify them:
-* `System`
-* `System.Collections.Generic`
-* `System.Linq`
-* `System.IO`
-* `System.Diagnostics`
-* `Wyam.Core`
-* `Wyam.Core.Configuration`
-* `Wyam.Core.Modules`
-* `Wyam.Core.Helpers`
-* `Wyam.Abstractions`
+Also note that all assemblies from the directory containing the Wyam executable (and all subdirectories) will also be scanned for module assemblies.
 
 # Configuration
 ---
@@ -134,6 +118,39 @@ Pipelines.Add("Markdown",
 );
 ```
 
+## Declarations
+
+The code in your configuration is typically executed inside the context of an "invisible" class and method. This means that you can't bring namespaces into scope, create classes, declare helper methods, etc. If you need to do any of these things, place it above the configuration code and separate it with a line consisting entirely of one or more dashes (`---`). Any code above this line will be evaluated outside the scope of the configuration method or any class. This means that you can bring namespaces into scope with `using` statements, declare helper classes, etc. Note that this code is global, so if you want to declare helper methods, they'll have to be placed within a wrapper class.
+
+```
+using System.IO;
+
+public static class Helpers
+{
+	public string GetWriteExtension()
+	{
+		return ".html";
+	}
+}
+
+---
+
+Pipelines.Add("Markdown",
+	ReadFiles("*.md"),
+    FrontMatter(Yaml()),
+	Markdown(),
+	WriteFiles(Helpers.GetWriteExtension())
+);
+```
+
+Note that namespaces for all found modules as well as the following namespaces are automatically brought into scope for every configuration script so you won't need to explicitly add them:
+
+* `System`
+* `System.Collections.Generic`
+* `System.Linq`
+* `System.IO`
+* `System.Diagnostics`
+
 # Example
 ---
 
@@ -148,7 +165,7 @@ Packages
 	.Install("Bootstrap")
 	.Install("jQuery", "[2.1.1]");
 	
----
+===
 
 Pipelines.Add("Markdown",
 	ReadFiles(@@"*.md"),

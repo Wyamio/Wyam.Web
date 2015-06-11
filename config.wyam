@@ -1,11 +1,8 @@
-Assemblies
-	.LoadDirectory(@"..\Wyam\Wyam.Modules.Markdown\bin\Debug")
-	.LoadDirectory(@"..\Wyam\Wyam.Modules.Yaml\bin\Debug")
-	.LoadDirectory(@"..\Wyam\Wyam.Modules.Razor\bin\Debug");
 Packages
 	.Install("Bootstrap")
 	.Install("jQuery", "[2.1.1]");
----
+	
+===
 
 Pipelines.Add("Markdown",
 	ReadFiles(@"*.md"),
