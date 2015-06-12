@@ -18,6 +18,8 @@ build_script:
 on_success:
   # http://www.appveyor.com/docs/how-to/git-push
   - git config --global credential.helper store
+  - git config --global user.email "dave@daveaglick.com"
+  - git config --global user.name "Dave Glick"
   - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
   - git checkout gh-pages
   - git rm -rf .
