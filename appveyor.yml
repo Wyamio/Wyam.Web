@@ -24,6 +24,7 @@ on_success:
   - git checkout gh-pages
   - git rm -rf .
   - xcopy ..\Output . /E
+  - echo wyam.io > CNAME
   - git remote set-url origin https://github.com/Wyamio/Wyam.Web.git
   - git add -A
   - git commit -a -m "Commit from AppVeyor"
