@@ -1,11 +1,11 @@
 branches:
   only:
     - master
-
+    
 environment:
   access_token:
     secure: jf56pSYTaUx5sBJCVt2IDCzmPrZ2iOTYrSVvCzEt17UhGKq3RfqlO4aIZ3bRlZSX
-	
+
 install:
   - ps: Start-FileDownload 'https://github.com/Wyamio/Wyam/releases/download/v0.1.1-alpha/Wyam.zip' -FileName '..\Wyam\Wyam.zip'
   - 7z x ..\Wyam\Wyam.zip -o..\Wyam -r
