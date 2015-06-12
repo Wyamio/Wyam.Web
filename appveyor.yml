@@ -1,0 +1,25 @@
+branches:
+  only:
+    - master
+
+environment:
+  access_token:
+    secure: jf56pSYTaUx5sBJCVt2IDCzmPrZ2iOTYrSVvCzEt17UhGKq3RfqlO4aIZ3bRlZSX
+	
+install:
+  - ps: Start-FileDownload 'https://github.com/Wyamio/Wyam/releases/download/v0.1.1-alpha/Wyam.zip' -FileName '..\Wyam\Wyam.zip'
+  - 7z x ..\Wyam\Wyam.zip -o..\Wyam -r
+
+build_script:
+  - ..\Wyam\Wyam.exe --output ..\Output
+
+on_success:
+  # http://www.appveyor.com/docs/how-to/git-push
+  - git config --global credential.helper store
+  - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
+  - git checkout gh-pages
+  - git rm -rf .
+  - xcopy ..\Output . /E
+  - git add -A
+  - git commit -a -m "Commit from AppVeyor"
+  - git push

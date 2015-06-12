@@ -17,7 +17,15 @@ There are also a number of arguments that allow you to control execution:
 
 * `--config file`
   
-  This allows you specify a configuration file that's different from the default `config.wyam`.
+  Configuration file other than the default `config.wyam`.
+  
+* `--input path`
+
+  The path to input files, can be absolute or relative to the current folder.
+  
+* `--output path`
+
+  The path to output files, can be absolute or relative to the current folder.
   
 * `--no-clean`
 
@@ -29,24 +37,24 @@ There are also a number of arguments that allow you to control execution:
 
 * `--watch`
 
-  This tells Wyam to watch the input folder for any changes. If any are found, the content is regenerated. Because of the flexible nature of Wyam modules it is impossible to tell which input files impact which output files, so all pipelines have to be rerun from scratch. Specifying this argument will keep Wyam running until a key is pressed.
+  Watch the input folder for any changes. If any are found, the content is regenerated. Because of the flexible nature of Wyam modules it is impossible to tell which input files impact which output files, so all pipelines have to be rerun from scratch. Specifying this argument will keep Wyam running until a key is pressed.
   
 * `--preview [port] [force-ext]`
 
-  This will start the embedded preview web server on the specified port (or on port 5080 if no port is specified). Be default, the web server has a routing rule for extensionless URLs (that is, if you go to `/about` and a file `/about.html` or `/about.htm` exists, it will be served). To turn this behavior off and force the use of file extensions, specify `force-ext`. Note that to match the extensionless routing behavior on your web server, some additional configuration may be required. Specifying this argument will keep Wyam running until a key is pressed.
+  Starts the embedded preview web server on the specified port (or on port 5080 if no port is specified). Be default, the web server has a routing rule for extensionless URLs (that is, if you go to `/about` and a file `/about.html` or `/about.htm` exists, it will be served). To turn this behavior off and force the use of file extensions, specify `force-ext`. Note that to match the extensionless routing behavior on your web server, some additional configuration may be required. Specifying this argument will keep Wyam running until a key is pressed.
   
 * `--log [logfile]`
 
-  This will log all trace messages to a log file. You can specify the log file with `logfile` or the file `wyam-[datetime].txt` will be used if one isn't specified.
+  Log all trace messages to a log file. You can specify the log file with `logfile` or the file `wyam-[datetime].txt` will be used if one isn't specified.
   
 * `--verbose`
 
-  This will turn on "verbose mode" and will generate additional trace message useful for debugging.
+  Turn on "verbose mode" and will generate additional trace message useful for debugging.
   
 * `--pause`
 
-  This will pause execution at the start of the program until a key is pressed and is useful for attaching a debugger or synchronizing with other applications.
+  Pause execution at the start of the program until a key is pressed and is useful for attaching a debugger or synchronizing with other applications.
   
 * `--help`
 
-  This prints out a list of the available command line arguments. 
+  Prints out a list of the available command line arguments. 
