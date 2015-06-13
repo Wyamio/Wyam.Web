@@ -1,4 +1,5 @@
 Title: Configuration
+Description: Describes the format of the configuration file.
 Order: 4
 ---
 The command line Wyam application reads a configuration file typically named `config.wyam` (though you can change that with an argument) that sets up the environment and initializes metadata and pipelines. It consists of two parts, the *setup* and the *configuration*. These two sections are separated by a line consisting entirely of one or more equals (`===`).

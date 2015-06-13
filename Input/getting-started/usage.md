@@ -1,4 +1,5 @@
 Title: Usage
+Description: Describes how to run Wyam and the available options.
 Order: 3
 ---
 You typically run Wyam using the command line application `Wyam.exe`. If you don't specify any arguments, the root folder will be set to the current folder and if a file named `config.wyam` is found, it will be used as the configuration file. You can also specify a root folder that's different than the current folder after the `Wyam.exe` command. For example:
