@@ -1,4 +1,5 @@
 Title: Helpers
+Description: Describes the available helper methods.
 ---
 The `Wyam.Core.Helpers` namespaces contains several static helper classes that have useful methods.
 

@@ -60,3 +60,21 @@ code {
 		display: none;
 	}
 }
+
+/* Code styles */
+pre,
+pre.prettyprint {
+    padding: 8px;
+    margin: 0;
+    overflow: auto;
+    word-wrap: normal;
+    word-break: normal;
+    border-color: #ddd;
+    background-color: #f5f5f5;
+    margin-bottom: 20px;
+}
+
+code {
+    background-color: #f5f5f5;
+    color: #333;
+}

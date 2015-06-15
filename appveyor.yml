@@ -15,6 +15,7 @@ install:
   # Note that we have to escape special chars inside the YAML scalar string
   - "curl -s https://api.github.com/repos/Wyamio/wyam/releases | grep tag_name | head -n 1 | C:\\cygwin\\bin\\grep -oP ': \"\\K[^\"]*' > wyamversion.txt"
   - set /P WYAMVERSION=< wyamversion.txt
+  - echo %WYAMVERSION%
   # Get and unzip the latest version of Wyam
   - ps: Start-FileDownload "https://github.com/Wyamio/Wyam/releases/download/$env:WYAMVERSION/Wyam.zip" -FileName "..\Wyam\Wyam.zip"
   - 7z x ..\Wyam\Wyam.zip -o..\Wyam -r

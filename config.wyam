@@ -8,6 +8,7 @@ Pipelines.Add("Markdown",
 	ReadFiles(@"*.md"),
 	FrontMatter(Yaml()),
 	Markdown(),
+	Replace("<pre><code>", "<pre class=\"prettyprint\"><code>"),
 	Razor(),
 	WriteFiles(".html")
 );
