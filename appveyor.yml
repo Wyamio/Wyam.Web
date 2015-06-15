@@ -9,7 +9,7 @@ environment:
 install:
   - mkdir ..\Wyam
   - mkdir ..\Output
-  - for /f "delims=" %a in ('curl -s https://api.github.com/repos/Wyamio/wyam/releases | grep name | head -n 1 | cut -d ''"'' -f 4') do @set latestwyam=%a
+  - for /f "delims=" %a in ('curl -s "https://api.github.com/repos/Wyamio/wyam/releases" | grep name | head -n 1 | cut -d ''"'' -f 4') do @set latestwyam=%a
   - echo %latestwyam%
   - ps: Start-FileDownload https://github.com/Wyamio/Wyam/releases/download/%latestwyam%/Wyam.zip -FileName "..\Wyam\Wyam.zip"
   - 7z x ..\Wyam\Wyam.zip -o..\Wyam -r
