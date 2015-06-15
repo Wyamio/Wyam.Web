@@ -9,8 +9,12 @@ environment:
 install:
   - mkdir ..\Wyam
   - mkdir ..\Output
-  - "curl -s https://api.github.com/repos/Wyamio/wyam/releases | grep tag_name | head -n 1 | grep -oP ': \"\\K[^\"]*' > wyamversion.txt"
+  # Fetch the latest version of Wyam 
+  # Have to use the Cygwin version of grep because the gitbash one is old and doesn't support -o option
+  # Also have to use this little hack to get the curl/grep output into an environment variable (via a file) 
+  - "curl -s https://api.github.com/repos/Wyamio/wyam/releases | grep tag_name | head -n 1 | C:\cygwin\grep -oP ': \"\\K[^\"]*' > wyamversion.txt"
   - set /P WYAMVERSION=< wyamversion.txt
+  # Get and unzip the latest version of Wyam
   - ps: Start-FileDownload https://github.com/Wyamio/Wyam/releases/download/%WYAMVERSION%/Wyam.zip -FileName "..\Wyam\Wyam.zip"
   - 7z x ..\Wyam\Wyam.zip -o..\Wyam -r
 
@@ -18,7 +22,8 @@ build_script:
   - ..\Wyam\Wyam.exe --output ..\Output
 
 on_success:
-  # http://www.appveyor.com/docs/how-to/git-push
+  # Switch branches to gh-pages, clean the folder, copy everything in from the Wyam output, and commit/push
+  # See http://www.appveyor.com/docs/how-to/git-push for more info
   - git config --global credential.helper store
   - git config --global user.email "dave@daveaglick.com"
   - git config --global user.name "Dave Glick"
