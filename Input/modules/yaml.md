@@ -1,2 +1,2 @@
-Title: YAML
+Title: Yaml
 ---

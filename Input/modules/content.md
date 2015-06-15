@@ -16,7 +16,7 @@ Replaces the content of each input document with the string value of the specifi
 
   - `Content(params IModule[] modules)`
   
-  The specified modules are executed against an empty initial document and the results are applied to every input document (possibly creating more than one output document for each input document)
+  The specified modules are executed against an empty initial document and the results are applied to every input document (possibly creating more than one output document for each input document).
   
 ## Fluent Methods
 
