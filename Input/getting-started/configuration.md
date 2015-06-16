@@ -35,7 +35,7 @@ Note that some commonly-used module libraries are made available in the command 
 * `Wyam.Modules.Razor`
 * `Wyam.Modules.Yaml`
 
-## Assemblies
+## <a name="assemblies"></a>Assemblies
 
 In addition to NuGet packages you can also load assemblies. This is accomplished by using the `Assemblies` property. You can load all the assemblies in a directory with the `LoadDirectory(string path, SearchOption searchOption = SearchOption.AllDirectories)` method. The specified directory can either be relative to the active directory or absolute. You can also load a single assembly by location with the `LoadFile(string path)` method and by full name with the `Load(string name)` method. For example:
 
