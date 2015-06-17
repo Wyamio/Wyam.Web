@@ -9,7 +9,7 @@
 	    .OrderBy(x => x.Metadata.Get<int>("Order", 1000))
 	    .ThenBy(x => x.Metadata.Get<string>("Title")))
 	{
-		<h3><strong><a href="/@PathHelper.RemoveExtension(childDoc.Metadata.Get<string>("FileRelative"))">@(childDoc.Metadata.Get<string>("Title", childDoc.Metadata.Get<string>("FileBase")))</a></strong></h3>
+		<h3><strong><a href="/@PathHelper.RemoveExtension(childDoc.Metadata.Get<string>("FileRelative").Replace("\\", "/"))">@(childDoc.Metadata.Get<string>("Title", childDoc.Metadata.Get<string>("FileBase")))</a></strong></h3>
 		if(childDoc.Metadata.ContainsKey("Description"))
 		{
 			<p>@(childDoc.Metadata.Get<string>("Description"))</p>

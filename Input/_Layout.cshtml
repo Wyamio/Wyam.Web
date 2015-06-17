@@ -43,7 +43,7 @@
                     {
                         "Getting Started",
                         "Modules",
-                        "Advanced",
+                        "Knowledgebase",
                         "FAQ"    
                     };
                     string activeNavFolder = string.Empty;
@@ -114,7 +114,7 @@
                             @foreach(KeyValuePair<string, string> subNav in subNavs)
                             {
                                 string subActive = Model.Get<string>("FileRelative") == subNav.Value ? "active" : null;
-                                <li class="@subActive"><a href="/@PathHelper.RemoveExtension(subNav.Value)">@subNav.Key</a></li>
+                                <li class="@subActive"><a href="/@PathHelper.RemoveExtension(subNav.Value).Replace("\\", "/")">@subNav.Key</a></li>
                             }
                         </ul>
                         <hr class="hidden-md hidden-lg" />
