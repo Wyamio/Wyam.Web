@@ -6,8 +6,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
         <title>Wyam - @Model.Get("Title")</title>
-        <meta name="description" content="FluentBootstrap provides extensions, helper classes, model binding, and other goodies to help you use the Bootstrap CSS framework from .NET code." />
-        <meta name="keywords" content="ASP.NET,MVC,ASP.NET MVC,C#,HTML,HtmlHelpers,Web Development,Bootstrap,Twitter Bootstrap,CSS" />
+        <meta name="description" content="Wyam is a simple to use, highly modular, and extremely configurable static content generator." />
+        <meta name="keywords" content="static content generator,static site generator,static site,HTML,web development,.NET,C#,Razor,Markdown,YAML" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -51,7 +51,7 @@
                 @foreach(string nav in navs)
                 {
                     string navFolder = nav.ToLower().Replace(' ', '-');
-                    string active = Model.Get<string>("FileRelative").StartsWith(navFolder) ? "active" : null;
+                    string active = Model.Get<string>(MetadataKeys.FileRelative).StartsWith(navFolder) ? "active" : null;
                     if(active != null)
                     {
                         activeNavFolder = navFolder;
@@ -66,7 +66,7 @@
           </div>
         </nav>
         
-        @if(Model.Get<string>("FileRelative") == "index.cshtml")
+        @if(Model.Get<string>(MetadataKeys.FileRelative) == "index.cshtml")
         {
             <div class="jumbotron jumbotron-intro">
               <div class="container-background">
@@ -88,15 +88,15 @@
         @{
             List<KeyValuePair<string, string>> subNavs = activeNavFolder == string.Empty || Model.Get<bool>("HideSubNav", false) 
                 ? new List<KeyValuePair<string, string>>()
-                : AllDocuments.Where(x => x.Metadata.ContainsKey("FileRelative")
-                        && !x.Metadata.Get<string>("FileRelative").EndsWith("index.md") 
-                        && !x.Metadata.Get<string>("FileRelative").EndsWith("index.cshtml") 
-                        && x.Metadata.Get<string>("FileRelative").StartsWith(activeNavFolder))
+                : AllDocuments.Where(x => x.Metadata.ContainsKey(MetadataKeys.FileRelative)
+                        && !x.Metadata.Get<string>(MetadataKeys.FileRelative).EndsWith("index.md") 
+                        && !x.Metadata.Get<string>(MetadataKeys.FileRelative).EndsWith("index.cshtml") 
+                        && x.Metadata.Get<string>(MetadataKeys.FileRelative).StartsWith(activeNavFolder))
                     .OrderBy(x => x.Metadata.Get<int>("Order", 1000))
                     .ThenBy(x => x.Metadata.Get<string>("Title"))
                     .Select(x => new KeyValuePair<string, string>(
-                        x.Metadata.Get<string>("Title", x.Metadata.Get<string>("FileBase")),
-                        x.Metadata.Get<string>("FileRelative")))
+                        x.Metadata.Get<string>("Title", x.Metadata.Get<string>(MetadataKeys.FileBase)),
+                        x.Metadata.Get<string>(MetadataKeys.FileRelative)))
                     .ToList();   
         }
         @if(subNavs.Count == 0)
@@ -113,7 +113,7 @@
                         <ul class="nav nav-pills nav-stacked" id="sub-nav">
                             @foreach(KeyValuePair<string, string> subNav in subNavs)
                             {
-                                string subActive = Model.Get<string>("FileRelative") == subNav.Value ? "active" : null;
+                                string subActive = Model.Get<string>(MetadataKeys.FileRelative) == subNav.Value ? "active" : null;
                                 <li class="@subActive"><a href="/@PathHelper.RemoveExtension(subNav.Value).Replace("\\", "/")">@subNav.Key</a></li>
                             }
                         </ul>

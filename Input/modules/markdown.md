@@ -1,7 +1,7 @@
 Title: Markdown
 Description: Parses markdown content and renders it to HTML.
 ---
-Parses markdown content and renders it to HTML.
+Parses markdown content and renders it to HTML. This module uses [CommonMark.NET](https://github.com/Knagis/CommonMark.NET).
 
 # Usage
 ---

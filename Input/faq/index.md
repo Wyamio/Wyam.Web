@@ -4,8 +4,13 @@ Title: FAQ
   
 *Wyam* is a Native American name for the [Celilo Falls](https://en.wikipedia.org/wiki/Celilo_Falls) area and is also roughly translated as "echo of falling water" or "sound of water upon the rocks". Which sounds kind of like static. For a static site generator. Get it? I also liked the image of water going over the falls as one thing then going through a transition as it emerged at the bottom as something else. Plus the name just sounds cool, and the domain was available.
   
-### **Not *another* static site generator - what were you thinking!?**
+### **Not *another* static site generator; what were you thinking!?**
   
 Here's the thing: I like static site generators. I've been thinking about this problem for a long time (as in, many years). And while there are *a lot* of generators out there, none of them really fit with the way I think about the problem. I don't want to follow a prescribed notion of what sort of content I'm creating or follow assumptions about the location of files. I wanted a static *content* generator that is designed from the ground up to be flexible, even if it means making it slightly more complicated to configure. There are some generators that come close (I'm personally fond of the concepts in [Metalsmith](http://www.metalsmith.io/)). I'm also a .NET developer and while there are a couple good static site generators in the .NET ecosystem ([Pretzel](https://github.com/Code52/pretzel) and [Sandra.Snow](https://github.com/Sandra/Sandra.Snow) come to mind), I certainly don't think we've hit peak generator in that world as we have in, say, JavaScript.
 
-tl; dr: I wanted to build one, so I did.
+**TL; DR**: I wanted to build one, so I did.
+
+### **Where's all the async/await code? What kind of crappy turn of the century codebase is this?**
+
+The kind that is *designed* to run synchronously. I'm just as big a fan of the great asynchronous constructs in C# as the next guy, but it's not appropriate for everything. In this case, a conscious descision was made to keep everything synchronous (at least for now). There are a number of reasons for this, but the primary one is that because pipelines and the modules they contain can have impacts on any modules or other pipelines down the line, it's important that the behavior remain predictable. Since there's no way of knowing which modules are going to have an impact on other ones, everything has to be executed in sequence. It's possible that in the future strategies can be derived that will help give clues about what's safe to potentially run concurrently and thus relax this constraint, but for now it was more important to focus on the behavior and additional functionality.
+ 

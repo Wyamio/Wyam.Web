@@ -1,7 +1,7 @@
 Title: Yaml
 Description: Parses YAML content and stores the result in document metadata.
 ---
-Parses YAML content for each input document and stores the result in it's metadata. 
+Parses YAML content for each input document and stores the result in it's metadata. This module uses [YamlDotNet](http://aaubry.net/pages/yamldotnet.html).
 
 # Usage
 ---

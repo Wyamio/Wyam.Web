@@ -37,7 +37,7 @@ Chain these methods together after the constructor to modify behavior.
 # Metadata
 ---
 
-The following metadata is added to each new document:
+The following metadata is added to each document. Each key is available as a `const` string in the [`MetadataKeys` class](/knowledgebase/metadatakeys).
 
   - `FileRoot`
   
@@ -45,7 +45,7 @@ The following metadata is added to each new document:
   
   - `FilePath`
   
-    The full path of the file.
+    The full path of the file (including file name). Same as `SourcePath`
   
   - `FileBase`
 
@@ -66,3 +66,7 @@ The following metadata is added to each new document:
   - `FileRelative`
   
     The relative path to the file (including file name) from the Wyam input folder.
+
+  - `SourcePath`
+  
+    The full path of the file (including file name). Same as `FilePath`.

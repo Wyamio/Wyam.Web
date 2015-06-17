@@ -25,3 +25,12 @@ Chain these methods together after the constructor to modify behavior.
   - `Where(Func<IDocument, bool> predicate)`
   
     Specifies a predicate that must be satisfied for the file to be written.
+    
+# Metadata
+---
+
+The following metadata is added to each document. Each key is available as a `const` string in the [`MetadataKeys` class](/knowledgebase/metadatakeys).
+
+  - `DestinationPath`
+  
+    The full path (including file name) of the destination file.
