@@ -11,3 +11,6 @@ Writing a new module is easy:
 
 4. Compile your library and place it somewhere Wyam will find it. You can manually put it in the Wyam directory (not recommended), tell Wyam to [reference your assemblies](/getting-started/configuration#assemblies), or create a NuGet package and [tell Wyam to use it](/getting-started/configuration#nuget). In all of these deployment scenarios, Wyam will scan the assembly for any modules, find your new module, and make it available.
 
+# Executing Child Modules
+
+If you need to execute child modules from your module, don't call `IModule.Execute(...)` on each child module. Instead use the `IExecutionContext.Execute(IEnumerable<IModule> modules, IEnumerable<IDocument> inputDocuments)` method. It returns the resultant documents from calling the child module chain (which can also be returned by your own module). If you pass `null` for `inputDocuments` a new initial document will be used.

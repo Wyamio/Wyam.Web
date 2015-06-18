@@ -1,4 +1,4 @@
-Title: Metadata
+Title: Meta
 Description: Sets metadata in each input document.
 ---
 Adds the specified metadata to each input document.
@@ -6,15 +6,15 @@ Adds the specified metadata to each input document.
 # Usage
 ---
 
-  - `Metadata(string key, object metadata)`
+  - `Meta(string key, object metadata)`
   
     The specified object is added as metadata for the specified key for every input document.
 
-  - `Metadata(string key, Func<IDocument, object> metadata)`
+  - `Meta(string key, Func<IDocument, object> metadata)`
   
     Uses a function to determine an object to be added as metadata for each document. This allows you to specify different metadata for each document depending on the input.
 
-  - `Metadata(params IModule[] modules)`
+  - `Meta(params IModule[] modules)`
   
     The specified modules are executed against an empty initial document and all metadata that exists on the result documents from evaluating the entire child module chain are added as metadata to each input document.
   

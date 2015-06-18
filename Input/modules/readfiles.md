@@ -1,7 +1,7 @@
 Title: ReadFiles
 Description: Reads files from disk and sets associated metadata.
 ---
-Reads the content of files from the file system into the content of new documents. For each output document, several metadata values are set with information about the file.
+Reads the content of files from the file system into the content of new documents. For each output document, several metadata values are set with information about the file. Note that this module is best at the beginning of a pipeline because it will be executed once for each input document, even if you only specify a search path. If you want to add additional files to a current pipeline, you should enclose your ReadFiles modules with [Concat](/modules/concat).
 
 # Usage
 ---

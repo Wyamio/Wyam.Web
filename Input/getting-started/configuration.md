@@ -57,6 +57,10 @@ By default, the following assemblies are already loaded so you don't need to exp
 
 Also note that all assemblies from the directory containing the Wyam executable (and all subdirectories) will also be scanned for module assemblies.
 
+## Folders
+
+You can configure the folders Wyam uses by setting `RootFolder`, `InputFolder`, and/or `OutputFolder` in the setup script.
+
 # Configuration
 ---
 
@@ -152,6 +156,14 @@ Note that namespaces for all found modules as well as the following namespaces a
 * `System.IO`
 * `System.Diagnostics`
 
+## Folders
+
+You can access the folders Wyam uses by getting `RootFolder`, `InputFolder`, and/or `OutputFolder` in the configuration script.
+
+## Execution Ordering
+
+Be aware that the configuration file only *configures* the pipelines. Each pipeline is executed in the order in which they were first added after the entire configuration file is evaluated. This means that you can't declare one pipeline, then declare another, and then add a new module to the first pipeline expecting it to reflect what happened in the second one. The second pipeline won't execute until the entire first pipeline is complete, including any modules that were added to it after the second one was declared.
+
 # Example
 ---
 
@@ -164,20 +176,17 @@ Packages
 	
 ===
 
-Pipelines.Add("Markdown",
+Pipelines.Add("Content",
 	ReadFiles(@@"*.md"),
 	FrontMatter(Yaml()),
 	Markdown(),
 	Replace("<pre><code>", "<pre class=\"prettyprint\"><code>"),
+	Concat(
+		ReadFiles(@@"*.cshtml").Where(x => Path.GetFileName(x)[0] != '_'),
+		FrontMatter(Yaml())		
+	),
 	Razor(),
-	WriteFiles(".html")
-);
-
-Pipelines.Add("Razor",
-	ReadFiles(@@"*.cshtml").Where(x => Path.GetFileName(x)[0] != '_'),
-	FrontMatter(Yaml()),
-	Razor(),
-	WriteFiles(".html")
+	WriteFiles(".html")	
 );
 
 Pipelines.Add("Resources",
