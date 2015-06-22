@@ -8,11 +8,11 @@ Writes the content of each input document to the file system.
 
   - `WriteFiles()`
   
-    Writes the document content to disk with the same file name and relative path as the input file. This requires metadata for `FileRelative` to be set (which is done by default by the [ReadFiles](/modules/readfiles) module).
+    Writes the document content to disk with the same file name and relative path as the input file. This requires metadata for `RelativeFilePath` to be set (which is done by default by the [ReadFiles](/modules/readfiles) module).
   
   - `WriteFiles(string extension)`
 
-    Writes the document content to disk with the specified extension with the same base file name and relative path as the input file. This requires metadata for `FileRelative` to be set (which is done by default by the [ReadFiles](/modules/readfiles) module).
+    Writes the document content to disk with the specified extension with the same base file name and relative path as the input file. This requires metadata for `RelativeFilePath` to be set (which is done by default by the [ReadFiles](/modules/readfiles) module).
   
   - `WriteFiles(Func<IDocument, string> path)`
   
@@ -31,6 +31,6 @@ Chain these methods together after the constructor to modify behavior.
 
 The following metadata is added to each document. Each key is available as a `const` string in the [`MetadataKeys` class](/knowledgebase/metadatakeys).
 
-  - `DestinationPath`
+  - `DestinationFilePath`
   
     The full path (including file name) of the destination file.

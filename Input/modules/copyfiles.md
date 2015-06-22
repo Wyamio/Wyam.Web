@@ -43,10 +43,10 @@ Chain these methods together after the constructor to modify behavior.
 
 The following metadata is added to each document. Each key is available as a `const` string in the [`MetadataKeys` class](/knowledgebase/metadatakeys).
   
-  - `SourcePath`
+  - `SourceFilePath`
   
     The full path (including file name) of the source file.
   
-  - `DestinationPath`
+  - `DestinationFilePath`
   
     The full path (including file name) of the destination file.

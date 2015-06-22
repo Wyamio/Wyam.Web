@@ -39,34 +39,30 @@ Chain these methods together after the constructor to modify behavior.
 
 The following metadata is added to each document. Each key is available as a `const` string in the [`MetadataKeys` class](/knowledgebase/metadatakeys).
 
-  - `FileRoot`
+  - `SourceFileRoot`
   
     The root search path without any nested directories (useful for outputting documents at the same location relative to the root path).
+
+  - `SourceFilePath`
   
-  - `FilePath`
+    The full path of the file (including file name).
   
-    The full path of the file (including file name). Same as `SourcePath`
+  - `SourceFileBase`
+
+    The file name without any extension. Equivalent to `Path.GetFileNameWithoutExtension(SourceFilePath)`.
+
+  - `SourceFileExt`
+
+    The extension of the file. Equivalent to `Path.GetExtension(SourceFilePath)`.
+
+  - `SourceFileName`
+
+    The full file name. Equivalent to `Path.GetFileName(SourceFilePath)`.
+
+  - `SourceFileDir`
+
+    The full directory of the file. Equivalent to `Path.GetDirectoryName(SourceFilePath)`.
   
-  - `FileBase`
-
-    The file name without any extension. Equivalent to `Path.GetFileNameWithoutExtension(FilePath)`.
-
-  - `FileExt`
-
-    The extension of the file. Equivalent to `Path.GetExtension(FilePath)`.
-
-  - `FileName`
-
-    The full file name. Equivalent to `Path.GetFileName(FilePath)`.
-
-  - `FileDir`
-
-    The full directory of the file. Equivalent to `Path.GetDirectoryName(FilePath)`.
-  
-  - `FileRelative`
+  - `RelativeFilePath`
   
     The relative path to the file (including file name) from the Wyam input folder.
-
-  - `SourcePath`
-  
-    The full path of the file (including file name). Same as `FilePath`.
