@@ -37,7 +37,7 @@ Chain these methods together after the constructor to modify behavior.
 # Metadata
 ---
 
-The following metadata is added to each document. Each key is available as a `const` string in the [`MetadataKeys` class](/knowledgebase/metadatakeys).
+The following metadata is added to each document.
 
   - `SourceFileRoot`
   

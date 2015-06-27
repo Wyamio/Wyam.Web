@@ -51,7 +51,7 @@
                 @foreach(string nav in navs)
                 {
                     string navFolder = nav.ToLower().Replace(' ', '-');
-                    string active = Model.Get<string>(MetadataKeys.RelativeFilePath).StartsWith(navFolder) ? "active" : null;
+                    string active = Model.String("RelativeFilePath").StartsWith(navFolder) ? "active" : null;
                     if(active != null)
                     {
                         activeNavFolder = navFolder;
@@ -66,7 +66,7 @@
           </div>
         </nav>
         
-        @if(Model.Get<string>(MetadataKeys.RelativeFilePath) == "index.cshtml")
+        @if(Model.String("RelativeFilePath") == "index.cshtml")
         {
             <div class="jumbotron jumbotron-intro">
               <div class="container-background">
@@ -88,15 +88,16 @@
         @{
             List<KeyValuePair<string, string>> subNavs = activeNavFolder == string.Empty || Model.Get<bool>("HideSubNav", false) 
                 ? new List<KeyValuePair<string, string>>()
-                : AllDocuments.Where(x => x.Metadata.ContainsKey(MetadataKeys.RelativeFilePath)
-                        && !x.Metadata.Get<string>(MetadataKeys.RelativeFilePath).EndsWith("index.md") 
-                        && !x.Metadata.Get<string>(MetadataKeys.RelativeFilePath).EndsWith("index.cshtml") 
-                        && x.Metadata.Get<string>(MetadataKeys.RelativeFilePath).StartsWith(activeNavFolder))
-                    .OrderBy(x => x.Metadata.Get<int>("Order", 1000))
-                    .ThenBy(x => x.Metadata.Get<string>("Title"))
+                : Documents
+                    .Where(x => x.ContainsKey("RelativeFilePath")
+                        && !x.String("RelativeFilePath").EndsWith("index.md") 
+                        && !x.String("RelativeFilePath").EndsWith("index.cshtml") 
+                        && x.String("RelativeFilePath").StartsWith(activeNavFolder))
+                    .OrderBy(x => x.Get<int>("Order", 1000))
+                    .ThenBy(x => x.String("Title"))
                     .Select(x => new KeyValuePair<string, string>(
-                        x.Metadata.Get<string>("Title", x.Metadata.Get<string>(MetadataKeys.SourceFileBase)),
-                        x.Metadata.Get<string>(MetadataKeys.RelativeFilePath)))
+                        x.String("Title", x.String("SourceFileBase")),
+                        x.String("RelativeFilePath")))
                     .ToList();   
         }
         @if(subNavs.Count == 0)
@@ -113,7 +114,7 @@
                         <ul class="nav nav-pills nav-stacked" id="sub-nav">
                             @foreach(KeyValuePair<string, string> subNav in subNavs)
                             {
-                                string subActive = Model.Get<string>(MetadataKeys.RelativeFilePath) == subNav.Value ? "active" : null;
+                                string subActive = Model.String("RelativeFilePath") == subNav.Value ? "active" : null;
                                 <li class="@subActive"><a href="/@PathHelper.RemoveExtension(subNav.Value).Replace("\\", "/")">@subNav.Key</a></li>
                             }
                         </ul>

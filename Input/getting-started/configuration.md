@@ -1,10 +1,27 @@
 Title: Configuration
 Description: Describes the format of the configuration file.
-Order: 5
+Order: 4
 ---
-The command line Wyam application reads a configuration file typically named `config.wyam` (though you can change that with an argument) that sets up the environment and initializes metadata and pipelines. It consists of two parts, the *setup* and the *configuration*. These two sections are separated by a line consisting entirely of one or more equals (`===`).
+The command line Wyam application reads a configuration file typically named `config.wyam` (though you can change that with an argument) that sets up the environment and initializes metadata and pipelines. It consists of three parts, the *setup*, any *declarations*, and the *configuration*, in that order. The setup is separated by a line consisting entirely of one or more equals (`===`) and the declarations are separated by a line consisting entirely of one or more dashes (`---`).
 
-Both sections of the configuration file are evaluated as C# code, so you can make use of the full C# language and the entire .NET ecosystem. However, it's not necessary to know C# to write Wyam configuration files. The syntax has been carefully crafted to be usable by anyone no matter their level of programming experience.
+The sections of the configuration file are evaluated as C# code, so you can make use of the full C# language and the entire .NET ecosystem. However, it's not necessary to know C# to write Wyam configuration files. The syntax has been carefully crafted to be usable by anyone no matter their level of programming experience.
+
+A configuration file looks like this:
+
+```
+// Setup code (optional)
+// ...
+
+===
+
+// Declaration code (optional)
+// ...
+
+---
+
+// Configuration code (required)
+// ...
+```
 
 # Setup
 ---
@@ -46,6 +63,8 @@ Assemblies
 	.Load("SampleAssembly, Version=1.0.2004.0, Culture=neutral, PublicKeyToken=8744b20f8da049e3");
 ```
 
+Keep in mind that system assemblies and others located in the GAC *must* be loaded by full name (including the version, public key token, etc.).
+
 By default, the following assemblies are already loaded so you don't need to explicity specify them:
 * `System`
 * `System.Collections.Generic`
@@ -60,6 +79,44 @@ Also note that all assemblies from the directory containing the Wyam executable 
 ## Folders
 
 You can configure the folders Wyam uses by setting `RootFolder`, `InputFolder`, and/or `OutputFolder` in the setup script.
+
+# <a name="declarations"></a>Declarations
+---
+
+The code in your configuration is typically executed inside the context of an "invisible" class and method. This means that you can't bring namespaces into scope, create classes, declare helper methods, etc. If you need to do any of these things, place it above the configuration code and separate it with a line consisting entirely of one or more dashes (`---`). Any code above this line will be evaluated outside the scope of the configuration method or any class. This means that you can bring namespaces into scope with `using` statements, declare helper classes, etc. Note that this code is global, so if you want to declare helper methods, they'll have to be placed within a wrapper class.
+
+```
+// Declaration code
+
+using System.IO;
+
+public static class Helpers
+{
+	public string GetWriteExtension()
+	{
+		return ".html";
+	}
+}
+
+---
+
+// Configuration code
+
+Pipelines.Add("Markdown",
+	ReadFiles("*.md"),
+    FrontMatter(Yaml()),
+	Markdown(),
+	WriteFiles(Helpers.GetWriteExtension())
+);
+```
+
+Note that namespaces for all found modules as well as the following namespaces are automatically brought into scope for every configuration script so you won't need to explicitly add them:
+
+* `System`
+* `System.Collections.Generic`
+* `System.Linq`
+* `System.IO`
+* `System.Diagnostics`
 
 # Configuration
 ---
@@ -123,46 +180,13 @@ Pipelines.Add("Markdown",
 );
 ```
 
-## Declarations
-
-The code in your configuration is typically executed inside the context of an "invisible" class and method. This means that you can't bring namespaces into scope, create classes, declare helper methods, etc. If you need to do any of these things, place it above the configuration code and separate it with a line consisting entirely of one or more dashes (`---`). Any code above this line will be evaluated outside the scope of the configuration method or any class. This means that you can bring namespaces into scope with `using` statements, declare helper classes, etc. Note that this code is global, so if you want to declare helper methods, they'll have to be placed within a wrapper class.
-
-```
-using System.IO;
-
-public static class Helpers
-{
-	public string GetWriteExtension()
-	{
-		return ".html";
-	}
-}
-
----
-
-Pipelines.Add("Markdown",
-	ReadFiles("*.md"),
-    FrontMatter(Yaml()),
-	Markdown(),
-	WriteFiles(Helpers.GetWriteExtension())
-);
-```
-
-Note that namespaces for all found modules as well as the following namespaces are automatically brought into scope for every configuration script so you won't need to explicitly add them:
-
-* `System`
-* `System.Collections.Generic`
-* `System.Linq`
-* `System.IO`
-* `System.Diagnostics`
-
 ## Folders
 
 You can access the folders Wyam uses by getting `RootFolder`, `InputFolder`, and/or `OutputFolder` in the configuration script.
 
 ## Execution Ordering
 
-Be aware that the configuration file only *configures* the pipelines. Each pipeline is executed in the order in which they were first added after the entire configuration file is evaluated. This means that you can't declare one pipeline, then declare another, and then add a new module to the first pipeline expecting it to reflect what happened in the second one. The second pipeline won't execute until the entire first pipeline is complete, including any modules that were added to it after the second one was declared.
+Be aware that the configuration file only *configures* the pipelines. Each pipeline is executed in the order in which they were first added after the entire configuration file is evaluated. This means that you can't declare one pipeline, then declare another, and then add a new module to the first pipeline expecting it to reflect what happened in the second one. The second pipeline won't execute until the entire first pipeline is complete, including any modules that were added to it after the second one was declared. If you need to run some modules, switch to a different pipeline, and the perform additional processing on the first set of documents, look into the [Documents](/modules/documents) and [ConcatDocuments](/modules/concatdocuments) modules.
 
 # Example
 ---
@@ -170,11 +194,15 @@ Be aware that the configuration file only *configures* the pipelines. Each pipel
 The full configuration file for this site is given below as an example:
 
 ```
+// Setup code
+
 Packages
 	.Install("Bootstrap")
 	.Install("jQuery", "[2.1.1]");
 	
 ===
+
+// Configuration code
 
 Pipelines.Add("Content",
 	ReadFiles(@@"*.md"),

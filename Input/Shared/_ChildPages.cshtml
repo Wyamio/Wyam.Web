@@ -1,18 +1,19 @@
 @using Wyam.Core.Helpers
 
 @{
-	string currentFolder = new string(Model.Get<string>(MetadataKeys.RelativeFilePath, string.Empty).TakeWhile(x => x != '\\' && x != '/').ToArray());
-    foreach(IDocument childDoc in AllDocuments.Where(x => x.Metadata.ContainsKey(MetadataKeys.RelativeFilePath)
-	        && !x.Metadata.Get<string>(MetadataKeys.RelativeFilePath).EndsWith("index.md") 
-	        && !x.Metadata.Get<string>(MetadataKeys.RelativeFilePath).EndsWith("index.cshtml") 
-	        && x.Metadata.Get<string>(MetadataKeys.RelativeFilePath).StartsWith(currentFolder))
-	    .OrderBy(x => x.Metadata.Get<int>("Order", 1000))
-	    .ThenBy(x => x.Metadata.Get<string>("Title")))
+	string currentFolder = new string(Model.String("RelativeFilePath", string.Empty).TakeWhile(x => x != '\\' && x != '/').ToArray());
+    foreach(IDocument childDoc in Documents
+		.Where(x => x.ContainsKey("RelativeFilePath")
+	        && !x.String("RelativeFilePath").EndsWith("index.md") 
+	        && !x.String("RelativeFilePath").EndsWith("index.cshtml") 
+	        && x.String("RelativeFilePath").StartsWith(currentFolder))
+	    .OrderBy(x => x.Get<int>("Order", 1000))
+	    .ThenBy(x => x.String("Title")))
 	{
-		<h3><strong><a href="/@PathHelper.RemoveExtension(childDoc.Metadata.Get<string>(MetadataKeys.RelativeFilePath).Replace("\\", "/"))">@(childDoc.Metadata.Get<string>("Title", childDoc.Metadata.Get<string>(MetadataKeys.SourceFileBase)))</a></strong></h3>
-		if(childDoc.Metadata.ContainsKey("Description"))
+		<h3><strong><a href="/@PathHelper.RemoveExtension(childDoc.String("RelativeFilePath").Replace("\\", "/"))">@(childDoc.String("Title", childDoc.String("SourceFileBase")))</a></strong></h3>
+		if(childDoc.ContainsKey("Description"))
 		{
-			<p>@(childDoc.Metadata.Get<string>("Description"))</p>
+			<p>@(childDoc.String("Description"))</p>
 		}
 	}
 }

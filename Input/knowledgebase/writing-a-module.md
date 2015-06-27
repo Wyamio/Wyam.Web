@@ -13,4 +13,4 @@ Writing a new module is easy:
 
 # Executing Child Modules
 
-If you need to execute child modules from your module, don't call `IModule.Execute(...)` on each child module. Instead use the `IExecutionContext.Execute(IEnumerable<IModule> modules, IEnumerable<IDocument> inputDocuments)` method. It returns the resultant documents from calling the child module chain (which can also be returned by your own module). If you pass `null` for `inputDocuments` a new initial document will be used.
+If you need to execute child modules from your module, don't call `IModule.Execute(...)` on each child module. Instead use the `IExecutionContext.Execute(IEnumerable<IModule> modules, IEnumerable<IDocument> inputDocuments)` method. It returns the resultant documents from calling the child module chain (which can then be returned by your own module if needed). If you pass `null` for `inputDocuments` a new initial document will be used.

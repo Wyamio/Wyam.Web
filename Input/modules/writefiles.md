@@ -1,7 +1,7 @@
 Title: WriteFiles
 Description: Writes document content to disk.
 ---
-Writes the content of each input document to the file system.
+Writes the content of each input document to the file system. If the metadata keys `WriteFileName` or `WriteExtension` (which require `RelativeFilePath` to be set, usually by the [ReadFiles](/modules/readfiles) module) or `WritePath` are set on an input document, that value will be used instead of what's specified in the module. For example, if you have a bunch of Razor `.cshtml` files that need to be rendered to `.html` files but one of them should be output as a `.xml` file instead, define the `WriteExtension` metadata value in the [front matter](/modules/frontmatter) of the page. 
 
 # Usage
 ---
@@ -29,7 +29,7 @@ Chain these methods together after the constructor to modify behavior.
 # Metadata
 ---
 
-The following metadata is added to each document. Each key is available as a `const` string in the [`MetadataKeys` class](/knowledgebase/metadatakeys).
+The following metadata is added to each document.
 
   - `DestinationFilePath`
   

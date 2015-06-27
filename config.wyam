@@ -1,8 +1,11 @@
+// Setup code
+
 Packages
 	.Install("Bootstrap")
 	.Install("jQuery", "[2.1.1]");
 	
 ===
+// Configuration code
 
 Pipelines.Add("Content",
 	ReadFiles("*.md"),
