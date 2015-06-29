@@ -29,10 +29,7 @@ install:
   - mkdir ..\Wyam
   - mkdir ..\Output
   # Fetch the latest version of Wyam 
-  # Have to use the Cygwin version of grep because the gitbash one is old and doesn't support -o option
-  # Also have to use this little hack to get the curl/grep output into an environment variable (via a file) 
-  # Note that we have to escape special chars inside this YAML scalar string
-  - "curl -s https://api.github.com/repos/Wyamio/wyam/releases | grep tag_name | head -n 1 | C:\\cygwin\\bin\\grep -oP ': \"\\K[^\"]*' > ..\\Wyam\\wyamversion.txt"
+  - "curl -s https://raw.githubusercontent.com/Wyamio/Wyam/master/RELEASE -o ..\\Wyam\\wyamversion.txt"
   - set /P WYAMVERSION=< ..\Wyam\wyamversion.txt
   - echo %WYAMVERSION%
   # Get and unzip the latest version of Wyam
