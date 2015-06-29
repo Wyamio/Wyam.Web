@@ -7,7 +7,7 @@ environment:
     secure: jf56pSYTaUx5sBJCVt2IDCzmPrZ2iOTYrSVvCzEt17UhGKq3RfqlO4aIZ3bRlZSX
 
 init:
-- "choice /C X /T 3 /D X" # Pause for 3 seconds to give time to initialize everything before running curl
+- ps: Start-Sleep -s 3 # Pause for 3 seconds to give time to initialize everything before running curl
 
 install:
   - mkdir ..\Wyam
