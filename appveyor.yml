@@ -20,7 +20,7 @@ install:
   # Also have to use this little hack to get the curl/grep output into an environment variable (via a file) 
   # Note that we have to escape special chars inside this YAML scalar string
   - curl -s https://api.github.com/repos/Wyamio/wyam/releases -o ..\Wyam\wyamreleases
-  - C:\cygwin\bin\grep tag_name ..\Wyam\wyamreleases | head -n 1 | C:\cygwin\bin\grep -oP ': "\K[^"]*' > ..\Wyam\wyamversion.txt
+  - "C:\\cygwin\\bin\\grep tag_name ..\\Wyam\\wyamreleases | head -n 1 | C:\\cygwin\\bin\\grep -oP ': \"\\K[^\"]*' > ..\\Wyam\\wyamversion.txt"
   # - "curl -s https://api.github.com/repos/Wyamio/wyam/releases | grep tag_name | head -n 1 | C:\\cygwin\\bin\\grep -oP ': \"\\K[^\"]*' > ..\\Wyam\\wyamversion.txt"
   - set /P WYAMVERSION=< ..\Wyam\wyamversion.txt
   - echo %WYAMVERSION%
