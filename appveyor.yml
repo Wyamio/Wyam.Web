@@ -1,9 +1,3 @@
-init:
-- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
-
-on_finish:
-- ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
-
 branches:
   only:
     - master
@@ -11,6 +5,9 @@ branches:
 environment:
   access_token:
     secure: jf56pSYTaUx5sBJCVt2IDCzmPrZ2iOTYrSVvCzEt17UhGKq3RfqlO4aIZ3bRlZSX
+
+init:
+- ping 1.1.1.1 -n 1 -w 3000 > nul # Pause for 3 seconds to give time to initialize everything before running curl
 
 install:
   - mkdir ..\Wyam
