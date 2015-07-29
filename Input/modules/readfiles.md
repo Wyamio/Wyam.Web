@@ -41,11 +41,15 @@ The following metadata is added to each document.
 
   - `SourceFileRoot`
   
-    The root search path without any nested directories (useful for outputting documents at the same location relative to the root path).
+    The absolute root search path without any nested directories (I.e., the path that was searched, and possibly descended, for the given pattern).
 
   - `SourceFilePath`
   
-    The full path of the file (including file name).
+    The full absolute path of the file (including file name).
+
+  - `SourceFilePathBase`
+  
+    The full absolute path of the file (including file name) without the file extension.
   
   - `SourceFileBase`
 
@@ -61,8 +65,16 @@ The following metadata is added to each document.
 
   - `SourceFileDir`
 
-    The full directory of the file. Equivalent to `Path.GetDirectoryName(SourceFilePath)`.
+    The full absolute directory of the file. Equivalent to `Path.GetDirectoryName(SourceFilePath)`.
   
   - `RelativeFilePath`
   
     The relative path to the file (including file name) from the Wyam input folder.
+  
+  - `RelativeFilePathBase`
+  
+    The relative path to the file (including file name) from the Wyam input folder without the file extension.
+    
+  - `RelativeFileDir`
+  
+    The relative directory of the file from the Wyam input folder.

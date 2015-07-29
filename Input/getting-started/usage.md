@@ -28,9 +28,13 @@ There are also a number of arguments that allow you to control execution:
 
   The path to output files, can be absolute or relative to the current folder.
   
-* `--no-clean`
+* `--noclean`
 
   By default the output folder is cleaned on every execution and *all* files in the folder and all subfolders are deleted. This argument lets you prevent the cleaning and will keep all files in the output folder. Keep in mind that generated files will still get overwritten on every execution.
+  
+* `--nocache`
+
+  This turns off the caching mechanism for all modules. It results in a lower memory footprint at the expense of much slower build times.
   
 * `--update-packages`
 

@@ -12,6 +12,22 @@ Whenever possible, the same conventions as the Razor engine in ASP.NET MVC were 
   - `Razor(Type basePageType = null)`
   
     Parses Razor templates in each input document and outputs documents with rendered HTML content. If `basePageType` is specified, it will be used as the base type for Razor pages (see below).
+  
+## Fluent Methods
+
+Chain these methods together after the constructor to modify behavior.
+
+  - `SetViewStart(string path)`
+  
+    Specifies an alternate ViewStart file to use for all Razor pages processed by this module.
+
+  - `SetViewStart(Func<IDocument, string> path)`
+  
+    Specifies an alternate ViewStart file to use for all Razor pages processed by this module. This lets you specify a different ViewStart file for each document. For example, you could return a ViewStart based on document location or document metadata. Returning `null` from the function reverts back to the default ViewStart search behavior for that document.
+    
+  - `IgnorePrefix(string prefix)`
+  
+    Specifies a file prefix to ignore. If a document has a metadata value for `SourceFileName` and that metadata value starts with the specified prefix, that document will not be processed or output by the module. By default, the Razor module ignores all documents prefixed with an underscore (`_`). Specifying `null` will result in no documents being ignored.
 
 ## View Model
 

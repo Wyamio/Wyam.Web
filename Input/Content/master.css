@@ -22,8 +22,16 @@ code {
 
 .jumbotron {
 	padding: 0;
-	background: #8058B5;
 	color: #fff;
+	margin: 0;
+}
+
+.jumbotron-title {
+	margin-bottom: 30px;
+}
+
+.jumbotron-intro, .jumbotron-title {	
+	background: #8058B5;
 }
 
 .jumbotron-intro .container-background {
@@ -35,6 +43,11 @@ code {
 	padding-top: 48px;
 	padding-bottom: 48px;
 	background-size: cover;
+}
+
+.jumbotron-description {	
+	padding-top: 12px;
+	background: #4EABDD;
 }
 
 .tinynav { display: none }

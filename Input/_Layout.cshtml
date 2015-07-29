@@ -43,6 +43,7 @@
                     {
                         "Getting Started",
                         "Modules",
+                        "API",
                         "Knowledgebase",
                         "FAQ"    
                     };
@@ -78,7 +79,7 @@
         }
         else
         {
-            <div class="jumbotron">
+            <div class="jumbotron jumbotron-title">
     	       <div class="container">
                    <h1>@Model.Get("Title")</h1>
                </div>
@@ -101,10 +102,17 @@
                     .ToList();   
         }
         @if(subNavs.Count == 0)
-        {            
-            <div class="container">
-                @RenderBody()
-            </div>
+        {        
+            @if(Model.String("RelativeFilePath") == "index.cshtml")
+            {
+                @RenderBody()       
+            }
+            else
+            {     
+                <div class="container">
+                    @RenderBody()
+                </div>
+            }
         }
         else
         {

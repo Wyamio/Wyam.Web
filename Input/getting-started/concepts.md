@@ -53,23 +53,7 @@ Metadata is available via the `Metadata` property of every `IDocument`. The `IMe
 
 ## Metadata Type Conversion 
 
-All metadata is represented internally as raw objects. This allows you to store not just strings, but more complex data as well. However, when you access metadata you probably don't want to think about how it's stored or what the orignal type was. For example, [YAML](/modules/yaml) doesn't really distinguish between numbers and strings when it reads data, it's only when getting a value that you care. To make metadata as easy to work with as possible, Wyam includes a very powerful type conversion capability that let's you convert nearly any metadata value to any other compatible type. To access it, the `IMetadata` interface also contains the following methods:
-
-  - `object Get(string key, object defaultValue = null)`
-    
-    Returns an `object` and never throws an exception. If the key is not found in the metadata dictionary, then `defaultValue` is returned.
-    
-  - `T Get<T>(string key)`
-  
-    Attempts to convert the metadata value to type `T`. If no conversion can be performed or the metadata key is not found, `default(T)` is returned.
-  
-  - `T Get<T>(string key, T defaultValue)`
-  
-    Attempts to convert the metadata value to type `T`. If no conversion can be performed or the metadata key is not found, `defaultValue` is returned.
-  
-  - `string String(string key, string defaultValue = null)`
-  
-    Attempts to convert the metadata value to a string. If no conversion can be performed or the metadata key is not found, `defaultValue` is returned. This is equivalent to calling `IMetadata.Get<string>(key, defaultValue)`.
+All metadata is represented internally as raw objects. This allows you to store not just strings, but more complex data as well. However, when you access metadata you probably don't want to think about how it's stored or what the orignal type was. For example, [YAML](/modules/yaml) doesn't really distinguish between numbers and strings when it reads data, it's only when getting a value that you care. To make metadata as easy to work with as possible, Wyam includes a very powerful type conversion capability that lets you convert nearly any metadata value to any other compatible type.
     
 When converting metadata values, all .NET type conversion techniques are checked including `TypeConverter`, `IConvertible`, casting, etc. The conversion support is provided by the [UniversalTypeConverter](http://www.codeproject.com/Articles/248440/Universal-Type-Converter) library.
 

@@ -1,7 +1,9 @@
 Title: WriteFiles
 Description: Writes document content to disk.
 ---
-Writes the content of each input document to the file system. If the metadata keys `WriteFileName` or `WriteExtension` (which require `RelativeFilePath` to be set, usually by the [ReadFiles](/modules/readfiles) module) or `WritePath` are set on an input document, that value will be used instead of what's specified in the module. For example, if you have a bunch of Razor `.cshtml` files that need to be rendered to `.html` files but one of them should be output as a `.xml` file instead, define the `WriteExtension` metadata value in the [front matter](/modules/frontmatter) of the page. 
+Writes the content of each input document to the file system.
+
+If the metadata keys `WriteFileName` (which requires `RelativeFileDir` to be set, usually by the [ReadFiles](/modules/readfiles) module), `WriteExtension` (which requires `RelativeFilePath` to be set, usually by the [ReadFiles](/modules/readfiles) module) or `WritePath` are set on an input document, that value will be used instead of what's specified in the module. For example, if you have a bunch of Razor `.cshtml` files that need to be rendered to `.html` files but one of them should be output as a `.xml` file instead, define the `WriteExtension` metadata value in the [front matter](/modules/frontmatter) of the page. 
 
 # Usage
 ---
@@ -33,4 +35,24 @@ The following metadata is added to each document.
 
   - `DestinationFilePath`
   
-    The full path (including file name) of the destination file.
+    The full absolute path (including file name) of the destination file.
+    
+  - `DestinationFilePathBase`
+  
+    The full absolute path (including file name) of the destination file without the file extension.
+  
+  - `DestinationFileBase`
+
+    The file name without any extension. Equivalent to `Path.GetFileNameWithoutExtension(DestinationFilePath)`.
+
+  - `DestinationFileExt`
+
+    The extension of the file. Equivalent to `Path.GetExtension(DestinationFilePath)`.
+
+  - `DestinationFileName`
+
+    The full file name. Equivalent to `Path.GetFileName(DestinationFilePath)`.
+
+  - `DestinationFileDir`
+
+    The full absolute directory of the file. Equivalent to `Path.GetDirectoryName(DestinationFilePath)`.

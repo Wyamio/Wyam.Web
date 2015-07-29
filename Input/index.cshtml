@@ -1,49 +1,53 @@
 Title: A simple to use, highly modular, and extremely configurable static content generator
 ---
-<p class="lead"><strong>Wyam is different.</strong> It's not a Jekyll clone (not that there's anything wrong with that) and it's not designed around blogs (though it's great at those too). Wyam is a static <em>content</em> generator and can be used to generate web sites, produce documentation, create ebooks, and much more. Since everything is configured by chaining together flexible modules (that you can even write yourself), the only limits to what it can create are your imagination.</p>
+<div class="jumbotron jumbotron-description">
+    <div class="container">
+	    <p class="lead"><strong>Wyam is different.</strong> It's not a Jekyll clone (not that there's anything wrong with them) and it's not designed around blogs (though it's great at those too). Wyam is a static <em>content</em> generator and can be used to generate web sites, produce documentation, create ebooks, and much more. Since everything is configured by chaining together flexible modules (that you can even write yourself), the only limits to what it can create are your imagination.</p>
+		
+		<p class="text-center">
+			<a class="github-button" href="https://github.com/Wyamio/Wyam" data-icon="octicon-star" data-style="mega" data-count-href="/Wyamio/Wyam/stargazers" data-count-api="/repos/Wyamio/Wyam#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star Wyamio/Wyam on GitHub">Star</a> <a class="github-button" href="https://github.com/Wyamio/Wyam" data-icon="octicon-eye" data-style="mega" data-count-href="/Wyamio/Wyam/watchers" data-count-api="/repos/Wyamio/Wyam#subscribers_count" data-count-aria-label="# watchers on GitHub" aria-label="Watch Wyamio/Wyam on GitHub">Watch</a> <a href="https://twitter.com/wyamio" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @@wyamio</a>
+			<script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+		</p>
+    </div>
+</div>
 
-<div class="alert alert-info" role="alert">Wyam is currently under heavy development, but it is usable today. Read on for more information if you want to get started now and help influence it's future direction.</div>
-
-<p class="text-center">
-	<a class="github-button" href="https://github.com/Wyamio/Wyam" data-icon="octicon-star" data-style="mega" data-count-href="/Wyamio/Wyam/stargazers" data-count-api="/repos/Wyamio/Wyam#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star Wyamio/Wyam on GitHub">Star</a> <a class="github-button" href="https://github.com/Wyamio/Wyam" data-icon="octicon-eye" data-style="mega" data-count-href="/Wyamio/Wyam/watchers" data-count-api="/repos/Wyamio/Wyam#subscribers_count" data-count-aria-label="# watchers on GitHub" aria-label="Watch Wyamio/Wyam on GitHub">Watch</a> <a href="https://twitter.com/wyamio" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @@wyamio</a>
-	<script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
-	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-</p>
-			
-<h1>Features</h1>
-<hr />
-<ul>
-	<li>Written in .NET and <a href="/knowledgebase/writing-a-module">easily extensible</a></li>
-	<li><a href="/getting-started/installation">Low ceremony</a> - download a zip file, unzip, and run</li>
-	<li>Flexible <a href="/getting-started/configuration">script-based configuration</a> using the power of the .NET Compiler Platform (Roslyn)</li>
-	<li>Lots of <a href="/modules">modules</a> for things like <a href="/modules/readfiles">reading</a> and <a href="/modules/writefiles">writing</a> files, handling <a href="/modules/frontmatter">frontmatter</a>, and manipulating <a href="/modules/metadata">metadata</a></li>
-	<li><a href="/modules/yaml">YAML parser</a></li>
-	<li><a href="/modules/less">Less CSS compiler</a></li>
-	<li>Support for multiple templating languages including <a href="/modules/razor">Razor</a></li>
-	<li>Integrated <a href="/getting-started/usage">web server</a> for previewing output</li>
-	<li>Integrated <a href="/getting-started/usage">file watching</a> and regeneration</li>
-	<li>Full <a href="/getting-started/configuration#nuget">NuGet support</a></li>
-	<li><a href="/knowledgebase/embedded-use">Embeddable engine</a></li>
-	<li><a href="/faq#name">Cool name</a></li>
-</ul>
-
-<h1>Usage</h1>
-<hr />
-<p>The best way to get started is to <a href="/getting-started/usage">use the command line application</a>:</p>
-<pre>c:\MySite&gt;<strong>Wyam.exe --preview --watch</strong>
-Loading configuration from c:\MySite\config.wyam.
-Cleaning output directory c:\MySite\.\Output...
-Cleaned output directory.
-Executing 3 pipelines...
-    Executing pipeline "Markdown" (1/3) with 5 child module(s)...
-    Executed pipeline "Markdown" (1/3) resulting in 0 output document(s).
-    Executing pipeline "Razor" (2/3) with 4 child module(s)...
-    Executed pipeline "Razor" (2/3) resulting in 2 output document(s).
-    Executing pipeline "Resources" (3/3) with 1 child module(s)...
-    Executed pipeline "Resources" (3/3) resulting in 21 output document(s).
-Executed 3 pipelines.
-Preview server running on port 5080...
-Watching folder c:\MySite\.\Input...
-Hit any key to exit...	
-</pre>
-<p>Read more about <a href="/getting-started/configuration">configuration files</a> and the <a href="/getting-started/usage">available command line arguments</a>.</p>
+<div class="container">				
+	<h1>Features</h1>
+	<hr />
+	<ul>
+		<li>Written in .NET and <a href="/knowledgebase/writing-a-module">easily extensible</a></li>
+		<li><a href="/getting-started/installation">Low ceremony</a> - download a zip file, unzip, and run</li>
+		<li>Flexible <a href="/getting-started/configuration">script-based configuration</a> using the power of the .NET Compiler Platform (Roslyn)</li>
+		<li>Lots of <a href="/modules">modules</a> for things like <a href="/modules/readfiles">reading</a> and <a href="/modules/writefiles">writing</a> files, handling <a href="/modules/frontmatter">frontmatter</a>, and manipulating <a href="/modules/metadata">metadata</a></li>
+		<li><a href="/modules/yaml">YAML parser</a></li>
+		<li><a href="/modules/less">Less CSS compiler</a></li>
+		<li>Support for multiple templating languages including <a href="/modules/razor">Razor</a></li>
+		<li>Integrated <a href="/getting-started/usage">web server</a> for previewing output</li>
+		<li>Integrated <a href="/getting-started/usage">file watching</a> and regeneration</li>
+		<li>Full <a href="/getting-started/configuration#nuget">NuGet support</a></li>
+		<li><a href="/knowledgebase/embedded-use">Embeddable engine</a></li>
+		<li><a href="/faq#name">Cool name</a></li>
+	</ul>
+	
+	<h1>Usage</h1>
+	<hr />
+	<p>The best way to get started is to <a href="/getting-started/usage">use the command line application</a>:</p>
+	<pre>c:\MySite&gt;<strong>Wyam.exe --preview --watch</strong>
+	Loading configuration from c:\MySite\config.wyam.
+	Cleaning output directory c:\MySite\.\Output...
+	Cleaned output directory.
+	Executing 3 pipelines...
+	    Executing pipeline "Markdown" (1/3) with 5 child module(s)...
+	    Executed pipeline "Markdown" (1/3) resulting in 0 output document(s).
+	    Executing pipeline "Razor" (2/3) with 4 child module(s)...
+	    Executed pipeline "Razor" (2/3) resulting in 2 output document(s).
+	    Executing pipeline "Resources" (3/3) with 1 child module(s)...
+	    Executed pipeline "Resources" (3/3) resulting in 21 output document(s).
+	Executed 3 pipelines.
+	Preview server running on port 5080...
+	Watching folder c:\MySite\.\Input...
+	Hit any key to exit...	
+	</pre>
+	<p>Read more about <a href="/getting-started/configuration">configuration files</a> and the <a href="/getting-started/usage">available command line arguments</a>.</p>
+</div>
