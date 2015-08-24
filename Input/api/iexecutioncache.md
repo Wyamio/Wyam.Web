@@ -1,7 +1,8 @@
 Title: IExecutionCache
 Description: Used by modules to cache data for faster build times.
 ---
-Used by modules to cache data for faster build times. The cache can be keyed by a custom string or by a specified document (in which case the document content is used as the key). The cache value can be any object. Note that only objects that are not potentially dependent on external mutable state like metadata should be cached. For example, a compiled [Razor](/modules/Razor) page class can be cached, but the result of evaluating the Razor code against a given document should not be cached.
+Used by modules to cache data for faster build times. The cache can be keyed by a custom string or by a specified document (in which case the document content is used as the key). The cache value can be any object. Note that only objects that are not potentially dependent on external mutable state like metadata should be cached. For example, a compiled [Razor](/modules/Razor) page class can be cached, but the result of evaluating the Razor code against a given document should not be cached. Also be sure not to cache anything that itself could be mutated by the pipeline or else you'll get back something different when you fetch it in the next cache hit.
+
 
 # Members
 ---

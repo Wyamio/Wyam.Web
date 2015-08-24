@@ -49,6 +49,6 @@ Contains all the information about the running execution and pipeline. It is pas
   
 ## Methods
   
-  - `IReadOnlyList<IDocument> Execute(IEnumerable<IModule> modules, IEnumerable<IDocument> inputDocuments)`
+  - `IReadOnlyList<IDocument> Execute(IEnumerable<IModule> modules, IEnumerable<IDocument> inputs)`
   
     This executes the specified modules with the specified input documents and returns the result documents. If you pass in `null` for `inputDocuments`, a new input document with the initial metadata from the engine will be used.

@@ -1,7 +1,7 @@
 Title: Razor
 Description: Parses Razor templates and renders them to HTML.
 ---
-Razor is the templating language used by ASP.NET MVC. This module can parse and compile Razor templates and then render them to HTML.
+Razor is the templating language used by ASP.NET MVC. This module can parse and compile Razor templates and then render them to HTML. While a bit outdated, [this guide](http://haacked.com/archive/2011/01/06/razor-syntax-quick-reference.aspx/) is a good quick reference for the Razor language syntax.
 
 This module is based on the Razor code in the forthcoming ASP.NET 5 (vNext). It was written from the ground-up and doesn't use an intermediate library like [RazorEngine](https://github.com/Antaris/RazorEngine) (which is a great library, implementing directly just provides more control). Note that for now, TagHelpers are not implemented in Wyam. Their API is still changing and it would have been too difficult to keep up. Support for TagHelpers may be introduced once ASP.NET MVC 5 becomes more stable.  
 

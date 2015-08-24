@@ -17,11 +17,3 @@ Replaces a search string in the specified content with the content of an input d
   - `Content(string search, params IModule[] modules)`
   
     The specified modules are executed against an empty initial document and all occurrences of the search string in the result(s) are replaced by the content of each input document (possibly creating more than one output document for each input document).
-  
-## Fluent Methods
-
-Chain these methods together after the constructor to modify behavior.
-
-  - `ForEachDocument()`
-  
-    If child modules are specified in the constructor, this method indicates that the chain of child modules should be independently evaluated for each input document, otherwise the chain of child modules are evaluated once and the single result applied to each input document. The default behavior has better performance, but this provides additional control and flexibility. This has no effect if no child modules were specified in the constructor.

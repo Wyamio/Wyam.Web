@@ -17,6 +17,10 @@ Pipelines.Add("Content",
 		FrontMatter(Yaml())		
 	),
 	Razor(),
+	AutoLink(c => c.Documents
+		.FromPipeline("Content")
+		.Where(x => x.String("RelativeFileDir") == "api" && !string.IsNullOrWhiteSpace(x.String("Title")))
+		.ToDictionary(x => x.String("Title"), x => PathHelper.ToRootLink(Path.ChangeExtension(x.String("RelativeFilePath"), ".html")))),
 	WriteFiles(".html")
 );
 
