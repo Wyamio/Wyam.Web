@@ -1,5 +1,6 @@
 Title: Markdown
 Description: Parses markdown content and renders it to HTML.
+Category: Templating
 ---
 Parses markdown content and renders it to HTML.
 

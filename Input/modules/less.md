@@ -1,5 +1,6 @@
 Title: Less
 Description: Compiles Less CSS files to CSS stylesheets.
+Category: Templating
 ---
 Compiles Less CSS files to CSS stylesheets.
 

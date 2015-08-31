@@ -1,5 +1,6 @@
 Title: Razor
 Description: Parses Razor templates and renders them to HTML.
+Category: Templating
 ---
 Razor is the templating language used by ASP.NET MVC. This module can parse and compile Razor templates and then render them to HTML. While a bit outdated, [this guide](http://haacked.com/archive/2011/01/06/razor-syntax-quick-reference.aspx/) is a good quick reference for the Razor language syntax.
 

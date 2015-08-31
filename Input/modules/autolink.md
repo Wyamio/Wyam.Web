@@ -1,5 +1,6 @@
 Title: AutoLink
 Description: Replaces occurrences of specified strings with HTML links.
+Category: Content
 ---
 Replaces occurrences of specified strings with HTML links. This module is smart enough to only look in specified HTML elements (`p` by default). You can supply an alternate query selector to narrow the search scope to different container elements or to those elements that contain (or don't contain) a CSS class, etc. It also won't generate an HTML link if the replacement text is already found in another link.
 

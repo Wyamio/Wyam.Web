@@ -1,5 +1,6 @@
 Title: Yaml
 Description: Parses YAML content and stores the result in document metadata.
+Category: Metadata
 ---
 Parses YAML content for each input document and stores the result in it's metadata.
 

@@ -1,5 +1,6 @@
 Title: WriteFiles
 Description: Writes document content to disk.
+Category: Input/Output
 ---
 Writes the content of each input document to the file system.
 
@@ -16,7 +17,7 @@ If the metadata keys `WriteFileName` (which requires `RelativeFileDir` to be set
 
     Writes the document content to disk with the specified extension with the same base file name and relative path as the input file. This requires metadata for `RelativeFilePath` to be set (which is done by default by the [ReadFiles](/modules/readfiles) module).
   
-  - `WriteFiles(Func<IDocument, string> path)`
+  - `WriteFiles(Func<IDocument, IExecutionContext, string> path)`
   
     Uses a function to describe where to write the content of each document. The output of the function should be either a full path to the disk location (including file name) or a path relative to the output folder.
   
@@ -25,6 +26,10 @@ If the metadata keys `WriteFileName` (which requires `RelativeFileDir` to be set
 Chain these methods together after the constructor to modify behavior.
   
   - `Where(Func<IDocument, bool> predicate)`
+  
+    Specifies a predicate that must be satisfied for the file to be written.
+    
+  - `Where(Func<IDocument, IExecutionContext, bool> predicate)`
   
     Specifies a predicate that must be satisfied for the file to be written.
     

@@ -193,6 +193,43 @@ Pipelines.Add("Markdown",
 );
 ```
 
+### Automatic Lambda Generation
+
+Many modules accept functions so that you can use information about the current `IExecutionContext` and/or `IDocument` when executing the module. For example, you may want to write files to disk in different locations depending on some value in each document's metadata. To make this easier in simple cases, and to assist users who may not be familiar with the [C# lambda expression syntax](https://msdn.microsoft.com/en-us/library/bb397687.aspx), the configuration file will automatically generate lambda expressions when using a special syntax. This generation will only happen for module constructors and fluent configuration methods. Any other method you use that requires a function will still have to specify it explicitly.
+
+If the module or fluent configuration method accepts a `Func<IExecutionContext, T>`, you can instead use any variable name that *starts* with `@@ctx`. For example:
+
+```
+Foo(@@ctx2.InputFolder)
+```
+will be expanded to:
+
+```
+Foo(@@ctx2 => @@ctx2.InputFolder)
+```
+
+Likewise, any variable name that *starts* with `@@doc` will be expanded to `Func<IDocument, IExecutionContext, T>`. For example:
+
+```
+Foo(@@doc["SomeMetadataValue"])
+```
+will be expanded to:
+
+```
+Foo((@@doc, _) => @@doc["SomeMetadataValue"])
+```
+
+If you use both `@@ctx` and `@@doc`, a `Func<IDocument, IExecutionContext, T>` will be generated that uses both values. For example:
+
+```
+Foo(@@doc[@@ctx.InputFolder])
+```
+will be expanded to:
+
+```
+Foo((@@doc, @@ctx) => @@doc[@@ctx.InputFolder])
+```
+
 ## Folders
 
 You can access the folders Wyam uses by getting `RootFolder`, `InputFolder`, and/or `OutputFolder` in the configuration script.
@@ -208,9 +245,8 @@ The full configuration file for this documentation site is given below as an exa
 
 ```
 // Setup code
-
 Packages
-	.Install("Bootstrap")
+	.Install("Twitter.Bootstrap.Less", "[3.3.5]")
 	.Install("jQuery", "[2.1.1]");
 	
 ===
@@ -233,7 +269,17 @@ Pipelines.Add("Content",
 	WriteFiles(".html")
 );
 
+Pipelines.Add("Less",
+    ReadFiles("master.less"),
+    Concat(ReadFiles("bootstrap.less")),
+    Less(),
+    WriteFiles(".css")
+);
+
 Pipelines.Add("Resources",
-	CopyFiles("*").Where(x => Path.GetExtension(x) != ".cshtml" && Path.GetExtension(x) != ".md")
+	CopyFiles("*").Where(x => 
+		Path.GetExtension(x) != ".cshtml" 
+		&& Path.GetExtension(x) != ".md"
+		&& Path.GetExtension(x) != ".less")
 );
 ```

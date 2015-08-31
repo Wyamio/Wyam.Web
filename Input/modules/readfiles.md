@@ -1,5 +1,6 @@
 Title: ReadFiles
 Description: Reads files from disk and sets associated metadata.
+Category: Input/Output
 ---
 Reads the content of files from the file system into the content of new documents. For each output document, several metadata values are set with information about the file. Note that this module is best at the beginning of a pipeline because it will be executed once for each input document, even if you only specify a search path. If you want to add additional files to a current pipeline, you should enclose your ReadFiles modules with [Concat](/modules/concat).
 
@@ -9,8 +10,8 @@ Reads the content of files from the file system into the content of new document
   - `ReadFiles(string searchPattern)`
 
     Reads all files that match the specified search pattern.
-  
-  - `ReadFiles(Func<IDocument, string> path)`
+    
+  - `ReadFiles(Func<IDocument, IExecutionContext, string> path)`
   
     Reads all files that match the specified path. This allows you to specify different search paths depending on the input.
   

@@ -9,10 +9,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/favicon.ico" type="image/x-icon">
-        <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+        <link href="/Content/bootstrap/bootstrap.css" rel="stylesheet" />
         <link href="/Content/prettify.css" rel="stylesheet">
         <link href="/Content/github.css" rel="stylesheet">
         <link href="/Content/master.css" rel="stylesheet" />
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
         <script src="/Scripts/jquery-2.1.1.min.js"></script>
         <script src="/Scripts/bootstrap.min.js"></script>    
         <script src="/Scripts/tinynav.min.js"></script>        
@@ -86,23 +87,19 @@
         }
         
         @{
-            List<KeyValuePair<string, string>> subNavs = activeNavFolder == string.Empty || Model.Get<bool>("HideSubNav", false) 
-                ? new List<KeyValuePair<string, string>>()
-                : Documents
+            IList<IGrouping<string, IDocument>> categoryGroups = (activeNavFolder == string.Empty || Model.Get<bool>("HideSubNav", false)) 
+                ? new List<IGrouping<string, IDocument>>() : Documents
                     .Where(x => x.ContainsKey("RelativeFilePath")
                         && !x.String("RelativeFilePath").EndsWith("index.md") 
                         && !x.String("RelativeFilePath").EndsWith("index.cshtml") 
                         && x.String("RelativeFilePath").StartsWith(activeNavFolder))
-                    .OrderBy(x => x.Get<int>("Order", 1000))
-                    .ThenBy(x => x.String("Title"))
-                    .Select(x => new KeyValuePair<string, string>(
-                        x.String("Title", x.String("SourceFileBase")),
-                        x.String("RelativeFilePath")))
-                    .ToList();   
+                    .GroupBy(x => x.String("Category"))
+                    .OrderBy(x => x.Key)
+                    .ToList();
         }
-        @if(subNavs.Count == 0)
+        @if(categoryGroups.Count == 0)
         {        
-            @if(Model.String("RelativeFilePath") == "index.cshtml")
+            @if(Model.Get<bool>("NoContainer"))
             {
                 @RenderBody()       
             }
@@ -117,18 +114,32 @@
         {
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3">                        
-                        <ul class="nav nav-pills nav-stacked" id="sub-nav">
-                            @foreach(KeyValuePair<string, string> subNav in subNavs)
-                            {
-                                string subActive = Model.String("RelativeFilePath") == subNav.Value ? "active" : null;
-                                <li class="@subActive"><a href="@PathHelper.ToRootLink(PathHelper.RemoveExtension(subNav.Value))">@subNav.Key</a></li>
-                            }
-                        </ul>
-                        <hr class="hidden-md hidden-lg" />
-                    </div>
-                    <div class="col-md-9">
+                    <div class="col-md-9 col-md-push-3">
                         @RenderBody()
+                    </div>
+                    <hr class="hidden-md hidden-lg" />
+                    <div class="col-md-3 col-md-pull-9">        
+                        @foreach(IGrouping<string, IDocument> categoryGroup in categoryGroups)
+                        {
+                            if(!string.IsNullOrWhiteSpace(categoryGroup.Key))
+                            {
+                                <div class="subnav-category">@categoryGroup.Key</div>
+                            }
+                                            
+                            <ul class="subnav">
+                                @foreach(IDocument childDoc in categoryGroup
+                                    .OrderBy(x => x.Get<int>("Order", 1000))
+                                    .ThenBy(x => x.String("Title")))
+                                {
+                                    string subActive = Model.String("RelativeFilePath") == childDoc.String("RelativeFilePath") ? "active" : null;
+                                    <li class="@subActive">
+                                        <a href="@PathHelper.ToRootLink(PathHelper.RemoveExtension(childDoc.String("RelativeFilePath")))">
+                                            @(childDoc.String("Title", childDoc.String("SourceFileBase")))
+                                        </a>
+                                    </li>
+                                }    
+                            </ul>                            
+                        }
                     </div>
                 </div>
             </div>

@@ -1,17 +1,27 @@
 @{
 	string currentFolder = new string(Model.String("RelativeFilePath", string.Empty).TakeWhile(x => x != '\\' && x != '/').ToArray());
-    foreach(IDocument childDoc in Documents
+	foreach(IGrouping<string, IDocument> categoryGroup in Documents
 		.Where(x => x.ContainsKey("RelativeFilePath")
 	        && !x.String("RelativeFilePath").EndsWith("index.md") 
 	        && !x.String("RelativeFilePath").EndsWith("index.cshtml") 
 	        && x.String("RelativeFilePath").StartsWith(currentFolder))
-	    .OrderBy(x => x.Get<int>("Order", 1000))
-	    .ThenBy(x => x.String("Title")))
+		.GroupBy(x => x.String("Category"))
+		.OrderBy(x => x.Key))
 	{
-		<h3><strong><a href="@PathHelper.ToRootLink(PathHelper.RemoveExtension(childDoc.String("RelativeFilePath")))">@(childDoc.String("Title", childDoc.String("SourceFileBase")))</a></strong></h3>
-		if(childDoc.ContainsKey("Description"))
+		if(!string.IsNullOrWhiteSpace(categoryGroup.Key))
 		{
-			<p>@(childDoc.String("Description"))</p>
+			<h1>@categoryGroup.Key</h1>
+			<hr />
+		}
+		foreach(IDocument childDoc in categoryGroup
+			.OrderBy(x => x.Get<int>("Order", 1000))
+			.ThenBy(x => x.String("Title")))
+		{
+			<h3><strong><a href="@PathHelper.ToRootLink(PathHelper.RemoveExtension(childDoc.String("RelativeFilePath")))">@(childDoc.String("Title", childDoc.String("SourceFileBase")))</a></strong></h3>
+			if(childDoc.ContainsKey("Description"))
+			{
+				<p>@(childDoc.String("Description"))</p>
+			}
 		}
 	}
 }

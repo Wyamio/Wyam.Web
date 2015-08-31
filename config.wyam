@@ -1,7 +1,6 @@
 // Setup code
-
 Packages
-	.Install("Bootstrap")
+	.Install("Twitter.Bootstrap.Less", "[3.3.5]")
 	.Install("jQuery", "[2.1.1]");
 	
 ===
@@ -24,6 +23,16 @@ Pipelines.Add("Content",
 	WriteFiles(".html")
 );
 
+Pipelines.Add("Less",
+    ReadFiles("master.less"),
+    Concat(ReadFiles("bootstrap.less")),
+    Less(),
+    WriteFiles(".css")
+);
+
 Pipelines.Add("Resources",
-	CopyFiles("*").Where(x => Path.GetExtension(x) != ".cshtml" && Path.GetExtension(x) != ".md")
+	CopyFiles("*").Where(x => 
+		Path.GetExtension(x) != ".cshtml" 
+		&& Path.GetExtension(x) != ".md"
+		&& Path.GetExtension(x) != ".less")
 );

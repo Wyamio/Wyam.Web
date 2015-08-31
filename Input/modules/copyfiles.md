@@ -1,5 +1,6 @@
 Title: CopyFiles
 Description: Copies files from one location on disk to another one and sets associated metadata.
+Category: Input/Output
 ---
 Copies the content of files from the file system from one location on disk to another location. For each output document, several metadata values are set with information about the file. By default, files are copied from the input folder (or a subfolder) to the same relative location in the output folder, but this doesn't have to be the case. Also note that this module is evaluated for each input document, so it's typically used as the first (and often only) module in a pipeline. Otherwise, you would probably copy the same files multiple times (once for each input document).
 
@@ -10,9 +11,9 @@ Copies the content of files from the file system from one location on disk to an
   
     Copies all files that match the specified search pattern.
   
-  - `CopyFiles(Func<IDocument, string> sourcePath)`
+  - `CopyFiles(Func<IDocument, IExecutionContext, string> sourcePath)`
   
-    Copies all files that match the specified path. This allows you to specify different search paths depending on the input.
+    Copies all files that match the specified path. This allows you to specify different search paths depending on the input document.
   
 ## Fluent Methods
 

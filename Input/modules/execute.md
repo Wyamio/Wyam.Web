@@ -1,5 +1,6 @@
 Title: Execute
 Description: Executes custom code for each input document.
+Category: Extensibility
 ---
 This module lets you execute custom code for each input document. It's a way to customize pipeline execution without having to write an entire module.
 
