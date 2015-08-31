@@ -38,6 +38,21 @@ Chain these methods together after constructor to start processing images.
     
     If the image is smaller than the specified `width` and `height`, it will be left alone. 
 
+  - `ApplyFilters(params ImageFilter[] filters)`
+    
+    Apply one or more filters to the image. The available filters are as follows:
+    
+    - ImageFilter.BlackAndWhite
+    - ImageFilter.Comic
+    - ImageFilter.Gotham
+    - ImageFilter.GreyScale
+    - ImageFilter.HiSatch
+    - ImageFilter.Invert
+    - ImageFilter.Lomograph
+    - ImageFilter.LoSatch
+    - ImageFilter.Polaroid
+    - ImageFilter.Sepia
+
   - `Brigthen(short percentage)`
     
     Brigthen image using percentage from 0 (no processing) to 100%.
