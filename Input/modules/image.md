@@ -38,7 +38,7 @@ Above configuration produces two set of new images, one with `-thumb` suffix and
 
   - `Image()`
   
-    Create the initial module. 
+    Create the module. 
     
     
 # Fluent Methods
