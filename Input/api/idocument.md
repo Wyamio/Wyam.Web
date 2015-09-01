@@ -25,23 +25,23 @@ The primary object in Wyam that contains content and metadata for each item as i
   
 ## Methods
   
-  - `IDocument Clone(string source, string content, IEnumerable<KeyValuePair<string, object>> items = null)`
+  - `IDocument Clone(string source, string content, IEnumerable<KeyValuePair<string, object>> metadata = null)`
   
     Clones the current document with a new source, new content, and additional metadata (all existing metadata is retained).
     
-  - `IDocument Clone(string content, IEnumerable<KeyValuePair<string, object>> items = null)`
+  - `IDocument Clone(string content, IEnumerable<KeyValuePair<string, object>> metadata = null)`
   
     Clones the current document with new content and additional metadata (all existing metadata is retained).
     
-  - `IDocument Clone(string source, Stream stream, IEnumerable<KeyValuePair<string, object>> items = null, bool disposeStream = true)`
+  - `IDocument Clone(string source, Stream stream, IEnumerable<KeyValuePair<string, object>> metadata = null, bool disposeStream = true)`
   
     Clones the current document with a new source, new stream, and additional metadata (all existing metadata is retained). If `disposeStream` is true (which it is by default), the provided stream will automatically be disposed when the document is disposed (I.e., the cloned document takes ownership of the stream).
     
-  - `IDocument Clone(Stream stream, IEnumerable<KeyValuePair<string, object>> items = null, bool disposeStream = true)`
+  - `IDocument Clone(Stream stream, IEnumerable<KeyValuePair<string, object>> metadata = null, bool disposeStream = true)`
   
     Clones the current document with a new stream and additional metadata (all existing metadata is retained). If `disposeStream` is true (which it is by default), the provided stream will automatically be disposed when the document is disposed (I.e., the cloned document takes ownership of the stream).
   
-  - `IDocument Clone(IEnumerable<KeyValuePair<string, object>> items = null)`
+  - `IDocument Clone(IEnumerable<KeyValuePair<string, object>> metadata)`
   
     Clones the current document with identical content and additional metadata (all existing metadata is retained).
     
