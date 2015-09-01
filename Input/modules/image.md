@@ -114,10 +114,6 @@ Chain these methods together after constructor to start processing images.
   
     Desaturate the image from 0 to 100.
     
-  - `SetContrast(short percentage)`
-  
-    Set the contrast value of the image from the value of -100 to 100.
-    
   - `SetSuffix(string suffix)`
    
     Set the suffix of the generated image, e.g. `SetSuffix('-medium')` will transform original filename `hello-world.jpg` to `hello-world-medium.jpg`.
