@@ -1,10 +1,37 @@
 Title: Image
 Description: Manipulates images.
 ---
-This module manipulates images by applying operations such as resizing, darken/lighten, etc. The module allows you to perform more than one set of processing instructions by using the fluent property `and`.
+This module manipulates images by applying operations such as resizing, darken/lighten, etc. This module uses [ImageProcessor](http://imageprocessor.org/).
 
-This module uses [ImageProcessor](http://imageprocessor.org/)
+This image module does not modify your original images in anyway. It will create a copy of your images and produce images in the same image format as the original.
 
+It relies on other modules such as `ReadFiles` to read the actual images as input and `WriteFiles` to write images to disk.
+
+```
+Pipelines.Add("Images",
+    ReadFiles("*").Where(x => x.Contains("images\\") && new[] { ".jpg", ".jpeg", ".gif", ".png"}.Contains(Path.GetExtension(x))),
+    Image()
+      .SetJpegQuality(100).Resize(400,209).SetSuffix("-thumb"),
+    WriteFiles("*")
+);
+```
+
+It will produce image with similar file name as the original image with addition of suffix indicating operations that have performed, e.g. `hello-world.jpg` can result in `hello-world-w100.jpg`.
+
+The module allows you to perform more than one set of processing instructions by using the fluent property `and`.
+
+```
+Pipelines.Add("Images",
+    ReadFiles("*").Where(x => x.Contains("images\\") && new[] { ".jpg", ".jpeg", ".gif", ".png"}.Contains(Path.GetExtension(x))),
+    Image()
+      .SetJpegQuality(100).Resize(400,209).SetSuffix("-thumb")
+      .And
+      .SetJpegQuality(70).Resize(400*2, 209*2).SetSuffix("-medium"),
+    WriteFiles("*")
+);
+```
+
+Above configuration produces two set of new images, one with `-thumb` suffix and the other with `-medium` suffix.
 
 # Usage
 ---
@@ -52,18 +79,20 @@ Chain these methods together after constructor to start processing images.
     - ImageFilter.LoSatch
     - ImageFilter.Polaroid
     - ImageFilter.Sepia
+    
+    These filter values map directly to filters provided by ImageProcessor library. You can see the output of these filters [here](http://imageprocessor.org/imageprocessor/imagefactory/filter/).
 
   - `Brigthen(short percentage)`
     
-    Brigthen image using percentage from 0 (no processing) to 100%.
+    Brigthen image using percentage from 0 (no processing) to 100.
     
   - `Darken(short percentage)`
   
-    Darken the iamge using percentage from 0 (no processing) to 100%.
+    Darken the image using percentage from 0 (no processing) to 100.
     
   - `SetOpacity(short percentage)`
   
-    Set opacity of the image from 0 to 100%.
+    Set opacity of the image from 0 to 100.
     
   - `SetHue (short degrees, bool rotate = false)`
   
@@ -79,11 +108,11 @@ Chain these methods together after constructor to start processing images.
     
   - `Saturate(short percentage)`
   
-    Saturate the image from 0 to 100%.
+    Saturate the image from 0 to 100.
     
   - `Desaturate(short percentage)`
   
-    Desaturate the image from 0 to 100%.
+    Desaturate the image from 0 to 100.
     
   - `SetContrast(short percentage)`
   
@@ -91,12 +120,17 @@ Chain these methods together after constructor to start processing images.
     
   - `SetSuffix(string suffix)`
    
-    Set the suffix of the generated processed image.
+    Set the suffix of the generated image, e.g. `SetSuffix('-medium')` will transform original filename `hello-world.jpg` to `hello-world-medium.jpg`.
     
   - `SetPrefix(string prefix)`
   
-    Set the prefix of the generated process image.
+    Set the prefix of the generated image.
     
+    
+  - `SetJpegQuality(short value`
+  
+    This setting only applies to JPEG images. It sets the quality of the JPEG output.
+      
   - `And`
   
-    Begins another set of processing instructions to be applied to the image. 
+    Mark the beginning of another set of processing instructions to be applied to the images. 
