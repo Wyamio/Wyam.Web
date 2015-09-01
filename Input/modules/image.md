@@ -53,9 +53,9 @@ Chain these methods together after constructor to start processing images.
     
     If `height` is set to `null` or `0`,  the image will be resized to its width.
     
-    If both `width` and `height` are specified and set to larger than 0, the image will perform cropping if necessary. The cropping position is determined by `anchor`.
+    If both `width` and `height` are specified and set to larger than 0, the image will perform cropping if necessary. The cropping position is determined by `anchor` with the possible values of `AnchorPosition[Center|Top|Bottom|Left|Right|TopLeft|TopRight|BottomLeft|BottomRight]`.
     
-    The module will generate error if both `width` and `height` are set to null or zero.
+    The module will not perform any image resizing if both `width` and `height` are set to null.
     
     If the source image is smaller than the specified `width` and `height`, the image will be enlarged.
  
@@ -63,7 +63,7 @@ Chain these methods together after constructor to start processing images.
  
     If the image is larger than the specified `width` and `height`, it will be resized down.
     
-    If the image is smaller than the specified `width` and `height`, it will be left alone. 
+    If the image is smaller than the specified `width` and `height`, it will not be resized. 
 
   - `ApplyFilters(params ImageFilter[] filters)`
     
@@ -80,7 +80,7 @@ Chain these methods together after constructor to start processing images.
     - ImageFilter.Polaroid
     - ImageFilter.Sepia
     
-    These filter values map directly to filters provided by ImageProcessor library. You can see the output of these filters [here](http://imageprocessor.org/imageprocessor/imagefactory/filter/).
+    These filter values map directly to filters provided by ImageProcessor library. You can see the effects of these filters [here](http://imageprocessor.org/imageprocessor/imagefactory/filter/).
 
   - `Brigthen(short percentage)`
     
@@ -100,11 +100,11 @@ Chain these methods together after constructor to start processing images.
     
   - `Tint(Color color)`
   
-    Tint the image with specific color.
+    Tint the image with specific color, e.g. `SetTint(Color.Aqua)`. Please check [here](https://msdn.microsoft.com/en-us/library/system.drawing.color(v=vs.110).aspx) for more color values.
     
   - `Vignette(Color color)`
   
-    Apply Vignette processing to the image with specific color.
+    Apply Vignette processing to the image with specific color, e.g. `Vignette(Color.AliceBlue)`. Please check [here](https://msdn.microsoft.com/en-us/library/system.drawing.color(v=vs.110).aspx) for more color values.
     
   - `Saturate(short percentage)`
   
@@ -120,16 +120,15 @@ Chain these methods together after constructor to start processing images.
     
   - `SetSuffix(string suffix)`
    
-    Set the suffix of the generated image, e.g. `SetSuffix('-medium')` will transform original filename `hello-world.jpg` to `hello-world-medium.jpg`.
+    Set the suffix of the generated image, e.g. `SetSuffix("-medium")` will transform original filename `hello-world.jpg` to `hello-world-medium.jpg`.
     
   - `SetPrefix(string prefix)`
   
-    Set the prefix of the generated image.
+    Set the prefix of the generated image, e.g. `SetPrefix("medium-")` will transform original filename `hello-world.jpg` to `medium-hello-world.jpg`.
     
-    
-  - `SetJpegQuality(short value`
+  - `SetJpegQuality(short value)`
   
-    This setting only applies to JPEG images. It sets the quality of the JPEG output.
+    This setting only applies to JPEG images. It sets the quality of the JPEG output. The possible values are from 0 to 100.
       
   - `And`
   
