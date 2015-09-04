@@ -16,8 +16,6 @@ This module uses [AngleSharp](https://github.com/FlorianRappl/AngleSharp).
   - `Excerpt(string querySelector)`
   
     Specifies an alternate query selector for the content.
-    
-  - `AutoLink(Func<IExecutionContext, IDictionary<string, string>> links)`
   
 ## Fluent Methods
 

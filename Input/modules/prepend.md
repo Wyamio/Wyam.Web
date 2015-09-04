@@ -11,11 +11,11 @@ Prepends the specified content to the existing content of each document.
   
     Prepends the string value of the specified object to the content of every input document.
     
-  - `Prepend(Func<IExecutionContext, object> content)`
+  - `Prepend(ContextConfig content)`
   
     Prepends the string value of the returned object to to content of each document. This allows you to specify different content to prepend depending on the execution context.
 
-  - `Prepend(Func<IDocument, IExecutionContext, object> content)`
+  - `Prepend(DocumentConfig content)`
   
     Prepends the string value of the returned object to to content of each document. This allows you to specify different content to prepend for each document depending on the input document.
 

@@ -11,11 +11,11 @@ Replaces the content of each input document with the string value of the specifi
   
     Uses the string value of the specified object as the new content for every input document.
 
-  - `Content(Func<IExecutionContext, object> content)`
+  - `Content(ContextConfig content)`
   
     Uses the string value of the returned object as the new content for each document. This allows you to specify different content depending on the execution context.
 
-  - `Content(Func<IDocument, IExecutionContext, object> content)`
+  - `Content(DocumentConfig content)`
   
     Uses the string value of the returned object as the new content for each document. This allows you to specify different content for each document depending on the input document.
 

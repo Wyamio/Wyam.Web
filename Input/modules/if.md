@@ -7,7 +7,7 @@ Evaluates a series of child modules for each input document if a specified condi
 # Usage
 ---
     
-  - `If(Func<IDocument, IExecutionContext, bool> predicate, params IModule[] modules)`
+  - `If(DocumentConfig predicate, params IModule[] modules)`
   
     Specifies a predicate and a series of child modules to be evaluated if the predicate returns true.
   
@@ -15,7 +15,7 @@ Evaluates a series of child modules for each input document if a specified condi
 
 Chain these methods together after the constructor to modify behavior.
     
-  - `ElseIf(Func<IDocument, IExecutionContext, bool> predicate, params IModule[] modules)`
+  - `ElseIf(DocumentConfig predicate, params IModule[] modules)`
   
     Specifies an alternate condition to be tested on documents that did not satisfy previous conditions. You can chain together as many `ElseIf` calls as needed.
   

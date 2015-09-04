@@ -6,11 +6,7 @@ This module lets you execute custom code for each input document. It's a way to 
 
 # Usage
 ---
-
-  - `Execute(Func<IDocument, IEnumerable<IDocument>> execute)`
+   
+  - `Execute(DocumentConfig execute)`
   
-    This function is evaluated once for every input document. The return value should be an enumerable of output documents for each input document. If you want to execute some code and just pass the documents through, you should return an array with the input document as the single value. Otherwise, use `IDocument.Clone(IEnumerable<KeyValuePair<string, object>> items = null)` to create new documents with additional metadata (and the same content) and/or `IDocument.Clone(string content, IEnumerable<KeyValuePair<string, object>> items = null)` to create new documents with new content and additional metadata. 
-    
-  - `Execute(Func<IDocument, IExecutionContext, IEnumerable<IDocument>> execute)`
-  
-    This function is evaluated once for every input document. The return value should be an enumerable of output documents for each input document. This overload allows you to execute code that requires the `IExecutionContext` (for example, if it needs to access previous documents or output trace information). 
+    This function is evaluated once for every input document. The return value should be a `IEnumerable<IDocument>`. If you want to execute some code and just pass the documents through, you should return an array with the input document as the single value. Otherwise, use `IDocument.Clone(IEnumerable&lt;KeyValuePair&lt;string, object&gt;&gt; items = null)` to create new documents with additional metadata (and the same content) and/or `IDocument.Clone(string content, IEnumerable&lt;KeyValuePair&lt;string, object&gt;&gt; items = null)` to create new documents with new content and additional metadata.  

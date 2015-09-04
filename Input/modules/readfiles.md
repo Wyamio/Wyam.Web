@@ -11,9 +11,9 @@ Reads the content of files from the file system into the content of new document
 
     Reads all files that match the specified search pattern.
     
-  - `ReadFiles(Func<IDocument, IExecutionContext, string> path)`
+  - `ReadFiles(DocumentConfig path)`
   
-    Reads all files that match the specified path. This allows you to specify different search paths depending on the input.
+    Reads all files that match the specified path. The return value is expected to be a `string`. This allows you to specify different search paths depending on the input.
   
 ## Fluent Methods
 

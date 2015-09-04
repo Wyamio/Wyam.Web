@@ -17,9 +17,9 @@ If the metadata keys `WriteFileName` (which requires `RelativeFileDir` to be set
 
     Writes the document content to disk with the specified extension with the same base file name and relative path as the input file. This requires metadata for `RelativeFilePath` to be set (which is done by default by the [ReadFiles](/modules/readfiles) module).
   
-  - `WriteFiles(Func<IDocument, IExecutionContext, string> path)`
+  - `WriteFiles(DocumentConfig path)`
   
-    Uses a function to describe where to write the content of each document. The output of the function should be either a full path to the disk location (including file name) or a path relative to the output folder.
+    Uses a function to describe where to write the content of each document. The return value is expected to be a `string`. The output of the function should be either a full path to the disk location (including file name) or a path relative to the output folder.
   
 ## Fluent Methods
 
@@ -29,9 +29,9 @@ Chain these methods together after the constructor to modify behavior.
   
     Specifies a predicate that must be satisfied for the file to be written.
     
-  - `Where(Func<IDocument, IExecutionContext, bool> predicate)`
+  - `Where(DocumentConfig predicate)`
   
-    Specifies a predicate that must be satisfied for the file to be written.
+    Specifies a predicate that must be satisfied for the file to be written. The return value is expected to be a `bool`.
     
 # Metadata
 ---

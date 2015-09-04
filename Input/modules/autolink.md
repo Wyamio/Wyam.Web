@@ -17,13 +17,13 @@ This module uses [AngleSharp](https://github.com/FlorianRappl/AngleSharp).
   
     Specifies a dictionary of link mappings. The keys specify strings to search for in the HTML content and the values specify what should be placed in the `href` attribute. This uses the same link mappings for all input documents.
     
-  - `AutoLink(Func<IExecutionContext, IDictionary<string, string>> links)`
+  - `AutoLink(ContextConfig links)`
   
-    Specifies a dictionary of link mappings given an `IExecutionContext`. The keys specify strings to search for in the HTML content and the values specify what should be placed in the `href` attribute. This uses the same link mappings for all input documents.
+    Specifies a dictionary of link mappings given an `IExecutionContext`. The return value is expected to be a `IDictionary<string, string>`. The keys specify strings to search for in the HTML content and the values specify what should be placed in the `href` attribute. This uses the same link mappings for all input documents.
     
-  - `AutoLink(Func<IDocument, IExecutionContext, IDictionary<string, string>> links)`
+  - `AutoLink(DocumentConfig links)`
   
-    Specifies a dictionary of link mappings given an `IDocument` and `IExecutionContext`. The keys specify strings to search for in the HTML content and the values specify what should be placed in the `href` attribute. This allows you to specify a different mapping for each input document.
+    Specifies a dictionary of link mappings given an `IDocument` and `IExecutionContext`. The return value is expected to be a `IDictionary<string, string>`. The keys specify strings to search for in the HTML content and the values specify what should be placed in the `href` attribute. This allows you to specify a different mapping for each input document.
   
 ## Fluent Methods
 

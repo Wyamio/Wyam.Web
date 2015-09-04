@@ -11,7 +11,7 @@ Adds the specified metadata to each input document.
   
     The specified object is added as metadata for the specified key for every input document.
 
-  - `Meta(string key, Func<IDocument, IExecutionContext, object> metadata)`
+  - `Meta(string key, DocumentConfig metadata)`
   
     Uses a function to determine an object to be added as metadata for each document. This allows you to specify different metadata for each document depending on the input.
 

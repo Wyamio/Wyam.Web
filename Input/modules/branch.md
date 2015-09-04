@@ -32,6 +32,6 @@ You can see that the input content to the AddOne modules after the Branch is the
 
 Chain these methods together after the constructor to modify behavior.
     
-  - `Where(Func<IDocument, IExecutionContext, bool> predicate)`
+  - `Where(DocumentConfig predicate)`
   
-    Limits the documents passed to the child modules to those that satisfy the supplied predicate. All original input documents are output without modification regardless of whether they satisfy the predicate.
+    Limits the documents passed to the child modules to those that satisfy the supplied predicate. The return value is expected to be a `bool`. All original input documents are output without modification regardless of whether they satisfy the predicate.

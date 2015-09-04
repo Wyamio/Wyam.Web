@@ -19,29 +19,29 @@ The primary object in Wyam that contains content and metadata for each item as i
   
     Gets the content associated with this document.
     
-  - `Stream Stream { get; }`
+  - `Stream GetStream()`
   
-    Gets a stream for the document content. **Take care not to dispose the returned `Stream` object as it may be reused later.**
+    Gets a stream for the document content. The retured stream wraps the underlying stream and prevents concurrent access (additional stream requests will block until the first one is finished). **You *must* dispose the retured stream as quickly as possible to prevent blocking on concurrent access**.
   
 ## Methods
   
-  - `IDocument Clone(string source, string content, IEnumerable<KeyValuePair<string, object>> metadata = null)`
+  - `IDocument Clone(string source, string content, IEnumerable&lt;KeyValuePair&lt;string, object&gt;&gt; metadata = null)`
   
     Clones the current document with a new source, new content, and additional metadata (all existing metadata is retained).
     
-  - `IDocument Clone(string content, IEnumerable<KeyValuePair<string, object>> metadata = null)`
+  - `IDocument Clone(string content, IEnumerable&lt;KeyValuePair&lt;string, object&gt;&gt; metadata = null)`
   
     Clones the current document with new content and additional metadata (all existing metadata is retained).
     
-  - `IDocument Clone(string source, Stream stream, IEnumerable<KeyValuePair<string, object>> metadata = null, bool disposeStream = true)`
+  - `IDocument Clone(string source, Stream stream, IEnumerable&lt;KeyValuePair&lt;string, object&gt;&gt; metadata = null, bool disposeStream = true)`
   
     Clones the current document with a new source, new stream, and additional metadata (all existing metadata is retained). If `disposeStream` is true (which it is by default), the provided stream will automatically be disposed when the document is disposed (I.e., the cloned document takes ownership of the stream).
     
-  - `IDocument Clone(Stream stream, IEnumerable<KeyValuePair<string, object>> metadata = null, bool disposeStream = true)`
+  - `IDocument Clone(Stream stream, IEnumerable&lt;KeyValuePair&lt;string, object&gt;&gt; metadata = null, bool disposeStream = true)`
   
     Clones the current document with a new stream and additional metadata (all existing metadata is retained). If `disposeStream` is true (which it is by default), the provided stream will automatically be disposed when the document is disposed (I.e., the cloned document takes ownership of the stream).
   
-  - `IDocument Clone(IEnumerable<KeyValuePair<string, object>> metadata)`
+  - `IDocument Clone(IEnumerable&lt;KeyValuePair&lt;string, object&gt;&gt; metadata)`
   
     Clones the current document with identical content and additional metadata (all existing metadata is retained).
     

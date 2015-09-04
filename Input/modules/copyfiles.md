@@ -11,9 +11,9 @@ Copies the content of files from the file system from one location on disk to an
   
     Copies all files that match the specified search pattern.
   
-  - `CopyFiles(Func<IDocument, IExecutionContext, string> sourcePath)`
+  - `CopyFiles(DocumentConfig sourcePath)`
   
-    Copies all files that match the specified path. This allows you to specify different search paths depending on the input document.
+    Copies all files that match the specified path. The return value is expected to be a `string`. This allows you to specify different search paths depending on the input document.
   
 ## Fluent Methods
 

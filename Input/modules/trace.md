@@ -11,11 +11,11 @@ Outputs trace messages during execution. This module has no effect on documents 
   
     Outputs the string value of the specified object to trace.
 
-  - `Trace(Func<IExecutionContext, object> content)`
+  - `Trace(ContextConfig content)`
   
     Outputs the string value of the returned object to trace. This allows you to trace different content depending on the execution context.
 
-  - `Trace(Func<IDocument, IExecutionContext, object> content)`
+  - `Trace(DocumentConfig content)`
   
     Outputs the string value of the returned object to trace. This allows you to trace different content for each document depending on the input document.
 

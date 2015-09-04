@@ -11,11 +11,11 @@ Replaces a search string in the content of each input document with new content.
   
     Replaces all occurrences of the search string in every input document with the string value of the specified object.
 
-  - `Replace(string search, Func<IExecutionContext, object> content)`
+  - `Replace(string search, ContextConfig content)`
   
     Replaces all occurrences of the search string in every input document with the string value of the returned object. This allows you to specify different content depending on the execution context.
 
-  - `Replace(string search, Func<IDocument, IExecutionContext, object> content)`
+  - `Replace(string search, DocumentConfig content)`
   
     Replaces all occurrences of the search string in every input document with the string value of the returned object. This allows you to specify different content for each document depending on the input document.
 

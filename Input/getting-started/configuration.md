@@ -197,7 +197,7 @@ Pipelines.Add("Markdown",
 
 Many modules accept functions so that you can use information about the current `IExecutionContext` and/or `IDocument` when executing the module. For example, you may want to write files to disk in different locations depending on some value in each document's metadata. To make this easier in simple cases, and to assist users who may not be familiar with the [C# lambda expression syntax](https://msdn.microsoft.com/en-us/library/bb397687.aspx), the configuration file will automatically generate lambda expressions when using a special syntax. This generation will only happen for module constructors and fluent configuration methods. Any other method you use that requires a function will still have to specify it explicitly.
 
-If the module or fluent configuration method accepts a `Func<IExecutionContext, T>`, you can instead use any variable name that *starts* with `@@ctx`. For example:
+If the module or fluent configuration method has a `ContextConfig` delegate argument, you can instead use any variable name that starts with `@@ctx`. For example:
 
 ```
 Foo(@@ctx2.InputFolder)
@@ -208,7 +208,7 @@ will be expanded to:
 Foo(@@ctx2 => @@ctx2.InputFolder)
 ```
 
-Likewise, any variable name that *starts* with `@@doc` will be expanded to `Func<IDocument, IExecutionContext, T>`. For example:
+Likewise, any variable name that starts with `@@doc` will be expanded to a `DocumentConfig` delegate. For example:
 
 ```
 Foo(@@doc["SomeMetadataValue"])
@@ -219,7 +219,7 @@ will be expanded to:
 Foo((@@doc, _) => @@doc["SomeMetadataValue"])
 ```
 
-If you use both `@@ctx` and `@@doc`, a `Func<IDocument, IExecutionContext, T>` will be generated that uses both values. For example:
+If you use both `@@ctx` and `@@doc`, a `DocumentConfig` delegate will be generated that uses both values. For example:
 
 ```
 Foo(@@doc[@@ctx.InputFolder])
@@ -236,7 +236,7 @@ You can access the folders Wyam uses by getting `RootFolder`, `InputFolder`, and
 
 ## Execution Ordering
 
-Be aware that the configuration file only *configures* the pipelines. Each pipeline is executed in the order in which they were first added after the entire configuration file is evaluated. This means that you can't declare one pipeline, then declare another, and then add a new module to the first pipeline expecting it to reflect what happened in the second one. The second pipeline won't execute until the entire first pipeline is complete, including any modules that were added to it after the second one was declared. If you need to run some modules, switch to a different pipeline, and the perform additional processing on the first set of documents, look into the [Documents](/modules/documents) and [ConcatDocuments](/modules/concatdocuments) modules.
+Be aware that the configuration file only *configures* the pipelines. Each pipeline is executed in the order in which they were first added after the entire configuration file is evaluated. This means that you can't declare one pipeline, then declare another, and then add a new module to the first pipeline expecting it to reflect what happened in the second one. The second pipeline won't execute until the entire first pipeline is complete, including any modules that were added to it after the second one was declared. If you need to run some modules, switch to a different pipeline, and the perform additional processing on the first set of documents, look into the [Documents](/modules/documents) module.
 
 # Example
 ---

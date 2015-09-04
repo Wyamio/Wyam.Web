@@ -7,6 +7,6 @@ Filters the current sequence of modules using a predicate. Only input documents 
 # Usage
 ---
     
-  - `Where(Func<IDocument, IExecutionContext, bool> predicate)`
+  - `Where(DocumentConfig predicate)`
   
-    Specifies the predicate to use for filtering documents.
+    Specifies the predicate to use for filtering documents. The return value is expected to be a `bool`.
