@@ -8,7 +8,7 @@ Allows you to get sequences of documents from the current and previous pipelines
   
 ## Methods
   
-  - `IReadOnlyDictionary<string, IEnumerable<IDocument>> ByPipeline()`
+  - `IReadOnlyDictionary&lt;string, IEnumerable&lt;IDocument&gt;&gt; ByPipeline()`
   
     Returns a dictionary containing all the documents processed by each pipeline keyed by pipeline name.
   
