@@ -25,7 +25,7 @@ Pipelines.Add("Content",
         FrontMatter(Yaml())		
     ),
     Razor(),
-    WriteFiles("".html"")
+    WriteFiles(".html")
 );
 
 Pipelines.Add("Resources",
