@@ -2,7 +2,7 @@ Title: Image
 Description: Manipulates images.
 Category: Data Processing
 ---
-This module manipulates images by applying operations such as resizing, darken/lighten, etc. This module uses [ImageProcessor](http://imageprocessor.org/).
+This module manipulates images by applying operations such as resizing, darken/lighten, etc.
 
 This image module does not modify your original images in anyway. It will create a copy of your images and produce images in the same image format as the original.
 
@@ -33,6 +33,8 @@ Pipelines.Add("Images",
 ```
 
 Above configuration produces two set of new images, one with `-thumb` suffix and the other with `-medium` suffix.
+
+**This module uses [ImageProcessor](http://imageprocessor.org/).**
 
 # Usage
 ---

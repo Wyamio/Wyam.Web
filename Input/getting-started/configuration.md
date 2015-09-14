@@ -47,11 +47,6 @@ From the `Install(...)` method you can also specify the acceptable package versi
 
 By default, packages are downloaded to `\packages`. If you want to change this, set `Packages.Path` to the relative folder where you want packages to be downloaded. For example, you could set this to a system-wide folder if you have several scripts that share the same packages.
 
-Note that some commonly-used module libraries are made available in the command line application by default and don't need to be explicitly specified in the configuration file unless you're using the embedded version of Wyam. These are:
-* `Wyam.Modules.Markdown`
-* `Wyam.Modules.Razor`
-* `Wyam.Modules.Yaml`
-
 ## <a name="assemblies"></a>Assemblies
 
 In addition to NuGet packages you can also load assemblies. This is accomplished by using the `Assemblies` property. You can load all the assemblies in a directory with the `LoadDirectory(string path, SearchOption searchOption = SearchOption.AllDirectories)` method. The specified directory can either be relative to the active directory or absolute. You can also load a single assembly by location with the `LoadFile(string path)` method and by full name with the `Load(string name)` method. For example:

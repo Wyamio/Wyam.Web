@@ -52,6 +52,10 @@ Contains all the information about the running execution and pipeline. It is pas
   - `bool TryConvert<T>(object value, out T result)`
   
     This attempts to convert `value` to type `T` using the same flexible conversion process as used for metadata. You should use this type of conversion as opposed to casting or other type conversion methods to be as lenient as possible.
+    
+  - `IDocument GetNewDocument(IEnumerable<KeyValuePair<string, object>> metadata = null)`
+  
+    Creates a new empty document with the specified metadata.
   
   - `IReadOnlyList<IDocument> Execute(IEnumerable<IModule> modules, IEnumerable<IDocument> inputs)`
   

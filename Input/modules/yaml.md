@@ -4,7 +4,7 @@ Category: Metadata
 ---
 Parses YAML content for each input document and stores the result in it's metadata.
 
-This module uses [YamlDotNet](http://aaubry.net/pages/yamldotnet.html).
+**This module uses [YamlDotNet](http://aaubry.net/pages/yamldotnet.html).**
 
 # Usage
 ---
