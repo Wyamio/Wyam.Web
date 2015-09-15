@@ -34,6 +34,10 @@ Chain these methods together after the constructor to modify behavior.
   - `Where(Func<string, bool> predicate)`
   
     Specifies a predicate that must be satisfied for the file to be read. The input to the predicate is the full path to the file.
+  
+  - `WithExtensions(params string[] extensions)`
+  
+    Only files with the specified extension(s) will be included. You could also do this with a search pattern in the constructor or with a predicate in the `Where(...)` method, but this may be more concise in some situations (like when you want to read multiple extensions).
        
 # Metadata
 ---
