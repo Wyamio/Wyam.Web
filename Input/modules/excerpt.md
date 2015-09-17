@@ -2,7 +2,7 @@ Title: Excerpt
 Description: Finds the first occurrence of a specified HTML element and stores it's contents as metadata.
 Category: Metadata
 ---
-Finds the first occurrence of a specified HTML element and stores it's contents as metadata. This is useful for situations like displaying the first paragraph of your most recent blog posts or [generating RSS and Atom feeds](/knowledgebase/rss-and-atom-feeds). By default, this module looks for the first `p` (paragraph) element and places it's outer HTML content in metadata with a key of `Excerpt`.
+Finds the first occurrence of a specified HTML element and stores it's contents as metadata. This is useful for situations like displaying the first paragraph of your most recent blog posts or [generating RSS and Atom feeds](/knowledgebase/rss-and-atom-feeds). By default, this module looks for the first `p` (paragraph) element and places it's outer HTML content in metadata with a key of `Excerpt`. The content of the original input document is left unchanged.
 
 **This module uses [AngleSharp](https://github.com/FlorianRappl/AngleSharp).**
 
@@ -21,7 +21,7 @@ Finds the first occurrence of a specified HTML element and stores it's contents 
 
 Chain these methods together after the constructor to modify behavior.
 
-  - `SetQuerySelector(string querySelector)`
+  - `WithQuerySelector(string querySelector)`
   
     Allows you to specify an alternate query selector. 
 
@@ -29,7 +29,7 @@ Chain these methods together after the constructor to modify behavior.
   
     Allows you to specify an alternate metadata key.
     
-  - `SetOuterHtml(bool outerHtml)`
+  - `GetOuterHtml(bool outerHtml)`
   
     Controls whether the inner HTML (not including the containing element's HTML) or outer HTML (including the containing element's HTML) of the first result from the query selector is added to metadata. The default is to return outer HTML content.
     

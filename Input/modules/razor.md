@@ -18,11 +18,11 @@ Whenever possible, the same conventions as the Razor engine in ASP.NET MVC were 
 
 Chain these methods together after the constructor to modify behavior.
 
-  - `SetViewStart(string path)`
+  - `WithViewStart(string path)`
   
     Specifies an alternate ViewStart file to use for all Razor pages processed by this module.
 
-  - `SetViewStart(Func<IDocument, string> path)`
+  - `WithViewStart(Func<IDocument, string> path)`
   
     Specifies an alternate ViewStart file to use for all Razor pages processed by this module. This lets you specify a different ViewStart file for each document. For example, you could return a ViewStart based on document location or document metadata. Returning `null` from the function reverts back to the default ViewStart search behavior for that document.
     

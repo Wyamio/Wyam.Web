@@ -19,15 +19,15 @@ Reads the content of files from the file system into the content of new document
 
 Chain these methods together after the constructor to modify behavior.
 
-  - `SearchOption(SearchOption searchOption)`
+  - `WithSearchOption(SearchOption searchOption)`
   
     Specifies whether to search all directories or just the top directory.
 
-  - `AllDirectories()`
+  - `FromAllDirectories()`
   
     Specifies that all directories should be searched.
   
-  - `TopDirectoryOnly()`
+  - `FromTopDirectoryOnly()`
   
     Specifies that only the top-level directory should be searched.
   

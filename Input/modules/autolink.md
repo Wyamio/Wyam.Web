@@ -29,10 +29,10 @@ Replaces occurrences of specified strings with HTML links. This module is smart 
 
 Chain these methods together after the constructor to modify behavior.
 
-  - `SetQuerySelector(string querySelector)`
+  - `WithQuerySelector(string querySelector)`
   
     Allows you to specify an alternate query selector. 
 
-  - `AddLink(string text, string link)`
+  - `WithLink(string text, string link)`
   
     Adds an additional link to the mapping. This can be used whether or not you specify a mapping in the constructor.

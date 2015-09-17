@@ -43,7 +43,7 @@ If you need to execute child modules from your module, don't call `IModule.Execu
 Here are a few other guidelines to follow so that your module matches the convention used by the built-in Wyam modules.
 
 - Favor overloaded constructors over optional arguments. This will help avoid versioning problems in the future (see [this blog post](http://haacked.com/archive/2010/08/10/versioning-issues-with-optional-arguments.aspx/) for more details).
-- Use a fluent interface for setting optional options.
+- Use a fluent interface for setting optional options and favor accepted fluent method naming conventions (I.e., use `WithSomeOption(...)` instead of `SetSomeOption(...)` unless you're actually setting something external to the module).
 - Make the module null and fault tolerant. That is, if null or other invalid values are supplied as constructor or fluent method arguments, try to work around it by using default values, etc. instead of throwing exceptions.
 
 # Deployment

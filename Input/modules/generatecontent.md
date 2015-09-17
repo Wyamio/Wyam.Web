@@ -29,7 +29,7 @@ Procedurally generates content using flexible text templates.
 
 Chain these methods together after the constructor to modify behavior.
   
-  - `SetSeed(long seed)`
+  - `WithSeed(long seed)`
   
     This allows you to set the seed used for text generation which can be handy for ensuring repeatable generations.
     
