@@ -36,3 +36,11 @@ Chain these methods together after the constructor to modify behavior.
   - `WithLink(string text, string link)`
   
     Adds an additional link to the mapping. This can be used whether or not you specify a mapping in the constructor.
+
+  - `WithMatchOnlyWholeWord()`
+  
+    If used, AutoLink no longer matches substrings in a word. Only whole words will be matched. A word is considered a substring of a string if both following conditions are met:
+    * The character before the first character of the word is not a digit and not a letter
+    * The character following the last character of the word is not a digit and not a letter
+
+    Any character before the first or after the last character of the string is regarded to be not a digit and not a letter.
