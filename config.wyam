@@ -31,8 +31,5 @@ Pipelines.Add("Less",
 );
 
 Pipelines.Add("Resources",
-	CopyFiles("*").Where(x => 
-		Path.GetExtension(x) != ".cshtml" 
-		&& Path.GetExtension(x) != ".md"
-		&& Path.GetExtension(x) != ".less")
+	CopyFiles("*").WithoutExtensions(".cshtml", ".md", ".less")
 );
