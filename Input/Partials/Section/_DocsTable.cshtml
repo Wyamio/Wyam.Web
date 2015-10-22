@@ -1,0 +1,34 @@
+@{
+	DocsTable docsTable = ViewData["DocsTable"] as DocsTable;
+	if(docsTable != null && docsTable.Docs != null && docsTable.Docs.Count > 0)
+	{
+		<text>
+			<h2>@docsTable.Title</h2>
+			<div class="box">
+				<div class="box-body no-padding">
+					<table class="table table-striped @(docsTable.HasSummary ? "two-cols" : string.Empty)">
+						<thead>
+							<tr>
+								<th>@docsTable.Header</th>
+								@if(docsTable.HasSummary)
+								{
+									<th>Summary</th>
+								}
+							</tr>
+						</thead>
+						@foreach(IDocument doc in docsTable.Docs)
+						{
+							<tr>
+								<td>@doc.Link()</td>
+								@if(docsTable.HasSummary)
+								{
+									<td>@Html.Raw(doc["SummaryHtml"])</td>
+								}
+							</tr>
+						}
+					</table>
+				</div>
+			</div>
+		</text>
+	}
+}

@@ -1,0 +1,24 @@
+@{
+	IDocument containingNamespace = Model.Get<IDocument>("ContainingNamespace");
+	if(containingNamespace != null)
+	{
+		<li class="header">Namespace</li>
+		<li>@containingNamespace.Link()</li>
+		
+		<li role="separator" class="divider"></li>
+		
+		foreach(IGrouping<string, IDocument> typeGroup 
+			in containingNamespace.Get<IReadOnlyList<IDocument>>("MemberTypes")
+				.Where(x => x.Get<bool>("IsResult") && x["Kind"].Equals("NamedType"))
+				.GroupBy(x => x.String("SpecificKind")))
+		{
+			<li class="header">@typeGroup.Key Types</li>
+			foreach(IDocument type in typeGroup)
+			{
+				string activeClass = type.String("SymbolId") == Model.String("SymbolId") 
+					? "active" : string.Empty;
+				<li class="@activeClass">@type.Link()</li>
+			}	
+		}
+	}
+}

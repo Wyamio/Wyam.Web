@@ -1,0 +1,8 @@
+@{
+	string syntax = Model.String("Syntax");
+}
+@if(!string.IsNullOrWhiteSpace(syntax))
+{
+	<h2>Syntax</h2>
+	<pre class="prettyprint">@syntax</pre>
+}

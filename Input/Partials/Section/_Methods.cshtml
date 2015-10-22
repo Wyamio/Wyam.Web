@@ -1,0 +1,34 @@
+@{
+	IList<IDocument> methods = Model.Get<IReadOnlyList<IDocument>>("Members")
+		?.Where(x => x.Get<bool>("IsResult") && x.String("Kind") == "Method")
+		.OrderBy(x => x["DisplayName"])
+		.ToList();
+	if(methods.Count > 0)
+	{
+		<text>
+			<h2>Methods</h2>
+			<div class="box">
+				<div class="box-body no-padding">
+					<table class="table table-striped three-cols">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Value</th>
+								<th>Summary</th>
+							</tr>
+						</thead>
+						@foreach(IDocument method in methods)
+						{
+							IDocument returnType = method.Get<IDocument>("ReturnType");
+							<tr>
+								<td>@method.Link()</td>
+								<td>@(returnType == null ? new HtmlString(string.Empty) : returnType.Link())</td>
+								<td>@Html.Raw(method["SummaryHtml"])</td>
+							</tr>
+						}
+					</table>
+				</div>
+			</div>
+		</text>
+	}
+}

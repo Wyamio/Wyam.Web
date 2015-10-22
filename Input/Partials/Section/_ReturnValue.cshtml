@@ -1,0 +1,24 @@
+@{
+	IDocument returnType = Model.Get<IDocument>("ReturnType");
+	string returnsHtml = Model.String("ReturnsHtml");
+}
+@if(returnType != null || !string.IsNullOrWhiteSpace(returnsHtml))
+{
+	<h2>Return Value</h2>
+	<div class="box">
+		<div class="box-body no-padding">
+			<table class="table table-striped two-cols">
+				<thead>
+					<tr>
+						<th>Type</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tr>
+					<td>@(returnType == null ? new HtmlString("void") : returnType.Link())</td>
+					<td>@Html.Raw(returnsHtml)</td>
+				</tr>
+			</table>
+		</div>
+	</div>	
+}

@@ -1,10 +1,71 @@
-// Setup code
 Packages
-	.Install("Twitter.Bootstrap.Less", "[3.3.5]")
+	.Install("bootstrap", "[3.3.5]")
 	.Install("jQuery", "[2.1.1]");
-	
+
 ===
-// Configuration code
+using Wyam.Modules.Razor.Microsoft.AspNet.Mvc.Rendering;
+using Microsoft.CodeAnalysis;
+
+public static class HtmlHelperExtensions
+{		
+	public static HtmlString Name(this IMetadata metadata)
+	{
+		string name = metadata.String("DisplayName");
+        return name == null 
+			? new HtmlString(string.Empty) 
+			: new HtmlString(System.Net.WebUtility.HtmlEncode(name.ToString()).ToString()
+				.Replace(".", "<wbr>.")
+				.Replace("(", "<wbr>(")
+				.Replace(")", ")<wbr>")
+				.Replace("&lt;", "<wbr>&lt;")
+				.Replace("&gt;", "&gt;<wbr>"));		
+	}
+	
+	public static HtmlString Link(this IMetadata metadata)
+	{
+		if(metadata.String("Kind") == "TypeParameter")
+		{
+			IDocument declaringType = metadata.Get<IDocument>("DeclaringType");
+			if(declaringType != null)
+			{			
+				return declaringType.ContainsKey("WritePath")
+					? new HtmlString($"<a href=\"{declaringType.Link("WritePath")}#typeparam-{metadata["Name"]}\">{metadata.Name()}</a>")
+					: metadata.Name();
+			}
+		} 
+		return metadata.ContainsKey("WritePath")
+			? new HtmlString($"<a href=\"{metadata.Link("WritePath")}\">{metadata.Name()}</a>")
+			: metadata.Name();
+	}
+}
+
+public class DocsTable
+{
+	public IList<IDocument> Docs { get; set; }
+	public string Title { get; set; }
+	public string Header { get; set; }
+	public bool HasSummary { get; set; }
+}
+
+---
+
+Pipelines.Add("Code",
+	//ReadSolution(@"..\Code\Wyam\Wyam.sln")  // Read from the master Wyam branch in the Git submodule
+	ReadSolution(@"..\..\Wyam\Wyam.sln")  // Read from the current branch on disk in the actual repo
+		.WhereProject(x => !x.EndsWith(".Tests"))
+);
+
+Pipelines.Add("API",
+	Documents("Code"),
+	AnalyzeCSharp()
+		.WhereNamespaces(false, "Wyam.Common")
+		.WherePublic()
+		.WithCssClasses("pre", "prettyprint")
+		.WithWritePathPrefix("api"),
+	Razor()
+		.WithViewStart(@"api\_ApiViewStart.cshtml"),
+	WriteFiles()
+);
 
 Pipelines.Add("Content",
 	ReadFiles("*.md"),
@@ -16,20 +77,9 @@ Pipelines.Add("Content",
 		FrontMatter(Yaml())		
 	),
 	Razor(),
-	AutoLink(c => c.Documents
-		.FromPipeline("Content")
-		.Where(x => x.String("RelativeFileDir") == "api" && !string.IsNullOrWhiteSpace(x.String("Title")))
-		.ToDictionary(x => x.String("Title"), x => PathHelper.ToRootLink(Path.ChangeExtension(x.String("RelativeFilePath"), ".html")))),
 	WriteFiles(".html")
 );
 
-Pipelines.Add("Less",
-    ReadFiles("master.less"),
-    Concat(ReadFiles("bootstrap.less")),
-    Less(),
-    WriteFiles(".css")
-);
-
 Pipelines.Add("Resources",
-	CopyFiles("*").WithoutExtensions(".cshtml", ".md", ".less")
+	CopyFiles("*").WithoutExtensions(".cshtml", ".md")
 );

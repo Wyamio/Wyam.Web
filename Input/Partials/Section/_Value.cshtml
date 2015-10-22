@@ -1,0 +1,24 @@
+@{
+	IDocument type = Model.Get<IDocument>("Type");
+	string valueHtml = Model.String("ValueHtml");
+}
+@if(type != null || !string.IsNullOrWhiteSpace(valueHtml))
+{
+	<h2>Value</h2>
+	<div class="box">
+		<div class="box-body no-padding">
+			<table class="table table-striped two-cols">
+				<thead>
+					<tr>
+						<th>Type</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tr>
+					<td>@(type == null ? new HtmlString(string.Empty) : type.Link())</td>
+					<td>@Html.Raw(valueHtml)</td>
+				</tr>
+			</table>
+		</div>
+	</div>	
+}

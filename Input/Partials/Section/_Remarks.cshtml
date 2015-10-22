@@ -1,0 +1,8 @@
+@{
+	string remarks = Model.String("RemarksHtml");
+}
+@if(!string.IsNullOrWhiteSpace(remarks))
+{
+	<h2>Remarks</h2>
+	<div>@Html.Raw(remarks)</div>
+}

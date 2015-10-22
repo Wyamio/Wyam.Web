@@ -1,0 +1,46 @@
+@{
+	IDocument containingNamespace = Model.Get<IDocument>("ContainingNamespace");
+	if(containingNamespace != null)
+	{
+		<li class="header">Namespace</li>
+		<li>@containingNamespace.Link()</li>
+	}
+	
+	IDocument containingType = Model.Get<IDocument>("ContainingType");
+	if(containingType != null)
+	{
+		<li class="header">Type</li>
+		<li>@containingType.Link()</li>
+		
+		<li role="separator" class="divider"></li>
+		
+		IReadOnlyList<IDocument> constructors = containingType
+			.Get<IReadOnlyList<IDocument>>("Constructors")
+			.Where(x => x.Get<bool>("IsResult"))
+			.ToList();
+		if(constructors != null && constructors.Count > 0)
+		{
+			<li class="header">Constructors</li>
+			foreach(IDocument constructor in constructors)
+			{
+				string activeClass = constructor.String("SymbolId") == Model.String("SymbolId") 
+					? "active" : string.Empty;
+				<li class="@activeClass">@constructor.Link()</li>
+			}
+		}			
+	
+		foreach(IGrouping<string, IDocument> memberGroup 
+			in containingType.Get<IReadOnlyList<IDocument>>("Members")
+				.Where(x => x.Get<bool>("IsResult"))
+				.GroupBy(x => x.String("Kind")))
+		{
+			<li class="header">@memberGroup.Key Members</li>
+			foreach(IDocument member in memberGroup)
+			{
+				string activeClass = member.String("SymbolId") == Model.String("SymbolId") 
+					? "active" : string.Empty;
+				<li class="@activeClass">@member.Link()</li>
+			}	
+		}
+	}
+}

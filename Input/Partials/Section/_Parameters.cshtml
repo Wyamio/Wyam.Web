@@ -1,0 +1,30 @@
+@{
+	IReadOnlyList<IDocument> parameters = Model.Get<IReadOnlyList<IDocument>>("Parameters");
+	IReadOnlyList<KeyValuePair<string, string>> paramHtml = Model.Get<IReadOnlyList<KeyValuePair<string, string>>>("ParamHtml");
+}
+@if(parameters != null && parameters.Count > 0)
+{
+	<h2>Parameters</h2>
+	<div class="box">
+		<div class="box-body no-padding">
+			<table class="table table-striped three-cols">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Type</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				@foreach(IDocument parameter in parameters)
+				{
+					IDocument parameterType = parameter.Get<IDocument>("Type");
+					<tr>
+						<td>@parameter["Name"]</td>
+						<td>@(parameterType == null ? new HtmlString(string.Empty) : parameterType.Link())</td>
+						<td>@Html.Raw(paramHtml?.Where(x => x.Key.Equals(parameter["Name"])).Select(x => x.Value).FirstOrDefault())</td>
+					</tr>
+				}
+			</table>
+		</div>
+	</div>	
+}

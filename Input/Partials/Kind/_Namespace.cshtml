@@ -1,0 +1,27 @@
+@{				
+	foreach(IGrouping<string, IDocument> typeGroup 
+		in Model.Get<IReadOnlyList<IDocument>>("MemberTypes")
+			.Where(x => x.Get<bool>("IsResult") && x["Kind"].Equals("NamedType"))
+			.GroupBy(x => x.String("SpecificKind")))
+	{
+		ViewData["DocsTable"] = new DocsTable
+		{
+			Docs = typeGroup.OrderBy(x => x["DisplayName"]).ToList(),
+			Title = typeGroup.Key + " Types",
+			Header = typeGroup.Key,
+			HasSummary = true
+		};
+		@Html.Partial("Partials\\Section\\_DocsTable");		
+	}
+	
+	ViewData["DocsTable"] = new DocsTable
+	{
+		Docs = Model.Get<IReadOnlyList<IDocument>>("MemberNamespaces")
+			?.Where(x => x.Get<bool>("IsResult"))
+			.OrderBy(x => x["DisplayName"])
+			.ToList(),
+		Title = "Namespaces",
+		Header = "Namespace"	
+	};
+	@Html.Partial("Partials\\Section\\_DocsTable");
+}

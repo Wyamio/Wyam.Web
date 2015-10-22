@@ -1,0 +1,85 @@
+body {
+    background-color: #B5BBC8 !important;
+}
+
+hr {
+    border-top-color: #B5BBC8;
+}
+
+.lead {
+    padding: 10px 20px;
+    margin: 0 0 20px;
+    border-left: 5px solid #B5BBC8;
+}
+
+.sidebar-menu,
+.sidebar-menu li,
+.sidebar-menu li a {
+    white-space: normal;
+    overflow: hidden;
+}
+
+.sidebar-menu li a {
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.sidebar-menu li.divider {
+    padding-top: 12px;
+    border-bottom: 1px solid #4b646f;
+}
+
+.three-cols th,
+.three-cols td {
+	width: 30%;
+}
+
+.two-cols th,
+.two-cols td {
+    width: 60%;
+}
+
+.two-cols th:last-child,
+.two-cols td:last-child,
+.three-cols th:last-child,
+.three-cols td:last-child {
+	width: 40%;
+}
+
+.content-header > h1 {
+	font-size: 42px;
+}
+
+.content-header > hr {
+    margin-bottom: 0;
+}
+
+dl ul,
+dl ol {
+	margin-bottom: 0;
+}
+
+.box-body dl,
+.box-body.lead {
+	margin-bottom: 0;
+}
+
+.paramref, .typeparamref {
+	font-style: italic;
+}
+
+/* Code styles */
+pre,
+pre.prettyprint {
+    padding: 8px;
+    margin: 0;
+    overflow: auto;
+    word-wrap: normal;
+    word-break: normal;
+    border-color: #ddd;
+    background-color: #fafafa;
+}
+
+code {
+    background-color: #fafafa;
+}

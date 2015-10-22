@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <title>Wyam - @Model.Get("Title")</title>
+        <meta name="description" content="Wyam is a simple to use, highly modular, and extremely configurable static content generator." />
+        <meta name="keywords" content="static content generator,static site generator,static site,HTML,web development,.NET,C#,Razor,Markdown,YAML" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+        <link href="/Content/bootstrap/bootstrap.css" rel="stylesheet" />
+        <link href="/Content/prettify.css" rel="stylesheet">
+        <link href="/Content/github.css" rel="stylesheet">
+        <link href="/Content/master.css" rel="stylesheet" />
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+        <script src="/Scripts/jquery-2.1.1.min.js"></script>
+        <script src="/Scripts/bootstrap.min.js"></script>    
+        <script src="/Scripts/tinynav.min.js"></script>        
+        <script src="/Scripts/prettify.js"></script>
+        <!--[if lt IE 9]>
+        <script src="/Scripts/html5shiv.min.js"></script>
+        <script src="/Scripts/respond.min.js"></script>
+        <![endif]-->  
+    </head>
+    <body onload="prettyPrint()">        
+        <nav class="navbar navbar-default navbar-static-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand hidden-sm" href="/"><img alt="Wyam" src="/Content/Images/nav-logo.png"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-main">
+              <ul class="nav navbar-nav">
+                @{
+                    string[] navs = new string[]
+                    {
+                        "Getting Started",
+                        "Modules",
+                        "API",
+                        "Knowledgebase",
+                        "Community",
+                        "FAQ"    
+                    };
+                    string activeNavFolder = string.Empty;
+                }                
+                @foreach(string nav in navs)
+                {
+                    string navFolder = nav.ToLower().Replace(' ', '-');
+                    string active = Model.String("RelativeFilePath").StartsWith(navFolder) ? "active" : null;
+                    if(active != null)
+                    {
+                        activeNavFolder = navFolder;
+                    }
+                    <li class="@active"><a href="/@navFolder">@nav</a></li>
+                }
+              </ul>              
+              <ul class="nav navbar-nav navbar-right hidden-xs hidden-sm">                
+                <li><a href="https://github.com/Wyamio/Wyam">GitHub</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        
+        @if(Model.String("RelativeFilePath") == "index.cshtml")
+        {
+            <div class="jumbotron jumbotron-intro">
+              <div class="container-background">
+            	  <div class="container">
+            	  	<h1>Wyam is a simple to use, highly modular, and extremely configurable static content generator.</h1>
+            	  </div>
+              </div>
+            </div>
+        }
+        else
+        {
+            <div class="jumbotron jumbotron-title">
+    	       <div class="container">
+                   <h1>@Model.Get("Title")</h1>
+               </div>
+            </div>
+        }
+        
+        @{
+            IList<IGrouping<string, IDocument>> categoryGroups = (activeNavFolder == string.Empty || Model.Get<bool>("HideSubNav", false)) 
+                ? new List<IGrouping<string, IDocument>>() : Documents
+                    .Where(x => x.ContainsKey("RelativeFilePath")
+                        && !x.String("RelativeFilePath").EndsWith("index.md") 
+                        && !x.String("RelativeFilePath").EndsWith("index.cshtml") 
+                        && x.String("RelativeFilePath").StartsWith(activeNavFolder))
+                    .GroupBy(x => x.String("Category"))
+                    .OrderBy(x => x.Key)
+                    .ToList();
+        }
+        @if(categoryGroups.Count == 0)
+        {        
+            @if(Model.Get<bool>("NoContainer"))
+            {
+                @RenderBody()       
+            }
+            else
+            {     
+                <div class="container">
+                    @RenderBody()
+                </div>
+            }
+        }
+        else
+        {
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9 col-md-push-3">
+                        @RenderBody()
+                    </div>
+                    <hr class="hidden-md hidden-lg" />
+                    <div class="col-md-3 col-md-pull-9">        
+                        @foreach(IGrouping<string, IDocument> categoryGroup in categoryGroups)
+                        {
+                            if(!string.IsNullOrWhiteSpace(categoryGroup.Key))
+                            {
+                                <div class="subnav-category">@categoryGroup.Key</div>
+                            }
+                                            
+                            <ul class="subnav">
+                                @foreach(IDocument childDoc in categoryGroup
+                                    .OrderBy(x => x.Get<int>("Order", 1000))
+                                    .ThenBy(x => x.String("Title")))
+                                {
+                                    string subActive = Model.String("RelativeFilePath") == childDoc.String("RelativeFilePath") ? "active" : null;
+                                    <li class="@subActive">
+                                        <a href="@PathHelper.ToRootLink(PathHelper.RemoveExtension(childDoc.String("RelativeFilePath")))">
+                                            @(childDoc.String("Title", childDoc.String("SourceFileBase")))
+                                        </a>
+                                    </li>
+                                }    
+                            </ul>                            
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+        
+        <hr />
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <p><small>Wyam is crafted by <a href="http://www.daveaglick.com">Dave Glick</a> and <a href="https://github.com/Wyamio/Wyam/graphs/contributors">other awesome contributors</a>. <a href="https://github.com/Wyamio/Wyam">Code on GitHub</a>. This site was entirely generated by Wyam. Check out <a href="https://github.com/Wyamio/Wyam.Web">the site code on GitHub</a> for a good example of a reasonably complicated Wyam site (and how easy it is to set up).</small></p>
+                </div>
+                <div class="col-md-3 text-right hidden-xs hidden-sm">                
+                    <a class="btn btn-primary btn-xs" href='https://github.com/Wyamio/Wyam.Web/edit/develop/Input/@(Model.String("RelativeFilePath"))'><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit This Page</a>
+                </div>
+            </div>
+        </div>        
+    </body>
+    <script>
+      $(function () {
+        $("#sub-nav").tinyNav({
+            active: 'active'
+        });
+      });
+      
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    
+      ga('create', 'UA-54470483-4', 'auto');
+      ga('send', 'pageview');
+    </script>
+</html>

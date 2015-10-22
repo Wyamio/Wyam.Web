@@ -1,0 +1,78 @@
+@{
+	IDocument containingNamespace = Model.Get<IDocument>("ContainingNamespace");
+	IReadOnlyList<IDocument> allInterfaces = Model.Get<IReadOnlyList<IDocument>>("AllInterfaces");
+	IDocument baseType = Model.Get<IDocument>("BaseType");
+	IReadOnlyList<IDocument> derivedTypes = Model.Get<IReadOnlyList<IDocument>>("DerivedTypes");
+	IReadOnlyList<IDocument> implementingTypes = Model.Get<IReadOnlyList<IDocument>>("ImplementingTypes");
+	if(containingNamespace != null
+		|| (allInterfaces != null && allInterfaces.Count > 0)
+		|| baseType != null
+		|| (derivedTypes != null && derivedTypes.Count > 0)
+		|| (implementingTypes != null && implementingTypes.Count > 0))
+	{
+		<dl class="dl-horizontal">		
+			@if(containingNamespace != null)
+			{	
+				<dt>Namespace</dt>
+				<dd>@containingNamespace.Link()</dd>
+			}
+							
+			@if(allInterfaces != null && allInterfaces.Count > 0)
+			{
+				<dt>Interfaces</dt>
+				<dd>
+					<ul class="list-inline">
+						@foreach(IDocument interfaceDocument in allInterfaces)
+						{
+							<li>@interfaceDocument.Link()</li>								
+						}
+					</ul>
+				</dd>
+			}
+			
+			@if(baseType != null)
+			{
+				<dt>Base Type</dt>
+				<dd>@baseType.Link()</dd>				
+			}
+			
+			@if(derivedTypes != null && derivedTypes.Count > 0)
+			{
+				<dt>Derived Types</dt>
+				<dd>
+					<ul class="list-inline">
+						@foreach(IDocument derivedType in derivedTypes)
+						{
+							<li>@derivedType.Link()</li>								
+						}
+					</ul>
+				</dd>			
+			}
+			
+			@if(implementingTypes != null && implementingTypes.Count > 0)
+			{
+				<dt>Implementing Types</dt>
+				<dd>
+					<ul class="list-inline">
+						@foreach(IDocument implementingType in implementingTypes)
+						{
+							<li>@implementingType.Link()</li>								
+						}
+					</ul>
+				</dd>				
+			}
+		</dl>
+		<hr />
+	}
+}
+
+@Html.Partial("Partials\\Section\\_Summary")
+@Html.Partial("Partials\\Section\\_Syntax")
+@Html.Partial("Partials\\Section\\_TypeParameters")
+@Html.Partial("Partials\\Section\\_Constructors")
+@Html.Partial("Partials\\Section\\_Events")
+@Html.Partial("Partials\\Section\\_Properties")
+@Html.Partial("Partials\\Section\\_Methods")
+@Html.Partial("Partials\\Section\\_Remarks")
+@Html.Partial("Partials\\Section\\_Examples")
+@Html.Partial("Partials\\Section\\_SeeAlso")
