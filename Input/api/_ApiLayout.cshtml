@@ -8,14 +8,14 @@
 		containingTypeString = containingTypeString + containingType.String("DisplayName") + ".";
 		containingType = containingType.Get<IDocument>("ContainingType");
 	}
-	ViewData["Title"] = containingTypeString + Model["DisplayName"] + Model["SpecificKind"];
+	ViewData["Title"] = "API - " + containingTypeString + Model["DisplayName"] + Model["SpecificKind"];
 }
 
 @section Sidebar {
 	@Html.Partial("Partials\\Sidebar\\_" + Model.String("Kind"))
 }
 
-<section class="content-header">
+<section class="content-header container">
 	@{
 		containingType = Model.Get<IDocument>("ContainingType");
 		while(containingType != null)
@@ -27,7 +27,7 @@
 	<h1>@Model.Name() <small>@Model["SpecificKind"]</small></h1>
 	<hr />
 </section>
-<section class="content">
+<section class="content container">
 	@RenderBody()
 	@Html.Partial("Partials\\Kind\\_" + Model.String("Kind"))
 </section>

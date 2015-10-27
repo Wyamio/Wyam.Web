@@ -1,7 +1,3 @@
-body {
-    background-color: #B5BBC8 !important;
-}
-
 hr {
     border-top-color: #B5BBC8;
 }
@@ -9,7 +5,18 @@ hr {
 .lead {
     padding: 10px 20px;
     margin: 0 0 20px;
-    border-left: 5px solid #B5BBC8;
+    border-left: 5px solid #367fa9;
+}
+
+.layout-top-nav .main-header > .navbar {
+    /* make space for logo, even when no sidebar */
+    margin-left: 230px;
+}
+
+@media (max-width: 767px) {
+    .layout-top-nav .main-header > .navbar {
+        margin-left: 0;
+    }
 }
 
 .sidebar-menu,
@@ -46,12 +53,40 @@ hr {
 	width: 40%;
 }
 
+.larger {
+    font-size: 18px;
+}
+
+.content-wrapper {
+    background-color: #fff;
+}
+
 .content-header > h1 {
 	font-size: 42px;
 }
 
 .content-header > hr {
     margin-bottom: 0;
+}
+
+.table-striped tr
+{
+    background-color: #f4f4f4;
+}
+
+.table thead tr
+{
+    background-color: #3c8dbc;
+    color: #fff;
+}
+
+.box
+{
+    border-top-color: #367fa9;    
+}
+
+h1 {
+	font-weight: bold;
 }
 
 dl ul,
@@ -66,6 +101,49 @@ dl ol {
 
 .paramref, .typeparamref {
 	font-style: italic;
+}
+
+.jumbotron {
+	padding: 0;
+	color: #fff;
+	margin: 0;
+}
+
+.jumbotron-title {
+	margin-bottom: 30px;
+}
+
+.jumbotron-intro, .jumbotron-title {	
+	background: #8058B5;
+}
+
+.jumbotron-intro .container-background {
+	background: url('/Content/Images/intro-bg.png') no-repeat center center;
+	background-size: cover;
+}
+
+.jumbotron-intro .container {
+	padding-top: 48px;
+	padding-bottom: 48px;
+	background-size: cover;
+}
+
+.jumbotron-description {	
+	padding-top: 12px;
+	background: #4EABDD;
+}
+
+@media (min-width: 1200px) { 
+	.jumbotron-intro {
+		height: 400px;
+	}
+	.jumbotron-intro .container-background {
+		background: none;
+	}
+	.jumbotron-intro .container {
+		background: url('/Content/Images/intro-bg.png') no-repeat center center;
+		height: 400px;
+	}	
 }
 
 /* Code styles */

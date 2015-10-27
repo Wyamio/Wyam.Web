@@ -3,7 +3,12 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-        <title>@ViewData["Title"]</title>
+        <meta name="description" content="Wyam is a simple to use, highly modular, and extremely configurable static content generator." />
+        <meta name="keywords" content="static content generator,static site generator,static site,HTML,web development,.NET,C#,Razor,Markdown,YAML" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+        <title>Wyam - @ViewData["Title"]</title>
         <link href="/Content/bootstrap.min.css" rel="stylesheet" />
         <link href="/Content/AdminLTE.min.css" rel="stylesheet" />
         <link href="/Content/skins/skin-blue.min.css" rel="stylesheet" />
@@ -21,24 +26,30 @@
         <script src="/Scripts/respond.min.js"></script>
         <![endif]-->  
     </head>
-    <body class="hold-transition skin-blue layout-boxed" onload="prettyPrint()">    
+    @{
+        string layoutTopNav = Model.Get<bool>("NoSidebar", false) ? "layout-top-nav" : string.Empty;
+    }
+    <body class="hold-transition skin-blue @layoutTopNav" onload="prettyPrint()">    
         <div class="wrapper">
             <!-- Header -->
             <header class="main-header">
                 <a href="/" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
-                    <span class="logo-mini">Wyam Docs</span>
+                    <span class="logo-mini">Wyam</span>
                     <!-- logo for regular state and mobile devices -->
-                    <span class="logo-lg">Wyam Docs</span>
+                    <span class="logo-lg">Wyam</span>
                 </a>                
                 <nav class="navbar navbar-static-top" role="navigation">
                     <!-- Sidebar toggle button-->
-                    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
+                    @if(!Model.Get<bool>("NoSidebar", false))
+                    {
+                        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                    }
                     <!-- Navbar Right Menu -->
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
@@ -55,25 +66,28 @@
             </header>
             
             <!-- Left side column. contains the logo and sidebar -->
-            <aside class="main-sidebar">
-                <section class="sidebar">
-                    <!-- search form -->
-                    @*
-                    <form action="#" method="get" class="sidebar-form">
-                        <div class="input-group">
-                        <input type="text" name="q" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
-                            <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
-                        </span>
-                        </div>
-                    </form>
-                    *@
-                    <!-- sidebar menu: : style can be found in sidebar.less -->
-                    <ul class="sidebar-menu">
-                        @RenderSection("Sidebar", false)
-                    </ul>
-                </section>                
-            </aside>
+            @if(!Model.Get<bool>("NoSidebar", false))
+            {
+                <aside class="main-sidebar">
+                    <section class="sidebar">
+                        <!-- search form -->
+                        @*
+                        <form action="#" method="get" class="sidebar-form">
+                            <div class="input-group">
+                            <input type="text" name="q" class="form-control" placeholder="Search...">
+                            <span class="input-group-btn">
+                                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+                            </span>
+                            </div>
+                        </form>
+                        *@
+                        <!-- sidebar menu: : style can be found in sidebar.less -->
+                        <ul class="sidebar-menu">
+                            @RenderSection("Sidebar", false)
+                        </ul>
+                    </section>                
+                </aside>
+            }
             
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">

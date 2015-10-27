@@ -3,9 +3,16 @@
 	ViewData["Title"] = @Model.Get("Title", string.Empty);
 }
 
-<section class="content-header">
-	<h1>@ViewData["Title"]</h1>
-</section>
-<section class="content">
+@if(Model.Get<bool>("NoContainer", false))
+{
 	@RenderBody()
-</section>
+}
+else
+{
+	<section class="content-header">
+		<h1>@ViewData["Title"]</h1>
+	</section>
+	<section class="content">
+		@RenderBody()
+	</section>
+}
