@@ -1,8 +1,3 @@
-Packages
-	.Install("bootstrap", "[3.3.5]")
-	.Install("jQuery", "[2.1.1]");
-
-===
 using Wyam.Modules.Razor.Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.CodeAnalysis;
 
@@ -58,7 +53,7 @@ Pipelines.Add("Code",
 Pipelines.Add("API",
 	Documents("Code"),
 	AnalyzeCSharp()
-		.WhereNamespaces(false, "Wyam.Common")
+		.WhereNamespaces(false, "Wyam.Common", "Wyam.Core")
 		.WherePublic()
 		.WithCssClasses("pre", "prettyprint")
 		.WithWritePathPrefix("api"),
@@ -78,6 +73,15 @@ Pipelines.Add("Content",
 	),
 	Razor(),
 	WriteFiles(".html")
+);
+
+Pipelines.Add("Less",
+    ReadFiles("Content\\bootstrap-less\\bootstrap.less"),
+    Concat(ReadFiles("Content\\adminlte\\AdminLTE.less")),
+    Concat(ReadFiles("Content\\adminlte\\skins\\wyam.less")),
+    Concat(ReadFiles("Content\\master.less")),
+    Less(),
+    WriteFiles(".css")
 );
 
 Pipelines.Add("Resources",

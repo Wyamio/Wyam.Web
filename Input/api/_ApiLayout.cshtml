@@ -15,7 +15,7 @@
 	@Html.Partial("Partials\\Sidebar\\_" + Model.String("Kind"))
 }
 
-<section class="content-header container">
+<section class="content-header">
 	@{
 		containingType = Model.Get<IDocument>("ContainingType");
 		while(containingType != null)
@@ -27,7 +27,7 @@
 	<h1>@Model.Name() <small>@Model["SpecificKind"]</small></h1>
 	<hr />
 </section>
-<section class="content container">
+<section class="content">
 	@RenderBody()
 	@Html.Partial("Partials\\Kind\\_" + Model.String("Kind"))
 </section>
