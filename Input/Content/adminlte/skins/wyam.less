@@ -16,6 +16,12 @@ body.wyam {
       right: 0;
       height: 80px;
     }
+    
+    &.no-gutter {
+      .top-banner {
+        height: 50px;
+      }
+    }
   
     .wrapper {
       box-shadow: none;
@@ -186,6 +192,11 @@ body.wyam {
       margin-bottom: 30px;
     }
     
+    &.no-gutter .main-header
+    {
+      margin-bottom: 0px;
+    }
+    
     .main-footer
     {
       border-top: none;
@@ -194,6 +205,7 @@ body.wyam {
     .bottom-footer {
       text-align: center;
     }
+    
 }
 
 .wyam.layout-top-nav .main-header > .logo {

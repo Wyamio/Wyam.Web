@@ -28,17 +28,18 @@
     </head>
     @{
         string layoutTopNav = Model.Get<bool>("NoSidebar", false) ? "layout-top-nav" : string.Empty;
+        string noGutter = Model.Get<bool>("NoGutter", false) ? "no-gutter" : string.Empty;
     }
-    <body class="hold-transition wyam layout-boxed @layoutTopNav" onload="prettyPrint()">    
+    <body class="hold-transition wyam layout-boxed @layoutTopNav @noGutter" onload="prettyPrint()">    
         <div class="top-banner"></div>
         <div class="wrapper">
             <!-- Header -->
             <header class="main-header">
                 <a href="/" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
-                    <span class="logo-mini">Wyam</span>
+                    <span class="logo-mini"><img src="/Content/images/nav-logo.png"></span>
                     <!-- logo for regular state and mobile devices -->
-                    <span class="logo-lg">Wyam</span>
+                    <span class="logo-lg"><img src="/Content/images/nav-logo.png"></span>
                 </a>                
                 <nav class="navbar navbar-static-top" role="navigation">
                     <!-- Sidebar toggle button-->
