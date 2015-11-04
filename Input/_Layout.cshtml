@@ -3,6 +3,10 @@
 	ViewData["Title"] = @Model.Get("Title", string.Empty);
 }
 
+@section Sidebar {
+	@RenderSection("Sidebar", false)
+}
+
 @if(Model.Get<bool>("NoContainer", false))
 {
 	@RenderBody()

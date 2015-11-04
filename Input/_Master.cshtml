@@ -61,7 +61,7 @@
             
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
-                        <ul class="nav navbar-nav larger">                            
+                        <ul class="nav navbar-nav">                            
                             @{
                                 string[] navs = new string[]
                                 {
@@ -75,8 +75,7 @@
                                 foreach(string nav in navs)
                                 {
                                     string navFolder = nav.ToLower().Replace(' ', '-');
-                                    //string active = Model.String("RelativeFilePath").StartsWith(navFolder) ? "active" : null;
-                                    string active = string.Empty;
+                                    string active = Model.String("RelativeFilePath").StartsWith(navFolder) ? "active" : null;
                                     <li class="@active"><a href="/@navFolder">@nav</a></li>
                                 }
                             }
@@ -102,28 +101,25 @@
             </header>
             
             <!-- Left side column. contains the logo and sidebar -->
-            @if(!Model.Get<bool>("NoSidebar", false))
-            {
-                <aside class="main-sidebar">
-                    <section class="sidebar">
-                        <!-- search form -->
-                        @*
-                        <form action="#" method="get" class="sidebar-form">
-                            <div class="input-group">
-                            <input type="text" name="q" class="form-control" placeholder="Search...">
-                            <span class="input-group-btn">
-                                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
-                            </span>
-                            </div>
-                        </form>
-                        *@
-                        <!-- sidebar menu: : style can be found in sidebar.less -->
-                        <ul class="sidebar-menu">
-                            @RenderSection("Sidebar", false)
-                        </ul>
-                    </section>                
-                </aside>
-            }
+            <aside class="main-sidebar @(Model.Get<bool>("NoSidebar", false) ? "hidden" : string.Empty)">
+                <section class="sidebar smaller">
+                    <!-- search form -->
+                    @*
+                    <form action="#" method="get" class="sidebar-form">
+                        <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="Search...">
+                        <span class="input-group-btn">
+                            <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+                        </span>
+                        </div>
+                    </form>
+                    *@
+                    <!-- sidebar menu: : style can be found in sidebar.less -->
+                    <ul class="sidebar-menu">
+                        @RenderSection("Sidebar", false)
+                    </ul>
+                </section>                
+            </aside>
             
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
