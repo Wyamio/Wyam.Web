@@ -16,7 +16,7 @@
 			<li class="header">@categoryGroup.Key</li>
 		}
 						
-		@foreach(IDocument childDoc in categoryGroup
+		foreach(IDocument childDoc in categoryGroup
 			.OrderBy(x => x.Get<int>("Order", 1000))
 			.ThenBy(x => x.String("Title")))
 		{

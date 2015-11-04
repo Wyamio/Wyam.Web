@@ -1,0 +1,17 @@
+@{
+	Layout = @"..\_Master.cshtml";
+	ViewData["Title"] = "Modules - " + Model["DisplayName"];
+}
+
+@section Sidebar {
+	@Html.Partial("Sidebar\\_Modules")
+}
+
+<section class="content-header">
+	<h1>@Model.Name()</h1>
+</section>
+<section class="content">
+	@RenderBody()  @* Empty, but needs to be here *@
+	
+	blah, blah, blah
+</section>

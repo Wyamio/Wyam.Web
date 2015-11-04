@@ -3,7 +3,7 @@
 	if(docsTable != null && docsTable.Docs != null && docsTable.Docs.Count > 0)
 	{
 		<text>
-			<h2>@docsTable.Title</h2>
+			<h1>@docsTable.Title</h1>
 			<div class="box">
 				<div class="box-body no-padding">
 					<table class="table table-striped @(docsTable.HasSummary ? "two-cols" : string.Empty)">

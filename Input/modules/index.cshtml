@@ -1,0 +1,33 @@
+Title: Modules
+NoSidebar: true
+---
+@{
+	IList<IGrouping<string, IDocument>> categoryGroups = 
+		Documents.FromPipeline("Modules")
+			.GroupBy(x => {
+				IReadOnlyList<KeyValuePair<IReadOnlyDictionary<string, string>, string>> category =
+					x.Get<IReadOnlyList<KeyValuePair<IReadOnlyDictionary<string, string>, string>>>("CategoryHtml");
+				return category == null ? string.Empty : category[0].Value;
+			})
+			.OrderBy(x => x.Key)
+			.ToList();
+	foreach(IGrouping<string, IDocument> categoryGroup in categoryGroups)
+	{
+		if(!string.IsNullOrWhiteSpace(categoryGroup.Key))
+		{
+			<h1>@categoryGroup.Key</h1>
+			<hr />
+		}
+					
+		foreach(IDocument childDoc in categoryGroup
+			.OrderBy(x => x.String("DisplayName")))
+		{
+			<h3><strong><a href="@PathHelper.ToRootLink(PathHelper.RemoveExtension(childDoc.String("RelativeFilePath")))">@(childDoc.String("DisplayName"))</a></strong></h3>
+			string summary = childDoc.String("SummaryHtml");
+			if(!string.IsNullOrWhiteSpace(summary))
+			{
+				<p>@Html.Raw(summary)</p>
+			}
+		} 
+	}	
+}

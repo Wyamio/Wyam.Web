@@ -122,6 +122,13 @@ body.wyam {
     .content-header {
       background: transparent;
       padding-top: 0;
+      
+      h1 {
+        font-size: ceil((@font-size-h1 * 1.25));
+        background-color: #f4f4f4;
+        padding: 8px 16px;
+        .border-radius(@border-radius-large);   
+      }
     }
     
     .content,
@@ -166,6 +173,7 @@ body.wyam {
       
       li.header {
         text-transform: uppercase;
+        font-size: @font-size-base;
       }
     } 
         

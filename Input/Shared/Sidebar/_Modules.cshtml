@@ -1,0 +1,29 @@
+@{
+	IList<IGrouping<string, IDocument>> categoryGroups = 
+		Documents.FromPipeline("Modules")
+			.GroupBy(x => {
+				IReadOnlyList<KeyValuePair<IReadOnlyDictionary<string, string>, string>> category =
+					x.Get<IReadOnlyList<KeyValuePair<IReadOnlyDictionary<string, string>, string>>>("CategoryHtml");
+				return category == null ? string.Empty : category[0].Value;
+			})
+			.OrderBy(x => x.Key)
+			.ToList();
+	foreach(IGrouping<string, IDocument> categoryGroup in categoryGroups)
+	{
+		if(!string.IsNullOrWhiteSpace(categoryGroup.Key))
+		{
+			<li class="header">@categoryGroup.Key</li>
+		}
+					
+		foreach(IDocument childDoc in categoryGroup
+			.OrderBy(x => x.String("DisplayName")))
+		{
+			string subActive = Model.String("RelativeFilePath") == childDoc.String("RelativeFilePath") ? "active" : null;
+			<li class="@subActive">
+				<a href="@PathHelper.ToRootLink(PathHelper.RemoveExtension(childDoc.String("RelativeFilePath")))">
+					@(childDoc.String("DisplayName"))
+				</a>
+			</li>
+		} 
+	}	
+}

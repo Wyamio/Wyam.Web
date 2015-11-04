@@ -27,7 +27,7 @@
 	<h1>@Model.Name() <small>@Model["SpecificKind"]</small></h1>
 	<hr />
 </section>
-<section class="content">
-	@RenderBody()
+<section class="content smaller">
+	@RenderBody()  @* Empty, but needs to be here *@
 	@Html.Partial("Kind\\_" + Model.String("Kind"))
 </section>
