@@ -11,7 +11,7 @@
 			Header = typeGroup.Key,
 			HasSummary = true
 		};
-		@Html.Partial("Partials\\Section\\_DocsTable");		
+		@Html.Partial("Section\\_DocsTable");		
 	}
 	
 	ViewData["DocsTable"] = new DocsTable
@@ -23,5 +23,5 @@
 		Title = "Namespaces",
 		Header = "Namespace"	
 	};
-	@Html.Partial("Partials\\Section\\_DocsTable");
+	@Html.Partial("Section\\_DocsTable");
 }

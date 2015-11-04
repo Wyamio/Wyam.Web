@@ -12,7 +12,7 @@
 }
 
 @section Sidebar {
-	@Html.Partial("Partials\\Sidebar\\_" + Model.String("Kind"))
+	@Html.Partial("Sidebar\\_" + Model.String("Kind"))
 }
 
 <section class="content-header">
@@ -29,5 +29,5 @@
 </section>
 <section class="content">
 	@RenderBody()
-	@Html.Partial("Partials\\Kind\\_" + Model.String("Kind"))
+	@Html.Partial("Kind\\_" + Model.String("Kind"))
 </section>

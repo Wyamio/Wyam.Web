@@ -1,12 +1,14 @@
 @{
 	IDocument containingNamespace = Model.Get<IDocument>("ContainingNamespace");
 	IDocument containingType = Model.Get<IDocument>("ContainingType");
+	IDocument type = Model.Get<IDocument>("Type");
 	IDocument overridden = Model.Get<IDocument>("Overridden");
-	if(containingNamespace != null 
+	if(containingNamespace != null
 		|| containingType != null
+		|| type != null
 		|| overridden != null)
 	{
-		<dl class="dl-horizontal">		
+		<dl class="dl-horizontal">
 			@if(containingNamespace != null)
 			{		
 				<dt>Namespace</dt>
@@ -19,6 +21,12 @@
 				<dd>@containingType.Link()</dd>		
 			}
 			
+			@if(type != null)
+			{
+				<dt>Event Type</dt>
+				<dd>@type.Link()</dd>
+			}
+			
 			@if(overridden != null)
 			{
 				<dt>Overridden</dt>
@@ -27,13 +35,10 @@
 		</dl>
 		<hr />	
 	}
-}
+}	
 
-@Html.Partial("Partials\\Section\\_Summary")
-@Html.Partial("Partials\\Section\\_Syntax")
-@Html.Partial("Partials\\Section\\_TypeParameters")
-@Html.Partial("Partials\\Section\\_Parameters")
-@Html.Partial("Partials\\Section\\_ReturnValue")
-@Html.Partial("Partials\\Section\\_Remarks")
-@Html.Partial("Partials\\Section\\_Examples")
-@Html.Partial("Partials\\Section\\_SeeAlso")
+@Html.Partial("Section\\_Summary")
+@Html.Partial("Section\\_Syntax")
+@Html.Partial("Section\\_Remarks")
+@Html.Partial("Section\\_Examples")
+@Html.Partial("Section\\_SeeAlso")
