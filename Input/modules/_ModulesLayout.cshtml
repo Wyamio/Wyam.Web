@@ -21,8 +21,10 @@
 			<div class="lead">@Html.Raw(summary)</div>
 		}
 		
-		// Constructors
 		<h1>Usage</h1>
+		<hr />
+		
+		// Constructors
 		<ul>			
 		@{			
 			IReadOnlyList<IDocument> constructors =
@@ -41,7 +43,7 @@
 						@{
 							if(!string.IsNullOrWhiteSpace(syntax))
 							{
-								<p><code>@(syntax.Replace("public ", string.Empty))</code></p>
+								<p><code>@(syntax.Substring(syntax.IndexOf(" ") + 1))</code></p>
 							}
 							if(!string.IsNullOrWhiteSpace(constructorSummary))
 							{
@@ -68,5 +70,51 @@
 			}
 		}
 		</ul>
+		
+		// Methods
+		// TODO: Concat with base fluent methods
+		IReadOnlyList<IDocument> methods =
+			Model.Get<IReadOnlyList<IDocument>>("Members")
+				?.Where(x => x.String("Kind") == "Method" && x.Get<IDocument>("ReturnType")["SymbolId"].Equals(Model["SymbolId"]))
+					.OrderBy(x => x["DisplayName"])
+					.ToList();
+		if(methods != null && methods.Count > 0)
+		{
+			<h2>Fluent Methods</h2>
+			<p>Chain these methods together after the constructor to modify behavior.</p>
+			<ul>
+				@foreach(IDocument method in methods)
+				{
+					string syntax = method.String("Syntax");
+					string methodSummary = method.String("SummaryHtml");
+					IReadOnlyList<IDocument> parameters = method.Get<IReadOnlyList<IDocument>>("Parameters");
+					IReadOnlyList<KeyValuePair<string, string>> paramHtml = method.Get<IReadOnlyList<KeyValuePair<string, string>>>("ParamHtml");
+					<li>
+						@{
+							if(!string.IsNullOrWhiteSpace(syntax))
+							{
+								// Two spaces - once for access modifier and again for return type
+								<p><code>@(syntax.Substring(syntax.IndexOf(" ", syntax.IndexOf(" ") + 1) + 1))</code></p>
+							}
+							if(!string.IsNullOrWhiteSpace(methodSummary))
+							{
+								<p>@Html.Raw(methodSummary)</p>
+							}
+							if(parameters != null && parameters.Count > 0 && paramHtml != null && paramHtml.Count > 0)
+							{
+								<ul>
+									@foreach(IDocument parameter in parameters)
+									{
+										string paramSummary = paramHtml?.Where(x => x.Key.Equals(parameter["Name"])).Select(x => x.Value).FirstOrDefault();
+										paramSummary = paramSummary == null ? string.Empty : ": " + paramSummary;
+										<li><p><code>@parameter["Name"]</code>@paramSummary</p></li>
+									}
+								</ul>
+							}
+						}
+					</li>				
+				}				
+			</ul>
+		}		
 	}	
 </section>
