@@ -22,7 +22,7 @@ NoSidebar: true
 		foreach(IDocument childDoc in categoryGroup
 			.OrderBy(x => x.String("DisplayName")))
 		{
-			<h3><strong><a href="@PathHelper.ToRootLink(PathHelper.RemoveExtension(childDoc.String("RelativeFilePath")))">@(childDoc.String("DisplayName"))</a></strong></h3>
+			<h2><strong><a href="@PathHelper.ToRootLink(PathHelper.RemoveExtension(childDoc.String("RelativeFilePath")))">@(childDoc.String("DisplayName"))</a></strong></h2>
 			string summary = childDoc.String("SummaryHtml");
 			if(!string.IsNullOrWhiteSpace(summary))
 			{

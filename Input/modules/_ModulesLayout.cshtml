@@ -13,5 +13,60 @@
 <section class="content">
 	@RenderBody()  @* Empty, but needs to be here *@
 	
-	blah, blah, blah
+	@{
+		// Summary
+		string summary = Model.String("SummaryHtml");
+		if(!string.IsNullOrWhiteSpace(summary))
+		{
+			<div class="lead">@Html.Raw(summary)</div>
+		}
+		
+		// Constructors
+		<h1>Usage</h1>
+		<ul>			
+		@{			
+			IReadOnlyList<IDocument> constructors =
+				Model.Get<IReadOnlyList<IDocument>>("Constructors")
+					?.OrderBy(x => x["DisplayName"])
+					.ToList();
+			if(constructors != null && constructors.Count > 0)
+			{
+				foreach(IDocument constructor in constructors)
+				{
+					string syntax = constructor.String("Syntax");
+					string constructorSummary = constructor.String("SummaryHtml");
+					IReadOnlyList<IDocument> parameters = constructor.Get<IReadOnlyList<IDocument>>("Parameters");
+					IReadOnlyList<KeyValuePair<string, string>> paramHtml = constructor.Get<IReadOnlyList<KeyValuePair<string, string>>>("ParamHtml");
+					<li>
+						@{
+							if(!string.IsNullOrWhiteSpace(syntax))
+							{
+								<p><code>@(syntax.Replace("public ", string.Empty))</code></p>
+							}
+							if(!string.IsNullOrWhiteSpace(constructorSummary))
+							{
+								<p>@Html.Raw(constructorSummary)</p>
+							}
+							if(parameters != null && parameters.Count > 0 && paramHtml != null && paramHtml.Count > 0)
+							{
+								<ul>
+									@foreach(IDocument parameter in parameters)
+									{
+										string paramSummary = paramHtml?.Where(x => x.Key.Equals(parameter["Name"])).Select(x => x.Value).FirstOrDefault();
+										paramSummary = paramSummary == null ? string.Empty : ": " + paramSummary;
+										<li><p><code>@parameter["Name"]</code>@paramSummary</p></li>
+									}
+								</ul>
+							}
+						}
+					</li>				
+				}
+			}
+			else
+			{
+				<li><p><code>@(Model.Name())()</code></p></li>
+			}
+		}
+		</ul>
+	}	
 </section>

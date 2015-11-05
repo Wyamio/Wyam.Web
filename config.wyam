@@ -67,10 +67,13 @@ Pipelines.Add("Modules",
 	AnalyzeCSharp()
 		.WhereSymbol(x => {
 			INamedTypeSymbol namedTypeSymbol = x as INamedTypeSymbol;
-			return namedTypeSymbol != null && namedTypeSymbol.AllInterfaces.Any(y => y.Name == "IModule");
+			return namedTypeSymbol != null 
+				&& namedTypeSymbol.AllInterfaces.Any(y => y.Name == "IModule")
+				&& !namedTypeSymbol.IsAbstract;
 		})
 		.WherePublic()
 		.WithCssClasses("pre", "prettyprint")
+		.WithDocsForImplicitSymbols()
 		.WithWritePath(x => {
 			string name = x.String("DisplayName").ToLower();
 			if(name == "index")

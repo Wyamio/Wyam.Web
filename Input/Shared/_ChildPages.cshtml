@@ -17,7 +17,7 @@
 			.OrderBy(x => x.Get<int>("Order", 1000))
 			.ThenBy(x => x.String("Title")))
 		{
-			<h3><strong><a href="@PathHelper.ToRootLink(PathHelper.RemoveExtension(childDoc.String("RelativeFilePath")))">@(childDoc.String("Title", childDoc.String("SourceFileBase")))</a></strong></h3>
+			<h2><strong><a href="@PathHelper.ToRootLink(PathHelper.RemoveExtension(childDoc.String("RelativeFilePath")))">@(childDoc.String("Title", childDoc.String("SourceFileBase")))</a></strong></h2>
 			if(childDoc.ContainsKey("Description"))
 			{
 				<p>@(childDoc.String("Description"))</p>
