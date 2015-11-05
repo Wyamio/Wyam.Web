@@ -71,13 +71,24 @@
 		}
 		</ul>
 		
-		// Methods
-		// TODO: Concat with base fluent methods
-		IReadOnlyList<IDocument> methods =
+		// Methods (including from base types)
+		List<IDocument> methods =
 			Model.List<IDocument>("Members")
-				?.Where(x => x.String("Kind") == "Method" && x.Get<IDocument>("ReturnType")["SymbolId"].Equals(Model["SymbolId"]))
-				.OrderBy(x => x["DisplayName"])
+				?.Where(x => x.String("Kind") == "Method" && x.Get<IDocument>("ReturnType")
+					.List<IDocument>("AllInterfaces").Any(y => y.String("Name") == "IModule"))
 				.ToList();
+		if(methods != null)
+		{
+			IDocument baseType = Model.Get<IDocument>("BaseType");
+			while(baseType != null)
+			{
+				methods.AddRange(baseType.List<IDocument>("Members")
+					?.Where(x => x.String("Kind") == "Method" && x.Get<IDocument>("ReturnType")
+						.List<IDocument>("AllInterfaces").Any(y => y.String("Name") == "IModule")));
+				baseType = baseType.Get<IDocument>("BaseType");
+			}
+			methods.Sort((a, b) => a.String("DisplayName").CompareTo(b.String("DisplayName")));
+		}
 		if(methods != null && methods.Count > 0)
 		{
 			<h2>Fluent Methods</h2>
