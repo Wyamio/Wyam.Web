@@ -2,9 +2,8 @@
 	IList<IGrouping<string, IDocument>> categoryGroups = 
 		Documents.FromPipeline("Modules")
 			.GroupBy(x => {
-				IReadOnlyList<KeyValuePair<IReadOnlyDictionary<string, string>, string>> category =
-					x.Get<IReadOnlyList<KeyValuePair<IReadOnlyDictionary<string, string>, string>>>("CategoryHtml");
-				return category == null ? string.Empty : category[0].Value;
+				IReadOnlyList<OtherComment> categoryComments = x.List<OtherComment>("CategoryComments");
+				return categoryComments == null ? string.Empty : categoryComments[0].Html;
 			})
 			.OrderBy(x => x.Key)
 			.ToList();

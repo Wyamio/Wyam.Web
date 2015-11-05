@@ -1,8 +1,8 @@
 @{
-	IReadOnlyList<IDocument> typeParams = Model.Get<IReadOnlyList<IDocument>>("TypeParams");
-	IReadOnlyList<KeyValuePair<string, string>> typeParamHtml = Model.Get<IReadOnlyList<KeyValuePair<string, string>>>("TypeParamHtml");
+	IReadOnlyList<IDocument> typeParameters = Model.List<IDocument>("TypeParameters");
+	IReadOnlyList<ReferenceComment> typeParams = Model.List<ReferenceComment>("TypeParams");
 }
-@if(typeParams != null && typeParams.Count > 0)
+@if(typeParameters != null && typeParameters.Count > 0)
 {
 	<h1>Type Parameters</h1>
 	<div class="box">
@@ -14,12 +14,12 @@
 						<th>Description</th>
 					</tr>
 				</thead>
-				@foreach(IDocument typeParam in typeParams)
+				@foreach(IDocument typeParam in typeParameters)
 				{
 					IDocument declaringType = typeParam.Get<IDocument>("DeclaringType");
 					<tr id="typeparam-@typeParam["Name"]">
 						<td>@(declaringType != null && declaringType["SymbolId"].Equals(Model["SymbolId"]) ? new HtmlString(typeParam.String("Name")) : typeParam.Link())</td>
-						<td>@Html.Raw(typeParamHtml?.Where(x => x.Key.Equals(typeParam["Name"])).Select(x => x.Value).FirstOrDefault())</td>
+						<td>@Html.Raw(typeParams?.Where(x => x.Name.Equals(typeParam["Name"])).Select(x => x.Html).FirstOrDefault())</td>
 					</tr>
 				}
 			</table>

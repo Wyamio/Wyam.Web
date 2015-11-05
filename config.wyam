@@ -53,7 +53,8 @@ Pipelines.Add("Code",
 Pipelines.Add("API",
 	Documents("Code"),
 	AnalyzeCSharp()
-		.WhereNamespaces(false, "Wyam.Common", "Wyam.Core")
+		.WhereNamespaces(false)
+		.WhereNamespaces(x => !x.StartsWith("Wyam.Modules.Razor.Microsoft"))
 		.WherePublic()
 		.WithCssClasses("pre", "prettyprint")
 		.WithWritePathPrefix("api"),

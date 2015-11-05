@@ -15,7 +15,7 @@
 		<li role="separator" class="divider"></li>
 		
 		IReadOnlyList<IDocument> constructors = containingType
-			.Get<IReadOnlyList<IDocument>>("Constructors")
+			.List<IDocument>("Constructors")
 			.Where(x => x.Get<bool>("IsResult"))
 			.ToList();
 		if(constructors != null && constructors.Count > 0)
@@ -30,7 +30,7 @@
 		}			
 	
 		foreach(IGrouping<string, IDocument> memberGroup 
-			in containingType.Get<IReadOnlyList<IDocument>>("Members")
+			in containingType.List<IDocument>("Members")
 				.Where(x => x.Get<bool>("IsResult"))
 				.GroupBy(x => x.String("Kind")))
 		{

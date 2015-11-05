@@ -1,8 +1,8 @@
 @{
 	IDocument type = Model.Get<IDocument>("Type");
-	string valueHtml = Model.String("ValueHtml");
+	string value = Model.String("Value");
 }
-@if(type != null || !string.IsNullOrWhiteSpace(valueHtml))
+@if(type != null || !string.IsNullOrWhiteSpace(value))
 {
 	<h1>Value</h1>
 	<div class="box">
@@ -16,7 +16,7 @@
 				</thead>
 				<tr>
 					<td>@(type == null ? new HtmlString(string.Empty) : type.Link())</td>
-					<td>@Html.Raw(valueHtml)</td>
+					<td>@Html.Raw(value)</td>
 				</tr>
 			</table>
 		</div>

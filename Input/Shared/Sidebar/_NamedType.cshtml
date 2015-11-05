@@ -8,7 +8,7 @@
 		<li role="separator" class="divider"></li>
 		
 		foreach(IGrouping<string, IDocument> typeGroup 
-			in containingNamespace.Get<IReadOnlyList<IDocument>>("MemberTypes")
+			in containingNamespace.List<IDocument>("MemberTypes")
 				.Where(x => x.Get<bool>("IsResult") && x["Kind"].Equals("NamedType"))
 				.GroupBy(x => x.String("SpecificKind")))
 		{

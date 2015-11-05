@@ -1,6 +1,6 @@
 @{
-	IReadOnlyList<IDocument> parameters = Model.Get<IReadOnlyList<IDocument>>("Parameters");
-	IReadOnlyList<KeyValuePair<string, string>> paramHtml = Model.Get<IReadOnlyList<KeyValuePair<string, string>>>("ParamHtml");
+	IReadOnlyList<IDocument> parameters = Model.List<IDocument>("Parameters");
+	IReadOnlyList<ReferenceComment> paramComments = Model.List<ReferenceComment>("Params");
 }
 @if(parameters != null && parameters.Count > 0)
 {
@@ -21,7 +21,7 @@
 					<tr>
 						<td>@parameter["Name"]</td>
 						<td>@(parameterType == null ? new HtmlString(string.Empty) : parameterType.Link())</td>
-						<td>@Html.Raw(paramHtml?.Where(x => x.Key.Equals(parameter["Name"])).Select(x => x.Value).FirstOrDefault())</td>
+						<td>@Html.Raw(paramComments?.Where(x => x.Name.Equals(parameter["Name"])).Select(x => x.Html).FirstOrDefault())</td>
 					</tr>
 				}
 			</table>

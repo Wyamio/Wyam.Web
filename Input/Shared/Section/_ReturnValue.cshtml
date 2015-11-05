@@ -1,8 +1,8 @@
 @{
 	IDocument returnType = Model.Get<IDocument>("ReturnType");
-	string returnsHtml = Model.String("ReturnsHtml");
+	string returns = Model.String("Returns");
 }
-@if(returnType != null || !string.IsNullOrWhiteSpace(returnsHtml))
+@if(returnType != null || !string.IsNullOrWhiteSpace(returns))
 {
 	<h1>Return Value</h1>
 	<div class="box">
@@ -16,7 +16,7 @@
 				</thead>
 				<tr>
 					<td>@(returnType == null ? new HtmlString("void") : returnType.Link())</td>
-					<td>@Html.Raw(returnsHtml)</td>
+					<td>@Html.Raw(returns)</td>
 				</tr>
 			</table>
 		</div>

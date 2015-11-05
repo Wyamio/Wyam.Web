@@ -1,5 +1,5 @@
 @{
-	IList<IDocument> events = Model.Get<IReadOnlyList<IDocument>>("Members")
+	IList<IDocument> events = Model.List<IDocument>("Members")
 		?.Where(x => x.Get<bool>("IsResult") && x.String("Kind") == "Event")
 		.OrderBy(x => x["DisplayName"])
 		.ToList();
@@ -23,7 +23,7 @@
 							<tr>
 								<td>@evt.Link()</td>
 								<td>@(type == null ? new HtmlString(string.Empty) : type.Link())</td>
-								<td>@Html.Raw(evt["SummaryHtml"])</td>
+								<td>@Html.Raw(evt["Summary"])</td>
 							</tr>
 						}
 					</table>

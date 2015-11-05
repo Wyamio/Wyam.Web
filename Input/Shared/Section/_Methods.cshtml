@@ -1,5 +1,5 @@
 @{
-	IList<IDocument> methods = Model.Get<IReadOnlyList<IDocument>>("Members")
+	IList<IDocument> methods = Model.List<IDocument>("Members")
 		?.Where(x => x.Get<bool>("IsResult") && x.String("Kind") == "Method")
 		.OrderBy(x => x["DisplayName"])
 		.ToList();
@@ -23,7 +23,7 @@
 							<tr>
 								<td>@method.Link()</td>
 								<td>@(returnType == null ? new HtmlString(string.Empty) : returnType.Link())</td>
-								<td>@Html.Raw(method["SummaryHtml"])</td>
+								<td>@Html.Raw(method["Summary"])</td>
 							</tr>
 						}
 					</table>

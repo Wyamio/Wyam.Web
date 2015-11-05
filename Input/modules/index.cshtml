@@ -5,9 +5,8 @@ NoSidebar: true
 	IList<IGrouping<string, IDocument>> categoryGroups = 
 		Documents.FromPipeline("Modules")
 			.GroupBy(x => {
-				IReadOnlyList<KeyValuePair<IReadOnlyDictionary<string, string>, string>> category =
-					x.Get<IReadOnlyList<KeyValuePair<IReadOnlyDictionary<string, string>, string>>>("CategoryHtml");
-				return category == null ? string.Empty : category[0].Value;
+				IReadOnlyList<OtherComment> categoryComments = x.List<OtherComment>("CategoryComments");
+				return categoryComments == null ? string.Empty : categoryComments[0].Html;
 			})
 			.OrderBy(x => x.Key)
 			.ToList();
@@ -23,7 +22,7 @@ NoSidebar: true
 			.OrderBy(x => x.String("DisplayName")))
 		{
 			<h2><strong><a href="@PathHelper.ToRootLink(PathHelper.RemoveExtension(childDoc.String("RelativeFilePath")))">@(childDoc.String("DisplayName"))</a></strong></h2>
-			string summary = childDoc.String("SummaryHtml");
+			string summary = childDoc.String("Summary");
 			if(!string.IsNullOrWhiteSpace(summary))
 			{
 				<p>@Html.Raw(summary)</p>

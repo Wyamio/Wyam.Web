@@ -15,7 +15,7 @@
 	
 	@{
 		// Summary
-		string summary = Model.String("SummaryHtml");
+		string summary = Model.String("Summary");
 		if(!string.IsNullOrWhiteSpace(summary))
 		{
 			<div class="lead">@Html.Raw(summary)</div>
@@ -28,7 +28,7 @@
 		<ul>			
 		@{			
 			IReadOnlyList<IDocument> constructors =
-				Model.Get<IReadOnlyList<IDocument>>("Constructors")
+				Model.List<IDocument>("Constructors")
 					?.OrderBy(x => x["DisplayName"])
 					.ToList();
 			if(constructors != null && constructors.Count > 0)
@@ -36,9 +36,9 @@
 				foreach(IDocument constructor in constructors)
 				{
 					string syntax = constructor.String("Syntax");
-					string constructorSummary = constructor.String("SummaryHtml");
-					IReadOnlyList<IDocument> parameters = constructor.Get<IReadOnlyList<IDocument>>("Parameters");
-					IReadOnlyList<KeyValuePair<string, string>> paramHtml = constructor.Get<IReadOnlyList<KeyValuePair<string, string>>>("ParamHtml");
+					string constructorSummary = constructor.String("Summary");
+					IReadOnlyList<IDocument> parameters = constructor.List<IDocument>("Parameters");
+					IReadOnlyList<ReferenceComment> paramComments = constructor.List<ReferenceComment>("Params");
 					<li>
 						@{
 							if(!string.IsNullOrWhiteSpace(syntax))
@@ -49,12 +49,12 @@
 							{
 								<p>@Html.Raw(constructorSummary)</p>
 							}
-							if(parameters != null && parameters.Count > 0 && paramHtml != null && paramHtml.Count > 0)
+							if(parameters != null && parameters.Count > 0 && paramComments != null && paramComments.Count > 0)
 							{
 								<ul>
 									@foreach(IDocument parameter in parameters)
 									{
-										string paramSummary = paramHtml?.Where(x => x.Key.Equals(parameter["Name"])).Select(x => x.Value).FirstOrDefault();
+										string paramSummary = paramComments?.Where(x => x.Name.Equals(parameter["Name"])).Select(x => x.Html).FirstOrDefault();
 										paramSummary = paramSummary == null ? string.Empty : ": " + paramSummary;
 										<li><p><code>@parameter["Name"]</code>@paramSummary</p></li>
 									}
@@ -74,7 +74,7 @@
 		// Methods
 		// TODO: Concat with base fluent methods
 		IReadOnlyList<IDocument> methods =
-			Model.Get<IReadOnlyList<IDocument>>("Members")
+			Model.List<IDocument>("Members")
 				?.Where(x => x.String("Kind") == "Method" && x.Get<IDocument>("ReturnType")["SymbolId"].Equals(Model["SymbolId"]))
 					.OrderBy(x => x["DisplayName"])
 					.ToList();
@@ -86,9 +86,9 @@
 				@foreach(IDocument method in methods)
 				{
 					string syntax = method.String("Syntax");
-					string methodSummary = method.String("SummaryHtml");
-					IReadOnlyList<IDocument> parameters = method.Get<IReadOnlyList<IDocument>>("Parameters");
-					IReadOnlyList<KeyValuePair<string, string>> paramHtml = method.Get<IReadOnlyList<KeyValuePair<string, string>>>("ParamHtml");
+					string methodSummary = method.String("Summary");
+					IReadOnlyList<IDocument> parameters = method.List<IDocument>("Parameters");
+					IReadOnlyList<ReferenceComment> paramComments = method.List<ReferenceComment>("Params");
 					<li>
 						@{
 							if(!string.IsNullOrWhiteSpace(syntax))
@@ -100,12 +100,12 @@
 							{
 								<p>@Html.Raw(methodSummary)</p>
 							}
-							if(parameters != null && parameters.Count > 0 && paramHtml != null && paramHtml.Count > 0)
+							if(parameters != null && parameters.Count > 0 && paramComments != null && paramComments.Count > 0)
 							{
 								<ul>
 									@foreach(IDocument parameter in parameters)
 									{
-										string paramSummary = paramHtml?.Where(x => x.Key.Equals(parameter["Name"])).Select(x => x.Value).FirstOrDefault();
+										string paramSummary = paramComments?.Where(x => x.Name.Equals(parameter["Name"])).Select(x => x.Html).FirstOrDefault();
 										paramSummary = paramSummary == null ? string.Empty : ": " + paramSummary;
 										<li><p><code>@parameter["Name"]</code>@paramSummary</p></li>
 									}

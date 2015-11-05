@@ -1,6 +1,6 @@
 @{				
 	foreach(IGrouping<string, IDocument> typeGroup 
-		in Model.Get<IReadOnlyList<IDocument>>("MemberTypes")
+		in Model.List<IDocument>("MemberTypes")
 			.Where(x => x.Get<bool>("IsResult") && x["Kind"].Equals("NamedType"))
 			.GroupBy(x => x.String("SpecificKind")))
 	{
@@ -16,7 +16,7 @@
 	
 	ViewData["DocsTable"] = new DocsTable
 	{
-		Docs = Model.Get<IReadOnlyList<IDocument>>("MemberNamespaces")
+		Docs = Model.List<IDocument>("MemberNamespaces")
 			?.Where(x => x.Get<bool>("IsResult"))
 			.OrderBy(x => x["DisplayName"])
 			.ToList(),

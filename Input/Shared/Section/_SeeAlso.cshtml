@@ -1,13 +1,13 @@
 @{
-	IReadOnlyList<string> seeAlso = Model.Get<IReadOnlyList<string>>("SeeAlsoHtml");
+	IReadOnlyList<string> seeAlso = Model.List<string>("SeeAlso");
 }
 @if(seeAlso != null && seeAlso.Count > 0)
 {
 	<h1>See Also</h1>
 	<ul class="list-unstyled">
-		@foreach(string seeAlsoHtml in seeAlso)
+		@foreach(string seeAlsoComment in seeAlso)
 		{
-			<li>@Html.Raw(seeAlsoHtml)</li>
+			<li>@Html.Raw(seeAlsoComment)</li>
 		}
 	</ul>
 }
