@@ -29,8 +29,8 @@
 		@{			
 			IReadOnlyList<IDocument> constructors =
 				Model.List<IDocument>("Constructors")
-					?.OrderBy(x => x["DisplayName"])
-					.ToList();
+				?.OrderBy(x => x["DisplayName"])
+				.ToList();
 			if(constructors != null && constructors.Count > 0)
 			{
 				foreach(IDocument constructor in constructors)
@@ -76,8 +76,8 @@
 		IReadOnlyList<IDocument> methods =
 			Model.List<IDocument>("Members")
 				?.Where(x => x.String("Kind") == "Method" && x.Get<IDocument>("ReturnType")["SymbolId"].Equals(Model["SymbolId"]))
-					.OrderBy(x => x["DisplayName"])
-					.ToList();
+				.OrderBy(x => x["DisplayName"])
+				.ToList();
 		if(methods != null && methods.Count > 0)
 		{
 			<h2>Fluent Methods</h2>
@@ -115,6 +115,31 @@
 					</li>				
 				}				
 			</ul>
-		}		
+		}
+		
+		// Metadata
+		IReadOnlyList<OtherComment> metadata =
+			Model.List<OtherComment>("MetadataComments")
+				?.Where(x => x.Attributes.ContainsKey("name"))
+				.OrderBy(x => x.Attributes["name"])
+				.ToList();
+		if(metadata != null && metadata.Count > 0)
+		{
+			<h1>Metadata</h1>
+			<hr />
+			<p>The following metadata is added to each document.</p>
+			<ul>
+				@foreach(OtherComment meta in metadata)
+				{
+					<li>
+						<p><code>@(meta.Attributes["name"])</code></p>
+						@if(!string.IsNullOrWhiteSpace(meta.Html))
+						{							
+							<p>@Html.Raw(meta.Html)</p>
+						}
+					</li>
+				}
+			</ul>
+		}
 	}	
 </section>
