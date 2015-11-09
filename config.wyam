@@ -60,6 +60,14 @@ Pipelines.Add("API",
 		.WithWritePathPrefix("api"),
 	Razor()
 		.WithViewStart(@"api\_ApiViewStart.cshtml"),
+	ConcatBranch(
+		Where(@doc.String("Kind") == "NamedType"),
+		SearchIndex(new SearchIndexItem(
+			"/" + @doc.String("WritePath").Replace("/index.html", string.Empty), 
+			@doc.String("DisplayName"), 
+			@doc.String("DisplayName"))),
+		Meta("WritePath", @"Scripts\searchIndex.js")
+	),
 	WriteFiles()
 );
 

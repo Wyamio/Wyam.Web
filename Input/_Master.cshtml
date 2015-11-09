@@ -102,7 +102,8 @@
             
             <!-- Left side column. contains the logo and sidebar -->
             <aside class="main-sidebar @(Model.Get<bool>("NoSidebar", false) ? "hidden" : string.Empty)">
-                <section class="sidebar smaller">
+                <section class="sidebar smaller">                    
+                    @RenderSection("Search", false)
                     <!-- search form -->
                     @*
                     <form action="#" method="get" class="sidebar-form">
@@ -114,6 +115,7 @@
                         </div>
                     </form>
                     *@
+                    
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
                         @RenderSection("Sidebar", false)

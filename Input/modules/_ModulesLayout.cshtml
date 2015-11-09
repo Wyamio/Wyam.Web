@@ -74,8 +74,9 @@
 		// Methods (including from base types)
 		List<IDocument> methods =
 			Model.List<IDocument>("Members")
-				?.Where(x => x.String("Kind") == "Method" && x.Get<IDocument>("ReturnType")
-					.List<IDocument>("AllInterfaces").Any(y => y.String("Name") == "IModule"))
+				?.Where(x => x.String("Kind") == "Method"
+					&& x.String("Accessibility") == "Public" 
+					&& x.Get<IDocument>("ReturnType").List<IDocument>("AllInterfaces").Any(y => y.String("Name") == "IModule"))
 				.ToList();
 		if(methods != null)
 		{
