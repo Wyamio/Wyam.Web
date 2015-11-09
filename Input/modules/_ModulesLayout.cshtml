@@ -43,7 +43,7 @@
 						@{
 							if(!string.IsNullOrWhiteSpace(syntax))
 							{
-								<p><code>@(syntax.Substring(syntax.IndexOf(" ") + 1))</code></p>
+								<p><strong><code>@(syntax.Substring(syntax.IndexOf(" ") + 1))</code></strong></p>
 							}
 							if(!string.IsNullOrWhiteSpace(constructorSummary))
 							{
@@ -56,7 +56,7 @@
 									{
 										string paramSummary = paramComments?.Where(x => x.Name.Equals(parameter["Name"])).Select(x => x.Html).FirstOrDefault();
 										paramSummary = paramSummary == null ? string.Empty : ": " + paramSummary;
-										<li><p><code>@parameter["Name"]</code>@paramSummary</p></li>
+										<li><p><code>@parameter["Name"]</code>@Html.Raw(paramSummary)</p></li>
 									}
 								</ul>
 							}
@@ -106,7 +106,7 @@
 							if(!string.IsNullOrWhiteSpace(syntax))
 							{
 								// Two spaces - once for access modifier and again for return type
-								<p><code>@(syntax.Substring(syntax.IndexOf(" ", syntax.IndexOf(" ") + 1) + 1))</code></p>
+								<p><strong><code>@(syntax.Substring(syntax.IndexOf(" ", syntax.IndexOf(" ") + 1) + 1))</code></strong></p>
 							}
 							if(!string.IsNullOrWhiteSpace(methodSummary))
 							{
@@ -119,7 +119,7 @@
 									{
 										string paramSummary = paramComments?.Where(x => x.Name.Equals(parameter["Name"])).Select(x => x.Html).FirstOrDefault();
 										paramSummary = paramSummary == null ? string.Empty : ": " + paramSummary;
-										<li><p><code>@parameter["Name"]</code>@paramSummary</p></li>
+										<li><p><code>@parameter["Name"]</code>@Html.Raw(paramSummary)</p></li>
 									}
 								</ul>
 							}
@@ -144,7 +144,7 @@
 				@foreach(OtherComment meta in metadata)
 				{
 					<li>
-						<p><code>@(meta.Attributes["name"])</code></p>
+						<p><strong><code>@(meta.Attributes["name"])</code></strong></p>
 						@if(!string.IsNullOrWhiteSpace(meta.Html))
 						{							
 							<p>@Html.Raw(meta.Html)</p>

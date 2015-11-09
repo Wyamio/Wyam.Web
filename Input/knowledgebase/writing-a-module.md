@@ -46,6 +46,10 @@ Here are a few other guidelines to follow so that your module matches the conven
 - Use a fluent interface for setting optional options and favor accepted fluent method naming conventions (I.e., use `WithSomeOption(...)` instead of `SetSomeOption(...)` unless you're actually setting something external to the module).
 - Try to make sure fluent methods are resilient against multiple calls if appropriate. I.e., if a fluent methods defines a set of something, make sure subsiquent calls add to the set instead of replacing it. If the fluent method defines a predicate, make sure subsiquent calls add conditions to the predicate instead of replacing it.
 - Make the module null and fault tolerant. That is, if null or other invalid values are supplied as constructor or fluent method arguments, try to work around it by using default values, etc. instead of throwing exceptions.
+- Favor flexibility and try to consider all the possible uses of your module. Even if you don't think anyone would use it in a certain way, try to support as many scenarios as possible.
+- Always process the input documents to a module. Don't rely on getting documents from the IExecutionContext except for reference or suplemental information.
+- Write tests if possible and include them if submitting your module to the official repository.
+- Document your module using XML code comments. Also use the special `category` and `metadata` XML comment elements (the Wyam web site knows how to read these and they power the [modules](/modules) page).
 
 # Deployment
 ---
