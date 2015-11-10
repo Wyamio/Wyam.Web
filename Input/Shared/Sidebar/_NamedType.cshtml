@@ -13,7 +13,8 @@
 				.GroupBy(x => x.String("SpecificKind")))
 		{
 			<li class="header">@typeGroup.Key Types</li>
-			foreach(IDocument type in typeGroup)
+			foreach(IDocument type in typeGroup
+				.OrderBy(x => x.String("Name")))
 			{
 				string activeClass = type.String("SymbolId") == Model.String("SymbolId") 
 					? "active" : string.Empty;

@@ -35,7 +35,8 @@
 				.GroupBy(x => x.String("Kind")))
 		{
 			<li class="header">@memberGroup.Key Members</li>
-			foreach(IDocument member in memberGroup)
+			foreach(IDocument member in memberGroup
+				.OrderBy(x => x.String("Name")))
 			{
 				string activeClass = member.String("SymbolId") == Model.String("SymbolId") 
 					? "active" : string.Empty;
