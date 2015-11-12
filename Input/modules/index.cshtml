@@ -21,12 +21,16 @@ NoSidebar: true
 		foreach(IDocument childDoc in categoryGroup
 			.OrderBy(x => x.String("DisplayName")))
 		{
-			<h2><strong><a href="@PathHelper.ToRootLink(PathHelper.RemoveExtension(childDoc.String("RelativeFilePath")))">@(childDoc.String("DisplayName"))</a></strong></h2>
-			string summary = childDoc.String("Summary");
-			if(!string.IsNullOrWhiteSpace(summary))
-			{
-				<p>@Html.Raw(summary)</p>
-			}
+			<h2>
+				<strong><a href="@PathHelper.ToRootLink(PathHelper.RemoveExtension(childDoc.String("RelativeFilePath")))">@(childDoc.String("DisplayName"))</a></strong>
+				@{					
+					string summary = childDoc.String("Summary");
+					if(!string.IsNullOrWhiteSpace(summary))
+					{
+						<small>@Html.Raw(summary)</small>
+					}
+				}
+			</h2>
 		} 
 	}	
 }

@@ -21,6 +21,22 @@
 			<div class="lead">@Html.Raw(summary)</div>
 		}
 		
+		// Remarks
+		string remarks = Model.String("Remarks");
+		if(!string.IsNullOrWhiteSpace(remarks))
+		{
+			<div>@Html.Raw(remarks)</div>
+		}
+		
+		// Examples
+		string examples = Model.String("Example");
+		if(!string.IsNullOrWhiteSpace(examples))
+		{
+			<h1>Examples</h1>
+			<hr />
+			<div>@Html.Raw(examples)</div>
+		}
+		
 		<h1>Usage</h1>
 		<hr />
 		
@@ -152,15 +168,7 @@
 					</li>
 				}
 			</ul>
-		}		
+		}	
 		
-		// Examples
-		string examples = Model.String("Example");
-		if(!string.IsNullOrWhiteSpace(examples))
-		{
-			<h1>Examples</h1>
-			<hr />
-			<div>@Html.Raw(examples)</div>
-		}
 	}	
 </section>
