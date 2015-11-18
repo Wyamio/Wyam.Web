@@ -158,7 +158,8 @@ body.wyam {
       }
       
       li.active li.active a {
-        background-color: darken(@sidebar-light-hover-bg, 4%);
+        background-color: @light-blue;
+        color: #fff;
       }
       
       li.divider {
@@ -170,6 +171,7 @@ body.wyam {
       li.header {
         text-transform: uppercase;
         font-size: @font-size-base;
+        font-weight: bold;        
       }
     } 
         
@@ -191,6 +193,18 @@ body.wyam {
   
     //Create the sidebar skin
     .skin-light-sidebar(@light-blue);
+    
+    // Overrides for the sidebar skin
+    .sidebar-menu {
+      & > li.header {
+        color: @gray;
+      }
+      
+      & > li.active > a {
+          background-color: @light-blue;
+          color: #fff;
+      }
+    }
     
     .main-header,  
     .main-footer

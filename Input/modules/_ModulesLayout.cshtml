@@ -71,8 +71,8 @@
 									@foreach(IDocument parameter in parameters)
 									{
 										string paramSummary = paramComments?.Where(x => x.Name.Equals(parameter["Name"])).Select(x => x.Html).FirstOrDefault();
-										paramSummary = paramSummary == null ? string.Empty : ": " + paramSummary;
-										<li><p><code>@parameter["Name"]</code>@Html.Raw(paramSummary)</p></li>
+										paramSummary = paramSummary == null ? string.Empty : "<p>" + paramSummary + "</p>";
+										<li><p><code>@parameter["Name"]</code></p>@Html.Raw(paramSummary)</li>
 									}
 								</ul>
 							}
@@ -82,7 +82,7 @@
 			}
 			else
 			{
-				<li><p><code>@(Model.Name())()</code></p></li>
+				<li><p><strong><code>@(Model.Name())()</code></strong></p></li>
 			}
 		}
 		</ul>
@@ -134,8 +134,8 @@
 									@foreach(IDocument parameter in parameters)
 									{
 										string paramSummary = paramComments?.Where(x => x.Name.Equals(parameter["Name"])).Select(x => x.Html).FirstOrDefault();
-										paramSummary = paramSummary == null ? string.Empty : ": " + paramSummary;
-										<li><p><code>@parameter["Name"]</code>@Html.Raw(paramSummary)</p></li>
+										paramSummary = paramSummary == null ? string.Empty : "<p>" + paramSummary + "</p>";
+										<li><p><code>@parameter["Name"]</code></p>@Html.Raw(paramSummary)</li>
 									}
 								</ul>
 							}
@@ -160,7 +160,16 @@
 				@foreach(OtherComment meta in metadata)
 				{
 					<li>
-						<p><strong><code>@(meta.Attributes["name"])</code></strong></p>
+						<p>
+							@{
+								string type = string.Empty;
+								if(meta.Attributes.ContainsKey("type"))
+								{
+									type = ": <code>" + System.Net.WebUtility.HtmlEncode(meta.Attributes["type"]) + "</code>";
+								}
+							}
+							<strong><code>@(meta.Attributes["name"])</code></strong>@Html.Raw(type)
+						</p>
 						@if(!string.IsNullOrWhiteSpace(meta.Html))
 						{							
 							<p>@Html.Raw(meta.Html)</p>
