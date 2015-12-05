@@ -53,8 +53,8 @@ In addition to NuGet packages you can also load assemblies. This is accomplished
 
 ```
 Assemblies
-    .LoadDirectory(@@"lib")
-	.LoadFile(@@"foo\bar.dll")
+    .LoadDirectory(@"lib")
+	.LoadFile(@"foo\bar.dll")
 	.Load("SampleAssembly, Version=1.0.2004.0, Culture=neutral, PublicKeyToken=8744b20f8da049e3");
 ```
 
@@ -192,37 +192,37 @@ Pipelines.Add("Markdown",
 
 Many modules accept functions so that you can use information about the current `IExecutionContext` and/or `IDocument` when executing the module. For example, you may want to write files to disk in different locations depending on some value in each document's metadata. To make this easier in simple cases, and to assist users who may not be familiar with the [C# lambda expression syntax](https://msdn.microsoft.com/en-us/library/bb397687.aspx), the configuration file will automatically generate lambda expressions when using a special syntax. This generation will only happen for module constructors and fluent configuration methods. Any other method you use that requires a function will still have to specify it explicitly.
 
-If the module or fluent configuration method has a `ContextConfig` delegate argument, you can instead use any variable name that starts with `@@ctx`. For example:
+If the module or fluent configuration method has a `ContextConfig` delegate argument, you can instead use any variable name that starts with `@ctx`. For example:
 
 ```
-Foo(@@ctx2.InputFolder)
+Foo(@ctx2.InputFolder)
 ```
 will be expanded to:
 
 ```
-Foo(@@ctx2 => @@ctx2.InputFolder)
+Foo(@ctx2 => @ctx2.InputFolder)
 ```
 
-Likewise, any variable name that starts with `@@doc` will be expanded to a `DocumentConfig` delegate. For example:
+Likewise, any variable name that starts with `@doc` will be expanded to a `DocumentConfig` delegate. For example:
 
 ```
-Foo(@@doc["SomeMetadataValue"])
+Foo(@doc["SomeMetadataValue"])
 ```
 will be expanded to:
 
 ```
-Foo((@@doc, _) => @@doc["SomeMetadataValue"])
+Foo((@doc, _) => @doc["SomeMetadataValue"])
 ```
 
-If you use both `@@ctx` and `@@doc`, a `DocumentConfig` delegate will be generated that uses both values. For example:
+If you use both `@ctx` and `@doc`, a `DocumentConfig` delegate will be generated that uses both values. For example:
 
 ```
-Foo(@@doc[@@ctx.InputFolder])
+Foo(@doc[@ctx.InputFolder])
 ```
 will be expanded to:
 
 ```
-Foo((@@doc, @@ctx) => @@doc[@@ctx.InputFolder])
+Foo((@doc, @ctx) => @doc[@ctx.InputFolder])
 ```
 
 ## Folders

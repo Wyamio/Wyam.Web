@@ -1,4 +1,5 @@
 Title: FAQ
+NoSidebar: true
 ---
 ### <a name="name"></a>**What's with the name?**
   

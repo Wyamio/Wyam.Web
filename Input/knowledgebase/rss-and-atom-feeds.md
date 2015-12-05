@@ -18,16 +18,16 @@ Then, create a Razor page and add code similar to the following (this is the act
 ```
 WriteFileName: feed.rss
 ---
-@@using System.ServiceModel.Syndication; 
-@@using System.IO;
-@@using System.Xml;
-@@using AngleSharp;
-@@using AngleSharp.Parser.Html;
+@using System.ServiceModel.Syndication; 
+@using System.IO;
+@using System.Xml;
+@using AngleSharp;
+@using AngleSharp.Parser.Html;
 
-@@{
+@{
 	Layout = string.Empty;
 	
-	Uri baseUri = new Uri(@@"http://daveaglick.com");  // This is the root URL to your site
+	Uri baseUri = new Uri(@"http://daveaglick.com");  // This is the root URL to your site
     SyndicationFeed feed = new SyndicationFeed()
     {
         Title = new TextSyndicationContent("Dave Glick"),  // This should be the name of your site or feed
@@ -64,7 +64,7 @@ A couple things to note:
   
   - My blog contains a date metadata key `Published`. You should replace references to it in the code above with whatever your site uses to store the post date.
   
-  - This code uses [AngleSharp](https://github.com/FlorianRappl/AngleSharp) to find the `div` with an `id` of `post-content` in each item. In the layout file, this `div` contains the `@@RenderBody()` call so this code essentially strips out everything but the content. If you want to do the same thing, make sure to include AngleSharp in your configuration file:
+  - This code uses [AngleSharp](https://github.com/FlorianRappl/AngleSharp) to find the `div` with an `id` of `post-content` in each item. In the layout file, this `div` contains the `@RenderBody()` call so this code essentially strips out everything but the content. If you want to do the same thing, make sure to include AngleSharp in your configuration file:
   
   ```
   Packages
