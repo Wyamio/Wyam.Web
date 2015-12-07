@@ -74,12 +74,7 @@ Pipelines.Add("API",
 Pipelines.Add("Modules",
 	Documents("Code"),
 	AnalyzeCSharp()
-		.WhereSymbol(x => {
-			INamedTypeSymbol namedTypeSymbol = x as INamedTypeSymbol;
-			return namedTypeSymbol != null 
-				&& namedTypeSymbol.AllInterfaces.Any(y => y.Name == "IModule")
-				&& !namedTypeSymbol.IsAbstract;
-		})
+		.WithNamedTypes(x => x.AllInterfaces.Any(y => y.Name == "IModule") && !x.IsAbstract)
 		.WherePublic()
 		.WithCssClasses("pre", "prettyprint")
 		.WithDocsForImplicitSymbols()
