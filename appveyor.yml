@@ -23,7 +23,7 @@ build_script:
 
 on_success:
   # Remove the code submodule, otherwise GitHub Pages will complain about it not being initialized
-  - git rm --cached Code
+  - git rm -rf --cached Code
   - rm -rf .git/modules/Code
   - rm -rf Code
   # Switch branches to gh-pages, clean the folder, copy everything in from the Wyam output, and commit/push
