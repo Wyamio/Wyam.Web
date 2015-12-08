@@ -48,6 +48,10 @@ There are also a number of arguments that allow you to control execution:
 
   Starts the embedded preview web server on the specified port (or on port 5080 if no port is specified). Be default, the web server has a routing rule for extensionless URLs (that is, if you go to `/about` and a file `/about.html` or `/about.htm` exists, it will be served). To turn this behavior off and force the use of file extensions, specify `force-ext`. Note that to match the extensionless routing behavior on your web server, some additional configuration may be required. Specifying this argument will keep Wyam running until a key is pressed.
   
+* `--output-scripts`
+
+  Outputs the config scripts after they've been processed for further debugging or to see exactly what gets evaluated when your configuration runs.
+  
 * `--log [logfile]`
 
   Log all trace messages to a log file. You can specify the log file with `logfile` or the file `wyam-[datetime].txt` will be used if one isn't specified.
