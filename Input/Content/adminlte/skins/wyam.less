@@ -63,6 +63,10 @@ body.wyam {
       width: @sidebar-width - 1px;
     }
     
+    .main-sidebar, .left-side {
+      padding-top: 50px;
+    }
+    
     .wrapper {      
       border-radius: 0;
     }
@@ -87,6 +91,13 @@ body.wyam {
           background-color: darken(@light-blue, 5%);
         }
       }
+      .navbar-toggle
+      {
+        font-family: "fontAwesome";
+        &:before {
+          content: "\f0c9";
+        }
+      }
       @media (max-width: @screen-header-collapse) {
           .dropdown-menu {
             li {
@@ -107,6 +118,15 @@ body.wyam {
       //Logo
       .logo {
         .logo-variant(@light-blue);
+        @media (max-width: @screen-header-collapse) {
+          position: absolute;
+          top: 0;
+          z-index: 1001;
+          background-color: transparent;
+          width: 230px;
+          left: 50%;
+          margin-left: -115px;
+        }
       }
   
       li.user-header {
