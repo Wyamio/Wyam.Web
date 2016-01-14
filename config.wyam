@@ -45,8 +45,8 @@ public class DocsTable
 ---
 
 Pipelines.Add("Code",
-	ReadSolution(@"..\Code\Wyam\Wyam.sln")  // Read from the master Wyam branch in the Git submodule
-	//ReadSolution(@"..\..\Wyam\Wyam.sln")  // Read from the current branch on disk in the actual repo
+	ReadSolution(@"..\Code\Wyam\src\Wyam.sln")  // Read from the master Wyam branch in the Git submodule
+	//ReadSolution(@"..\..\Wyam\src\Wyam.sln")  // Read from the current branch on disk in the actual repo
 		.WhereProject(x => !x.EndsWith(".Tests"))
 );
 

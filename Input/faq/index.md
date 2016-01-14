@@ -10,4 +10,14 @@ NoSidebar: true
 Here's the thing: I like static site generators. I've been thinking about this problem for a long time (as in, many years). And while there are *a lot* of generators out there, none of them really fit with the way I think about the problem. I don't want to follow a prescribed notion of what sort of content I'm creating or follow assumptions about the location of files. I wanted a static *content* generator that is designed from the ground up to be flexible, even if it means making it slightly more complicated to configure. There are some generators that come close (I'm personally fond of the concepts in [Metalsmith](http://www.metalsmith.io/)). I'm also a .NET developer and while there are a couple good static site generators in the .NET ecosystem ([Pretzel](https://github.com/Code52/pretzel) and [Sandra.Snow](https://github.com/Sandra/Sandra.Snow) come to mind), I certainly don't think we've hit peak generator in that world as we have in, say, JavaScript.
 
 **TL; DR**: I wanted to build one, so I did.
- 
+
+### **How can I set the `CurrentCulture`?**
+
+The best way to do this is to add the following to the top of your configuration file in the config section:
+
+```
+System.Globalization.CultureInfo.DefaultThreadCurrentCulture
+    = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
+```
+
+That should set the culture for the primary thread as well as any other threads spawned during the generation process.
