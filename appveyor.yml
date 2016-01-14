@@ -8,7 +8,7 @@ environment:
 
 install:
   - git submodule update --init --recursive
-  - git submodule git pull --recursive
+  - git submodule update --remote --merge
   - mkdir ..\Wyam
   - mkdir ..\Output
   # Fetch the latest version of Wyam 
