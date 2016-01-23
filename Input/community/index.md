@@ -12,6 +12,10 @@ Here are some awesome Wyam-related goodies from the community. Are you doing som
   
   It's so meta!
   
+- **[Web Content Management - Systems, Features, and Best Practices](http://flyingsquirrelbook.com/)**
+
+  Informational site for the excellent book on CMS systems by Deane Barker featuring cross-referenced glossary pages and detailed chapter information.
+  
 - **[Siwawi](http://siwawi.com/)**
 
   Travel and informational site for Siwa Oasis, Egypt. 300,000 palm trees, 70,000 olive trees, 300 freshwater springs, 25,000 amazing people.

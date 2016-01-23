@@ -26,6 +26,7 @@ environment:
     secure: ABCDEFG...
 
 install:
+  - git submodule update --init --recursive
   - mkdir ..\Wyam
   - mkdir ..\Output
   # Fetch the latest version of Wyam 
@@ -33,7 +34,7 @@ install:
   - set /P WYAMVERSION=< ..\Wyam\wyamversion.txt
   - echo %WYAMVERSION%
   # Get and unzip the latest version of Wyam
-  - ps: Start-FileDownload "https://github.com/Wyamio/Wyam/releases/download/$env:WYAMVERSION/Wyam.zip" -FileName "..\Wyam\Wyam.zip"
+  - ps: Start-FileDownload "https://github.com/Wyamio/Wyam/releases/download/$env:WYAMVERSION/Wyam-$env:WYAMVERSION.zip" -FileName "..\Wyam\Wyam.zip"
   - 7z x ..\Wyam\Wyam.zip -o..\Wyam -r
 
 build_script:
