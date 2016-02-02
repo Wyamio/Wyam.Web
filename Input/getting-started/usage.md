@@ -46,7 +46,7 @@ There are also a number of arguments that allow you to control execution:
   
 * `--preview [port] [force-ext]`
 
-  Starts the embedded preview web server on the specified port (or on port 5080 if no port is specified). Be default, the web server has a routing rule for extensionless URLs (that is, if you go to `/about` and a file `/about.html` or `/about.htm` exists, it will be served). To turn this behavior off and force the use of file extensions, specify `force-ext`. Note that to match the extensionless routing behavior on your web server, some additional configuration may be required. Specifying this argument will keep Wyam running until a key is pressed.
+  Starts the embedded preview web server on the specified port (or on port 5080 if no port is specified). By default, the web server has a routing rule for extensionless URLs (that is, if you go to `/about` and a file `/about.html` or `/about.htm` exists, it will be served). To turn this behavior off and force the use of file extensions, specify `force-ext`. Note that to match the extensionless routing behavior on your web server, some additional configuration may be required. Specifying this argument will keep Wyam running until a key is pressed.
   
 * `--output-scripts`
 
