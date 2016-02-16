@@ -26,31 +26,31 @@ If your module needs any information, you'll typically get it in the constructor
 # Implement The Execute Method
 ---
 
-Implement the single method `IEnumerable<IDocument> Execute(IReadOnlyList<IDocument> inputs, IExecutionContext context)`. Your implementation should accept zero or more `IDocument` inputs and return zero or more `IDocument` outputs. To the extent you need to modify the input documents (which are immutable), use one of the `IDocument.Clone(...)` methods which return a new `IDocument` with new content and/or additional metadata items.
+Implement the single method `IEnumerable<IDocument> Execute(IReadOnlyList<IDocument> inputs, IExecutionContext context)`. Your implementation should accept zero or more `IDocument` inputs and return zero or more `IDocument` outputs. To the extent you need to modify the input documents (which are immutable) or get new ones, use one of the `IExecutionContext.GetDocument()` methods which return a new `IDocument` with new content and/or additional metadata items.
 
-Inside your `Execute` implementation, iterate over the `IDocument` objects that were passed in. To access document content, use `IDocument.GetStream()` or `IDocument.Content`. Using streams is prefered when both reading and cloning documents because it can provide more direct access to the document content. However, you should prefer `IDocument.Content` over using your own `MemoryStream` to buffer content from `IDocument.GetStream()` if you need access to the content as a string. Also use one of the `IDocument.Clone(...)` overrides that takes a string instead of cloning with a `MemoryStream` if you already have the content as a string. Also note that if you use `IDocument.GetStream()` **you must dispose the returned stream**.
+Inside your `Execute` implementation, iterate over the `IDocument` objects that were passed in. To access document content, use `IDocument.GetStream()` or `IDocument.Content`. Using streams is prefered when both reading and cloning documents because it can provide more direct access to the document content. However, you should prefer `IDocument.Content` over using your own `MemoryStream` to buffer content from `IDocument.GetStream()` if you need access to the content as a string. Also use one of the `IExecutionContext.GetDocument()` overrides that takes a string instead of cloning with a `MemoryStream` if you already have the content as a string. Also note that if you use `IDocument.GetStream()` **you must dispose the returned stream**.
 
 ## Parallel Execution
 
-For performance reasons, modules are encouraged to perform their operations in parallel if possible. That's why the entire sequence of input documents gets passed to the `Execute(...)` method instead of just giving the module one at a time. The easiest way to do this is to use `.AsParallel()` in a LINQ expression or use `Parallel.ForEach(...)`, but any method is acceptable. Keep in mind that while intra-module operations are allowed to run in parallel, the pipeline is run sequentially on the main thread. This ensures that the order of pipelines and modules remains predictable and consistent.
+For performance reasons, modules are encouraged to perform their operations in parallel if possible. That's why the entire sequence of input documents gets passed to the `Execute()` method instead of just giving the module one at a time. The easiest way to do this is to use `.AsParallel()` in a LINQ expression or use `Parallel.ForEach()`, but any method is acceptable. Keep in mind that while intra-module operations are allowed to run in parallel, the pipeline is run sequentially on the main thread. This ensures that the order of pipelines and modules remains predictable and consistent.
 
 ## Executing Child Modules
 
-If you need to execute child modules from your module, don't call `IModule.Execute(...)` on each child module. Instead use one of the `IExecutionContext.Execute(...)` methods. They return the result documents from calling the child module chain (which can then be returned by your own module if needed).
+If you need to execute child modules from your module, don't call `IModule.Execute()` on each child module. Instead use one of the `IExecutionContext.Execute()` methods. They return the result documents from calling the child module chain (which can then be returned by your own module if needed).
 
 ## Other Guidelines
 
 Here are a few other guidelines to follow so that your module matches the convention used by the built-in Wyam modules.
 
 - Favor overloaded constructors over optional arguments. This will help avoid versioning problems in the future (see [this blog post](http://haacked.com/archive/2010/08/10/versioning-issues-with-optional-arguments.aspx/) for more details).
-- Use a fluent interface for setting optional options and favor accepted fluent method naming conventions (I.e., use `WithSomeOption(...)` instead of `SetSomeOption(...)` unless you're actually setting something external to the module).
+- Use a fluent interface for setting optional options and favor accepted fluent method naming conventions (I.e., use `WithSomeOption()` instead of `SetSomeOption()` unless you're actually setting something external to the module).
 - Try to make sure fluent methods are resilient against multiple calls if appropriate. I.e., if a fluent methods defines a set of something, make sure subsequent calls add to the set instead of replacing it. If the fluent method defines a predicate, make sure subsequent calls add conditions to the predicate instead of replacing it.
 - Make the module null and fault tolerant. That is, if null or other invalid values are supplied as constructor or fluent method arguments, try to work around it by using default values, etc. instead of throwing exceptions.
 - Favor flexibility and try to consider all the possible uses of your module. Even if you don't think anyone would use it in a certain way, try to support as many scenarios as possible.
 - Always process the input documents to a module. Don't rely on getting documents from the `IExecutionContext` except for reference or supplemental information.
 - Write tests if possible and include them if submitting your module to the official repository.
 - Consider using a `public static class` called `[LibraryName]Keys` with `public const string` members to store your metadata keys if your module generates metadata. This will help avoid the use of "magic strings" in configuration files and templates.
-- Document your module using XML code comments. Also use the special `category` and `metadata` XML comment elements (the Wyam web site knows how to read these and they power the [modules](/modules) page).
+- If you're planning on submitting your module, document it using XML code comments. Also use the special `category` and `metadata` XML comment elements (the Wyam web site knows how to read these and they power the [modules](/modules) page).
 
 # Deployment
 ---

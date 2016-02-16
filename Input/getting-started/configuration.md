@@ -2,7 +2,7 @@ Title: Configuration
 Description: Describes the format of the configuration file.
 Order: 4
 ---
-The command line Wyam application reads a configuration file typically named `config.wyam` (though you can change that with an argument) that sets up the environment and initializes metadata and pipelines. It consists of three parts, the *setup*, any *declarations*, and the *configuration*, in that order. The setup is separated by a line consisting entirely of one or more equals (`===`) and the declarations are separated by a line consisting entirely of one or more dashes (`---`).
+The command line Wyam application reads a configuration file typically named `config.wyam` (though you can change that with an argument) that sets up the environment and initializes metadata and pipelines. It consists of three parts, the *setup*, any *declarations*, and the *body*, in that order. The setup is separated by a line consisting entirely of one or more equals (`===`) and the declarations are separated by a line consisting entirely of one or more dashes (`---`).
 
 The sections of the configuration file are evaluated as C# code, so you can make use of the full C# language and the entire .NET ecosystem. However, it's not necessary to know C# to write Wyam configuration files. The syntax has been carefully crafted to be usable by anyone no matter their level of programming experience.
 
@@ -19,7 +19,7 @@ A configuration file looks like this:
 
 ---
 
-// Configuration code (required)
+// Body code (required)
 // ...
 ```
 
@@ -32,7 +32,7 @@ The setup helps establish the Wyam environment and gets evaluated before the res
 
 Wyam can automatically install any NuGet packages you declare in the setup portion of the configuration file. These will then be scanned for modules and be made available to the main configuration body. NuGet packages are configured using the global `Packages` object and a fluent interface.
 
-`Packages.Install(string packageId, string versionSpec = null, bool allowPrereleaseVersions = false, bool allowUnlisted = false)` will let you specify a NuGet package to download from the default package source, which is the main NuGet.org feed. `Packages.Repository(string packageSource)` will let you define alternate package sources (such as an internal NuGet feed or a feed on MyGet). You can then continue to chain additional `Install(...)` calls as before. For example:
+`Packages.Install(string packageId, string versionSpec = null, bool allowPrereleaseVersions = false, bool allowUnlisted = false)` will let you specify a NuGet package to download from the default package source, which is the main NuGet.org feed. `Packages.Repository(string packageSource)` will let you define alternate package sources (such as an internal NuGet feed or a feed on MyGet). You can then continue to chain additional `Install()` calls as before. For example:
 
 ```
 Packages
@@ -43,7 +43,7 @@ Packages.Repository("https://www.myget.org/F/roslyn-nightly/")
     .Install("Microsoft.CodeAnalysis.Scripting");
 ```
 
-From the `Install(...)` method you can also specify the acceptable package version(s) and whether prerelease and/or unlisted packages should be allowed. The `versionSpec` argument takes a string that matches the standard NuGet version specifications defined at https://docs.nuget.org/create/versioning
+From the `Install()` method you can also specify the acceptable package version(s) and whether prerelease and/or unlisted packages should be allowed. The `versionSpec` argument takes a string that matches the standard NuGet version specifications defined at https://docs.nuget.org/create/versioning
 
 By default, packages are downloaded to `\packages`. If you want to change this, set `Packages.Path` to the relative folder where you want packages to be downloaded. For example, you could set this to a system-wide folder if you have several scripts that share the same packages.
 
@@ -113,16 +113,16 @@ Note that namespaces for all found modules as well as the following namespaces a
 * `System.IO`
 * `System.Diagnostics`
 
-# Configuration
+# <a name="body"></a>Body
 ---
 
 ## Initial Metadata
 
-Each pipeline starts with a single document prepopulated with initial metadata you specify in the configuration file. You can use this facility to introduce variables that can influence the way the pipeline behaves. To set initial metadata, just add values to the `Metadata` property (it's a `IDictionary<string, object>`). Note that the dictionary values are objects, so you can store simple primitive values or complex structure. For example:
+Each pipeline starts with a single document prepopulated with initial metadata you specify in the configuration file. You can use this facility to introduce variables that can influence the way the pipeline behaves. To set initial metadata, just add values to the `InitialMetadata` property (it's of type `IInitialMetadata` which implements `IDictionary<string, object>`). Note that the dictionary values are objects, so you can store simple primitive values or complex structure. For example:
 
 ```
-Metadata["Foo"] = "Bar";
-Metadata.Add("Baz", new KeyValuePair<string, string>("abc", "xyz")); 
+InitialMetadata["Foo"] = "Bar";
+InitialMetadata.Add("Baz", new KeyValuePair<string, string>("abc", "xyz")); 
 ```
 
 ## Pipelines
@@ -140,7 +140,7 @@ However, don't let the simplicity fool you. Wyam configuration files are C# scri
 
 ### Pipeline Names
 
-Pipelines should be given names, which makes them easier to identify in trace messages and also makes them easier to refer to within templates (for example, to get all the documents generated by a previous pipeline). Just pass in the name of a pipeline as the first parameter to the `Add(...)` method. If no name is provided (as above), then pipelines will implicitly be given the names `Pipeline 1`, `Pipeline 2`, etc.
+Pipelines should be given names, which makes them easier to identify in trace messages and also makes them easier to refer to within templates (for example, to get all the documents generated by a previous pipeline). Just pass in the name of a pipeline as the first parameter to the `Add()` method. If no name is provided (as above), then pipelines will implicitly be given the names `Pipeline 1`, `Pipeline 2`, etc.
 
 ```
 Pipelines.Add("Markdown",
@@ -245,7 +245,7 @@ Packages
 	.Install("jQuery", "[2.1.1]");
 	
 ===
-// Configuration code
+// Body code
 
 Pipelines.Add("Content",
 	ReadFiles("*.md"),

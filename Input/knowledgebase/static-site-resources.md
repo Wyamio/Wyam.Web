@@ -1,7 +1,7 @@
 Title: Static Site Resources
 Description: A list of resources that can help improve your static sites.
 ---
-Just because you're running a static site doesn't mean that the experience can't be both rich for your users and easy to host and deploy for you. This is a list of helpful resources we've found - feel free to expand it by suggesting edits using the button at the bottom.
+Just because you're running a static site doesn't mean that the experience can't be both rich for your users and easy to host and deploy for you. This is a list of helpful resources we've found. Please suggest additional resources if you know of any.
 
 # Services
 ---
