@@ -56,3 +56,9 @@ usage:  [-w] [-p [arg]] [--force-ext] [--preview-root <arg>] [-i <arg>]
                              file (by default, wyam-[datetime].txt).
     <root>                   The folder (or config file) to use.
 ```
+
+# Paths
+
+The paths that Wyam uses can be specified on the command line. This includes the `--input` path(s) where Wyam will look for files, the `--output` path where Wyam will place the output of modules like [WriteFiles](/modules/writefiles), the `--config` file path where Wyam will look for a configuration file, and the root path that Wyam considers the base path for all other relative paths. By default, the root path is set to the path from where Wyam is executed. You may want to specify a different base path (for example, if running from a build script or as part of a larger process). In this case, just supply an alternate absolute path at the end of the command line. This new root path will be the base for all other relative paths including input and output paths. This is a good way to ensure consistency regardless of which path Wyam is run from.
+
+Note that these paths can also be specified from within the [setup portion of your configuration script](/getting-started/configuration#setup). From there you can set `FileSystem.OutputPath` or `FileSystem.RootPath` or call `FileSystem.InputPaths.Add()`.
