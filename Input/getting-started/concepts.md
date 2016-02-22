@@ -15,26 +15,59 @@ A *module* is a small single-purpose component that takes documents as input, do
 A *pipeline* is a series of modules executed in sequence that results in final output documents. A given Wyam configuration can have multiple pipelines which are executed in sequence, and subsequent pipelines have access to the documents from the previous pipelines.
 
 A simple pipeline looks like:
-```
-  [Empty Document]
-         |
-      [Module]
-	  /      \
-[Document] [Document]
-    |           |
-  [----Module*----]
-    |           |
-[Document] [Document]
 
-* modules often (though not always) handle documents in parallel for performance
-```
+<div class="mermaid">
+    graph TD
+        D1("Empty Document")
+        D1-->Module1["Module 1"]
+        Module1-->D2("Document A")
+        Module1-->D3("Document B")
+        D2-->Module2["Module 2"]
+        D3-->Module2
+        Module2-->D4("Document C")
+        Module2-->D5("Document D")
+</div>
 
 In the visualization above, the first module may have read some files (in this case 2 files) and stuck some information about those files such as name and path in the document metadata. Then the second module may have transformed the files (for example, from Markdown to HTML).
+
+It's not unusual for a real-world generation to contain many different pipelines. Many times this is helpful if you need to reuse the output from one of the pipelines or want to separate the different generation steps.
+
+<div class="mermaid">
+    graph TD
+        subgraph Second Pipeline
+            D6("Empty Document")
+            D6-->Module3["Module 3"]
+            Module3-->D7("Document E")
+            D7-->Module4["Module 4"]
+            Module4-->D8("Document F")
+        end
+        subgraph First Pipeline
+            D1("Empty Document")
+            D1-->Module1["Module 1"]
+            Module1-->D2("Document A")
+            Module1-->D3("Document B")
+            D2-->Module2["Module 2"]
+            D3-->Module2
+            Module2-->D4("Document C")
+            Module2-->D5("Document D")
+        end
+</div>
 
 # Documents
 ---
 
 A *document* is a combination of *content* and *metadata* as it makes it's way through the system. The content of a document is what most modules manipulate and is what you will presumably output at the end of the pipeline. The metadata serves as a way to pass information to and from modules to other modules (see below). Once a value is added to the metadata by one module, it can never be removed by a subsequent one (though it can be overwritten). It can be important to note that documents are immutable. Though we often talk about documents being "transformed" or "manipulated" by modules, this isn't strictly accurate. Instead modules return a new copy of the document with different content and/or additional metadata.
+
+<div class="mermaid">
+    graph TD
+        subgraph Document
+            subgraph Metadata
+                Title
+                Published
+            end
+            Content
+        end
+</div>
 
 ## Accessing Documents
 
