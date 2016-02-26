@@ -29,6 +29,10 @@ Here are some awesome Wyam-related goodies from the community. Are you doing som
 
 # Blog Posts
 
+- **[Setting up a blog with static page generator](http://gniriki.com/posts/Setting-up-the-blog)**
+
+  Bartosz Borowiecki - February 6, 2016
+
 - **[Converting My Blog to Wyam - How I went from compiled to static in less than a day.](http://daveaglick.com/posts/converting-my-blog-to-wyam)**
 
   Dave Glick - July 7, 2015
