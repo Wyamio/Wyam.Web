@@ -38,6 +38,7 @@ Wyam can automatically install any NuGet packages you declare in the setup porti
 Packages
     .Install("Humanizer")
     .Install("Newtonsoft.Json");
+
 Packages.Repository("https://www.myget.org/F/roslyn-nightly/")
     .Install("Microsoft.CodeAnalysis")
     .Install("Microsoft.CodeAnalysis.Scripting");
@@ -54,8 +55,8 @@ In addition to NuGet packages you can also load assemblies. This is accomplished
 ```
 Assemblies
     .LoadDirectory(@"lib")
-	.LoadFile(@"foo\bar.dll")
-	.Load("SampleAssembly, Version=1.0.2004.0, Culture=neutral, PublicKeyToken=8744b20f8da049e3");
+    .LoadFile(@"foo\bar.dll")
+    .Load("SampleAssembly, Version=1.0.2004.0, Culture=neutral, PublicKeyToken=8744b20f8da049e3");
 ```
 
 Keep in mind that system assemblies and others located in the GAC *must* be loaded by full name (including the version, public key token, etc.).
@@ -87,10 +88,10 @@ using System.IO;
 
 public static class Helpers
 {
-	public string GetWriteExtension()
-	{
-		return ".html";
-	}
+    public string GetWriteExtension()
+    {
+        return ".html";
+    }
 }
 
 ---
@@ -98,10 +99,10 @@ public static class Helpers
 // Configuration code
 
 Pipelines.Add("Markdown",
-	ReadFiles("*.md"),
+    ReadFiles("*.md"),
     FrontMatter(Yaml()),
-	Markdown(),
-	WriteFiles(Helpers.GetWriteExtension())
+    Markdown(),
+    WriteFiles(Helpers.GetWriteExtension())
 );
 ```
 
@@ -130,9 +131,9 @@ InitialMetadata.Add("Baz", new KeyValuePair<string, string>("abc", "xyz"));
 Configuring a pipeline is easy, and Wyam configuration files are designed to be simple and straightforward:
 ```
 Pipelines.Add(
-	ReadFiles("*.md"),
-	Markdown(),
-	WriteFiles(".html")
+    ReadFiles("*.md"),
+    Markdown(),
+    WriteFiles(".html")
 );
 ```
 
@@ -144,10 +145,10 @@ Pipelines should be given names, which makes them easier to identify in trace me
 
 ```
 Pipelines.Add("Markdown",
-	ReadFiles("*.md"),
+    ReadFiles("*.md"),
     FrontMatter(Yaml()),
-	Markdown(),
-	WriteFiles(".html")
+    Markdown(),
+    WriteFiles(".html")
 );
 ```
 
@@ -157,10 +158,10 @@ Some modules also accept child modules as part of their processing. For example,
 
 ```
 Pipelines.Add("Markdown",
-	ReadFiles("*.md"),
+    ReadFiles("*.md"),
     FrontMatter(Yaml()),
-	Markdown(),
-	WriteFiles(".html")
+    Markdown(),
+    WriteFiles(".html")
 );
 ```
 
@@ -170,10 +171,10 @@ If you know that a given pipeline doesn't use data from other pipelines and you'
 
 ```
 Pipelines.Add("Markdown", true,
-	ReadFiles("*.md"),
+    ReadFiles("*.md"),
     FrontMatter(Yaml()),
-	Markdown(),
-	WriteFiles(".html")
+    Markdown(),
+    WriteFiles(".html")
 );
 ```
 
@@ -182,9 +183,9 @@ Pipelines.Add("Markdown", true,
 Note that you supply the pipeline with new instances of each module. An astute reader will notice that in the example above, modules are being specified with what look like global methods. These methods are just shorthand for the actual module class constructors and this convention can be used for any module within the configuration script. The example configuration above could also have been written as:
 ```
 Pipelines.Add("Markdown",
-	new ReadFiles("*.md"),
-	new Markdown(),
-	new WriteFiles(".html")
+    new ReadFiles("*.md"),
+    new Markdown(),
+    new WriteFiles(".html")
 );
 ```
 
@@ -241,27 +242,27 @@ The full configuration file for this documentation site is given below as an exa
 ```
 // Setup code
 Packages
-	.Install("Twitter.Bootstrap.Less", "[3.3.5]")
-	.Install("jQuery", "[2.1.1]");
-	
+    .Install("Twitter.Bootstrap.Less", "[3.3.5]")
+    .Install("jQuery", "[2.1.1]");
+    
 ===
 // Body code
 
 Pipelines.Add("Content",
-	ReadFiles("*.md"),
-	FrontMatter(Yaml()),
-	Markdown(),
-	Replace("<pre><code>", "<pre class=\"prettyprint\"><code>"),
-	Concat(
-		ReadFiles("*.cshtml").Where(x => Path.GetFileName(x)[0] != '_'),
-		FrontMatter(Yaml())		
-	),
-	Razor(),
-	AutoLink(c => c.Documents
-		.FromPipeline("Content")
-		.Where(x => x.String("RelativeFileDir") == "api" && !string.IsNullOrWhiteSpace(x.String("Title")))
-		.ToDictionary(x => x.String("Title"), x => PathHelper.ToRootLink(Path.ChangeExtension(x.String("RelativeFilePath"), ".html")))),
-	WriteFiles(".html")
+    ReadFiles("*.md"),
+    FrontMatter(Yaml()),
+    Markdown(),
+    Replace("<pre><code>", "<pre class=\"prettyprint\"><code>"),
+    Concat(
+        ReadFiles("*.cshtml").Where(x => Path.GetFileName(x)[0] != '_'),
+        FrontMatter(Yaml())        
+    ),
+    Razor(),
+    AutoLink(c => c.Documents
+        .FromPipeline("Content")
+        .Where(x => x.String("RelativeFileDir") == "api" && !string.IsNullOrWhiteSpace(x.String("Title")))
+        .ToDictionary(x => x.String("Title"), x => PathHelper.ToRootLink(Path.ChangeExtension(x.String("RelativeFilePath"), ".html")))),
+    WriteFiles(".html")
 );
 
 Pipelines.Add("Less",
@@ -272,9 +273,9 @@ Pipelines.Add("Less",
 );
 
 Pipelines.Add("Resources",
-	CopyFiles("*").Where(x => 
-		Path.GetExtension(x) != ".cshtml" 
-		&& Path.GetExtension(x) != ".md"
-		&& Path.GetExtension(x) != ".less")
+    CopyFiles("*").Where(x => 
+        Path.GetExtension(x) != ".cshtml" 
+        && Path.GetExtension(x) != ".md"
+        && Path.GetExtension(x) != ".less")
 );
 ```

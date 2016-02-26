@@ -25,9 +25,9 @@ WriteFileName: feed.rss
 @using AngleSharp.Parser.Html;
 
 @{
-	Layout = string.Empty;
-	
-	Uri baseUri = new Uri(@"http://daveaglick.com");  // This is the root URL to your site
+    Layout = string.Empty;
+    
+    Uri baseUri = new Uri(@"http://daveaglick.com");  // This is the root URL to your site
     SyndicationFeed feed = new SyndicationFeed()
     {
         Title = new TextSyndicationContent("Dave Glick"),  // This should be the name of your site or feed
@@ -68,7 +68,7 @@ A couple things to note:
   
   ```
   Packages
-	.Install("AngleSharp");
+    .Install("AngleSharp");
   ```
   
   - This code produces an RSS feed using the `Rss20FeedFormatter` class. Just change this to `Atom10FeedFormatter` to output an Atom feed instead.
