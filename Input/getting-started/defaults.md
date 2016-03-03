@@ -22,7 +22,7 @@ Pipelines.Add("Content",
     Markdown(),
     Concat(
         ReadFiles("*.cshtml").Where(x => Path.GetFileName(x)[0] != '_'),
-        FrontMatter(Yaml())		
+        FrontMatter(Yaml())
     ),
     Razor(),
     WriteFiles(".html")
