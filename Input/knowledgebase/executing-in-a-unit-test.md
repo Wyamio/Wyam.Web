@@ -11,7 +11,7 @@ public void ExecuteExample()
     string exePath = Path.Combine(TestContext.CurrentContext.TestDirectory, "Wyam.exe");
     // Note that you may need to use a different exe path depending 
     // on where you got Wyam from (I.e., from the tools package)
-    
+
     Process process = new Process();
     process.StartInfo.FileName = exePath;
     process.StartInfo.Arguments = rootPath;
@@ -26,3 +26,4 @@ public void ExecuteExample()
     process.WaitForExit();
     Assert.AreEqual(0, process.ExitCode);
 }
+```

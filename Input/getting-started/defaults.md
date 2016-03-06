@@ -19,10 +19,10 @@ For reference, the full default configuration script is:
 Pipelines.Add("Content",
     ReadFiles("*.md"),
     FrontMatter(Yaml()),
-    Markdown(),
+    Markdown().EscapeAt(true),
     Concat(
         ReadFiles("*.cshtml").Where(x => Path.GetFileName(x)[0] != '_'),
-        FrontMatter(Yaml())		
+        FrontMatter(Yaml())
     ),
     Razor(),
     WriteFiles(".html")

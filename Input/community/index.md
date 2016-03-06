@@ -1,7 +1,7 @@
 Title: Community
 NoSidebar: true
 ---
-Here are some awesome Wyam-related goodies from the community. Are you doing something cool with Wyam? Let us and everyone else know by <a href='https://github.com/Wyamio/Wyam.Web/edit/master/Input/@(Model.String("RelativeFilePath"))'>editing this page</a>.
+Here are some awesome Wyam-related goodies from the community. Are you doing something cool with Wyam? Let us and everyone else know by <a href='https://github.com/Wyamio/Wyam.Web/edit/develop/Input/community/index.md'>editing this page</a>.
 
 <div class="row">
 <div class="col-md-4">
@@ -28,6 +28,10 @@ Here are some awesome Wyam-related goodies from the community. Are you doing som
 <div class="col-md-4">
 
 # Blog Posts
+
+- **[Setting up a blog with static page generator](http://gniriki.com/posts/Setting-up-the-blog)**
+
+  Bartosz Borowiecki - February 6, 2016
 
 - **[Converting My Blog to Wyam - How I went from compiled to static in less than a day.](http://daveaglick.com/posts/converting-my-blog-to-wyam)**
 
