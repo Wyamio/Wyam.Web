@@ -1,6 +1,6 @@
 Title: Defaults
 Description: The default configuration if you don't supply one of your own.
-Order: 5
+Order: 6
 ---
 It's entirely possible to use Wyam without ever worring about configuration files. If you don't create or specify one, two pipelines are used by default:
 
