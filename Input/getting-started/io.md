@@ -16,6 +16,18 @@ or directory within a given file system. They are usually obtained given a path 
 
 # Case Sensitivity
 
+# File Providers
+
+# Virtual File System
+
+The link between paths, file providers, and files and paths is managed by a virtual file system abailable through the execution context as a `FileSystem` property. The virtual file system can also be accessed in your configuration file. It stores all the registered file providers as well as the various root, input, and output paths and provides methods to join them with relative paths to get `IFile` and `IDirectory` instances.
+
+## Root Path
+
+## Input Paths
+
+## Output Path
+
 # <a name="globbing"></a>Globbing
 
-Testing
+# Testing
