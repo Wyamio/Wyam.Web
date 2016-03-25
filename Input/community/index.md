@@ -23,11 +23,23 @@ Here are some awesome Wyam-related goodies from the community. Are you doing som
 - **[Dave Glick](http://daveaglick.com)** ([source code](https://github.com/daveaglick/daveaglick))
   
   The personal blog of Dave Glick.
+  
+- **[Gniriki Games](http://gniriki.com)**
+
+  The blog of Gniriki Games / Bartosz Borowiecki.
+  
+- **[Arjan van Rijn](http://arjanvanrijn.com)**
+
+  The personal blog of Arjan van Rijn.  
 
 </div>
 <div class="col-md-4">
 
 # Blog Posts
+
+- **[Wyam I using a static site generator?](http://arjanvanrijn.com/posts/Wyam-i-using-a-static-site-generator)**
+
+  Arjan van Rijn - March 23, 2016
 
 - **[Setting up a blog with static page generator](http://gniriki.com/posts/Setting-up-the-blog)**
 
