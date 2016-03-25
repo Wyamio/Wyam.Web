@@ -24,3 +24,9 @@ In addition, many situations that would have required a predicate with `.Where()
 ## CopyFiles
 
 The changes to `CopyFiles` are similar to those for `ReadFiles`. The constructor now accepts one or more [globbing patterns](/getting-started/io#globbing) and the methods to manually specify depth have been removed. The method for limiting extensions has also been removed as that can be represented in the globbing patterns. `CopyFiles.Where()` has been modified to pass an `IFile` instead of just a string path.
+
+## Rss
+
+The main changes to the `Rss` module are that the constructor is now a little different and accepts a site root URI (which can be specified as either a `Uri` or a `string` by using different constructor overloads) and a relative path to the destination RSS file. This allows you to use the module with sites where the site exists at a subpath of the URI.
+
+In addition, the link customizer is now a `Func<FilePath, FilePath>` instead of a `Func<string, string>`.
