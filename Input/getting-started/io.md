@@ -20,6 +20,10 @@ Different file systems have different rules about case sensitivity. Ideally, we'
 
 # File Providers
 
+A file provider acts as a factory for `IFile` and `IDirectory` instances. It's usually bundled with specific implementations of `IFile` and `IDirectory` for a given file source. For example, the default file provider operates on the local file system and returns file and directory instances that do the same. Other file providers may include ones that provide access to zip files, embedded resources, GitHub repositories, or web-based resources. A file provider may or may not require additional configuration in it's constructor (for example, the name of a user and repository for a GitHub file provider).
+
+All absolute paths must specify a file provider intended to handle the path. If one isn't explicitly specified, it's set to the default file provider (which is typically the local file system). Providers are refered to by name, and the default provider is represented by an empty string. You can also manually specify the file provider by using an alternate constructor for a `FilePath` or `DirectoryPath` or by using the special `"provider::/my/path"` syntax.
+
 # Virtual File System
 
 The link between paths, file providers, and files and paths is managed by a virtual file system abailable through the execution context as a `FileSystem` property. The virtual file system can also be accessed in your configuration file. It stores all the registered file providers as well as the various root, input, and output paths and provides methods to join them with relative paths to get `IFile` and `IDirectory` instances.
