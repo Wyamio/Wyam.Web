@@ -26,13 +26,21 @@ All absolute paths must specify a file provider intended to handle the path. If 
 
 # Virtual File System
 
-The link between paths, file providers, and files and paths is managed by a virtual file system abailable through the execution context as a `FileSystem` property. The virtual file system can also be accessed in your configuration file. It stores all the registered file providers as well as the various root, input, and output paths and provides methods to join them with relative paths to get `IFile` and `IDirectory` instances.
+The link between paths, file providers, and files and paths is managed by a virtual file system available through the execution context as the `FileSystem` property. The virtual file system can also be accessed in your configuration file. It stores all the registered file providers as well as the various root, input, and output paths and provides methods to join them with relative paths to get `IFile` and `IDirectory` instances.
 
 ## Root Path
 
+The root path is an absolute path that acts as a starting point for all other relative paths. By default this is set to the path on the underlying file system from where you execute Wyam. The root path can be changed both from the command line and from the configuration file.
+
 ## Input Paths
 
+Wyam uses multiple input paths that together comprise a virtual aggregated set of input files. This lets us do things like specify a set of cannonical input files to use for a theme but then selectivly override the theme files by putting replacements in an alternate input path with higher precedence.
+
+Input paths are stored in an ordered list. When checking for files, the paths at the end of the list take precedence over those at the start of the list. For example, if path "A" is at index 0, path "B" is at index 1, and they both have a file named "foo.md", the one from path "B" will be used. Further, all paths are aggregated so searching for files or evaluating globbing experessions will consider all files and directories in all input paths. In the example above, getting all input files will result in a set of files from both path "A" and path "B" (with files of the same name from path "B" replacig those from path "A").
+
 ## Output Path
+
+The output path is where Wyam will place output files by default. Note that many modules have the ability to manually specify an output path, so this behavior can be modified on a module by module basis.
 
 # <a name="globbing"></a>Globbing
 
