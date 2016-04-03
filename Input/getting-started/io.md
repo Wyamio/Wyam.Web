@@ -30,7 +30,9 @@ The link between paths, file providers, and files and paths is managed by a virt
 
 ## Root Path
 
-The root path is an absolute path that acts as a starting point for all other relative paths. By default this is set to the path on the underlying file system from where you execute Wyam. The root path can be changed both from the command line and from the configuration file.
+The root path is an absolute path that acts as a starting point for all other relative paths. It can be changed both from the command line and from the configuration file.
+
+By default the root path is set to the path on the underlying file system from where you execute Wyam.
 
 ## Input Paths
 
@@ -38,9 +40,17 @@ Wyam uses multiple input paths that together comprise a virtual aggregated set o
 
 Input paths are stored in an ordered list. When checking for files, the paths at the end of the list take precedence over those at the start of the list. For example, if path "A" is at index 0, path "B" is at index 1, and they both have a file named "foo.md", the one from path "B" will be used. Further, all paths are aggregated so searching for files or evaluating globbing experessions will consider all files and directories in all input paths. In the example above, getting all input files will result in a set of files from both path "A" and path "B" (with files of the same name from path "B" replacig those from path "A").
 
+By default, the following input paths are set:
+
+- [path to any NuGet packages with content folders]
+- "theme"
+- "input"
+
 ## Output Path
 
 The output path is where Wyam will place output files by default. Note that many modules have the ability to manually specify an output path, so this behavior can be modified on a module by module basis.
+
+By default the output path is set to "output".
 
 # <a name="globbing"></a>Globbing
 
