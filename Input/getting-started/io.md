@@ -54,4 +54,28 @@ By default the output path is set to "output".
 
 # <a name="globbing"></a>Globbing
 
+Globbing (or globs) is a particular syntax for specifying files or directories using wildcards and other path-based search criteria. Wyam uses a sophisticated globbing engine to give you a lot of flexibility when searching for files. Even better, the globbing engine works with any file provider, be it the local file system or something else.
+
+To demonstrate, let's assume the following files exist in our file provider:
+- /a/x.txt
+- /a/b/x.txt
+- /a/b/y.md
+- /c/z.txt
+- /d/x.txt
+
+The globbing engine supports the following syntax:
+- `*`
+  This represents any number of characters at a specific depth. For example, `/*/x.txt` will find:
+  - /a/x.txt
+  - /d/x.txt
+  Note that a wildcard can also be used in the file name. For example, `/*/*.txt` will find:
+  - /a/x.txt
+  - /c/z.txt
+  - /d/x.txt
+- `**`
+  This represents any number of characters at multiple depths. For example, `/**/x.txt` will find:
+  - /a/x.txt
+  - /a/b/x.txt
+  - /d/x.txt
+
 # Testing
