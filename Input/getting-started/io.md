@@ -9,7 +9,7 @@ Wyam uses an IO abstraction layer designed to provide flexibility and consistenc
 
 Two types of classes are used, *paths* and *files/directories*. 
 
-Path classes (primarily `FilePath` and `DirectoryPath`) describe the location of a file or directory. Paths can be either absolute (I.e., starting from the root of a particular file system) or relative. They can be easily joined together and otherwise manipulated. Every absolute path also contains information about what *provider* the path is intended to be used with but are not directly tied to that provider (see below for informaion about providers).
+Path classes (`FilePath` and `DirectoryPath`) describe the location of a file or directory. Paths can be either absolute (I.e., starting from the root of a particular file system) or relative. They can be easily joined together and otherwise manipulated. Every absolute path also contains information about what *provider* the path is intended to be used with but are not directly tied to that provider (see below for informaion about providers).
 
 File and directory classes (primarily implementations of `IFile` and `IDirectory`) point directly to a potential file
 or directory within a given file system. They are usually obtained given a path that points to them. Each provider implements their own file and directory classes as appropriate for that provider. File and directory implementations often provide functionality for reading and writing files, creating directories, and otherwise manipulating the file system.
@@ -65,6 +65,7 @@ To demonstrate, let's assume the following files exist in our file provider:
 
 The globbing engine supports the following syntax:
 - `*`
+
   This represents any number of characters at a specific depth. For example, `/*/x.txt` will find:
   - /a/x.txt
   - /d/x.txt
@@ -72,10 +73,30 @@ The globbing engine supports the following syntax:
   - /a/x.txt
   - /c/z.txt
   - /d/x.txt
+  
 - `**`
+
   This represents any number of characters at multiple depths. For example, `/**/x.txt` will find:
   - /a/x.txt
   - /a/b/x.txt
   - /d/x.txt
+  
+- `{,}`
+
+  This represents multiple expansions for the pattern. For example, `/**/{y,z}.*` will find:
+  - /a/b/y.md
+  - /c/z.txt
+  
+  Leaving the last option blank indicates any match at that position. For example, `/{a,}/**/x.txt` will find:
+  - /a/x.txt
+  - /a/b/x.txt
+  - /d/x.txt
+  
+- `!`
+
+  This represents exclusion and is useful in combination with multiple expansions. For example, `/**/{*,!x}.txt` will find:
+  - /c/z.txt
 
 # Testing
+
+Because the new IO abstraction includes support for virtual file systems, it can be used to greatly simplify testing your custom modules by providing files that don't actually have to exist on disk. Several classes in the `Wyam.Testing` library in the `Wyam.Testing.IO` namespace are provided to help with this.
