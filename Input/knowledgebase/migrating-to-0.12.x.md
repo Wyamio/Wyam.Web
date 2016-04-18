@@ -1,15 +1,20 @@
-Title: 0.12.0 Migration
-Description: How to migrate existing sites to the new IO abstraction in 0.12.0.
+Title: Migrating to 0.12.x
+Description: How to migrate existing sites to the new IO abstraction in 0.12.x.
 ---
+In general, the steps to migrate look like the following:
+- Modify the paths used with `ReadFiles` and `CopyFiles` to use [globbing patterns](/getting-started/io#globbing) and honor [case sensitivity](/getting-started/io#case-sensitivity).
+- Change uses of `IMetadata.Link()` to `IExecutionContext.GetLink()` in templates and helper methods.
+- Change uses of `PathHelper` to instance methods of `FilePath` and `DirectoryPath`.
 
-Here are some general notes:
+Here is a little more detail about the changes:
 - All paths are now case sensitive (see [case sensitivity](/getting-started/io#case-sensitivity) for a discussion of why).
 - Modules now use [globbing patterns](/getting-started/io#globbing) instead of simple file search patterns.
 - Methods to manually specify search depth and apply conditions that globbing can cover (such as limiting to specific extensions) have generally been removed.
 - Path metadata set by modules such as `ReadFiles` is now typed as `FilePath` or `DirectoryPath`.
   - You can still easily get a `string` by using `IMetadata.String()` but direct casts to `string` (I.e., `(string)document["key"]`) may fail.
 - `IDocument.Source` is now a `FilePath` and must be absolute (modules should use the static string `NormalizedPath.AbstractProvider` as the provider for a source path if the document was generated internally).
-- `IMetadata.Link()` have been moved to `NormalizedPath.ToLink()`
+- `PathHelper` is no longer available, use instance methods of `FilePath` and `DirectoryPath` instead.
+- `IMetadata.Link()` has been moved to `ExecutionContext.GetLink()` and link settings like host and root path can be globally controlled with `OutputSettings`
 
 # Modules
 
@@ -29,6 +34,4 @@ The changes to `CopyFiles` are similar to those for `ReadFiles`. The constructor
 
 ## Rss and Sitemap
 
-The `Rss` and `Sitemap` modules both require the full URL of the output site to generate their content (since RSS and sitemap files are intended for consumption from outside the site). The main changes to these modules are that the constructors are now a little different and accept a site root URI (which can be specified as either a `Uri` or a `string` by using different constructor overloads). `Rss` also takes a relative path to the destination RSS file. This allows you to use these modules with sites where the site exists at a subpath of the URI.
-
-In addition, the link/location customizers are now `Func<FilePath, FilePath>` instead of a `Func<string, string>`.
+The link/location customizers are now `Func<FilePath, FilePath>` instead of a `Func<string, string>`.

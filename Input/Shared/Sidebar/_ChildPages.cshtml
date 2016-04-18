@@ -1,11 +1,11 @@
 @{
-	string navFolder = Model.String("RelativeFilePath", string.Empty).Split(new[] {'\\'})[0];
-	IList<IGrouping<string, IDocument>> categoryGroups = string.IsNullOrWhiteSpace(navFolder) 
-		? new List<IGrouping<string, IDocument>>() : Documents
+	string folder = Model.FilePath("RelativeFilePath")?.Segments[0];
+	IList<IGrouping<string, IDocument>> categoryGroups = folder == null 
+		? new List<IGrouping<string, IDocument>>() 
+		: Documents
 			.Where(x => x.ContainsKey("RelativeFilePath")
-				&& !x.String("RelativeFilePath").EndsWith("index.md") 
-				&& !x.String("RelativeFilePath").EndsWith("index.cshtml") 
-				&& x.String("RelativeFilePath").StartsWith(navFolder))
+				&& x.FilePath("RelativeFilePath").FileNameWithoutExtension.FullPath != "index" 
+				&& x.FilePath("RelativeFilePath")?.Segments[0] == folder)
 			.GroupBy(x => x.String("Category"))
 			.OrderBy(x => x.Key)
 			.ToList();
@@ -22,7 +22,7 @@
 		{
 			string subActive = Model.String("RelativeFilePath") == childDoc.String("RelativeFilePath") ? "active" : null;
 			<li class="@subActive">
-				<a href="@PathHelper.ToRootLink(PathHelper.RemoveExtension(childDoc.String("RelativeFilePath")))">
+				<a href="@Context.GetLink(childDoc)">
 					@(childDoc.String("Title", childDoc.String("SourceFileBase")))
 				</a>
 			</li>

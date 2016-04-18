@@ -21,8 +21,8 @@
 						{
 							IDocument type = property.Get<IDocument>("Type");
 							<tr>
-								<td>@property.Link()</td>
-								<td>@(type == null ? new HtmlString(string.Empty) : type.Link())</td>
+								<td>@Context.GetTypeLink(property)</td>
+								<td>@(type == null ? new HtmlString(string.Empty) : Context.GetTypeLink(type))</td>
 								<td>@Html.Raw(property["Summary"])</td>
 							</tr>
 						}

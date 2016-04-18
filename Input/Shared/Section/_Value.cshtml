@@ -15,7 +15,7 @@
 					</tr>
 				</thead>
 				<tr>
-					<td>@(type == null ? new HtmlString(string.Empty) : type.Link())</td>
+					<td>@(type == null ? new HtmlString(string.Empty) : Context.GetTypeLink(type))</td>
 					<td>@Html.Raw(value)</td>
 				</tr>
 			</table>

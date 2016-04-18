@@ -19,7 +19,7 @@
 		{
 			string subActive = Model.String("RelativeFilePath") == childDoc.String("RelativeFilePath") ? "active" : null;
 			<li class="@subActive">
-				<a href="@PathHelper.ToRootLink(PathHelper.RemoveExtension(childDoc.String("RelativeFilePath")))">
+				<a href="@Context.GetLink(childDoc)">
 					@(childDoc.String("DisplayName"))
 				</a>
 			</li>

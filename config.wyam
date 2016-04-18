@@ -16,7 +16,7 @@ public static class HtmlHelperExtensions
 				.Replace("&gt;", "&gt;<wbr>"));		
 	}
 	
-	public static HtmlString Link(this IMetadata metadata)
+	public static HtmlString GetTypeLink(this IExecutionContext context, IMetadata metadata)
 	{
 		if(metadata.String("Kind") == "TypeParameter")
 		{
@@ -24,12 +24,12 @@ public static class HtmlHelperExtensions
 			if(declaringType != null)
 			{			
 				return declaringType.ContainsKey("WritePath")
-					? new HtmlString($"<a href=\"{declaringType.Link("WritePath")}#typeparam-{metadata["Name"]}\">{metadata.Name()}</a>")
+					? new HtmlString($"<a href=\"{context.GetLink(declaringType.FilePath("WritePath"))}#typeparam-{metadata["Name"]}\">{metadata.Name()}</a>")
 					: metadata.Name();
 			}
 		} 
 		return metadata.ContainsKey("WritePath")
-			? new HtmlString($"<a href=\"{metadata.Link("WritePath")}\">{metadata.Name()}</a>")
+			? new HtmlString($"<a href=\"{context.GetLink(metadata.FilePath("WritePath"))}\">{metadata.Name()}</a>")
 			: metadata.Name();
 	}
 }
@@ -45,8 +45,8 @@ public class DocsTable
 ---
 
 Pipelines.Add("Code",
-	//ReadSolution(@"..\Code\Wyam\src\Wyam.sln")  // Read from the master Wyam branch in the Git submodule
-	ReadSolution(@"..\..\Wyam\src\Wyam.sln")  // Read from the current branch on disk in the actual repo
+	//ReadSolution("../Code/Wyam/src/Wyam.sln")  // Read from the master Wyam branch in the Git submodule
+	ReadSolution("../../Wyam/src/Wyam.sln")  // Read from the current branch on disk in the actual repo
 	    .WhereProject(x => !x.EndsWith(".Tests"))
 );
 
@@ -59,14 +59,14 @@ Pipelines.Add("API",
 		.WithCssClasses("pre", "prettyprint")
 		.WithWritePathPrefix("api"),
 	Razor()
-		.WithViewStart(@"api\_ApiViewStart.cshtml"),
+		.WithViewStart("api/_ApiViewStart.cshtml"),
 	ConcatBranch(
 		Where(@doc.String("Kind") == "NamedType"),
 		SearchIndex(new SearchIndexItem(
-			"/" + @doc.String("WritePath").Replace("/index.html", string.Empty), 
+			@ctx.GetLink(doc),
 			@doc.String("DisplayName"), 
 			@doc.String("DisplayName"))),
-		Meta("WritePath", @"Scripts\searchIndex.js")
+		Meta("WritePath", new FilePath("Scripts/searchIndex.js"))
 	),
 	WriteFiles()
 );
@@ -93,20 +93,20 @@ Pipelines.Add("Modules",
                 name = name.Substring(0, genericParamsIndex);
             }
             
-			return $"modules\\{name}.html";
+			return new FilePath($"modules/{name}.html");
 		}),
 	Razor()
-		.WithViewStart(@"modules\_ModulesViewStart.cshtml"),
+		.WithViewStart("modules/_ModulesViewStart.cshtml"),
 	WriteFiles()
 );
 
 Pipelines.Add("Content",
-	ReadFiles("*.md"),
+	ReadFiles("**/*.md"),
 	FrontMatter(Yaml()),
 	Markdown(),
 	Replace("<pre><code>", "<pre class=\"prettyprint\"><code>"),
 	Concat(
-		ReadFiles("*.cshtml").Where(x => Path.GetFileName(x)[0] != '_'),
+		ReadFiles("**/{!_,}*.cshtml"),
 		FrontMatter(Yaml())		
 	),
 	Razor(),
@@ -114,14 +114,14 @@ Pipelines.Add("Content",
 );
 
 Pipelines.Add("Less",
-    ReadFiles("Content\\bootstrap-less\\bootstrap.less"),
-    Concat(ReadFiles("Content\\adminlte\\AdminLTE.less")),
-    Concat(ReadFiles("Content\\adminlte\\skins\\wyam.less")),
-    Concat(ReadFiles("Content\\master.less")),
+    ReadFiles("Content/bootstrap-less/bootstrap.less"),
+    Concat(ReadFiles("Content/adminlte/AdminLTE.less")),
+    Concat(ReadFiles("Content/adminlte/skins/wyam.less")),
+    Concat(ReadFiles("Content/master.less")),
     Less(),
     WriteFiles(".css")
 );
 
 Pipelines.Add("Resources",
-	CopyFiles("*").WithoutExtensions(".cshtml", ".md")
+	CopyFiles("**/*{!.cshtml,!.md,}")
 );

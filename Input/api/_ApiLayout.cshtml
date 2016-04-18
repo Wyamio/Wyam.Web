@@ -62,7 +62,7 @@
 		containingType = Model.Get<IDocument>("ContainingType");
 		while(containingType != null)
 		{
-			<h3>@containingType.Link().</h3>
+			<h3>@Context.GetTypeLink(containingType).</h3>
 			containingType = containingType.Get<IDocument>("ContainingType");
 		}
 	}

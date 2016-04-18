@@ -24,7 +24,7 @@
 			<li class="treeview @nestedActiveClass">
 				<a href="#">@(current.Item1[0]).@(current.Item1[1])...<i class="fa fa-angle-left pull-right"></i></a>
 				<ul class="treeview-menu">
-					<li class="@currentActiveClass">@current.Item2.Link()</li>
+					<li class="@currentActiveClass">@Context.GetTypeLink(current.Item2)</li>
 					@{
 						while(c+1 < namespaces.Count 
 							&& namespaces[c+1].Item1[0] == current.Item1[0] && namespaces[c+1].Item1[1] == current.Item1[1])
@@ -32,7 +32,7 @@
 							nestedActiveClass = Model.String("Kind") == "Namespace" 
 								&& Model.String("SymbolId") == namespaces[c+1].Item2.String("SymbolId")
 								? "active" : string.Empty;
-							<li class="@nestedActiveClass">@namespaces[c+1].Item2.Link()</li>
+							<li class="@nestedActiveClass">@Context.GetTypeLink(namespaces[c+1].Item2)</li>
 							c++;
 						}
 					}
@@ -41,7 +41,7 @@
 		}
 		else
 		{
-			<li class="@currentActiveClass">@current.Item2.Link()</li>
+			<li class="@currentActiveClass">@Context.GetTypeLink(current.Item2)</li>
 		}
 	}
 }      

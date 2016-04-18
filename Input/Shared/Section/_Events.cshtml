@@ -21,8 +21,8 @@
 						{
 							IDocument type = evt.Get<IDocument>("Type");
 							<tr>
-								<td>@evt.Link()</td>
-								<td>@(type == null ? new HtmlString(string.Empty) : type.Link())</td>
+								<td>@Context.GetTypeLink(evt)</td>
+								<td>@(type == null ? new HtmlString(string.Empty) : Context.GetTypeLink(type))</td>
 								<td>@Html.Raw(evt["Summary"])</td>
 							</tr>
 						}

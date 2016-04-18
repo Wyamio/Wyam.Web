@@ -8,13 +8,13 @@
 			@if(containingNamespace != null)
 			{		
 				<dt>Namespace</dt>
-				<dd>@containingNamespace.Link()</dd>
+				<dd>@Context.GetTypeLink(containingNamespace)</dd>
 			}
 			
 			@if(containingType != null)
 			{
 				<dt>Containing Type</dt>
-				<dd>@containingType.Link()</dd>		
+				<dd>@Context.GetTypeLink(containingType)</dd>		
 			}
 		</dl>
 		<hr />	

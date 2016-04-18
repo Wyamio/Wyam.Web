@@ -21,8 +21,8 @@
 						{
 							IDocument returnType = method.Get<IDocument>("ReturnType");
 							<tr>
-								<td>@method.Link()</td>
-								<td>@(returnType == null ? new HtmlString(string.Empty) : returnType.Link())</td>
+								<td>@Context.GetTypeLink(method)</td>
+								<td>@(returnType == null ? new HtmlString(string.Empty) : Context.GetTypeLink(returnType))</td>
 								<td>@Html.Raw(method["Summary"])</td>
 							</tr>
 						}

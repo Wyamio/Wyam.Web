@@ -1,31 +1,47 @@
 @{
-	string currentFolder = new string(Model.String("RelativeFilePath", string.Empty).TakeWhile(x => x != '\\' && x != '/').ToArray());
-	foreach(IGrouping<string, IDocument> categoryGroup in Documents
-		.Where(x => x.ContainsKey("RelativeFilePath")
-	        && !x.String("RelativeFilePath").EndsWith("index.md") 
-	        && !x.String("RelativeFilePath").EndsWith("index.cshtml") 
-	        && x.String("RelativeFilePath").StartsWith(currentFolder))
-		.GroupBy(x => x.String("Category"))
-		.OrderBy(x => x.Key))
+	string folder = Model.FilePath("RelativeFilePath")?.Segments[0];
+	IList<IGrouping<string, IDocument>> categoryGroups = folder == null 
+		? new List<IGrouping<string, IDocument>>() 
+		: Documents
+			.Where(x => x.ContainsKey("RelativeFilePath")
+				&& x.FilePath("RelativeFilePath").FileNameWithoutExtension.FullPath != "index" 
+				&& x.FilePath("RelativeFilePath")?.Segments[0] == folder)
+			.GroupBy(x => x.String("Category"))
+			.OrderBy(x => x.Key)
+			.ToList();
+	
+	foreach(IGrouping<string, IDocument> categoryGroup in categoryGroups)
 	{
-		if(!string.IsNullOrWhiteSpace(categoryGroup.Key))
-		{
-			<h1>@categoryGroup.Key</h1>
-			<hr />
-		}
-		foreach(IDocument childDoc in categoryGroup
-			.OrderBy(x => x.Get<int>("Order", 1000))
-			.ThenBy(x => x.String("Title")))
-		{
-			<h2>
-				<strong><a href="@PathHelper.ToRootLink(PathHelper.RemoveExtension(childDoc.String("RelativeFilePath")))">@(childDoc.String("Title", childDoc.String("SourceFileBase")))</a></strong>
-				@{
-					if(childDoc.ContainsKey("Description"))
+		<div class="box">
+			<div class="box-body no-padding">
+				<table class="table table-striped table-hover two-cols-alt">
+					@if(!string.IsNullOrWhiteSpace(categoryGroup.Key))
 					{
-						<small>@(childDoc.String("Description"))</small>
-					}					
-				}
-			</h2>
-		}
+						<thead>
+							<tr class="active"><th colspan="2">@categoryGroup.Key</th></tr>
+						</thead>
+					}
+					
+					<tbody>
+						@foreach(IDocument childDoc in categoryGroup
+							.OrderBy(x => x.Get<int>("Order", 1000))
+							.ThenBy(x => x.String("Title")))
+						{
+							<tr>
+								<td><strong><a href="@Context.GetLink(childDoc)">@(childDoc.String("Title", childDoc.String("SourceFileBase")))</a></strong></td>
+								<td>
+									@{
+										if(childDoc.ContainsKey("Description"))
+										{
+											<text>@(childDoc.String("Description"))</text>
+										}					
+									}
+								</td>
+							</tr>
+						}
+					</tbody>				
+				</table>
+			</div>
+		</div> 
 	}
 }

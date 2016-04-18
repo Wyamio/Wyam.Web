@@ -19,7 +19,7 @@
 						@foreach(IDocument doc in docsTable.Docs)
 						{
 							<tr>
-								<td>@doc.Link()</td>
+								<td>@Context.GetTypeLink(doc)</td>
 								@if(docsTable.HasSummary)
 								{
 									<td>@Html.Raw(doc["Summary"])</td>

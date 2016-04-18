@@ -10,27 +10,39 @@ NoSidebar: true
 			})
 			.OrderBy(x => x.Key)
 			.ToList();
+			
 	foreach(IGrouping<string, IDocument> categoryGroup in categoryGroups)
 	{
-		if(!string.IsNullOrWhiteSpace(categoryGroup.Key))
-		{
-			<h1>@categoryGroup.Key</h1>
-			<hr />
-		}
-					
-		foreach(IDocument childDoc in categoryGroup
-			.OrderBy(x => x.String("DisplayName")))
-		{
-			<h2>
-				<strong><a href="@PathHelper.ToRootLink(PathHelper.RemoveExtension(childDoc.String("RelativeFilePath")))">@(childDoc.String("DisplayName"))</a></strong>
-				@{					
-					string summary = childDoc.String("Summary");
-					if(!string.IsNullOrWhiteSpace(summary))
+		<div class="box">
+			<div class="box-body no-padding">
+				<table class="table table-striped table-hover two-cols-alt">
+					@if(!string.IsNullOrWhiteSpace(categoryGroup.Key))
 					{
-						<small>@Html.Raw(summary)</small>
+						<thead>
+							<tr><th colspan="2">@categoryGroup.Key</th></tr>
+						</thead>
 					}
-				}
-			</h2>
-		} 
-	}	
+								
+					<tbody>
+						@foreach(IDocument childDoc in categoryGroup
+							.OrderBy(x => x.String("DisplayName")))
+						{
+							<tr>
+								<td><strong><a href="@Context.GetLink(childDoc)">@(childDoc.String("DisplayName"))</a></strong></td>
+								<td>
+									@{					
+										string summary = childDoc.String("Summary");
+										if(!string.IsNullOrWhiteSpace(summary))
+										{
+											@Html.Raw(summary)
+										}
+									}
+								</td>
+							</tr>
+						}	
+					</tbody>							
+				</table>
+			</div>
+		</div> 
+	}
 }

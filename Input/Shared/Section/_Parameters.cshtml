@@ -20,7 +20,7 @@
 					IDocument parameterType = parameter.Get<IDocument>("Type");
 					<tr>
 						<td>@parameter["Name"]</td>
-						<td>@(parameterType == null ? new HtmlString(string.Empty) : parameterType.Link())</td>
+						<td>@(parameterType == null ? new HtmlString(string.Empty) : Context.GetTypeLink(parameterType))</td>
 						<td>@Html.Raw(paramComments?.Where(x => x.Name.Equals(parameter["Name"])).Select(x => x.Html).FirstOrDefault())</td>
 					</tr>
 				}

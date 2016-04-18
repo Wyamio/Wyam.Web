@@ -15,7 +15,7 @@
 					</tr>
 				</thead>
 				<tr>
-					<td>@(returnType == null ? new HtmlString("void") : returnType.Link())</td>
+					<td>@(returnType == null ? new HtmlString("void") : Context.GetTypeLink(returnType))</td>
 					<td>@Html.Raw(returns)</td>
 				</tr>
 			</table>

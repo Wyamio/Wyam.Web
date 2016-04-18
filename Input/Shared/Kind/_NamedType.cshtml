@@ -14,7 +14,7 @@
 			@if(containingNamespace != null)
 			{	
 				<dt>Namespace</dt>
-				<dd>@containingNamespace.Link()</dd>
+				<dd>@Context.GetTypeLink(containingNamespace)</dd>
 			}
 							
 			@if(allInterfaces != null && allInterfaces.Count > 0)
@@ -24,7 +24,7 @@
 					<ul class="list-inline">
 						@foreach(IDocument interfaceDocument in allInterfaces)
 						{
-							<li>@interfaceDocument.Link()</li>								
+							<li>@Context.GetTypeLink(interfaceDocument)</li>								
 						}
 					</ul>
 				</dd>
@@ -33,7 +33,7 @@
 			@if(baseType != null)
 			{
 				<dt>Base Type</dt>
-				<dd>@baseType.Link()</dd>				
+				<dd>@Context.GetTypeLink(baseType)</dd>				
 			}
 			
 			@if(derivedTypes != null && derivedTypes.Count > 0)
@@ -43,7 +43,7 @@
 					<ul class="list-inline">
 						@foreach(IDocument derivedType in derivedTypes)
 						{
-							<li>@derivedType.Link()</li>								
+							<li>@Context.GetTypeLink(derivedType)</li>								
 						}
 					</ul>
 				</dd>			
@@ -56,7 +56,7 @@
 					<ul class="list-inline">
 						@foreach(IDocument implementingType in implementingTypes)
 						{
-							<li>@implementingType.Link()</li>								
+							<li>@Context.GetTypeLink(implementingType)</li>								
 						}
 					</ul>
 				</dd>				
