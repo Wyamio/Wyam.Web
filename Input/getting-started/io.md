@@ -69,6 +69,7 @@ The globbing engine supports the following syntax:
   This represents any number of characters at a specific depth. For example, `/*/x.txt` will find:
   - /a/x.txt
   - /d/x.txt
+
   Note that a wildcard can also be used in the file name. For example, `/*/*.txt` will find:
   - /a/x.txt
   - /c/z.txt
