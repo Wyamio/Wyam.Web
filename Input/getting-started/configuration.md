@@ -88,7 +88,7 @@ using System.IO;
 
 public static class Helpers
 {
-    public string GetWriteExtension()
+    public static string GetWriteExtension()
     {
         return ".html";
     }
