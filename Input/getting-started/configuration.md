@@ -2,17 +2,14 @@ Title: Configuration
 Description: Describes the format of the configuration file.
 Order: 4
 ---
-The command line Wyam application reads a configuration file typically named `config.wyam` (though you can change that with an argument) that sets up the environment and initializes metadata and pipelines. It consists of three parts, the *setup*, any *declarations*, and the *body*, in that order. The setup is separated by a line consisting entirely of one or more equals (`===`) and the declarations are separated by a line consisting entirely of one or more dashes (`---`).
+The command line Wyam application reads a configuration file typically named `config.wyam` (though you can change that with an argument) that sets up the environment and configures the pipelines. It consists of two sections: The *declaration* section and the *body*, in that order. The declaration section is optional and is separated by a line consisting entirely of one or more dashes (`---`). Preprocessor directives can also appear anywhere in the configuration file, though they are always evaluated before processing the rest of the file (by convention they're usually at the top of the file).
 
-The sections of the configuration file are evaluated as C# code, so you can make use of the full C# language and the entire .NET ecosystem. However, it's not necessary to know C# to write Wyam configuration files. The syntax has been carefully crafted to be usable by anyone no matter their level of programming experience.
+The sections of the configuration file are evaluated as C# code, so you can make use of the full C# language and the entire .NET ecosystem. However, it's not necessary to know C# to write Wyam configuration files. The syntax has been carefully crafted to be usable by anyone no matter their level of programming experience. Some extra pre-processing is also done to the file to make certain code easier to write (which actually makes the syntax a superset of C#, though this extra magic is entirely optional).
 
 A configuration file looks like this:
 
 ```
-// Setup code (optional)
-// ...
-
-===
+// Preprocessor directives (optional)
 
 // Declaration code (optional)
 // ...
@@ -23,58 +20,58 @@ A configuration file looks like this:
 // ...
 ```
 
-# <a name="setup"></a>Setup
+# <a name="Preprocessor"></a>Preprocessor Directives
 ---
 
-The setup helps establish the Wyam environment and gets evaluated before the rest of the configuration file. It's generally responsible for declaring NuGet packages, assemblies, and namespaces that should be made available to the main configuration body. Any modules that exist in referenced NuGet packages or assemblies will get automatically imported for use in pipelines. Additionally, the objects in NuGet packages and assemblies will be available from the configuration body and any specified namespaces will be brought into scope. Note that while the setup portion of the configuration file is evaluated as C# code just like the configuration body, it only references a small subset of the .NET class library (basically just enough to set things up).
-
-## <a name="nuget"></a>NuGet
-
-Wyam can automatically install any NuGet packages you declare in the setup portion of the configuration file. These will then be scanned for modules and be made available to the main configuration body. NuGet packages are configured using the global `Packages` object and a fluent interface.
-
-`Packages.Install(string packageId, string versionSpec = null, bool allowPrereleaseVersions = false, bool allowUnlisted = false)` will let you specify a NuGet package to download from the default package source, which is the main NuGet.org feed. `Packages.Repository(string packageSource)` will let you define alternate package sources (such as an internal NuGet feed or a feed on MyGet). You can then continue to chain additional `Install()` calls as before. For example:
+Preprocessor directives establish the Wyam environment and get evaluated before the rest of the configuration file. They're typically responsible for declaring things like NuGet packages and assemblies. Every preprocessor directive starts with `#` at the beginning of a line and extend for the rest of the line. The following directives are available (the current set of directives can always be seen by calling `wyam.exe --help-directives`).
 
 ```
-Packages
-    .Install("Humanizer")
-    .Install("Newtonsoft.Json");
+#ns, #nuget-source
 
-Packages.Repository("https://www.myget.org/F/roslyn-nightly/")
-    .Install("Microsoft.CodeAnalysis")
-    .Install("Microsoft.CodeAnalysis.Scripting");
+    <sources>...    The package source(s) to add.
+
+
+
+#nc, #nuget-config
+
+    --use-local-packages    Toggles the use of a local NuGet packages
+                            folder.
+    --update-packages       Check the NuGet server for more recent
+                            versions of each package and update them if
+                            applicable.
+    <packages-path>         The packages path to use (only if use-local
+                            is true).
+
+
+
+#a, #assembly
+
+    <assemblies>...    The assemblies to load by file or globbing
+                       pattern.
+
+
+
+#n, #nuget
+
+    -p, --prerelease         Specifies that prerelease packages are
+                             allowed.
+    -u, --unlisted           Specifies that unlisted packages are
+                             allowed.
+    -v, --version <arg>      Specifies the version of the package to
+                             use.
+    -s, --source <arg>...    Specifies the package source(s) to get the
+                             package from.
+    -e, --exclusive          Indicates that only the specified package
+                             source(s) should be used to find the
+                             package.
+    <package>...             The package(s) to install.
+
+
+
+#an, #assembly-name
+
+    <assemblies>...    The assemblies to load by name.
 ```
-
-From the `Install()` method you can also specify the acceptable package version(s) and whether prerelease and/or unlisted packages should be allowed. The `versionSpec` argument takes a string that matches the standard NuGet version specifications defined at https://docs.nuget.org/create/versioning
-
-By default, packages are downloaded to `\packages`. If you want to change this, set `Packages.Path` to the relative folder where you want packages to be downloaded. For example, you could set this to a system-wide folder if you have several scripts that share the same packages.
-
-## <a name="assemblies"></a>Assemblies
-
-In addition to NuGet packages you can also load assemblies. This is accomplished by using the `Assemblies` property. You can load all the assemblies in a directory with the `LoadDirectory(string path, SearchOption searchOption = SearchOption.AllDirectories)` method. The specified directory can either be relative to the active directory or absolute. You can also load a single assembly by location with the `LoadFile(string path)` method and by full name with the `Load(string name)` method. For example:
-
-```
-Assemblies
-    .LoadDirectory(@"lib")
-    .LoadFile(@"foo\bar.dll")
-    .Load("SampleAssembly, Version=1.0.2004.0, Culture=neutral, PublicKeyToken=8744b20f8da049e3");
-```
-
-Keep in mind that system assemblies and others located in the GAC *must* be loaded by full name (including the version, public key token, etc.).
-
-By default, the following assemblies are already loaded so you don't need to explicity specify them:
-* `System`
-* `System.Collections.Generic`
-* `System.Linq`
-* `System.Core`
-* `Microsoft.CSharp`
-* `System.IO`
-* `System.Diagnostics`
-
-Also note that all assemblies from the directory containing the Wyam executable (and all subdirectories) will also be scanned for module assemblies.
-
-## Folders
-
-You can configure the folders Wyam uses by setting `RootFolder`, `InputFolder`, and/or `OutputFolder` in the setup script.
 
 # <a name="declarations"></a>Declarations
 ---

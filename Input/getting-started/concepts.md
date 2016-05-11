@@ -1,6 +1,6 @@
 Title: Concepts
 Description: Describes the primary concepts of modules, pipelines, documents, and metadata.
-Order: 3
+Order: 2
 ---
 The primary concepts in Wyam are *modules*, *pipelines*, *documents*, and *metadata*. 
 
@@ -14,7 +14,7 @@ A *module* is a small single-purpose component that takes documents as input, do
 
 A *pipeline* is a series of modules executed in sequence that results in final output documents. A given Wyam configuration can have multiple pipelines which are executed in sequence, and subsequent pipelines have access to the documents from the previous pipelines.
 
-A simple pipeline looks like:
+Conceptually, a simple pipeline looks like:
 
 <div class="mermaid">
     graph TD
