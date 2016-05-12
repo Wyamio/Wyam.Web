@@ -28,7 +28,20 @@ NoSidebar: true
 							.OrderBy(x => x.String("DisplayName")))
 						{
 							<tr>
-								<td><strong><a href="@Context.GetLink(childDoc)">@(childDoc.String("DisplayName"))</a></strong></td>
+								<td>
+									<strong><a href="@Context.GetLink(childDoc)">@(childDoc.String("DisplayName"))</a></strong>
+									@{
+										IDocument containingNamespace = childDoc.Get<IDocument>("ContainingNamespace");
+										if(containingNamespace != null)
+										{
+											string ns = containingNamespace.String("DisplayName");
+											if(!ns.StartsWith("Wyam.Core"))
+											{
+												<small><span class="label label-default">@ns</span></small>
+											}
+										}
+									}
+								</td>
 								<td>
 									@{					
 										string summary = childDoc.String("Summary");

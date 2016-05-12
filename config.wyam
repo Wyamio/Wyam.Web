@@ -1,4 +1,9 @@
-#n -p Wyam.Modules.Razor Wyam.Modules.Markdown Wyam.Modules.Yaml Wyam.Modules.Less Wyam.Modules.CodeAnalysis Wyam.Modules.SearchIndex
+#n Wyam.Modules.Razor -p
+#n Wyam.Modules.Markdown -p
+#n Wyam.Modules.Yaml -p
+#n Wyam.Modules.Less -p
+#n Wyam.Modules.CodeAnalysis -p
+#n Wyam.Modules.SearchIndex -p
 
 using Wyam.Modules.Razor.Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.CodeAnalysis;

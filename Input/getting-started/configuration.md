@@ -26,33 +26,20 @@ A configuration file looks like this:
 Preprocessor directives establish the Wyam environment and get evaluated before the rest of the configuration file. They're typically responsible for declaring things like NuGet packages and assemblies. Every preprocessor directive starts with `#` at the beginning of a line and extend for the rest of the line. The following directives are available (the current set of directives can always be seen by calling `wyam.exe --help-directives`).
 
 ```
-#ns, #nuget-source
+Adds a reference to an assembly by name.:
+#assembly-name, #an
+    <assembly>    The assembly to load by name.
 
-    <sources>...    The package source(s) to add.
+Adds a reference to an assembly by file name or globbing pattern.:
+#assembly, #a
+    <assembly>    The assembly to load by file or globbing pattern.
 
+Specifies an additional package source to use.:
+#nuget-source, #ns
+    <source>    The package source to add.
 
-
-#nc, #nuget-config
-
-    --use-local-packages    Toggles the use of a local NuGet packages
-                            folder.
-    --update-packages       Check the NuGet server for more recent
-                            versions of each package and update them if
-                            applicable.
-    <packages-path>         The packages path to use (only if use-local
-                            is true).
-
-
-
-#a, #assembly
-
-    <assemblies>...    The assemblies to load by file or globbing
-                       pattern.
-
-
-
-#n, #nuget
-
+Adds a NuGet package (downloading and installing it if needed).:
+#nuget, #n
     -p, --prerelease         Specifies that prerelease packages are
                              allowed.
     -u, --unlisted           Specifies that unlisted packages are
@@ -64,14 +51,37 @@ Preprocessor directives establish the Wyam environment and get evaluated before 
     -e, --exclusive          Indicates that only the specified package
                              source(s) should be used to find the
                              package.
-    <package>...             The package(s) to install.
-
-
-
-#an, #assembly-name
-
-    <assemblies>...    The assemblies to load by name.
+    <package>                The package to install.
 ```
+
+## <a name="nuget"></a>NuGet Packages
+
+Any NuGet packages you specify in preprocessor directives are installed and then scanned for modules which are made available to the main configuration body.
+
+Note that many modules require their package to be installed before they can be used. For example, to make use of the [Markdown](/modules/markdown) module, you must install the `Wyam.Modules.Markdown` package. To do this, you would add the following to your configuration file (the `-p` indicates this is a prerelease package, which currently applies to all the Wyam packages):
+
+```
+#n -p Wyam.Modules.Markdown
+``` 
+
+You can also specify the special `Wyam.Modules.All` package which will download all of the official Wyam module packages at once:
+
+```
+#n -p Wyam.Modules.All
+```
+
+## <a name="assemblies"></a>Assemblies
+
+In addition to NuGet packages you can also load assemblies. You can load all the assemblies in a directory by using a [globbing pattern](/getting-started/io#globbing) with the `#assembly` directive, or by specifying a relative or absolute path to the assembly. You can also load assemblies by name with the `#assembly-name` directive. Keep in mind that system assemblies and others located in the GAC *must* be loaded by full name (including the version, public key token, etc.).
+
+By default, the following assemblies are already loaded so you don't need to explicitly specify them:
+* `System`
+* `System.Collections.Generic`
+* `System.Linq`
+* `System.Core`
+* `Microsoft.CSharp`
+* `System.IO`
+* `System.Diagnostics`
 
 # <a name="declarations"></a>Declarations
 ---
@@ -223,56 +233,6 @@ will be expanded to:
 Foo((@doc, @ctx) => @doc[@ctx.InputFolder])
 ```
 
-## Folders
-
-You can access the folders Wyam uses by getting `RootFolder`, `InputFolder`, and/or `OutputFolder` in the configuration script.
-
 ## Execution Ordering
 
 Be aware that the configuration file only *configures* the pipelines. Each pipeline is executed in the order in which they were first added after the entire configuration file is evaluated. This means that you can't declare one pipeline, then declare another, and then add a new module to the first pipeline expecting it to reflect what happened in the second one. The second pipeline won't execute until the entire first pipeline is complete, including any modules that were added to it after the second one was declared. If you need to run some modules, switch to a different pipeline, and the perform additional processing on the first set of documents, look into the [Documents](/modules/documents) module.
-
-# Example
----
-
-The full configuration file for this documentation site is given below as an example:
-
-```
-// Setup code
-Packages
-    .Install("Twitter.Bootstrap.Less", "[3.3.5]")
-    .Install("jQuery", "[2.1.1]");
-    
-===
-// Body code
-
-Pipelines.Add("Content",
-    ReadFiles("*.md"),
-    FrontMatter(Yaml()),
-    Markdown(),
-    Replace("<pre><code>", "<pre class=\"prettyprint\"><code>"),
-    Concat(
-        ReadFiles("*.cshtml").Where(x => Path.GetFileName(x)[0] != '_'),
-        FrontMatter(Yaml())        
-    ),
-    Razor(),
-    AutoLink(c => c.Documents
-        .FromPipeline("Content")
-        .Where(x => x.String("RelativeFileDir") == "api" && !string.IsNullOrWhiteSpace(x.String("Title")))
-        .ToDictionary(x => x.String("Title"), x => PathHelper.ToRootLink(Path.ChangeExtension(x.String("RelativeFilePath"), ".html")))),
-    WriteFiles(".html")
-);
-
-Pipelines.Add("Less",
-    ReadFiles("master.less"),
-    Concat(ReadFiles("bootstrap.less")),
-    Less(),
-    WriteFiles(".css")
-);
-
-Pipelines.Add("Resources",
-    CopyFiles("*").Where(x => 
-        Path.GetExtension(x) != ".cshtml" 
-        && Path.GetExtension(x) != ".md"
-        && Path.GetExtension(x) != ".less")
-);
-```

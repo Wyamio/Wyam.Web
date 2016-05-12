@@ -8,7 +8,21 @@
 }
 
 <section class="content-header">
-	<h1>@Model.Name()</h1>
+    <h1>
+		@Model.Name()
+		@{
+			string ns = null;
+			IDocument containingNamespace = Model.Get<IDocument>("ContainingNamespace");
+			if(containingNamespace != null)
+			{
+				ns = containingNamespace.String("DisplayName");
+				if(!ns.StartsWith("Wyam.Core"))
+				{
+					<small><span class="label label-default">@ns</span></small>
+				}
+			}
+		}
+	</h1>
 </section>
 <section class="content">
 	@RenderBody()  @* Empty, but needs to be here *@
@@ -26,6 +40,17 @@
 		if(!string.IsNullOrWhiteSpace(remarks))
 		{
 			<div>@Html.Raw(remarks)</div>
+		}
+		
+		// Package
+		if(!ns.StartsWith("Wyam.Core"))
+		{
+			<h1>Package</h1>
+			<hr />
+			<div>This module exists in the <strong>@ns</strong> package which is not part of the core distribution. Add the following preprocessor directive to your <a href="/getting-started/configuration">configuration file</a> to use it:</div>
+			<pre class="prettyprint"><code>#n -p @ns</code></pre>
+			<div>Alternativly, you can add all modules at once with the following preprocessor directive:</div>
+			<pre class="prettyprint"><code>#n -p Wyam.Modules.All</code></pre>
 		}
 		
 		// Examples
