@@ -20,7 +20,7 @@ install:
   - 7z x ..\Wyam\Wyam.zip -o..\Wyam -r
 
 build_script:
-  - ..\Wyam\Wyam.exe --verbose --output ..\Output
+  - ..\Wyam\Wyam.exe --output ..\Output
 
 on_success:
   # Remove the code submodule, otherwise GitHub Pages will complain about it not being initialized
