@@ -20,6 +20,7 @@ on_success:
   - git rm -rf --cached Code
   - rm -rf .git/modules/Code
   - rm -rf Code
+  - rm -rf tools
   # Switch branches to gh-pages, clean the folder, copy everything in from the Wyam output, and commit/push
   # See http://www.appveyor.com/docs/how-to/git-push for more info
   - git config --global credential.helper store
