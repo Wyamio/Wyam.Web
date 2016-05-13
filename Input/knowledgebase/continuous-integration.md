@@ -38,7 +38,7 @@ install:
   - 7z x ..\Wyam\Wyam.zip -o..\Wyam -r
 
 build_script:
-  - ..\Wyam\Wyam.exe --output ..\Output
+  - ..\Wyam\wyam --output ..\Output
 
 on_success:
   # Switch branches to gh-pages, clean the folder, copy everything in from the Wyam output, and commit/push

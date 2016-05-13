@@ -2,16 +2,16 @@ Title: Usage
 Description: Describes how to run Wyam and the available options.
 Order: 3
 ---
-You typically run Wyam using the command line application `Wyam.exe`. If you don't specify any arguments, the root folder will be set to the current folder and if a file named `config.wyam` is found, it will be used as the configuration file. You can also specify a root folder that's different than the current folder after the `Wyam.exe` command. For example:
+You typically run Wyam using the command line application `wyam`. If you don't specify any arguments, the root folder will be set to the current folder and if a file named `config.wyam` is found, it will be used as the configuration file. You can also specify a root folder that's different than the current folder after the `wyam` command. For example:
 
 ```
-Wyam.exe
+wyam
 ```
 
 Or:
 
 ```
-Wyam.exe C:\MySite
+wyam C:\MySite
 ```
 
 There are also a number of arguments that allow you to control execution (use `--help` or `-?` to see them):
@@ -115,13 +115,13 @@ usage:  [--help-directives] [-w] [-p [arg]] [--force-ext]
 Note that some of the options such as `--nuget` are "nested" and must be contained in quotes if they contain options of their own (and any inner quotes must be escaped). For example, the following command will load a Nuget package named `Foo.Bar`:
 
 ```
-Wyam.exe --nuget Foo.Bar 
+wyam --nuget Foo.Bar 
 ```
 
 However, if you want to specify any additional options for the `--nuget` option, you need to surround the whole value in quotes:
 
 ```
-Wyam.exe --nuget "Foo.Bar -p" 
+wyam --nuget "Foo.Bar -p" 
 ```
 
 # Paths

@@ -23,7 +23,7 @@ A configuration file looks like this:
 # <a name="Preprocessor"></a>Preprocessor Directives
 ---
 
-Preprocessor directives establish the Wyam environment and get evaluated before the rest of the configuration file. They're typically responsible for declaring things like NuGet packages and assemblies. Every preprocessor directive starts with `#` at the beginning of a line and extend for the rest of the line. The following directives are available (the current set of directives can always be seen by calling `wyam.exe --help-directives`).
+Preprocessor directives establish the Wyam environment and get evaluated before the rest of the configuration file. They're typically responsible for declaring things like NuGet packages and assemblies. Every preprocessor directive starts with `#` at the beginning of a line and extend for the rest of the line. The following directives are available (the current set of directives can always be seen by calling `wyam --help-directives`).
 
 ```
 Adds a reference to an assembly by name.:
