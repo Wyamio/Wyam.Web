@@ -44,4 +44,23 @@ If you're developing addins or you want to embed Wyam in your own applications y
 
 # Development Builds
 
-You can also get the most recent builds at the MyGet feed: [https://www.myget.org/feed/Packages/wyam](https://www.myget.org/feed/Packages/wyam).
+You can also get the most recent builds at the MyGet feed:
+
+NuGet V3 clients (VS 2015, Wyam): [https://www.myget.org/F/wyam/api/v3/index.json](https://www.myget.org/F/wyam/api/v3/index.json)
+
+NuGet V2 clients (VS 2013, Cake): [https://www.myget.org/F/wyam/api/v2](https://www.myget.org/F/wyam/api/v2)
+
+To make Cake use the development feed, change the directives at the top of the Cake build script to:
+
+```
+#tool nuget:https://www.myget.org/F/wyam/api/v2?package=Wyam&prerelease
+#addin nuget:https://www.myget.org/F/wyam/api/v2?package=Cake.Wyam&prerelease
+```
+
+Note that you'll also need to delete the existing "tools\Wyam" and "tools\Addins\Cake.Wyam" folders if they exist (otherwise Cake will just use the existing packages and won't download the new packages).
+
+To use the development feed inside a Wyam configuration file for a particular module, specify it like this:
+
+```
+#n Wyam.Modules.Markdown -s https://www.myget.org/F/wyam/api/v3/index.json -l -p
+```

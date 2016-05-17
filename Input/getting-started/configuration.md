@@ -46,6 +46,8 @@ Adds a NuGet package (downloading and installing it if needed).:
                              allowed.
     -v, --version <arg>      Specifies the version of the package to
                              use.
+    -l, --latest             Specifies that the latest available version
+                             of the package should always be used.
     -s, --source <arg>...    Specifies the package source(s) to get the
                              package from.
     -e, --exclusive          Indicates that only the specified package
@@ -56,7 +58,7 @@ Adds a NuGet package (downloading and installing it if needed).:
 
 ## <a name="nuget"></a>NuGet Packages
 
-Any NuGet packages you specify in preprocessor directives are installed and then scanned for modules which are made available to the main configuration body.
+Any NuGet packages you specify in preprocessor directives are installed and then scanned for modules which are made available to the main configuration body. By default, Wyam will attempt to match requested packages with those on disk and will use the disk-based package when available. To force it to use a specific version (and download and install it if necessary), use the `--version <version>` flag. To force it to always download and install the latest available version on the package feed, use the `--latest` flag.
 
 Note that many modules require their package to be installed before they can be used. For example, to make use of the [Markdown](/modules/markdown) module, you must install the `Wyam.Modules.Markdown` package. To do this, you would add the following to your configuration file (the `-p` indicates this is a prerelease package, which currently applies to all the Wyam packages):
 
