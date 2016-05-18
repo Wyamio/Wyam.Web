@@ -54,11 +54,10 @@ To make Cake use the development feed, change the directives at the top of the C
 
 ```
 #tool nuget:https://www.myget.org/F/wyam/api/v2?package=Wyam&prerelease
-#addin nuget:?package=Cake.Common
 #addin nuget:https://www.myget.org/F/wyam/api/v2?package=Cake.Wyam&prerelease
 ```
 
-Note that you'll also need to delete the existing "tools\Wyam" and "tools\Addins\Cake.Wyam" folders if they exist (otherwise Cake will just use the existing packages and won't download the new packages). Also note that the `#addin` directive for `Cake.Common` needs to come before the one for `Cake.Wyam` to ensure the Cake common library is downloaded from the standard NuGet feed before downloading `Cake.Wyam` from the Wyam development feed as shown above.
+Note that you'll also need to delete the existing "tools\Wyam" and "tools\Addins\Cake.Wyam" folders if they exist (otherwise Cake will just use the existing packages and won't download the new packages).
 
 To use the development feed inside a Wyam configuration file for a particular module, specify it like this:
 
