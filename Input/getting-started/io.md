@@ -20,9 +20,29 @@ Different file systems have different rules about case sensitivity. Ideally, we'
 
 # File Providers
 
-A file provider acts as a factory for `IFile` and `IDirectory` instances. It's usually bundled with specific implementations of `IFile` and `IDirectory` for a given file source. For example, the default file provider operates on the local file system and returns file and directory instances that do the same. Other file providers may include ones that provide access to zip files, embedded resources, GitHub repositories, or web-based resources. A file provider may or may not require additional configuration in it's constructor (for example, the name of a user and repository for a GitHub file provider).
+A file provider acts as a factory for `IFile` and `IDirectory` instances. It's usually bundled with specific implementations of `IFile` and `IDirectory` for a given file source. For example, the default file provider operates on the local file system and returns file and directory instances that do the same. Other file providers may eventually include ones that provide access to zip files, embedded resources, GitHub repositories, or web-based resources.
 
-All absolute paths must specify a file provider intended to handle the path. If one isn't explicitly specified, it's set to the default file provider (which is typically the local file system). Providers are refered to by name, and the default provider is represented by an empty string. You can also manually specify the file provider by using an alternate constructor for a `FilePath` or `DirectoryPath` or by using the special `"provider::/my/path"` syntax.
+All absolute `FilePath` and `DirectoryPath` paths must specify a file provider intended to handle the path and return `IFile` and `IDirectory` instances when requested. If one isn't explicitly specified, it's set to the default file provider. File providers are generally specified using a URI. The URI scheme indicates which provider should be used and any additional URI information like the host, query string, etc. is passed to the file provider to use as appropriate. Not all file providers use this extra information. For example, the default provider uses the `file` scheme but doesn't require or accept any additional information. For these kinds of providers, the URI should look like `file:///` (notice *three* slashes, the first two separate the scheme from the host information and the last one separates the host from the path and query and completes the URI). 
+
+In addition to using a URI directly in the path constructor, there are other ways to specify which provider to use (though they all end up creating a URI under the hood). For one, you can delimit the provider from the path with a `|` character. You can also use a single URI for both the provider and the path and the two will be automatically separated when creating a `FilePath` or `DirectoryPath` (this is useful when relying on the implicit string-to-path conversion).
+
+For example, consider a file provider designed to get information from a GitHub Gist. This example provider doesn't require any URI information beyond the `gist` scheme, so it's similar to our default `file` scheme. The provider then looks at the absolute path to determine which specific Gist to retreive. All of the following ways of specifying the `gist` provider and the Gist ID of `9dac65b1ce1707550cb5f3bd9f7f9998` are equivalent:
+
+- `"gist|/2721371adf6bf69fa833"` - provider portion is implicitly understood to be a scheme without a host or any other components if not a URI (translates to "gist:///").
+- `"gist:///2721371adf6bf69fa833"` - if no provider is specified explicitly but the path itself is a valid URI, then the scheme, host, etc. become the provider and the path and query become the path. Note again that `///` is used and not `//` because a double slash would have indicated the gist ID was a host name and it would have become part of the provider URI, leaving an empty path.
+- `new FilePath("gist", "/2721371adf6bf69fa833")`
+- `new FilePath("gist:///", "/2721371adf6bf69fa833")`
+
+Here are equivalent examples for a pretend `http` file provider that uses host names:
+- `"http://foo.com|/a/b/c.txt"`
+- `"http://foo.com/a/b/c.txt"`
+- `new FilePath("http://foo.com", "/a/b/c.txt")`
+
+And here are a couple more equivalent examples that don't use host names but do require a path as part of the provider:
+- `"zip:///C:/foo/my.zip|/a/b/c.txt"`
+- `new FilePath("zip:///C:/foo/my.zip", "/a/b/c.txt")`
+
+Notice that any time the provider itself requires a path, you must either use the `|` delimiter or construct a path object. It's impossible to infer where the provider path ends and the actual path begins in a single URI in this case.
 
 # Virtual File System
 
