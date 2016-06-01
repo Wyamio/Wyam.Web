@@ -1,11 +1,11 @@
-#n Wyam.Modules.Razor -p
-#n Wyam.Modules.Markdown -p
-#n Wyam.Modules.Yaml -p
-#n Wyam.Modules.Less -p
-#n Wyam.Modules.CodeAnalysis -p
-#n Wyam.Modules.SearchIndex -p
+#n Wyam.Razor -p
+#n Wyam.Markdown -p
+#n Wyam.Yaml -p
+#n Wyam.Less -p
+#n Wyam.CodeAnalysis -p
+#n Wyam.SearchIndex -p
 
-using Wyam.Modules.Razor.Microsoft.AspNet.Mvc.Rendering;
+using Wyam.Razor.Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.CodeAnalysis;
 
 public static class HtmlHelperExtensions

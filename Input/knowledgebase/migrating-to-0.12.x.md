@@ -4,6 +4,14 @@ Description: How to migrate existing sites to the new IO abstraction in 0.12.x.
 
 The 0.12.x series of releases is a chance to "reset" some things that worked well when this was just a smaller project but need to change as Wyam serves more use cases. These changes will set the project up for a number of new features in the 0.13.x releases such as recipes and themes.
 
+# <a name="0.12.4"></a>0.12.4
+
+This release included some changes to NuGet packages to better handle additional extension points down the road (such as recipes, themes, file providers, etc.):
+- The ability to specify a [NuGet version range](/getting-started/configuration#nuget) is back. This is good news for constraining which versions of packages are used in your build in order to make them consistent and repeatable. Unfortunately, it's also a breaking change because the [NuGet version range convention](https://docs.nuget.org/create/versioning#specifying-version-ranges-in-.nuspec-files) specifies that specific versions be enclosed in `[` and `]` brackets. Wyam had been using an unadorned number for specific versions, which now indicates that version *or anything higher*.
+  - If you specify specific versions for any NuGet packages, surround the version with `[` and `]` to maintain the existing behavior.
+- In order to better represent that Wyam extension packages may contain other extensions beyond modules, all of the Wyam packages have been renamed from `Wyam.Modules.*` to `Wyam.*`. For example, Markdown support can now be found in `Wyam.Markdown`.
+  - Change all of your NuGet package names to the new name without the `.Modules` component.
+
 # <a name="0.12.1"></a>0.12.1
 ---
 

@@ -62,5 +62,5 @@ Note that you'll also need to delete the existing "tools\Wyam" and "tools\Addins
 To use the development feed inside a Wyam configuration file for a particular module, specify it like this:
 
 ```
-#n Wyam.Modules.Markdown -s https://www.myget.org/F/wyam/api/v3/index.json -l -p
+#n Wyam.Markdown -s https://www.myget.org/F/wyam/api/v3/index.json -l -p
 ```
