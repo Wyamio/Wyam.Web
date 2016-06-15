@@ -32,6 +32,10 @@ Here are some awesome Wyam-related goodies from the community. Are you doing som
 
   The personal blog of Arjan van Rijn.  
 
+- **[Ben Hyrman](http://hyr.mn)** ([source code](https://github.com/hyrmn/hyr.mn))
+  
+  The personal blog of Ben Hyrman.
+  
 </div>
 <div class="col-md-4">
 
