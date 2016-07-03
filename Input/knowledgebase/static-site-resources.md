@@ -12,6 +12,8 @@ A lot of third-parties have been filling in for traditional server-side roles wi
   - **[Eager](https://eager.io/)**: platform for easily adding libraries and services to your static site.
   
   - **[Formspree](http://formspree.io/)**: forms via email.
+
+  - **[Brisk Forms](https://www.briskforms.com/)**: free and open source forms via email that keeps your email address private.
   
   - **[Krowdify](http://www.krowdify.com/)**: inline discussion widget similar to Medium.
   
