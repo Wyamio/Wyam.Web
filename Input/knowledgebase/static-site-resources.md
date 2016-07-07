@@ -12,6 +12,8 @@ A lot of third-parties have been filling in for traditional server-side roles wi
   - **[Eager](https://eager.io/)**: platform for easily adding libraries and services to your static site.
   
   - **[Formspree](http://formspree.io/)**: forms via email.
+
+  - **[Brisk Forms](https://www.briskforms.com/)**: free and open source forms via email that keeps your email address private.
   
   - **[Krowdify](http://www.krowdify.com/)**: inline discussion widget similar to Medium.
   
@@ -27,4 +29,6 @@ A lot of third-parties have been filling in for traditional server-side roles wi
   - **[Netlify](https://www.netlify.com/)**: dedicated static site hosting with automation, CDN, and native support for many generators.
   
   - **[Surge](https://surge.sh)**: free static site hosting with easy deployment via command line.
-  
+
+  - **[Firebase Hosting](https://firebase.google.com/docs/hosting/)**: fast and secure static hosting for your web app with free and paid options.
+
