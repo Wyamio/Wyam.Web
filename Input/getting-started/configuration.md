@@ -266,7 +266,7 @@ Foo((@doc, @ctx) => @doc[@ctx.InputFolder])
 If you need to use the `ContextConfig` delegate argument but do not need to access `@doc` or `@ctx` then you will need to specify the lambda. For example, one of the overrides for the `WriteFiles` module is a string to let you specify a file extension. However, we might want to override the output and write to a single file (with minified and combined CSS for example). To accomplish this, we will need to pass in the lambda, even thought we won't be using it.
 
 ```
-WriteFiles((document, context) =>  "css/style.css")
+WriteFiles((doc, ctx) => "css/style.css")
 ```
 
 ## Execution Ordering
