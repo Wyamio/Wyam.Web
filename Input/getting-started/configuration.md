@@ -263,6 +263,12 @@ will be expanded to:
 Foo((@doc, @ctx) => @doc[@ctx.InputFolder])
 ```
 
+If you need to use the `ContextConfig` delegate argument but do not need to access `@doc` or `@ctx` then you will need to specify the lambda. For example, one of the overrides for the `WriteFiles` module is a string to let you specify a file extension. However, we might want to override the output and write to a single file (with minified and combined CSS for example). To accomplish this, we will need to pass in the lambda, even thought we won't be using it.
+
+```
+WriteFiles((document, context) =>  "css/style.css")
+```
+
 ## Execution Ordering
 
 Be aware that the configuration file only *configures* the pipelines. Each pipeline is executed in the order in which they were first added after the entire configuration file is evaluated. This means that you can't declare one pipeline, then declare another, and then add a new module to the first pipeline expecting it to reflect what happened in the second one. The second pipeline won't execute until the entire first pipeline is complete, including any modules that were added to it after the second one was declared. If you need to run some modules, switch to a different pipeline, and the perform additional processing on the first set of documents, look into the [Documents](/modules/documents) module.
