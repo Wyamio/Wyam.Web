@@ -10,9 +10,9 @@ NoGutter: true
 		</div>
 	</div>
 </div>
-<div class="jumbotron jumbotron-description">
+<div class="jumbotron jumbotron-description jumbotron-description-1">
     <div class="container">
-	    <p><h3><strong>Wyam is different.</strong> It's not a Jekyll clone (not that there's anything wrong with them) and it's not designed around blogs (though it's great at those too). Wyam is a static <em>content</em> generator and can be used to generate web sites, produce documentation, create ebooks, and much more. Since everything is configured by chaining together flexible modules (that you can even write yourself), the only limits to what it can create are your imagination.</h3></p>
+	    <p><h3><strong>Wyam is different.</strong> It's a <em>static content toolkit</em> and can be used to generate web sites, produce documentation, create ebooks, and much more. Since everything is configured by chaining together flexible modules (that you can even write yourself), the only limits to what it can create are your imagination.</h3></p>
 		
 		<p class="text-center">
 			<a class="github-button" href="https://github.com/Wyamio/Wyam" data-icon="octicon-star" data-style="mega" data-count-href="/Wyamio/Wyam/stargazers" data-count-api="/repos/Wyamio/Wyam#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star Wyamio/Wyam on GitHub">Star</a> <a class="github-button" href="https://github.com/Wyamio/Wyam" data-icon="octicon-eye" data-style="mega" data-count-href="/Wyamio/Wyam/watchers" data-count-api="/repos/Wyamio/Wyam#subscribers_count" data-count-aria-label="# watchers on GitHub" aria-label="Watch Wyamio/Wyam on GitHub">Watch</a> <a href="https://twitter.com/wyamio" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @@wyamio</a>
@@ -22,6 +22,27 @@ NoGutter: true
     </div>
 </div>
 
+<div class="jumbotron jumbotron-description jumbotron-description-2">
+	<div class="container">
+		<p><h1><i class="fa fa-rocket"></i> Easy!</h1></p>
+		<p><a href="/recipes-themes">Recipes and themes</a> make it easy to quickly generate different kinds of sites.</p>
+	</div>
+</div>
+
+<div class="jumbotron jumbotron-description jumbotron-description-3">
+	<div class="container">
+		<p><h1><i class="fa fa-magic"></i> Flexible!</h1></p>
+		<p>Use a <a href="/getting-started/configuration">configuration file</a> to customize your generation process with tons of modules or your own code.</p>
+	</div>
+</div>
+
+<div class="jumbotron jumbotron-description jumbotron-description-4">
+	<div class="container">
+		<p><h1><i class="fa fa-cogs"></i> Powerful!</h1></p>
+		<p><a href="/knowledgebase/embedded-use">Embed the Wyam engine</a> to add the power of static generation to your own applications.</p>
+	</div>
+</div>
+
 <div class="container">				
 	<h1>Features</h1>
 	<hr />
@@ -29,7 +50,7 @@ NoGutter: true
 		<li>Written in .NET and <a href="/knowledgebase/writing-a-module">easily extensible</a></li>
 		<li><a href="/getting-started/obtaining">Low ceremony</a> - download a zip file, unzip, and run</li>
 		<li>Flexible <a href="/getting-started/configuration">script-based configuration</a> using the power of the .NET Compiler Platform (Roslyn)</li>
-		<li>Lots of <a href="/modules">modules</a> for things like <a href="/modules/readfiles">reading</a> and <a href="/modules/writefiles">writing</a> files, handling <a href="/modules/frontmatter">frontmatter</a>, and manipulating <a href="/modules/meta">metadata</a></li>
+		<li>Lots of <a href="/modules">modules</a> for things like <a href="/modules/readfiles">reading</a> and <a href="/modules/writefiles">writing</a> files, handling <a href="/modules/frontmatter">front matter</a>, and manipulating <a href="/modules/meta">metadata</a></li>
 		<li><a href="/modules/yaml">YAML parser</a></li>
 		<li><a href="/modules/less">Less CSS compiler</a></li>
 		<li><a href="/modules/image">Image manipulation</a></li>
@@ -43,22 +64,9 @@ NoGutter: true
 	
 	<h1>Usage</h1>
 	<hr />
-	<p><strong><a href="https://github.com/Wyamio/Wyam/releases">Go download the latest version now</a></strong> (look at <em>Downloads</em> under each release). Then unzip the Wyam.zip archive, write some <a href="/modules/markdown">Markdown</a> or <a href="/modules/razor">Razor</a> files, run the following command, and watch the magic happen:</p>
-	<pre>c:\MySite&gt;<strong>wyam --preview --watch</strong>
-	Loading configuration from c:\MySite\config.wyam.
-	Cleaning output directory c:\MySite\.\Output...
-	Cleaned output directory.
-	Executing 3 pipelines...
-	    Executing pipeline "Markdown" (1/3) with 5 child module(s)...
-	    Executed pipeline "Markdown" (1/3) resulting in 0 output document(s).
-	    Executing pipeline "Razor" (2/3) with 4 child module(s)...
-	    Executed pipeline "Razor" (2/3) resulting in 2 output document(s).
-	    Executing pipeline "Resources" (3/3) with 1 child module(s)...
-	    Executed pipeline "Resources" (3/3) resulting in 21 output document(s).
-	Executed 3 pipelines.
-	Preview server running on port 5080...
-	Watching folder c:\MySite\.\Input...
-	Hit any key to exit...	
-	</pre>
-	<p>Read more about <a href="/getting-started/configuration">configuration files</a> and the <a href="/getting-started/usage">available command line arguments</a>. Then check out the full list of <a href="/modules">modules</a>.</p>
+	<p><strong><a href="https://github.com/Wyamio/Wyam/releases">Go download the latest version now</a></strong> (look at <em>Downloads</em> under each release). Then unzip the Wyam.zip archive. The easiest way to get started is to use a <a href="/recipes-themes">recipe and theme</a>.</p>
+	<p><b>1.</b> Scaffold a new blog: <pre>wyam.exe new --recipe Blog</pre></p>
+	<p><b>2.</b> Edit the scaffolded files.</p>
+	<p><b>3.</b> Build the blog with a theme: <pre>wyam.exe --recipe Blog --theme CleanBlog</pre></p>
+	<p>To go deeper, read more about <a href="/getting-started/configuration">configuration files</a> and the <a href="/getting-started/usage">available command line arguments</a>. Then check out the full list of <a href="/modules">modules</a>.</p>
 </div>

@@ -2,7 +2,17 @@ Title: Concepts
 Description: Describes the primary concepts of modules, pipelines, documents, and metadata.
 Order: 2
 ---
-The primary concepts in Wyam are *modules*, *pipelines*, *documents*, and *metadata*. 
+The primary concepts in Wyam are *recipes*, *themes*, *modules*, *pipelines*, *documents*, and *metadata*. 
+
+# Recipes
+---
+
+A *recipe* is a pre-configured series of modules and pipelines (see below). <a href="/recipes-themes">Each recipe</a> can be thought of as it's own special purpose static site generator. For example, the <a href="/recipes-themes/blog">Blog</a> recipe can be thought of as analogous to a tool like Jekyll. Recipes can still make use of <a href="/getting-started/configuration">configuration files</a> to further tweak the generation process, but they aren't required. 
+
+# Themes
+---
+
+Each *theme* contains a set of content such as CSS files, layouts, etc. that apply to a specific recipe. A theme can be used to get up and running quickly with a given recipe by providing the set of resources the recipe requires. Because each recipe is a totally different set of modules, pipelines, metadataa, etc. a given theme is only applicable to a specific recipe.
 
 # Modules
 ---

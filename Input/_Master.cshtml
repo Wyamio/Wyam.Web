@@ -70,6 +70,7 @@
                                 string[] navs = new string[]
                                 {
                                     "Getting Started",
+                                    "Recipes & Themes",
                                     "Modules",
                                     "API",
                                     "Knowledgebase",
@@ -77,7 +78,7 @@
                                 };
                                 foreach(string nav in navs)
                                 {
-                                    string navFolder = nav.ToLower().Replace(' ', '-');
+                                    string navFolder = nav.ToLower().Replace(" & ", "-").Replace(' ', '-');
                                     string active = Model.String("RelativeFilePath").StartsWith(navFolder) ? "active" : null;
                                     <li class="@active"><a href="/@navFolder">@nav</a></li>
                                 }
