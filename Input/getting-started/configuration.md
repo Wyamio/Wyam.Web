@@ -23,37 +23,46 @@ A configuration file looks like this:
 # <a name="Preprocessor"></a>Preprocessor Directives
 ---
 
-Preprocessor directives establish the Wyam environment and get evaluated before the rest of the configuration file. They're typically responsible for declaring things like NuGet packages and assemblies. Every preprocessor directive starts with `#` at the beginning of a line and extend for the rest of the line. The following directives are available (the current set of directives can always be seen by calling `wyam --help-directives`).
+Preprocessor directives establish the Wyam environment and get evaluated before the rest of the configuration file. They're typically responsible for declaring things like NuGet packages and assemblies. Every preprocessor directive starts with `#` at the beginning of a line and extend for the rest of the line. The following directives are available (the current set of directives can always be seen by calling `wyam help --directives`).
 
 ```
-Adds a reference to an assembly by name.:
-#assembly-name, #an
-    <assembly>    The assembly to load by name.
+Available preprocessor directives:
 
-Adds a reference to an assembly by file name or globbing pattern.:
-#assembly, #a
-    <assembly>    The assembly to load by file or globbing pattern.
-
-Specifies an additional package source to use.:
 #nuget-source, #ns
-    <source>    The package source to add.
+Specifies an additional package source to use.
 
-Adds a NuGet package (downloading and installing it if needed).:
+#recipe, #r
+    -i, --ignore-known-packages    Ignores (does not add) packages for
+                                   known recipes.
+    <recipe>                       The recipe to use.
+Specifies a recipe to use.
+
+#assembly, #a
+Adds an assembly reference by name, file name, or globbing pattern.
+
+#theme, #t
+    -i, --ignore-known-packages    Ignores (does not add) packages for
+                                   known themes.
+    <theme>                        The theme to use.
+Specifies a theme to use.
+
 #nuget, #n
     -p, --prerelease         Specifies that prerelease packages are
                              allowed.
     -u, --unlisted           Specifies that unlisted packages are
                              allowed.
-    -v, --version <arg>      Specifies the version of the package to
-                             use.
+    -v, --version <arg>      Specifies the version range of the package
+                             to use.
     -l, --latest             Specifies that the latest available version
-                             of the package should always be used.
+                             of the package should be used (this will
+                             always trigger a request to the sources).
     -s, --source <arg>...    Specifies the package source(s) to get the
                              package from.
     -e, --exclusive          Indicates that only the specified package
                              source(s) should be used to find the
                              package.
     <package>                The package to install.
+Adds a NuGet package (downloading and installing it if needed).
 ```
 
 ## <a name="nuget"></a>NuGet Packages
@@ -87,7 +96,7 @@ You can also specify the special `Wyam.All` package which will download all of t
 
 ## <a name="assemblies"></a>Assemblies
 
-In addition to NuGet packages you can also load assemblies. You can load all the assemblies in a directory by using a [globbing pattern](/getting-started/io#globbing) with the `#assembly` directive, or by specifying a relative or absolute path to the assembly. You can also load assemblies by name with the `#assembly-name` directive. Keep in mind that system assemblies and others located in the GAC *must* be loaded by full name (including the version, public key token, etc.).
+In addition to NuGet packages you can also load assemblies. All assemblies are loaded with the `#assembly` or `#a` directive. You can load all the assemblies in a directory by using a [globbing pattern](/getting-started/io#globbing), or by specifying a relative or absolute path to the assembly. You can also load assemblies by name. If you specify a short name, Wyam will attempt to resolve the assembly with the same version as the currently loaded framework. Keep in mind that non-framework assemblies located in the GAC *must* be loaded by full name (including the version, public key token, etc.).
 
 By default, the following assemblies are already loaded so you don't need to explicitly specify them:
 * `System`

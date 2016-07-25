@@ -38,6 +38,7 @@ Each document and/or post can also define some metadata (usually in front matter
 
 * `Title` - The title of the page or post.
 * `Lead` - A short introduction sentence about the page or post.
+* `Image` - A link (relative or absolute) to a large hero image that should be displayed on the page.
 * `Published` - The date the post was published.
 * `Tags` - A list of tags for the post.
 * `ShowInNavbar` - A true/false value indicating whether the page should be shown in the top navigation bar.
@@ -47,6 +48,7 @@ The front matter for a post might look something like this:
 ```
 Title: First Post
 Lead: This is my first post to my blog.
+Image: images/firstpost.jpg
 Published: 1/7/2016
 Tags:
   - Tag1
@@ -57,12 +59,31 @@ The text of the post goes here...
 
 # Themes
 
-## CleanBlog
+<div class="row">
+<div class="col-md-4">
+<h2>CleanBlog</h2>
+<img src="/Content/images/themes/blog-cleanblog.png" class="img-responsive img-thumbnail" alt="CleanBlog">
+
+The CleanBlog theme contains a clean layout with a large top banner area.
 
 To build the Blog recipe with the CleanBlog theme, run:
 
 ```
 wyam -r Blog -t CleanBlog
 ```
+</div>
+<div class="col-md-4">
+<h2>Phantom</h2>
+<img src="/Content/images/themes/blog-phantom.png" class="img-responsive img-thumbnail" alt="CleanBlog">
 
-The CleanBlog theme contains a clean layout with a large top banner area.
+An airy theme based on the [Phantom](https://html5up.net/phantom) template from [HTML5 Up](https://html5up.net/).
+
+To build the Blog recipe with the Phantom theme, run:
+
+```
+wyam -r Blog -t Phantom
+```
+</div>
+<div class="col-md-4">
+</div>
+</div>
