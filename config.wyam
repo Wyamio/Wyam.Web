@@ -49,8 +49,6 @@ public class DocsTable
 	public bool HasSummary { get; set; }
 }
 
----
-
 Pipelines.Add("Code",
 	ReadSolution(GlobalMetadata.String("SourcePath"))
 	    .WhereProject(x => !x.EndsWith(".Tests"))

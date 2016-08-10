@@ -5,7 +5,7 @@ The default `IDocument` implementation that gets passed through the pipeline exp
 
 # The Easy Way
 
-The easiest way to do this is to use the built-in helpers for custom document types. This starts with the `CustomDocument` base class. Simple derive a new document class from `CustomDocument` in the [declarations part](/getting-started/configuration#declarations) of your configuration file. The base class implements `IDocument` so you will have access to all the metadata that you normally would from the default implementation. This allows you to "wrap" metadata getters and setters with your own special logic. You can also add any additional properties and methods that you need to.
+The easiest way to do this is to use the built-in helpers for custom document types. This starts with the `CustomDocument` base class. Derive a new document class from `CustomDocument` in [your configuration file](/getting-started/configuration). The base class implements `IDocument` so you will have access to all the metadata that you normally would from the default implementation. This allows you to "wrap" metadata getters and setters with your own special logic. You can also add any additional properties and methods that you need to.
 
 The only thing that you should keep in mind is that you may need to implement the `CustomDocument.Clone()` method (its declared as `protected virtual`). The default implementation performs an `object.MemberwiseClone()` to get a new instance of your custom document class when needed. However, if you have any special cloning requirements (for example, your document class should be deep-cloned), you will need to override this method and implement it yourself. The only requirement is that it must return a new instance of your document class.
 
