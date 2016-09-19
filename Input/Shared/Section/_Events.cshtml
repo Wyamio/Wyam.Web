@@ -1,3 +1,4 @@
+@using Microsoft.AspNetCore.Html;
 @{
 	IList<IDocument> events = Model.List<IDocument>("Members")
 		?.Where(x => x.Get<bool>("IsResult") && x.String("Kind") == "Event")

@@ -5,7 +5,7 @@
 #n Wyam.CodeAnalysis -p
 #n Wyam.SearchIndex -p
 
-using Wyam.Razor.Microsoft.AspNet.Mvc.Rendering;
+using Microsoft.AspNetCore.Html;
 using Microsoft.CodeAnalysis;
 
 public static class HtmlHelperExtensions
