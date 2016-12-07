@@ -1,4 +1,0 @@
-[submodule "Code/Wyam"]
-	path = Code/Wyam
-	url = https://github.com/Wyamio/Wyam.git
-	branch = master
