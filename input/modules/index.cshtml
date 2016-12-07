@@ -1,0 +1,61 @@
+Title: Modules
+NoSidebar: true
+---
+@{
+	IList<IGrouping<string, IDocument>> categoryGroups = 
+		Documents.FromPipeline("Modules")
+			.GroupBy(x => {
+				IReadOnlyList<OtherComment> categoryComments = x.List<OtherComment>("CategoryComments");
+				return categoryComments == null ? string.Empty : categoryComments[0].Html;
+			})
+			.OrderBy(x => x.Key)
+			.ToList();
+			
+	foreach(IGrouping<string, IDocument> categoryGroup in categoryGroups)
+	{
+		<div class="box">
+			<div class="box-body no-padding">
+				<table class="table table-striped table-hover two-cols-alt">
+					@if(!string.IsNullOrWhiteSpace(categoryGroup.Key))
+					{
+						<thead>
+							<tr><th colspan="2">@categoryGroup.Key</th></tr>
+						</thead>
+					}
+								
+					<tbody>
+						@foreach(IDocument childDoc in categoryGroup
+							.OrderBy(x => x.String("DisplayName")))
+						{
+							<tr>
+								<td>
+									<strong><a href="@Context.GetLink(childDoc)">@(childDoc.String("DisplayName"))</a></strong>
+									@{
+										IDocument containingNamespace = childDoc.Get<IDocument>("ContainingNamespace");
+										if(containingNamespace != null)
+										{
+											string ns = containingNamespace.String("DisplayName");
+											if(!ns.StartsWith("Wyam.Core"))
+											{
+												<small><span class="label label-default">@ns</span></small>
+											}
+										}
+									}
+								</td>
+								<td>
+									@{					
+										string summary = childDoc.String("Summary");
+										if(!string.IsNullOrWhiteSpace(summary))
+										{
+											@Html.Raw(summary)
+										}
+									}
+								</td>
+							</tr>
+						}	
+					</tbody>							
+				</table>
+			</div>
+		</div> 
+	}
+}

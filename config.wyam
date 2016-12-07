@@ -1,0 +1,65 @@
+Settings.Host = "wyam.io";
+GlobalMetadata[DocsKeys.SiteTitle] = "Wyam";
+GlobalMetadata[DocsKeys.SourceFiles] = "../release/repo/src/**/{!bin,!obj,!packages,!*.Tests,}/**/*.cs";
+GlobalMetadata[DocsKeys.BaseEditUrl] = "https://github.com/Wyamio/Wyam.Web/tree/develop/input/";
+
+Pipelines.InsertBefore(DocsPipelines.RenderPages, "Modules",
+	Documents(DocsPipelines.Code),
+	AnalyzeCSharp()
+		.WithNamedTypes(x => x.AllInterfaces.Any(y => y.Name == "IModule") && !x.IsAbstract)
+		.WhereNamespaces(x => !x.StartsWith("Wyam.Testing"))
+		.WherePublic()
+		.WithDocsForImplicitSymbols()
+		.WithWritePath(x => {
+			string name = x.String("DisplayName").ToLower();
+			if(name == "index")
+			{
+				name = "indx";  // Special case for the Index module
+			}
+            
+            // Remove generic types
+            int genericParamsIndex = name.IndexOf("<");
+            if(genericParamsIndex != -1)
+            {
+                name = name.Substring(0, genericParamsIndex);
+            }
+            
+			return new FilePath($"modules/{name}.html");
+		}),
+    Branch(
+        SearchIndex(new SearchIndexItem(
+            @ctx.GetLink(@doc), 
+            @doc.String(CodeAnalysisKeys.DisplayName), 
+            @doc.String(CodeAnalysisKeys.DisplayName))
+        )
+            .WithScript((scriptBuilder, context) =>
+            {
+                // Use a custom tokenizer that splits on camel case characters
+                // https://github.com/olivernn/lunr.js/issues/230#issuecomment-244790648
+                scriptBuilder.Insert(0, @"
+var camelCaseTokenizer = function (obj) {
+    var previous = '';
+    return obj.toString().trim().split(/[\s\-]+|(?=[A-Z])/).reduce(function(acc, cur) {
+        var current = cur.toLowerCase();
+        if(acc.length === 0) {
+            previous = current;
+            return acc.concat(current);
+        }
+        previous = previous.concat(current);
+        return acc.concat([current, previous]);
+    }, []);
+}
+lunr.tokenizer.registerFunction(camelCaseTokenizer, 'camelCaseTokenizer')");
+                scriptBuilder.Replace("this.ref('id');", @"this.ref('id');
+        this.tokenizer(camelCaseTokenizer);");
+                return scriptBuilder.ToString();
+            })
+            .IncludeHost(false),
+        Meta(Keys.WritePath, new FilePath("assets/js/modulesSearchIndex.js")),
+        WriteFiles()        
+    ),
+	Razor().WithLayout("/_ModulesLayout.cshtml"),
+    Headings(),
+    HtmlInsert("div#infobar-headings", @ctx.GenerateInfobarHeadings(@doc)),
+	WriteFiles()
+);
