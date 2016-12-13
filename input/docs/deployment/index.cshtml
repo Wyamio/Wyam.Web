@@ -1,6 +1,7 @@
-Order: 30
+Order: 3
+Description: One of the many benefits of static generation is that the end result is a collection of final files. By default, Wyam places the result of your build in the output folder. You can manually deploy your site by simply uploading these files to your host. There are also other ways to build and deploy your content described below.
+RedirectFrom: getting-started/deployment
 ---
-
-<p>One of the many benefits of static generation is that the end result is a collection of final files. By default, Wyam places the result of your build in the `output` folder. You can manually deploy your site by simply uploading these files to your host. There are also other ways to build and deploy your content described below.</p>
+<p>@Html.Raw(Model.String(DocsKeys.Description))</p>
 
 @Html.Partial("_ChildPages")

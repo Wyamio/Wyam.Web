@@ -2,6 +2,7 @@ Settings.Host = "wyam.io";
 GlobalMetadata[DocsKeys.SiteTitle] = "Wyam";
 GlobalMetadata[DocsKeys.SourceFiles] = "../release/repo/src/**/{!bin,!obj,!packages,!*.Tests,}/**/*.cs";
 GlobalMetadata[DocsKeys.BaseEditUrl] = "https://github.com/Wyamio/Wyam.Web/tree/develop/input/";
+GlobalMetadata[DocsKeys.NetlifyRedirects] = true;
 
 Pipelines.InsertBefore(DocsPipelines.RenderPages, "Modules",
 	Documents(DocsPipelines.Code),
@@ -54,8 +55,7 @@ lunr.tokenizer.registerFunction(camelCaseTokenizer, 'camelCaseTokenizer')");
         this.tokenizer(camelCaseTokenizer);");
                 return scriptBuilder.ToString();
             })
-            .IncludeHost(false),
-        Meta(Keys.WritePath, new FilePath("assets/js/modulesSearchIndex.js")),
+            .WithPath("assets/js/modulesSearchIndex.js"),
         WriteFiles()        
     ),
 	Razor().WithLayout("/_ModulesLayout.cshtml"),

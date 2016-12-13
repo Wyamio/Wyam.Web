@@ -1,12 +1,15 @@
 Title: Obtaining
 Description: How to download and install Wyam.
-Order: 10
+Order: 1
+RedirectFrom:
+  - getting-started/obtaining
+  - knowledgebase/tools-package
 ---
-There are several ways to download and install Wyam depending on which platform you're using and how much automation and control you want.
+There are several ways to download and install Wyam depending on which platform you're using and how much automation and control you want. Note that Wyam currently runs on the .NET Framework and is therefore Windows-only. Plans to port to .NET Core and enable cross-platform execution are already in the works.
 
 # Zip File
 
-To download Wyam as a zip file, visit the [Releases](https://github.com/Wyamio/Wyam/releases) page and download the most recent archive. Then unzip it into a folder of your choice. That's it. You may also want to add the folder where you unzipped Wyam to your path, but that step is optional.
+To download Wyam as a zip file, visit the [Releases](https://github.com/Wyamio/Wyam/releases) page and download the most recent archive. Then unzip it into a folder of your choice. That's it. The zip archive contains an executable `wyam.exe` as well as all the required libraries. You may also want to add the folder where you unzipped Wyam to your path, but that step is optional.
 
 **Note that you may also need to right-click the zip file after download and select "Unblock" in the Security section of the properties dialog, otherwise you could get strange errors when using the application.**
 
@@ -28,7 +31,7 @@ usage:  <command> [<args>]
                    environment variable.
 ```
 
-Of particular note, run `wyam.windows.exe update` to perform an update of Wyam to the latest version.
+Of particular note, run `wyam.windows.exe update` to perform an update of Wyam to the latest version. Note that this utility application is different from the main `wyam.exe` that you should use to actually run Wyam.
 
 # Tools Package
 
@@ -52,17 +55,10 @@ NuGet V3 clients (VS 2015, Wyam): [https://www.myget.org/F/wyam/api/v3/index.jso
 
 NuGet V2 clients (VS 2013, Cake): [https://www.myget.org/F/wyam/api/v2](https://www.myget.org/F/wyam/api/v2)
 
-To make Cake use the development feed, change the directives at the top of the Cake build script to:
-
-```
-#tool nuget:https://www.myget.org/F/wyam/api/v2?package=Wyam&prerelease
-#addin nuget:https://www.myget.org/F/wyam/api/v2?package=Cake.Wyam&prerelease
-```
-
-Note that you'll also need to delete the existing "tools\Wyam" and "tools\Addins\Cake.Wyam" folders if they exist (otherwise Cake will just use the existing packages and won't download the new packages).
-
 To use the development feed inside a Wyam configuration file for a particular module, specify it like this:
 
 ```
 #n Wyam.Markdown -s https://www.myget.org/F/wyam/api/v3/index.json -l -p
 ```
+
+The `-l` flag indicates that the latest version of the specified package should always be used, and the `-p` flag indicates that pre-release packages should be used.

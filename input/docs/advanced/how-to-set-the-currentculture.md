@@ -1,6 +1,7 @@
 Title: How To Set The CurrentCulture
+RedirectFrom: knowledgebase/how-to-set-the-currentculture
 ---
-The best way to do this is to add the following in the [main body](/getting-started/configuration#body) of your configuration file:
+The best way to do this is to add the following in your [configuration file](/docs/usage/configuration):
 
 ```
 System.Globalization.CultureInfo.DefaultThreadCurrentCulture

@@ -1,6 +1,7 @@
 Title: Configuration
 Description: Describes the format of the configuration file.
-Order: 30
+Order: 3
+RedirectFrom: getting-started/configuration
 ---
 The command line Wyam application reads a configuration file typically named `config.wyam` (though you can change that with an argument) that sets up the environment and configures the pipelines. Preprocessor directives can appear anywhere in the configuration file, though they are always evaluated before processing the rest of the file (by convention they're usually at the top of the file).
 
@@ -15,8 +16,7 @@ A configuration file typically looks like this:
 // ...
 ```
 
-# <a name="Preprocessor"></a>Preprocessor Directives
----
+# Preprocessor Directives
 
 Preprocessor directives establish the Wyam environment and get evaluated before the rest of the configuration file. They're typically responsible for declaring things like NuGet packages and assemblies. Every preprocessor directive starts with `#` at the beginning of a line and extend for the rest of the line. The following directives are available (the current set of directives can always be seen by calling `wyam help --directives`).
 
@@ -102,8 +102,7 @@ By default, the following assemblies are already loaded so you don't need to exp
 * `System.IO`
 * `System.Diagnostics`
 
-# <a name="declarations"></a>Declarations
----
+# Declarations
 
 The code in your configuration is executed inside the context of an "invisible" class and method. Note that any declarations such as classes or methods will be automatically "lifted" into an outer scope. In this way, the configuration file is more like a C# script than a normal code file. Any classes that are declared in the configuration file will be placed in the global scope. Any methods will be placed in the wrapping class outside the default wrapping method that contains the rest of the configuration code.
 
@@ -140,7 +139,6 @@ Note that namespaces for all found modules as well as the following namespaces a
 * `System.Diagnostics`
 
 # Initial Metadata
----
 
 Each pipeline starts with a single document prepopulated with initial metadata you specify in the configuration file. You can use this facility to introduce variables that can influence the way the pipeline behaves. To set initial metadata, just add values to the `InitialMetadata` property (it's of type `IInitialMetadata` which implements `IDictionary<string, object>`). Note that the dictionary values are objects, so you can store simple primitive values or complex structure. For example:
 
@@ -150,7 +148,6 @@ InitialMetadata.Add("Baz", new KeyValuePair<string, string>("abc", "xyz"));
 ```
 
 # Pipelines
----
 
 Configuring a pipeline is easy, and Wyam configuration files are designed to be simple and straightforward:
 ```
@@ -272,6 +269,5 @@ WriteFiles((doc, ctx) => "css/style.css")
 ```
 
 # Execution Ordering
----
 
 Be aware that the configuration file only *configures* the pipelines. Each pipeline is executed in the order in which they were first added after the entire configuration file is evaluated. This means that you can't declare one pipeline, then declare another, and then add a new module to the first pipeline expecting it to reflect what happened in the second one. The second pipeline won't execute until the entire first pipeline is complete, including any modules that were added to it after the second one was declared. If you need to run some modules, switch to a different pipeline, and the perform additional processing on the first set of documents, look into the [Documents](/modules/documents) module.

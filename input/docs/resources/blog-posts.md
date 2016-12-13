@@ -1,6 +1,7 @@
 Title: Blog Posts
 Description: Blog posts about Wyam from around the web.
 Order: 30
+RedirectFrom: community
 ---
 
 - **[Wyam I using a static site generator?](http://arjanvanrijn.com/posts/Wyam-i-using-a-static-site-generator)**

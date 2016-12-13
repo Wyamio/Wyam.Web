@@ -1,10 +1,13 @@
-Title: Module Inputs vs. Outputs
-Description: A discussion about different input vs. output behavior.
-Order: 50
+Title: Modules
+Description: A module is a small single-purpose component that acts on documents.
+Order: 3
+RedirectFrom: knowledgebase/module-inputs-vs-outputs
 ---
+A *module* is a small single-purpose component that takes documents as input, does something based on those documents (possibly transforming them), and outputs documents as a result of whatever operation was performed.
+
 Modules in Wyam treat inputs and outputs in different ways. Some modules just "pass-through" the documents that are input, some transform them in some way and output the results, and some exhibit more complex behavior. Some modules even exhibit different behavior depending on how the module was configured. The behavior can get especially confusing when considering some modules evaluate child modules which also output documents. In these cases, there are different behaviors for how the input documents and the result documents from the child modules are combined. The way inputs, outputs, and child module results are related can generally be described as a few different patterns and even though these probably don't cover the way *every* module works, they should help you understand the concepts involved.
 
-# <a name="pass-through"></a>Pass-Through
+# Pass-Through
 
 These modules just take the input documents and pass them on as the outputs:
 
@@ -16,7 +19,7 @@ These modules just take the input documents and pass them on as the outputs:
         Module-->O2(I2)
 </div>
 
-# <a name="transformation"></a>Transformation
+# Transformation
 
 These modules apply some sort of transformation to the input documents and output one result for each input:
 
@@ -28,7 +31,7 @@ These modules apply some sort of transformation to the input documents and outpu
         Module-->O2("O2 (from I2)")
 </div>
 
-# <a name="aggregation"></a>Aggregation
+# Aggregation
 
 These modules take multiple input documents and combine them into a single output document:
 
@@ -39,7 +42,7 @@ These modules take multiple input documents and combine them into a single outpu
         Module-->O1("O1 (from I1 + I2)")
 </div>
 
-# <a name="splitting"></a>Splitting
+# Splitting
 
 This is the opposite behavior of aggregation. These modules split each input document into multiple output documents:
 
@@ -53,7 +56,7 @@ This is the opposite behavior of aggregation. These modules split each input doc
         Module-->O2B("O2B (from I2)")
 </div>
 
-# <a name="concatenation"></a>Concatenation
+# Concatenation
 
 In this case, output documents that are independent from the input documents are output, but instead of replacing the input document they are concatenated with them:
 
@@ -84,7 +87,7 @@ Note that the new documents may come from a sequence of child modules:
         Module-->O4(C2)
 </div>
 
-# <a name="replacement"></a>Replacement
+# Replacement
 
 These modules just replace the entire input set of documents with a different output set:
 
@@ -133,7 +136,7 @@ Further, some modules support a `ForEachDocument()` method that runs the entire 
         Module-->O4(C2B)
 </div>
 
-# <a name="combination"></a>Combination
+# Combination
 
 This pattern describes the combination of one or more input documents with the outputs from child modules:
 

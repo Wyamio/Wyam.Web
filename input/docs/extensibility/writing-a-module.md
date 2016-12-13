@@ -1,11 +1,10 @@
 Title: Writing a Module
 Description: How to write a module for Wyam.
-Order: 10
+RedirectFrom: knowledgebase/writing-a-module
 ---
 Writing a new module is easy and consists of four steps: creating a class library for your module, adding a module class, implementing a single method, and deploying the library.
 
 # Create a Library
----
 
 Create a class library for your module and reference the latest `Wyam.Common` [NuGet package](https://www.nuget.org/packages/Wyam.Common). This includes all of the Wyam interfaces and should be the only package you need to include to extend Wyam.
 
@@ -18,14 +17,12 @@ It is recommended that you aim for library separation based on dependencies. Wya
 Try to name your modules (and their containing libraries) based on *what they do* not *how they do it*. The names should also be short and concise. For example, if you write a module that manipulates Excel files, it should be called "Excel" not "ExcelDotNet" (assuming that was the name of a .NET Excel library) or "ExcelEditor".
 
 # Create a Module Class
----
 
 Derive your class from `IModule`.
 
 If your module needs any information, you'll typically get it in the constructor and then save it until execution. If your module needs to collect data at runtime, use either `ContextConfig` or `DocumentConfig` as an argument in the constructor or fluent method and then evaluate it in your `Execute` method using `Invoke<T>`. Because both `ContextConfig` and `DocumentConfig` return a raw `object` to make configuration easier, be sure to document somewhere what kind of return type your module expects from these delegates.
 
 # Implement The Execute Method
----
 
 Implement the single method `IEnumerable<IDocument> Execute(IReadOnlyList<IDocument> inputs, IExecutionContext context)`. Your implementation should accept zero or more `IDocument` inputs and return zero or more `IDocument` outputs. To the extent you need to modify the input documents (which are immutable) or get new ones, use one of the `IExecutionContext.GetDocument()` methods which return a new `IDocument` with new content and/or additional metadata items.
 
@@ -54,12 +51,10 @@ Here are a few other guidelines to follow so that your module matches the conven
 - If you're planning on submitting your module, document it using XML code comments. Also use the special `category` and `metadata` XML comment elements (the Wyam web site knows how to read these and they power the [modules](/modules) page).
 
 # Deployment
----
 
-Compile your library and place it somewhere Wyam will find it. You can manually put it in the Wyam directory (not recommended), tell Wyam to [reference your assemblies](/getting-started/configuration#assemblies), or create a NuGet package and [tell Wyam to use it](/getting-started/configuration#nuget). In all of these deployment scenarios, Wyam will scan the assembly for any modules, find your new module, and make it available.
+Compile your library and place it somewhere Wyam will find it. You can manually put it in the Wyam directory (not recommended), tell Wyam to [reference your assemblies](/docs/usage/configuration#assemblies), or create a NuGet package and [tell Wyam to use it](/docs/usage/configuration#nuget-packages). In all of these deployment scenarios, Wyam will scan the assembly for any modules, find your new module, and make it available.
 
 # Example
----
 
 As an example, here's the entirety of the [Where](/modules/where) module, which filters the documents in the pipeline:
 

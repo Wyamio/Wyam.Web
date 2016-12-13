@@ -1,6 +1,7 @@
 Title: Services
 Description: A list of hosted services that can help improve your static sites.
 Order: 40
+RedirectFrom: knowledgebase/static-site-resources
 ---
 Just because you're running a static site doesn't mean that the experience can't be rich for your users. A lot of third-parties have been filling in for traditional server-side roles with easy to embed JavaScript widgets that run on the client. Here are some of our favorites. Please suggest additional resources if you know of any.
   

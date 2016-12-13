@@ -1,6 +1,7 @@
 Title: I/O
 Description: Explains Wyam's powerful I/O abstraction.
-Order: 40
+Order: 7
+RedirectFrom: getting-started/io
 ---
 
 Wyam uses an IO abstraction layer designed to provide flexibility and consistency when dealing with files, directories, and path information.
@@ -9,12 +10,12 @@ Wyam uses an IO abstraction layer designed to provide flexibility and consistenc
 
 Two types of classes are used, *paths* and *files/directories*. 
 
-Path classes (`FilePath` and `DirectoryPath`) describe the location of a file or directory. Paths can be either absolute (I.e., starting from the root of a particular file system) or relative. They can be easily joined together and otherwise manipulated. Every absolute path also contains information about what *provider* the path is intended to be used with but are not directly tied to that provider (see below for informaion about providers).
+Path classes (`FilePath` and `DirectoryPath`) describe the location of a file or directory. Paths can be either absolute (I.e., starting from the root of a particular file system) or relative. They can be easily joined together and otherwise manipulated. Every absolute path also contains information about what *provider* the path is intended to be used with but are not directly tied to that provider (see below for information about providers).
 
 File and directory classes (primarily implementations of `IFile` and `IDirectory`) point directly to a potential file
 or directory within a given file system. They are usually obtained given a path that points to them. Each provider implements their own file and directory classes as appropriate for that provider. File and directory implementations often provide functionality for reading and writing files, creating directories, and otherwise manipulating the file system.
 
-# <a name="case-sensitivity"></a>Case Sensitivity
+# Case Sensitivity
 
 Different file systems have different rules about case sensitivity. Ideally, we'd be able to follow the rules of the underlying file system. However, because of the way Wyam uses virtual paths (see the discussion on input paths below), and because multiple file systems might be in use at once, we have to operate with the assumption that paths are case-sensitive. Otherwise, we would consider paths equivalent when they might not be. **All paths in Wyam are case sensitive.** That means that when you compare a `FilePath`, "foo.txt" is different from "Foo.txt". Note, however, that a given file provider *might* be case-insensitive in which case these paths would actually point to the same file.
 
@@ -26,7 +27,7 @@ All absolute `FilePath` and `DirectoryPath` paths must specify a file provider i
 
 In addition to using a URI directly in the path constructor, there are other ways to specify which provider to use (though they all end up creating a URI under the hood). For one, you can delimit the provider from the path with a `|` character. You can also use a single URI for both the provider and the path and the two will be automatically separated when creating a `FilePath` or `DirectoryPath` (this is useful when relying on the implicit string-to-path conversion).
 
-For example, consider a file provider designed to get information from a GitHub Gist. This example provider doesn't require any URI information beyond the `gist` scheme, so it's similar to our default `file` scheme. The provider then looks at the absolute path to determine which specific Gist to retreive. All of the following ways of specifying the `gist` provider and the Gist ID of `9dac65b1ce1707550cb5f3bd9f7f9998` are equivalent:
+For example, consider a file provider designed to get information from a GitHub Gist. This example provider doesn't require any URI information beyond the `gist` scheme, so it's similar to our default `file` scheme. The provider then looks at the absolute path to determine which specific Gist to retrieve. All of the following ways of specifying the `gist` provider and the Gist ID of `9dac65b1ce1707550cb5f3bd9f7f9998` are equivalent:
 
 - `"gist|/2721371adf6bf69fa833"` - provider portion is implicitly understood to be a scheme without a host or any other components if not a URI (translates to "gist:///").
 - `"gist:///2721371adf6bf69fa833"` - if no provider is specified explicitly but the path itself is a valid URI, then the scheme, host, etc. become the provider and the path and query become the path. Note again that `///` is used and not `//` because a double slash would have indicated the gist ID was a host name and it would have become part of the provider URI, leaving an empty path.
@@ -46,7 +47,7 @@ Notice that any time the provider itself requires a path, you must either use th
 
 # Virtual File System
 
-The link between paths, file providers, and files and paths is managed by a virtual file system available through the execution context as the `FileSystem` property. The virtual file system can also be accessed in your configuration file. It stores all the registered file providers as well as the various root, input, and output paths and provides methods to join them with relative paths to get `IFile` and `IDirectory` instances.
+The link between paths, file providers, and files and paths is managed by a virtual file system available through the execution context as the `IExecutionContext.FileSystem` property. The virtual file system can also be accessed in your configuration file. It stores all the registered file providers as well as the various root, input, and output paths and provides methods to join them with relative paths to get `IFile` and `IDirectory` instances.
 
 ## Root Path
 
@@ -56,9 +57,9 @@ By default the root path is set to the path on the underlying file system from w
 
 ## Input Paths
 
-Wyam uses multiple input paths that together comprise a virtual aggregated set of input files. This lets us do things like specify a set of cannonical input files to use for a theme but then selectivly override the theme files by putting replacements in an alternate input path with higher precedence.
+Wyam uses multiple input paths that together comprise a virtual aggregated set of input files. This lets us do things like specify a set of canonical input files to use for a theme but then selectively override the theme files by putting replacements in an alternate input path with higher precedence.
 
-Input paths are stored in an ordered list. When checking for files, the paths at the end of the list take precedence over those at the start of the list. For example, if path "A" is at index 0, path "B" is at index 1, and they both have a file named "foo.md", the one from path "B" will be used. Further, all paths are aggregated so searching for files or evaluating globbing experessions will consider all files and directories in all input paths. In the example above, getting all input files will result in a set of files from both path "A" and path "B" (with files of the same name from path "B" replacig those from path "A").
+Input paths are stored in an ordered list. When checking for files, the paths at the end of the list take precedence over those at the start of the list. For example, if path "A" is at index 0, path "B" is at index 1, and they both have a file named "foo.md", the one from path "B" will be used. Further, all paths are aggregated so searching for files or evaluating globbing expressions will consider all files and directories in all input paths. In the example above, getting all input files will result in a set of files from both path "A" and path "B" (with files of the same name from path "B" replacing those from path "A").
 
 By default, the following input paths are set:
 
@@ -72,7 +73,7 @@ The output path is where Wyam will place output files by default. Note that many
 
 By default the output path is set to "output".
 
-# <a name="globbing"></a>Globbing
+# Globbing
 
 Globbing (or globs) is a particular syntax for specifying files or directories using wildcards and other path-based search criteria. Wyam uses a sophisticated globbing engine to give you a lot of flexibility when searching for files. Even better, the globbing engine works with any file provider, be it the local file system or something else.
 

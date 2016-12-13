@@ -1,6 +1,7 @@
 Title: AppVeyor for Continuous Integration
 Description: How to use GitHub Pages and AppVeyor to enable a free continuous integration environment for your site.
 Order: 20
+RedirectFrom: knowledgebase/continuous-integration
 ---
 It's relatively easy to achieve site deployment nirvana with Wyam, GitHub Pages, and AppVeyor. Follow these instructions to get up and running:
 

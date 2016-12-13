@@ -55,8 +55,7 @@
 		if(!ns.StartsWith("Wyam.Core"))
 		{
 			<h1 id="Package">Package</h1>
-			<hr />
-			<div>This module exists in the <strong>@ns</strong> package which is not part of the core distribution. Add the following preprocessor directive to your <a href="/getting-started/configuration">configuration file</a> to use it:</div>
+			<div>This module exists in the <strong>@ns</strong> package which is not part of the core distribution. Add the following preprocessor directive to your <a href="/docs/usage/configuration">configuration file</a> to use it:</div>
 			<pre class="prettyprint"><code>#n -p @ns</code></pre>
 			<div>Alternativly, you can add all modules at once with the following preprocessor directive:</div>
 			<pre class="prettyprint"><code>#n -p Wyam.All</code></pre>
@@ -67,12 +66,10 @@
 		if(!string.IsNullOrWhiteSpace(examples))
 		{
 			<h1 id="Examples">Examples</h1>
-			<hr />
 			<div>@Html.Raw(examples)</div>
 		}
 		
 		<h1 id="Usage">Usage</h1>
-		<hr />
 		
 		// Constructors
 		<ul>			
@@ -188,7 +185,6 @@
 		if(metadata != null && metadata.Count > 0)
 		{
 			<h1 id="Metadata">Metadata</h1>
-			<hr />
 			<p>The following metadata is added to each document.</p>
 			<ul>
 				@foreach(OtherComment meta in metadata)

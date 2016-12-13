@@ -1,6 +1,7 @@
 Title: Command Line
 Description: Describes how to run Wyam from the command line and the available options.
-Order: 10
+Order: 2
+RedirectFrom: getting-started/usage
 ---
 You typically run Wyam using the command line application `wyam`. If you don't specify any arguments, the root folder will be set to the current folder and if a file named `config.wyam` is found, it will be used as the configuration file. You can also specify a root folder that's different than the current folder after the `wyam` command. For example:
 
@@ -134,7 +135,9 @@ usage:  build [-v] [--attach] [-w] [-p [arg]] [--force-ext]
     <package>                The package to install.
 ```
 
-Note that some of the options such as `--nuget` are "nested" and must be contained in quotes if they contain options of their own (and any inner quotes must be escaped). For example, the following command will load a Nuget package named `Foo.Bar`:
+# Nested Arguments
+
+Note that some of the arguments such as `--nuget` are "nested" and must be contained in quotes if they contain options of their own (and any inner quotes must be escaped). For example, the following command will load a Nuget package named `Foo.Bar`:
 
 ```
 wyam --nuget Foo.Bar 
@@ -146,12 +149,20 @@ However, if you want to specify any additional options for the `--nuget` option 
 wyam --nuget "Foo.Bar -p" 
 ```
 
+# Embedded Web server
+
+Wyam includes an embedded web server you can use to test your site locally. It includes support for ignoring file extensions and implicitly delivering a `index.html` page if one exists. This is similar to the convention a lot of static site hosts such as GitHub Pages uses.
+
+To activate the preview server, use the `-p` or `--preview` argument. This will make the site available on a URL like `http://localhost:5080`. If you prefer a different port, add that after the preview argument. This will cause the Wyam process to remain open in your console until you hit a key to exit.
+
+You can also change where the preview server pulls files from with the `--preview-root` argument.
+
+# File Watching
+
+You can turn on file watching with the `-w` or `--watch` argument. When file watching is enabled, the generation will be re-run any time a file in one of the input folders changes. Some modules can cache information from one generation to the next, so re-generations after a watched file changes should be somewhat faster. Note that because Wyam makes no assumptions about dependencies between files, modules, and pipelines, it is not possible to only regenerate the effects of the file that changed. We don't know what modules that file may have impacted indirectly and therefore need to regenerate everything (it's possible that in the future this could get smarter, but it's a very hard problem). Also note that some modules like [Less](/modules/less) may not reflect changes to their underlying files due to the mechanics of the module.
+
 # Paths
 
-The paths that Wyam uses can be specified on the command line. This includes the `--input` path(s) where Wyam will look for files, the `--output` path where Wyam will place the output of modules like [WriteFiles](/modules/writefiles), the `--config` file path where Wyam will look for a configuration file, and the root path that Wyam considers the base path for all other relative paths. By default, the root path is set to the path from where Wyam is executed. You may want to specify a different base path (for example, if running from a build script or as part of a larger process). In this case, just supply an alternate absolute path at the end of the command line. This new root path will be the base for all other relative paths including input and output paths. This is a good way to ensure consistency regardless of which path Wyam is run from.
+The paths that Wyam uses can be specified on the command line. This includes the input path(s) specified by `--input` where Wyam will look for files, the output path specified by `--output` where Wyam will place the output of modules like [WriteFiles](/modules/writefiles), the config file path specified by `--config` where Wyam will look for a configuration file, and the root path specified as the final argument that Wyam considers the base path for all other relative paths. By default, the root path is set to the path from where Wyam is executed. You may want to specify a different base path (for example, if running from a build script or as part of a larger process). In this case, just supply an alternate absolute path at the end of the command line. This new root path will be the base for all other relative paths including input and output paths. This is a good way to ensure consistency regardless of which path Wyam is run from.
 
-Note that these paths can also be specified from within [your configuration script](/getting-started/configuration). From there you can set `FileSystem.OutputPath`, `FileSystem.RootPath`, or call `FileSystem.InputPaths.Add()`.
-
-# Embedding
-
-Creating a Wyam engine directly in your own application is also supported. The core Wyam library is available on NuGet as [Wyam.Core](https://www.nuget.org/packages/Wyam.Core). Once you've included it in your application, you will need to create an instance of the `Wyam.Core.Engine` class. See [the knowledgebase article on embedded use](/knowledgebase/embedded-use) for more information.
+Note that these paths can also be specified from within [your configuration script](/docs/usage/configuration). From there you can set [`FileSystem.OutputPath`](/api/Wyam.Common.IO/IFileSystem/6DB77CDF), [`FileSystem.RootPath`](/api/Wyam.Common.IO/IFileSystem/3D1098EC), or call [`FileSystem.InputPaths.Add()`](/api/Wyam.Common.IO/IFileSystem/540AF0EB).

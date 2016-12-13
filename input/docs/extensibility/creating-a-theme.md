@@ -1,0 +1,4 @@
+Title: Creating A Theme
+Description: Explains how to create and distribute your own theme.
+---
+Creating a theme is very easy. Since a theme [is just a collection of input files](/docs/concepts/themes), you can build your theme by working on files in your normal `input` path. Once you've got the input files exactly as you like them, package them up as a [NuGet package with content files](http://blog.nuget.org/20160126/nuget-contentFiles-demystified.html). When such a package is included in a Wyam generation, it will automatically make the file in the content folder of the package available as a low precedence theme input path.

@@ -1,5 +1,6 @@
 Title: Migrating to 0.12.x
 Description: How to migrate existing sites to the new IO abstraction in 0.12.x.
+RedirectFrom: knowledgebase/migrating-to-0.12.x
 ---
 
 The 0.12.x series of releases is a chance to "reset" some things that worked well when this was just a smaller project but need to change as Wyam serves more use cases. These changes will set the project up for a number of new features in the 0.13.x releases such as recipes and themes.
