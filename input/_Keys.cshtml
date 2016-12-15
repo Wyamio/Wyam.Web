@@ -1,0 +1,39 @@
+@model KeysModel
+
+<ul>
+    @{
+        IEnumerable<IDocument> keys = Documents
+            .FromPipeline(DocsPipelines.Api)
+            .First(x => x.String(CodeAnalysisKeys.Name) == Model.ContainerClass)
+                .DocumentList(CodeAnalysisKeys.Members)
+                .Where(x => x.String(CodeAnalysisKeys.Kind) == "Field" 
+                    && x.String("Accessibility") == "Public" 
+                    && (Model.Scope == null || x.List<OtherComment>("ScopeComments").Any(y => y.Html == Model.Scope)));
+        if(Model.AlphaSort)
+        {
+            keys = keys.OrderBy(x => x.String(CodeAnalysisKeys.DisplayName));
+        }
+        foreach(IDocument key in keys)
+        {
+            <li>        
+                <p>
+                    @{
+                        string type = string.Join(", ", key.List<OtherComment>("TypeComments")?.Select(x => x.Html) ?? Array.Empty<string>());
+                        if(type != string.Empty)
+                        {
+                            type = ": " + type;
+                        }
+                    }
+                    <strong><code>@(key.String(CodeAnalysisKeys.DisplayName))</code></strong>@Html.Raw(type)
+                </p>
+                @{
+                    string summary = key.String(CodeAnalysisKeys.Summary);            
+                    if(!string.IsNullOrWhiteSpace(summary))
+                    {							
+                        <p>@Html.Raw(summary)</p>
+                    }
+                }
+            </li>
+        }
+    }
+</ul>

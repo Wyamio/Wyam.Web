@@ -3,7 +3,7 @@ Description: How to call wyam.exe from within a unit test.
 Order: 5
 RedirectFrom: knowledgebase/executing-in-a-unit-test
 ---
-There may be times when you want to call wyam.exe from a unit test (or other bit of code) without actually [embedding it](/knowledgebase/embedded-use). Here's an example NUnit unit test that does this (though the technique should work for any test framework):
+There may be times when you want to call wyam.exe from a unit test (or other bit of code) without actually [embedding it](/docs/usage/embedding). Here's an example NUnit unit test that does this (though the technique should work for any test framework):
 
 ```
 [Test]

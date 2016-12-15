@@ -60,7 +60,7 @@ Specifies a theme to use.
 Adds a NuGet package (downloading and installing it if needed).
 ```
 
-## <a name="nuget"></a>NuGet Packages
+## NuGet Packages
 
 Any NuGet packages you specify in preprocessor directives are installed and then scanned for modules which are made available to the main configuration body. By default, Wyam will attempt to match requested packages with those on disk and will use the disk-based package when available. To force it to use a specific version or version range (and download and install it if necessary), use the `--version <version>` flag. To force it to always download and install the latest available version on the package feed, use the `--latest` flag, which will always result in a call to the configured source(s).
 
@@ -89,9 +89,9 @@ You can also specify the special `Wyam.All` package which will download all of t
 #n -p Wyam.All
 ```
 
-## <a name="assemblies"></a>Assemblies
+## Assemblies
 
-In addition to NuGet packages you can also load assemblies. All assemblies are loaded with the `#assembly` or `#a` directive. You can load all the assemblies in a directory by using a [globbing pattern](/getting-started/io#globbing), or by specifying a relative or absolute path to the assembly. You can also load assemblies by name. If you specify a short name, Wyam will attempt to resolve the assembly with the same version as the currently loaded framework. Keep in mind that non-framework assemblies located in the GAC *must* be loaded by full name (including the version, public key token, etc.).
+In addition to NuGet packages you can also load assemblies. All assemblies are loaded with the `#assembly` or `#a` directive. You can load all the assemblies in a directory by using a [globbing pattern](/docs/concepts/io#globbing), or by specifying a relative or absolute path to the assembly. You can also load assemblies by name. If you specify a short name, Wyam will attempt to resolve the assembly with the same version as the currently loaded framework. Keep in mind that non-framework assemblies located in the GAC *must* be loaded by full name (including the version, public key token, etc.).
 
 By default, the following assemblies are already loaded so you don't need to explicitly specify them:
 * `System`

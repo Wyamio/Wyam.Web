@@ -4,6 +4,25 @@ GlobalMetadata[DocsKeys.SourceFiles] = "../release/repo/src/**/{!bin,!obj,!packa
 GlobalMetadata[DocsKeys.BaseEditUrl] = "https://github.com/Wyamio/Wyam.Web/tree/develop/input/";
 GlobalMetadata[DocsKeys.NetlifyRedirects] = true;
 
+public class KeysModel
+{
+    public string ContainerClass { get; set; }
+    public string Scope { get; set; }
+    public bool AlphaSort { get; set; }
+
+    public KeysModel(string containerClass, string scope = null, bool alphaSort = true)
+    {
+        ContainerClass = containerClass;
+        Scope = scope;
+        AlphaSort = alphaSort;
+    }
+
+    public KeysModel(string containerClass, bool alphaSort = true)
+        : this(containerClass, null, alphaSort)
+    {        
+    }
+}
+
 Pipelines.InsertBefore(DocsPipelines.RenderPages, "Modules",
 	Documents(DocsPipelines.Code),
 	AnalyzeCSharp()

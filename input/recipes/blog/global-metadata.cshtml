@@ -1,0 +1,21 @@
+Order: 2
+---
+
+Note that this list isn't exhaustive. Some modules used by the recipe may have their own global metadata that you can set as well.
+
+
+---
+While it's not required, it's recommended that you create a configuration file to define the `Host` setting and the following global metadata:
+
+* `Title` - The title of the site, used in several places including the web page title.
+* `Description` - The description of the site used on the home page.
+* `Intro` - A small introduction paragraph used on the home page.
+
+A configuration file that defines these would look something like:
+
+```
+Settings.Host = "example.com";
+GlobalMetadata["Title"] = "Dave Glick";
+GlobalMetadata["Description"] = "The personal blog of Dave Glick";
+GlobalMetadata["Intro"] = "Hi, welcome to my blog!";
+```

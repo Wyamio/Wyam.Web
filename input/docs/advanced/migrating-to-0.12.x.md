@@ -8,7 +8,7 @@ The 0.12.x series of releases is a chance to "reset" some things that worked wel
 # <a name="0.12.4"></a>0.12.4
 
 This release included some changes to NuGet packages to better handle additional extension points down the road (such as recipes, themes, file providers, etc.):
-- The ability to specify a [NuGet version range](/getting-started/configuration#nuget) is back. This is good news for constraining which versions of packages are used in your build in order to make them consistent and repeatable. Unfortunately, it's also a breaking change because the [NuGet version range convention](https://docs.nuget.org/create/versioning#specifying-version-ranges-in-.nuspec-files) specifies that specific versions be enclosed in `[` and `]` brackets. Wyam had been using an unadorned number for specific versions, which now indicates that version *or anything higher*.
+- The ability to specify a [NuGet version range](/docs/usage/configuration) is back. This is good news for constraining which versions of packages are used in your build in order to make them consistent and repeatable. Unfortunately, it's also a breaking change because the [NuGet version range convention](https://docs.nuget.org/create/versioning#specifying-version-ranges-in-.nuspec-files) specifies that specific versions be enclosed in `[` and `]` brackets. Wyam had been using an unadorned number for specific versions, which now indicates that version *or anything higher*.
   - If you specify specific versions for any NuGet packages, surround the version with `[` and `]` to maintain the existing behavior.
 - In order to better represent that Wyam extension packages may contain other extensions beyond modules, all of the Wyam packages have been renamed from `Wyam.Modules.*` to `Wyam.*`. For example, Markdown support can now be found in `Wyam.Markdown`.
   - Change all of your NuGet package names to the new name without the `.Modules` component.
@@ -32,13 +32,13 @@ Alternatively, you can download a meta-package that contains references to all o
 ---
 
 In general, the steps to migrate look like the following:
-- Modify the paths used with `ReadFiles` and `CopyFiles` to use [globbing patterns](/getting-started/io#globbing) and honor [case sensitivity](/getting-started/io#case-sensitivity).
+- Modify the paths used with `ReadFiles` and `CopyFiles` to use [globbing patterns](/docs/concepts/io#globbing) and honor [case sensitivity](/docs/concepts/io#case-sensitivity).
 - Change uses of `IMetadata.Link()` to `IExecutionContext.GetLink()` in templates and helper methods.
 - Change uses of `PathHelper` to instance methods of `FilePath` and `DirectoryPath`.
 
 Here is a little more detail about the changes:
-- All paths are now case sensitive (see [case sensitivity](/getting-started/io#case-sensitivity) for a discussion of why).
-- Modules now use [globbing patterns](/getting-started/io#globbing) instead of simple file search patterns.
+- All paths are now case sensitive (see [case sensitivity](/docs/concepts/io#case-sensitivity) for a discussion of why).
+- Modules now use [globbing patterns](/docs/concepts/io#globbing) instead of simple file search patterns.
 - Methods to manually specify search depth and apply conditions that globbing can cover (such as limiting to specific extensions) have generally been removed.
 - Path metadata set by modules such as `ReadFiles` is now typed as `FilePath` or `DirectoryPath`.
   - You can still easily get a `string` by using `IMetadata.String()` but direct casts to `string` (I.e., `(string)document["key"]`) may fail.
@@ -52,7 +52,7 @@ Several modules that interact with the file system have been updated. An attempt
 
 ### ReadFiles
 
-The `ReadFiles` constructor now accepts one or more [globbing patterns](/getting-started/io#globbing). This easily covers everything the old version used to, plus enables much more powerful file searching. For example, instead of using a pattern of "\*.md" and `.FromAllDirectories()` you can just use the globbing pattern "\*\*/\*.md". Because the globbing patterns cover recursion, the methods to manually specify depth have been removed. The method for limiting extensions has also been removed as that can be represented in the globbing patterns.
+The `ReadFiles` constructor now accepts one or more [globbing patterns](/docs/concepts/io#globbing). This easily covers everything the old version used to, plus enables much more powerful file searching. For example, instead of using a pattern of "\*.md" and `.FromAllDirectories()` you can just use the globbing pattern "\*\*/\*.md". Because the globbing patterns cover recursion, the methods to manually specify depth have been removed. The method for limiting extensions has also been removed as that can be represented in the globbing patterns.
 
 In addition, many situations that would have required a predicate with `.Where()` can now rely on globbing patterns. For example, `ReadFiles("*.cshtml").Where(x => System.IO.Path.GetFileName(x)[0] != '_')` can now be written as `ReadFiles("{!_,}*.cshtml")`. Because the globbing patterns work differently than the old style patterns, it's recommended that you read and understand them before migrating your modules.
 
@@ -60,7 +60,7 @@ In addition, many situations that would have required a predicate with `.Where()
 
 ### CopyFiles
 
-The changes to `CopyFiles` are similar to those for `ReadFiles`. The constructor now accepts one or more [globbing patterns](/getting-started/io#globbing) and the methods to manually specify depth have been removed. The method for limiting extensions has also been removed as that can be represented in the globbing patterns. `CopyFiles.Where()` has been modified to pass an `IFile` instead of just a string path.
+The changes to `CopyFiles` are similar to those for `ReadFiles`. The constructor now accepts one or more [globbing patterns](/docs/concepts/io#globbing) and the methods to manually specify depth have been removed. The method for limiting extensions has also been removed as that can be represented in the globbing patterns. `CopyFiles.Where()` has been modified to pass an `IFile` instead of just a string path.
 
 ### Rss and Sitemap
 

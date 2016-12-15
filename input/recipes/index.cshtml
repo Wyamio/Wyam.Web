@@ -1,0 +1,17 @@
+Title: Recipes and Themes
+---
+
+<p>A recipe is a pre-configured series of modules and pipelines. Each recipe below can be thought of as it's own special purpose static site generator. To read more about the concepts behind recipes in general, view the <a href="/docs/concepts/recipes">docs section on recipes</a>.</p>
+
+<p>Each recipe can have one or more themes. Each theme contains a set of content such as CSS files, layouts, etc. that apply to a specific recipe. A theme can be used to get up and running quickly with a given recipe by providing the set of resources the recipe requires. Because each recipe is a totally different set of modules, pipelines, metadata, etc. a given theme is only applicable to a specific recipe. To read more about the concepts behind themes in general, view the <a href="/docs/concepts/themes">docs section on themes</a>.
+
+@foreach(IDocument child in Model.DocumentList(Keys.Children).OrderBy(x => x.Get<int>(DocsKeys.Order, 1000)))
+{
+    <h1>@(child.String(Keys.Title))</h1>
+    if(child.ContainsKey(DocsKeys.Description))
+    {
+        <p>@Html.Raw(child.String(DocsKeys.Description))</p>
+    }
+
+    @Html.Partial("_ChildPages", child)
+}
