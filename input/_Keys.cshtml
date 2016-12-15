@@ -8,7 +8,7 @@
                 .DocumentList(CodeAnalysisKeys.Members)
                 .Where(x => x.String(CodeAnalysisKeys.Kind) == "Field" 
                     && x.String("Accessibility") == "Public" 
-                    && (Model.Scope == null || x.List<OtherComment>("ScopeComments").Any(y => y.Html == Model.Scope)));
+                    && (Model.Scope == null || (x.List<OtherComment>("ScopeComments") ?? Array.Empty<OtherComment>()).Any(y => y.Html == Model.Scope)));
         if(Model.AlphaSort)
         {
             keys = keys.OrderBy(x => x.String(CodeAnalysisKeys.DisplayName));

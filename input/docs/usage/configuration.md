@@ -147,6 +147,15 @@ InitialMetadata["Foo"] = "Bar";
 InitialMetadata.Add("Baz", new KeyValuePair<string, string>("abc", "xyz")); 
 ```
 
+# Global Metadata
+
+You can specify global metadata that is available from the current `IExecutionContext`. This is often used by recipes to configure the generation and control different options.
+
+```
+GlobalMetadata["Foo"] = "Bar";
+GlobalMetadata.Add("Baz", new KeyValuePair<string, string>("abc", "xyz")); 
+```
+
 # Pipelines
 
 Configuring a pipeline is easy, and Wyam configuration files are designed to be simple and straightforward:

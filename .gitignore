@@ -4,3 +4,4 @@
 [Oo]utput/
 [Rr]elease/
 nuget.exe
+/debug.log

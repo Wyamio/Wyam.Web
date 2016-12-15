@@ -1,21 +1,7 @@
 Order: 2
 ---
+<p>The metadata values listed below apply globally and can be set from the <a href="/docs/usage/command-line">command line</a> or from a <a href="/docs/usage/configuration#global-metadata">configuration file</a>. They are used to configure options and otherwise control the generation process.</p>
 
-Note that this list isn't exhaustive. Some modules used by the recipe may have their own global metadata that you can set as well.
+<p>Note that this list isn't exhaustive. Some modules used by the recipe may have their own global metadata that you can set as well.</p>
 
-
----
-While it's not required, it's recommended that you create a configuration file to define the `Host` setting and the following global metadata:
-
-* `Title` - The title of the site, used in several places including the web page title.
-* `Description` - The description of the site used on the home page.
-* `Intro` - A small introduction paragraph used on the home page.
-
-A configuration file that defines these would look something like:
-
-```
-Settings.Host = "example.com";
-GlobalMetadata["Title"] = "Dave Glick";
-GlobalMetadata["Description"] = "The personal blog of Dave Glick";
-GlobalMetadata["Intro"] = "Hi, welcome to my blog!";
-```
+@Html.Partial("_Keys", new KeysModel("BlogKeys", "Global"))
