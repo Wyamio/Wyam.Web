@@ -1,6 +1,9 @@
 Order: 5
+Description: Details about the theme that supports this recipe and how to customize them.
 ---
 The Docs recipe only contains a single theme given how complex a documentation site is. It's conceivable that additional themes could be added in the future.
+
+# Overriding Theme Files
 
 One way to customize the output of the recipe is to [override specific theme files](/docs/concepts/themes#overriding-theme-files) with your own versions. Some theme files are even designed specifically for this purpose. While any theme file can be overridden, these are some of the more useful ones you should focus on. To implement an override, just create a new file with the same name in your own input path. In many cases you'll also want to start with the original content of the theme file ([as available in the repository](https://github.com/Wyamio/Wyam/tree/master/themes)) and edit it from there.
 
@@ -8,9 +11,9 @@ One way to customize the output of the recipe is to [override specific theme fil
   
   This is the main variables file for Bootstrap. You can use it to adjust colors, fonts, etc. Just be sure that you copy the original file before making any changes so that you maintain all the variables that Bootstrap needs.
 
-- **`/assets/css/master.less`**
+- **`/assets/css/override.less`**
   
-  You can use this file to define additional CSS styles for your site that you might use on specific pages. You can also define CSS override styles in this file since it's included after the main Bootstrap and theme CSS files.
+  You can use this file to define additional CSS styles. You can also define CSS override styles in this file since it's included after the main Bootstrap and theme CSS files.
 
 - **`/assets/img/logo.png`**
 

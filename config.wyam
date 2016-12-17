@@ -1,5 +1,5 @@
 Settings.Host = "wyam.io";
-GlobalMetadata[DocsKeys.SiteTitle] = "Wyam";
+GlobalMetadata[DocsKeys.Title] = "Wyam";
 GlobalMetadata[DocsKeys.SourceFiles] = "../release/repo/src/**/{!bin,!obj,!packages,!*.Tests,}/**/*.cs";
 GlobalMetadata[DocsKeys.BaseEditUrl] = "https://github.com/Wyamio/Wyam.Web/tree/develop/input/";
 GlobalMetadata[DocsKeys.NetlifyRedirects] = true;

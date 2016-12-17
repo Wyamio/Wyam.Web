@@ -1,5 +1,5 @@
-#tool "nuget:https://www.myget.org/F/wyam?package=Wyam&prerelease"
-#addin "nuget:https://www.myget.org/F/wyam?package=Cake.Wyam&prerelease"
+#tool "nuget:https://api.nuget.org/v3/index.json?package=Wyam&prerelease"
+#addin "nuget:https://api.nuget.org/v3/index.json?package=Cake.Wyam&prerelease"
 #addin "nuget:https://api.nuget.org/v3/index.json?package=Octokit"
 
 using Octokit;
@@ -48,30 +48,13 @@ Task("GetSource")
     });
 
 Task("Build")
+    .IsDependentOn("GetSource")
     .Does(() =>
     {
         Wyam(new WyamSettings
         {
-            Recipe = "Docs -i",
-            Theme = "Samson -i",
-            NuGetPackages = new []
-            {
-                "Wyam.Docs",
-                "Wyam.Docs.Samson",
-                "Wyam.Markdown",
-                "Wyam.Razor",
-                "Wyam.Yaml",
-                "Wyam.CodeAnalysis",
-                "Wyam.Less",
-                "Wyam.Html",
-                "Wyam.Feeds",
-                "Wyam.SearchIndex"
-            }.Select(x => new NuGetSettings
-            {
-                Prerelease = true,
-                Source = new [] { "https://www.myget.org/F/wyam/api/v3/index.json" },
-                Package = x
-            }),
+            Recipe = "Docs",
+            Theme = "Samson",
             UpdatePackages = true
         });        
     });
@@ -80,34 +63,16 @@ Task("Preview")
     .Does(() =>
     {
         // Use this to launch local build of Wyam
-        StartProcess("../Wyam/src/clients/Wyam/bin/Debug/wyam.exe",
-            "-a \"../Wyam/src/**/bin/Debug/*.dll\" -r \"docs -i\" -t \"../Wyam/themes/Docs/Samson\" -p --attach");
-/*
+        //StartProcess("../Wyam/src/clients/Wyam/bin/Debug/wyam.exe",
+        //    "-a \"../Wyam/src/**/bin/Debug/*.dll\" -r \"docs -i\" -t \"../Wyam/themes/Docs/Samson\" -p --attach");
+
         Wyam(new WyamSettings
         {
-            Recipe = "Docs -i",
-            Theme = "Samson -i",
-            NuGetPackages = new []
-            {
-                "Wyam.Docs",
-                "Wyam.Docs.Samson",
-                "Wyam.Markdown",
-                "Wyam.Razor",
-                "Wyam.Yaml",
-                "Wyam.CodeAnalysis",
-                "Wyam.Less",
-                "Wyam.Html",
-                "Wyam.Feeds",
-                "Wyam.SearchIndex"
-            }.Select(x => new NuGetSettings
-            {
-                Prerelease = true,
-                Source = new [] { "https://www.myget.org/F/wyam/api/v3/index.json" },
-                Package = x
-            }),
-            UpdatePackages = true
+            Recipe = "Docs",
+            Theme = "Samson",
+            UpdatePackages = true,
             Preview = true
-        });     */
+        });
     });
 
 //////////////////////////////////////////////////////////////////////
