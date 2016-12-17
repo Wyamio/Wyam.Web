@@ -5,3 +5,5 @@
 [Rr]elease/
 nuget.exe
 /debug.log
+/node_modules/
+/output.zip
