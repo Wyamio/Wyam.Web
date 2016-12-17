@@ -31,7 +31,7 @@ usage:  <command> [<args>]
                    environment variable.
 ```
 
-Of particular note, run `wyam.windows.exe update` to perform an update of Wyam to the latest version. Note that this utility application is different from the main `wyam.exe` that you should use to actually run Wyam.
+Of particular note, run `wyam.windows.cmd update` to perform an update of Wyam to the latest version. Note that this utility application is different from the main `wyam.exe` that you should use to actually run Wyam.
 
 # Tools Package
 
