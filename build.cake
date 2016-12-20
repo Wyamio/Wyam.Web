@@ -98,7 +98,7 @@ Task("Debug")
     });
 
 Task("Deploy")
-    //.IsDependentOn("Build")
+    .IsDependentOn("Build")
     .Does(() =>
     {
         var token = EnvironmentVariable("NETLIFY_WYAM");
@@ -121,6 +121,9 @@ Task("Deploy")
 
 Task("Default")
     .IsDependentOn("Build");
+    
+Task("AppVeyor")
+    .IsDependentOn("Deploy");
 
 //////////////////////////////////////////////////////////////////////
 // EXECUTION
