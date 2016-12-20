@@ -101,7 +101,11 @@ Task("Deploy")
     .IsDependentOn("Build")
     .Does(() =>
     {
-        var token = EnvironmentVariable("NETLIFY_WYAM");
+        string token = EnvironmentVariable("NETLIFY_WYAM");
+        if(string.IsNullOrEmpty(token))
+        {
+            throw new Exception("Could not get NETLIFY_WYAM environment variable");
+        }
         
         // This uses the Netlify CLI, but it hits the 200/min API rate limit
         // To use this, also need #addin "Cake.Npm"
