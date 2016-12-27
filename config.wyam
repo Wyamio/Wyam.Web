@@ -1,4 +1,5 @@
 Settings.Host = "wyam.io";
+Settings.LinksUseHttps = true;
 GlobalMetadata[DocsKeys.Title] = "Wyam";
 GlobalMetadata[DocsKeys.SourceFiles] = "../release/repo/src/**/{!bin,!obj,!packages,!*.Tests,}/**/*.cs";
 GlobalMetadata[DocsKeys.BaseEditUrl] = "https://github.com/Wyamio/Wyam.Web/tree/master/input/";

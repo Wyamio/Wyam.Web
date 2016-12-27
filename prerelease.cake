@@ -1,5 +1,5 @@
-#tool "nuget:https://api.nuget.org/v3/index.json?package=Wyam&prerelease"
-#addin "nuget:https://api.nuget.org/v3/index.json?package=Cake.Wyam&prerelease"
+#tool "nuget:https://www.myget.org/F/wyam?package=Wyam&prerelease"
+#addin "nuget:https://www.myget.org/F/wyam?package=Cake.Wyam&prerelease"
 #addin "nuget:https://api.nuget.org/v3/index.json?package=Octokit"
 
 using Octokit;
@@ -46,57 +46,35 @@ Task("GetSource")
         var containerDir = GetDirectories(releaseDir.Path.FullPath + "/*").First(x => x.GetDirectoryName().StartsWith("Wyamio"));
         MoveDirectory(containerDir, sourceDir);
     });
-
-Task("Build")
+    
+Task("Preview")
     .IsDependentOn("GetSource")
     .Does(() =>
     {
         Wyam(new WyamSettings
         {
-            Recipe = "Docs",
-            Theme = "Samson",
-            UpdatePackages = true
-        });        
-    });
-    
-Task("Preview")
-    .Does(() =>
-    {
-        Wyam(new WyamSettings
-        {
-            Recipe = "Docs",
-            Theme = "Samson",
+            Recipe = "Docs -i",
+            Theme = "Samson -i",
+            NuGetPackages = new []
+            {
+                "Wyam.Docs",
+                "Wyam.Docs.Samson",
+                "Wyam.Markdown",
+                "Wyam.Razor",
+                "Wyam.Yaml",
+                "Wyam.CodeAnalysis",
+                "Wyam.Less",
+                "Wyam.Html"
+            }.Select(x => new NuGetSettings
+            {
+                Prerelease = true,
+                Source = new [] { "https://www.myget.org/F/wyam/api/v3/index.json" },
+                Package = x
+            }),
             UpdatePackages = true,
-            Preview = true
+            Preview = true,
+            Watch = true
         });
-    });
-
-Task("Debug")
-    .Does(() =>
-    {
-        StartProcess("../Wyam/src/clients/Wyam/bin/Debug/wyam.exe",
-            "-a \"../Wyam/src/**/bin/Debug/*.dll\" -r \"docs -i\" -t \"../Wyam/themes/Docs/Samson\" -p --attach");
-    });
-
-Task("Deploy")
-    .Does(() =>
-    {
-        string token = EnvironmentVariable("NETLIFY_WYAM");
-        if(string.IsNullOrEmpty(token))
-        {
-            throw new Exception("Could not get NETLIFY_WYAM environment variable");
-        }
-        
-        // This uses the Netlify CLI, but it hits the 200/min API rate limit
-        // To use this, also need #addin "Cake.Npm"
-        // Npm.Install(x => x.Package("netlify-cli"));
-        // StartProcess(
-        //    MakeAbsolute(File("./node_modules/.bin/netlify.cmd")), 
-        //    "deploy -p output -s wyam -t " + token);
-
-        // Upload via curl and zip instead
-        Zip("./output", "output.zip", "./output/**/*");
-        StartProcess("curl", "--header \"Content-Type: application/zip\" --header \"Authorization: Bearer " + token + "\" --data-binary \"@output.zip\" --url https://api.netlify.com/api/v1/sites/wyam.netlify.com/deploys");
     });
 
 //////////////////////////////////////////////////////////////////////
@@ -104,11 +82,7 @@ Task("Deploy")
 //////////////////////////////////////////////////////////////////////
 
 Task("Default")
-    .IsDependentOn("Build");
-    
-Task("AppVeyor")
-    .IsDependentOn("Build")
-    .IsDependentOn("Deploy");
+    .IsDependentOn("Preview");
 
 //////////////////////////////////////////////////////////////////////
 // EXECUTION
