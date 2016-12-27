@@ -3,8 +3,8 @@ Description: These people know how to party!
 Order: 20
 ---
 
-- **[wyam.io](http://wyam.io)** ([source code](https://github.com/Wyamio/Wyam.Web)) - It's so meta!
-- **[Dave Glick](http://daveaglick.com)** ([source code](https://github.com/daveaglick/daveaglick)) - The personal blog of Dave Glick.
+- **[wyam.io](https://wyam.io)** ([source code](https://github.com/Wyamio/Wyam.Web)) - It's so meta!
+- **[Dave Glick](https://daveaglick.com)** ([source code](https://github.com/daveaglick/daveaglick)) - The personal blog of Dave Glick.
 - **[Siwawi](http://siwawi.com/)** - Travel and informational site for Siwa Oasis, Egypt. 300,000 palm trees, 70,000 olive trees, 300 freshwater springs, 25,000 amazing people.
 - **[Gniriki Games](http://gniriki.com)** - The blog of Gniriki Games / Bartosz Borowiecki.
 - **[Arjan van Rijn](http://arjanvanrijn.com)** - The personal blog of Arjan van Rijn.  
