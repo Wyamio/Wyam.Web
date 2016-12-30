@@ -34,105 +34,112 @@ by default is `build` which builds the site given the options you specify:
 ```
 >wyam build --help
 
-usage:  build [-v] [--attach] [-w] [-p [arg]] [--force-ext]
-        [--preview-root <arg>] [-i <arg>...] [-o <arg>] [-c <arg>] [-u]
-        [--use-local-packages] [--use-global-sources]
-        [--packages-path <arg>] [--output-script] [--verify-config]
-        [--noclean] [--nocache] [-l [arg]] [-g <arg>...]
-        [--initial <arg>...] [--ns <arg>...] [-r <arg>] [-a <arg>...]
-        [-t <arg>] [-n <arg>...] [--] <root>
-
-    -v, --verbose                    Turns on verbose output showing
-                                     additional trace message useful for
-                                     debugging.
-    --attach                         Pause execution at the start of the
-                                     program until a debugger is
-                                     attached.
-    -w, --watch                      Watches the input folder for any
-                                     changes.
-    -p, --preview [arg]              Start the preview web server on the
-                                     specified port (default is 5080).
-    --force-ext                      Force the use of extensions in the
-                                     preview web server (by default,
-                                     extensionless URLs may be used).
-    --preview-root <arg>             The path to the root of the preview
-                                     server, if not the output folder.
-    -i, --input <arg>...             The path(s) of input files, can be
-                                     absolute or relative to the current
-                                     folder.
-    -o, --output <arg>               The path to output files, can be
-                                     absolute or relative to the current
-                                     folder.
-    -c, --config <arg>               Configuration file (by default,
-                                     config.wyam is used).
-    -u, --update-packages            Check the NuGet server for more
-                                     recent versions of each package and
-                                     update them if applicable.
-    --use-local-packages             Toggles the use of a local NuGet
-                                     packages folder.
-    --use-global-sources             Toggles the use of the global NuGet
-                                     sources (default is false).
-    --packages-path <arg>            The packages path to use (only if
-                                     use-local is true).
-    --output-script                  Outputs the config script after
-                                     it's been processed for further
-                                     debugging.
-    --verify-config                  Compile the configuration but do
-                                     not execute.
-    --noclean                        Prevents cleaning of the output
-                                     path on each execution.
-    --nocache                        Prevents caching information during
-                                     execution (less memory usage but
-                                     slower execution).
-    -l, --log [arg]                  Log all trace messages to the
-                                     specified log file (by default,
-                                     wyam-[datetime].txt).
-    -g, --global <arg>...            Specifies global metadata as a
-                                     sequence of key=value pairs.
-    --initial <arg>...               Specifies initial document metadata
-                                     as a sequence of key=value pairs.
-    --ns, --nuget-source <arg>...    Specifies an additional package
-                                     source to use.
-    -r, --recipe <arg>               Specifies a recipe to use. See
-                                     below for syntax details.
-    -a, --assembly <arg>...          Adds an assembly reference by name,
-                                     file name, or globbing pattern.
-    -t, --theme <arg>                Specifies a theme to use. See below
-                                     for syntax details.
-    -n, --nuget <arg>...             Adds a NuGet package (downloading
-                                     and installing it if needed). See
-                                     below for syntax details.
-    <root>                           The folder (or config file) to use.
-
---recipe usage:
-
-    -i, --ignore-known-packages    Ignores (does not add) packages for
-                                   known recipes.
-    <recipe>                       The recipe to use.
-
---theme usage:
-
-    -i, --ignore-known-packages    Ignores (does not add) packages for
-                                   known themes.
-    <theme>                        The theme to use.
-
---nuget usage:
-
-    -p, --prerelease         Specifies that prerelease packages are
-                             allowed.
-    -u, --unlisted           Specifies that unlisted packages are
-                             allowed.
-    -v, --version <arg>      Specifies the version range of the package
-                             to use.
-    -l, --latest             Specifies that the latest available version
-                             of the package should be used (this will
-                             always trigger a request to the sources).
-    -s, --source <arg>...    Specifies the package source(s) to get the
-                             package from.
-    -e, --exclusive          Indicates that only the specified package
-                             source(s) should be used to find the
-                             package.
-    <package>                The package to install.
+usage:  build [-v] [--attach] [-w] [-p [arg]] [--force-ext]                     
+        [--virtual-dir <arg>] [--preview-root <arg>] [-i <arg>...]              
+        [-o <arg>] [-c <arg>] [-u] [--use-local-packages]                       
+        [--use-global-sources] [--packages-path <arg>] [--output-script]        
+        [--verify-config] [--noclean] [--nocache] [-l [arg]]                    
+        [-g <arg>...] [--initial <arg>...] [--ns <arg>...] [-r <arg>]           
+        [-a <arg>...] [-t <arg>] [-n <arg>...] [--] <root>                      
+                                                                                
+    -v, --verbose                    Turns on verbose output showing            
+                                     additional trace message useful for        
+                                     debugging.                                 
+    --attach                         Pause execution at the start of the        
+                                     program until a debugger is                
+                                     attached.                                  
+    -w, --watch                      Watches the input folder for any           
+                                     changes.                                   
+    -p, --preview [arg]              Start the preview web server on the        
+                                     specified port (default is 5080).          
+    --force-ext                      Force the use of extensions in the         
+                                     preview web server (by default,            
+                                     extensionless URLs may be used).           
+    --virtual-dir <arg>              Serve files in the preview web             
+                                     server under the specified virtual         
+                                     directory.                                 
+    --preview-root <arg>             The path to the root of the preview        
+                                     server, if not the output folder.          
+    -i, --input <arg>...             The path(s) of input files, can be         
+                                     absolute or relative to the current        
+                                     folder.                                    
+    -o, --output <arg>               The path to output files, can be           
+                                     absolute or relative to the current        
+                                     folder.                                    
+    -c, --config <arg>               Configuration file (by default,            
+                                     config.wyam is used).                      
+    -u, --update-packages            Check the NuGet server for more            
+                                     recent versions of each package and        
+                                     update them if applicable.                 
+    --use-local-packages             Toggles the use of a local NuGet           
+                                     packages folder.                           
+    --use-global-sources             Toggles the use of the global NuGet        
+                                     sources (default is false).                
+    --packages-path <arg>            The packages path to use (only if          
+                                     use-local is true).                        
+    --output-script                  Outputs the config script after            
+                                     it's been processed for further            
+                                     debugging.                                 
+    --verify-config                  Compile the configuration but do           
+                                     not execute.                               
+    --noclean                        Prevents cleaning of the output            
+                                     path on each execution.                    
+    --nocache                        Prevents caching information during        
+                                     execution (less memory usage but           
+                                     slower execution).                         
+    -l, --log [arg]                  Log all trace messages to the              
+                                     specified log file (by default,            
+                                     wyam-[datetime].txt).                      
+    -g, --global <arg>...            Specifies global metadata as a             
+                                     sequence of key=value pairs. Use           
+                                     the syntax [x,y] to specify array          
+                                     values.                                    
+    --initial <arg>...               Specifies initial document metadata        
+                                     as a sequence of key=value pairs.          
+                                     Use the syntax [x,y] to specify            
+                                     array values.                              
+    --ns, --nuget-source <arg>...    Specifies an additional package            
+                                     source to use.                             
+    -r, --recipe <arg>               Specifies a recipe to use. See             
+                                     below for syntax details.                  
+    -a, --assembly <arg>...          Adds an assembly reference by name,        
+                                     file name, or globbing pattern.            
+    -t, --theme <arg>                Specifies a theme to use. See below        
+                                     for syntax details.                        
+    -n, --nuget <arg>...             Adds a NuGet package (downloading          
+                                     and installing it if needed). See          
+                                     below for syntax details.                  
+    <root>                           The folder (or config file) to use.        
+                                                                                
+--recipe usage:                                                                 
+                                                                                
+    -i, --ignore-known-packages    Ignores (does not add) packages for          
+                                   known recipes.                               
+    <recipe>                       The recipe to use.                           
+                                                                                
+--theme usage:                                                                  
+                                                                                
+    -i, --ignore-known-packages    Ignores (does not add) packages for          
+                                   known themes.                                
+    <theme>                        The theme to use.                            
+                                                                                
+--nuget usage:                                                                  
+                                                                                
+    -p, --prerelease         Specifies that prerelease packages are             
+                             allowed.                                           
+    -u, --unlisted           Specifies that unlisted packages are               
+                             allowed.                                           
+    -v, --version <arg>      Specifies the version range of the package         
+                             to use.                                            
+    -l, --latest             Specifies that the latest available version        
+                             of the package should be used (this will           
+                             always trigger a request to the sources).          
+    -s, --source <arg>...    Specifies the package source(s) to get the         
+                             package from.                                      
+    -e, --exclusive          Indicates that only the specified package          
+                             source(s) should be used to find the               
+                             package.                                           
+    <package>                The package to install.                              
 ```
 
 # Nested Arguments
@@ -155,7 +162,9 @@ Wyam includes an embedded web server you can use to test your site locally. It i
 
 To activate the preview server, use the `-p` or `--preview` argument. This will make the site available on a URL like `http://localhost:5080`. If you prefer a different port, add that after the preview argument. This will cause the Wyam process to remain open in your console until you hit a key to exit.
 
-You can also change where the preview server pulls files from with the `--preview-root` argument.
+You can change where the preview server pulls files from with the `--preview-root` argument.
+
+You can serve files under a virtual directory with the `--virtual-dir` option. This will make all of files on disk appear as if they were under the specified path on the web server. Requesting any resources or pages outside of this virtual directory will result in 404 Not Found errors.
 
 # File Watching
 
