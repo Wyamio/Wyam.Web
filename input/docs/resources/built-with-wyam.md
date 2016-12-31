@@ -13,3 +13,5 @@ Order: 20
 - **[Ian Bebbington](http://ian.bebbs.co.uk)** ([source code](https://github.com/ibebbs/ibebbs.github.io)) - The personal blog of Ian Bebbington.
 - **[await Wisdom()](https://blog.awaitwisdom.com/)** ([source code](https://github.com/jcgillespie/awaitWisdom)) - The personal blog of Joshua Gillespie.
 - **[Gary Ewan Park](http://www.gep13.co.uk/)** ([source code](https://github.com/gep13/gep13)) - The personal blog of Gary Ewan Park.
+- **[Jamie Phillips](http://www.phillipsj.net)** - The personal blog of Jamie Phillips
+- **[Digital Tapestry](http://digitaltapestry.net)** - The personal blog of William E. Kempf
