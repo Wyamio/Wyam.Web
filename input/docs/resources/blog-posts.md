@@ -6,6 +6,7 @@ RedirectFrom: community
 
 There is a growing community of developers exploring static generators and Wyam. If you've written a blog post that involves Wyam, or know of one, please let us know by submitting a PR with additions to this page.
 
+- **[Now Using Wyam](http://www.phillipsj.net/posts/now-using-wyam)** by Jamie Phillips - January 2, 2017
 - **[Exploring Wyam - a .NET Static Site Content Generator](http://www.hanselman.com/blog/ExploringWyamANETStaticSiteContentGenerator.aspx)** by Scott Hanselman - December 11, 2016
 - **[Code Syntax Highlighting in Wyam](https://leekelleher.com/2016/09/wyam-code-syntax-highlighting/)** by Lee Kelleher - September 29, 2016
 - **[Syntax Highlighting In Wyam - How to make your code look pretty](https://daveaglick.com/posts/syntax-highlighting-in-wyam)** by Dave Glick - September 28, 2016
