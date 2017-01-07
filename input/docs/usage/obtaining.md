@@ -5,7 +5,7 @@ RedirectFrom:
   - getting-started/obtaining
   - knowledgebase/tools-package
 ---
-There are several ways to download and install Wyam depending on which platform you're using and how much automation and control you want. Note that Wyam currently runs on the .NET Framework and is therefore Windows-only. Plans to port to .NET Core and enable cross-platform execution are already in the works.
+There are several ways to download and install Wyam depending on which platform you're using and how much automation and control you want. **Note that Wyam currently runs on the .NET Framework and is therefore Windows-only. It also does not support Mono at this time.** Plans to port to .NET Core and enable cross-platform execution are already in the works.
 
 # Zip File
 

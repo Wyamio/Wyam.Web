@@ -119,6 +119,8 @@ The globbing engine supports the following syntax:
   This represents exclusion and is useful in combination with multiple expansions. For example, `/**/{*,!x}.txt` will find:
   - /c/z.txt
 
+Note that relative globbing patterns are often evaluated from the perspective of your `input` folder and not necessarily from where your config file resides, especially if the pattern is telling Wyam where to find certain files for processing. If you're having problems and a globbing pattern isn't returning the files you think it should, try adjusting it to start from the `input` folder.
+
 # Testing
 
 Because the new IO abstraction includes support for virtual file systems, it can be used to greatly simplify testing your custom modules by providing files that don't actually have to exist on disk. Several classes in the `Wyam.Testing` library in the `Wyam.Testing.IO` namespace are provided to help with this.
