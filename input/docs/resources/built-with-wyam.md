@@ -41,3 +41,6 @@ Many sites and blogs are realizing the benefits of an extensible, flexible, nati
 
 - **[Digital Tapestry](http://digitaltapestry.net)** ([source code](https://github.com/wekempf/wekempf.github.io))  
   The personal blog of William E. Kempf.
+
+- **[Richter-Notizen](http://richter-notizen.de/)**  
+  The personal blog of Lars Richter.
