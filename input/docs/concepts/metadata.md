@@ -8,7 +8,7 @@ Metadata is the primary means of passing information between modules and pipelin
 
 # Front Matter
 
-One of the more common ways to set metadata that's intended to be read by modules (as opposed to written by them) is to use *front matter*. Front matter is a common concept in static generators and gets around the problem of how to define metadata for a file without creating a whole separate file. Typically front matter is placed at the top of an input file and uses some sort of format (like YAML or JSON) to define key/value pairs. In Wyam, front matter can be extracted using the [FrontMatter](/modules/frontmatter) module in combination with the [Yaml](/modules/yaml) or [Json](/modules/json) module. Often front matter is delimited from the actual file content by a series of dashes such as `---`.
+One of the more common ways to set metadata that's intended to be read by modules (as opposed to written by them) is to use *front matter*. Front matter is a common concept in static generators and gets around the problem of how to define metadata for a file without creating a whole separate file. Typically front matter is placed at the top of an input file and uses some sort of format (like YAML or JSON) to define key/value pairs. In Wyam, front matter can be extracted using the [FrontMatter](/modules/frontmatter) module. That module accepts child modules that process whatever content is contained in the front matter block, such as the [Yaml](/modules/yaml) or [Json](/modules/json) module. Often front matter is delimited from the actual file content by a series of dashes such as `---`, though an alternate delimiter can be specified in the [FrontMatter](/modules/frontmatter) module.
 
 A file that contains front matter might look like this:
 
@@ -21,6 +21,8 @@ This is the content of the file.
 ```
 
 An example of front matter usage would be using metadata to define tags for your blog posts. You could create a "Tags" metadata field in the front matter of your post file and then read that metadata later to create tag clouds, lists of similar posts, etc.
+
+Practically, the [Yaml](/modules/yaml) module is usually used as the child of the [FrontMatter](/modules/frontmatter) module. However, like most things in Wyam this is designed to be flexible. You could process any type of front matter (JSON, etc.) with this setup by passing different child modules. You could even replicate the behavior of generators like [Hexo](https://hexo.io/docs/front-matter.html) and [Hugo](https://gohugo.io/content/front-matter/) that accept multiple front matter formats by putting multiple [FrontMatter](/modules/frontmatter) modules in a row with different delimiters and child modules.
 
 # Accessing Metadata
 
