@@ -8,6 +8,9 @@ There is a growing community of developers exploring static generators and Wyam.
 
 <!-- Use two spaces after the title for proper formatting -->
 
+- **[Wyam: Bootstrap Fun](http://www.phillipsj.net/posts/wyam-bootstrap-fun)**  
+  Jamie Phillips, January 9, 2017
+
 - **[Markdig Cheat Sheet](http://www.digitaltapestry.net/posts/markdig-cheat-sheet)**  
   William E. Kempf, January 8, 2017 
 
