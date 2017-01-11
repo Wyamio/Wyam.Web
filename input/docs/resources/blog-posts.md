@@ -8,6 +8,15 @@ There is a growing community of developers exploring static generators and Wyam.
 
 <!-- Use two spaces after the title for proper formatting -->
 
+- **[Wyam Anchors and Code Copy](http://www.digitaltapestry.net/posts/wyam-anchors-and-code-copy)**  
+  William E. Kempf, January 11, 2017
+
+- **[Exit Docpad, enter Wyam](http://www.petrikvandervelde.nl/posts/Updating-blog-to-wyam)**  
+  Patrick van der Velde, January 11, 2017
+
+- **[Adding clickable links for headers](http://www.gep13.co.uk/blog/adding-clickable-links-for-headers)**  
+  Gary Ewan Park, January 11, 2017
+
 - **[Wyam: Bootstrap Fun](http://www.phillipsj.net/posts/wyam-bootstrap-fun)**  
   Jamie Phillips, January 9, 2017
 

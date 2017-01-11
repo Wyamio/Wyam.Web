@@ -44,3 +44,7 @@ Many sites and blogs are realizing the benefits of an extensible, flexible, nati
 
 - **[Richter-Notizen](http://richter-notizen.de/)**  
   The personal blog of Lars Richter.
+
+- **[Mind Vortex](http://www.petrikvandervelde.nl/)** ([source code](https://github.com/pvandervelde/mindvortex))  
+  The personal blog of Patrick van der Velde
+
