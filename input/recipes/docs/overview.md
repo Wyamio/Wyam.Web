@@ -11,6 +11,7 @@ The Docs recipe is designed to cover many different use cases for documentation 
 - Posts and pages can be in [Markdown](/modules/markdown) or [Razor](/modules/razor).
 - API documentation from source files.
 - API documentation from assemblies (with or without XML documentation file from MSBuild).
+- Support for both namespace documentation and `<inheritdoc/>` XML comments.
 - Static site searching for API types.
 - Meta-refresh redirects and/or a Netlify redirect file.
 - RSS, Atom, and/or RDF feeds.

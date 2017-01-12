@@ -36,6 +36,10 @@ While anyone can create themes for any recipe, the official themes for the this 
 
   Put your favicon here.
 
+- **`/_Head.cshtml`**
+
+  This is included as part of the `<head>` content of every page after the theme elements. You can use it to add any additional scripts, stylesheets, etc.
+
 - **`/_Navbar.cshtml`**
 
   You can use this to define a custom navigation bar for the top of your page.
