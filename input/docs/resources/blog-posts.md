@@ -8,6 +8,9 @@ There is a growing community of developers exploring static generators and Wyam.
 
 <!-- Use two spaces after the title for proper formatting -->
 
+- **[Emoji Cheat Sheet](http://www.digitaltapestry.net/posts/emoji-cheat-sheet)**  
+  William E. Kempf, January 12, 2017
+
 - **[Wyam Anchors and Code Copy](http://www.digitaltapestry.net/posts/wyam-anchors-and-code-copy)**  
   William E. Kempf, January 11, 2017
 
