@@ -8,6 +8,9 @@ There is a growing community of developers exploring static generators and Wyam.
 
 <!-- Use two spaces after the title for proper formatting -->
 
+- **[Build an E-Commerce Site with Wyam, a .NET Static Content Generator](https://snipcart.com/blog/ecommerce-wyam-dot-net-static-site-generator)**  
+  Maxime Laboissonniere from [Snipcart](https://snipcart.com/), January 19, 2017
+
 - **[Emoji Cheat Sheet](http://www.digitaltapestry.net/posts/emoji-cheat-sheet)**  
   William E. Kempf, January 12, 2017
 
