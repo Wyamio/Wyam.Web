@@ -8,6 +8,9 @@ There is a growing community of developers exploring static generators and Wyam.
 
 <!-- Use two spaces after the title for proper formatting -->
 
+- **[New Year, New Site Design Using Wyam Static Site Generator](https://kamranicus.com/posts/2017-01-21-new-design-wyam-generator)**  
+  Kamran Ayub, January 22, 2017
+
 - **[Build an E-Commerce Site with Wyam, a .NET Static Content Generator](https://snipcart.com/blog/ecommerce-wyam-dot-net-static-site-generator)**  
   Maxime Laboissonniere from [Snipcart](https://snipcart.com/), January 19, 2017
 

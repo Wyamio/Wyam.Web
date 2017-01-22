@@ -109,13 +109,6 @@ Collecting data can often be just as important as publishing it. These services 
 - **[Staticman](https://staticman.net/)**  
   Staticman handles user-generated content for you and transforms it into data files that sit in your GitHub repository.
 
-# Platforms
-
-These resources are either full platforms or other services designed to cover a broad range of static site needs.
-
-- **[Eager](https://eager.io/)**  
-  Platform for easily adding libraries and services to your static site.
-
 # Search
 
 These tools let you add structured or unstructured search to your static site.
@@ -128,6 +121,16 @@ These tools let you add structured or unstructured search to your static site.
 
 - **[Swiftype](https://swiftype.com/)**  
   Smart search made simple.
+
+# Sharing
+
+Sharing is caring.
+
+- **[AddThis](https://www.addthis.com/)**  
+  Make your content shareable with just one click.
+
+- **[Simple Sharing Buttons Generator](https://simplesharingbuttons.com)**  
+  Create light-weight, mobile-friendly sharing buttons for Facebook, Twitter, Google+ and other social networks.
 
 
 
