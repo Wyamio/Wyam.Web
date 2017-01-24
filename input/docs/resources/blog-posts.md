@@ -8,6 +8,12 @@ There is a growing community of developers exploring static generators and Wyam.
 
 <!-- Use two spaces after the title for proper formatting -->
 
+- **[PoshWyam](http://www.digitaltapestry.net/posts/poshwyam)**  
+  William E. Kempf, January 23, 2017
+
+- **[New Static Cake Website](http://cakebuild.net/blog/2017/01/new-static-site)**  
+  Dave Glick, January 22, 2017
+
 - **[New Year, New Site Design Using Wyam Static Site Generator](https://kamranicus.com/posts/2017-01-21-new-design-wyam-generator)**  
   Kamran Ayub, January 22, 2017
 

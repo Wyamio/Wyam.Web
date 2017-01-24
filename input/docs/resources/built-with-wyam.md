@@ -15,6 +15,9 @@ Many sites and blogs are realizing the benefits of an extensible, flexible, nati
 - **[Ben Hyrman](http://hyr.mn)** ([source code](https://github.com/hyrmn/hyr.mn))  
   The personal blog of Ben Hyrman.
 
+- **[Cake](http://cakebuild.net/)** ([source code](https://github.com/cake-build/website))  
+  The documentation site for the Cake build automation platform.
+
 - **[Dave Glick](https://daveaglick.com)** ([source code](https://github.com/daveaglick/daveaglick))  
   The personal blog of Dave Glick.
 
@@ -48,7 +51,7 @@ Many sites and blogs are realizing the benefits of an extensible, flexible, nati
 - **[Siwawi](http://siwawi.com/)**  
   Travel and informational site for Siwa Oasis, Egypt. 300,000 palm trees, 70,000 olive trees, 300 freshwater springs, 25,000 amazing people.
 
-- **[wyam.io](https://wyam.io)** ([source code](https://github.com/Wyamio/Wyam.Web))  
+- **[Wyam](https://wyam.io)** ([source code](https://github.com/Wyamio/Wyam.Web))  
   It's so meta!
 
 

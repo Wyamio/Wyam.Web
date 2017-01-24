@@ -7,7 +7,7 @@ RedirectFrom:
 ---
 Just because you're running a static site doesn't mean that the experience can't be rich for your users. A lot of JavaScript components, hosted services, and other resources are available to support static sites where more traditional server-side infrastructure would otherwise be required. While some tools are targeted at specific static generators, many are generator agnostic and can be leveraged to enhance your Wyam site.
 
-Here are some of our favorites. Please suggest additional resources if you know of any that aren't listed here. Some other good places to look are [The New Dynamic](https://www.thenewdynamic.org/tools/) and the list of [Awesome Static Website Services](https://github.com/aharris88/awesome-static-website-services). Also make sure to check out the [list of static site hosts](/docs/resources/hosts) for services designed to host your static sites.
+Here are some of our favorites. All of the tools on this page are either open source, free to use, or have a free pricing tier. Please suggest additional resources if you know of any that aren't listed here. Some other good places to look are [The New Dynamic](https://www.thenewdynamic.org/tools/) and the list of [Awesome Static Website Services](https://github.com/aharris88/awesome-static-website-services). Also make sure to check out the [list of static site hosts](/docs/resources/hosts) for services designed to host your static sites.
 
 <!-- Use two spaces after the title for proper formatting -->
 
@@ -42,7 +42,10 @@ Turn your static site into a revenue generating machine with these tools that ad
 
 # Content
 
-Themes, images, and other content to use for your static site.
+Themes, images, and other content to use for your static site. Also includes tools and services to work with content.
+
+- **[Cloudinary](http://cloudinary.com)**  
+  Image back-end for web and mobile developers.
 
 - **[HTML5 UP!](https://html5up.net/)**  
   Spiffy HTML5 site templates.
