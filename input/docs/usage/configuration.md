@@ -77,16 +77,16 @@ Wyam follows the same conventions as NuGet with regards to [specifying version r
 [1.0,2.0] = 1.0 ≤ x ≤ 2.0
 ```
 
-Note that many modules require their package to be installed before they can be used. For example, to make use of the [Markdown](/modules/markdown) module, you must install the `Wyam.Markdown` package. To do this, you would add the following to your configuration file (the `-p` indicates this is a prerelease package, which currently applies to all the Wyam packages):
+Note that many modules require their package to be installed before they can be used. For example, to make use of the [Markdown](/modules/markdown) module, you must install the `Wyam.Markdown` package. To do this, you would add the following to your configuration file:
 
 ```
-#n -p Wyam.Markdown
+#n Wyam.Markdown
 ``` 
 
 You can also specify the special `Wyam.All` package which will download all of the official Wyam module packages at once:
 
 ```
-#n -p Wyam.All
+#n Wyam.All
 ```
 
 ## Assemblies
@@ -138,23 +138,15 @@ Note that namespaces for all found modules as well as the following namespaces a
 * `System.IO`
 * `System.Diagnostics`
 
-# Initial Metadata
+# Settings
 
-Each pipeline starts with a single document prepopulated with initial metadata you specify in the configuration file. You can use this facility to introduce variables that can influence the way the pipeline behaves. To set initial metadata, just add values to the `InitialMetadata` property (it's of type `IInitialMetadata` which implements `IDictionary<string, object>`). Note that the dictionary values are objects, so you can store simple primitive values or complex structure. For example:
-
-```
-InitialMetadata["Foo"] = "Bar";
-InitialMetadata.Add("Baz", new KeyValuePair<string, string>("abc", "xyz")); 
-```
-
-# Global Metadata
-
-You can specify global metadata that is available from the current `IExecutionContext`. This is often used by recipes to configure the generation and control different options.
+You can specify global settings that are available from the current `IExecutionContext`. This is often used by recipes to configure the generation and control different options. You can also use settings to pass information from your configuration file to [Razor](/modules/razor) templates or anything else that has access to the current `IExecutionContext`. Note that the settings dictionary values are objects, so you can store simple primitive values or complex structures as well.
 
 ```
-GlobalMetadata["Foo"] = "Bar";
-GlobalMetadata.Add("Baz", new KeyValuePair<string, string>("abc", "xyz")); 
+Settings["Foo"] = "Bar";
 ```
+
+Additionally, settings are inherited as metadata in each document. Every pipeline starts with a single document that has had it's metadata populated with the settings you specify in the configuration file. You can use this facility to introduce variables that can influence the way the pipeline behaves or to initialize documents with initial values for document-specific metadata.
 
 # Pipelines
 

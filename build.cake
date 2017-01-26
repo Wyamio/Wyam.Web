@@ -1,5 +1,5 @@
-#tool "nuget:https://api.nuget.org/v3/index.json?package=Wyam&prerelease"
-#addin "nuget:https://api.nuget.org/v3/index.json?package=Cake.Wyam&prerelease"
+#tool "nuget:https://api.nuget.org/v3/index.json?package=Wyam"
+#addin "nuget:https://api.nuget.org/v3/index.json?package=Cake.Wyam"
 #addin "nuget:https://api.nuget.org/v3/index.json?package=Octokit"
 
 using Octokit;

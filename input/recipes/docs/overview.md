@@ -50,8 +50,8 @@ If migrating your site from another generator, the paths may not match up exactl
 
 ## Link Validation
 
-The recipe includes the ability to validate both relative (internal) and absolute (external) links. Both features are opt-in given that they add additional time to the generation process. To activate them add `GlobalMetadata[DocsKeys.ValidateRelativeLinks] = true;` for relative link validation and/or `GlobalMetadata[DocsKeys.ValidateAbsoluteLinks] = true;` for absolute link validation to your configuration file.
+The recipe includes the ability to validate both relative (internal) and absolute (external) links. Both features are opt-in given that they add additional time to the generation process. To activate them add `Settings[DocsKeys.ValidateRelativeLinks] = true;` for relative link validation and/or `Settings[DocsKeys.ValidateAbsoluteLinks] = true;` for absolute link validation to your configuration file.
 
-By default validation failures output a warning with details on the link, why it failed, and which files it's in. You can switch to outputting errors (which will usually break the build) by using `GlobalMetadata[DocsKeys.ValidateLinksAsError] = true;` in your configuration file.
+By default validation failures output a warning with details on the link, why it failed, and which files it's in. You can switch to outputting errors (which will usually break the build) by using `Settings[DocsKeys.ValidateLinksAsError] = true;` in your configuration file.
 
 Note that turning on validation for absolute links typically results in a number of falsly reported failures which will need to be checked manually (so it's not recommended to validate absolute links *and* output errors).

@@ -1,6 +1,7 @@
 Settings[Keys.Host] = "wyam.io";
 Settings[Keys.LinksUseHttps] = true;
 Settings[DocsKeys.Title] = "Wyam";
+Settings[DocsKeys.Logo] = "/assets/img/logo.png";
 Settings[DocsKeys.SourceFiles] = "../release/repo/src/**/{!bin,!obj,!packages,!*.Tests,}/**/*.cs";
 Settings[DocsKeys.BaseEditUrl] = "https://github.com/Wyamio/Wyam.Web/tree/master/input/";
 Settings[DocsKeys.NetlifyRedirects] = true;

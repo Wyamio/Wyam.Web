@@ -5,7 +5,7 @@ RedirectFrom:
   - getting-started/obtaining
   - knowledgebase/tools-package
 ---
-There are several ways to download and install Wyam depending on which platform you're using and how much automation and control you want. **Note that Wyam currently runs on the .NET Framework and is therefore Windows-only. It also does not support Mono at this time.** Plans to port to .NET Core and enable cross-platform execution are already in the works.
+There are several ways to download and install Wyam depending on which platform you're using and how much automation and control you want. **Note that Wyam currently runs on the [.NET Framework 4.6.2](https://www.microsoft.com/en-us/download/details.aspx?id=53345) and is therefore Windows-only. It also does not support Mono at this time.** Plans to port to .NET Core and enable cross-platform execution are already in the works.
 
 # Zip File
 
@@ -58,7 +58,7 @@ NuGet V2 clients (VS 2013, Cake): [https://www.myget.org/F/wyam/api/v2](https://
 To use the development feed inside a Wyam configuration file for a particular module, specify it like this:
 
 ```
-#n Wyam.Markdown -s https://www.myget.org/F/wyam/api/v3/index.json -l -p
+#n Wyam.Markdown -s https://www.myget.org/F/wyam/api/v3/index.json -l
 ```
 
-The `-l` flag indicates that the latest version of the specified package should always be used, and the `-p` flag indicates that pre-release packages should be used.
+The `-l` flag indicates that the latest version of the specified package should always be used.

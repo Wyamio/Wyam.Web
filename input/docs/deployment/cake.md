@@ -1,11 +1,11 @@
 Title: Using Cake
 Description: Instrument your build and deployment steps with Cake.
 ---
-Wyam includes an official [Cake Build](http://cakebuild.net/) addin called [Cake.Wyam](https://www.nuget.org/packages/Cake.Wyam). This allows you to integrate Wyam into a more general Cake-based build and deployment process. To use it, you must include the appropriate `#tool` and `#addin` directive at the top of your Cake script (to load the Wyam engine and the Cake addin respectively). Note that you'll need to use the special URI syntax below since Wyam packages are still prerelease (due to having dependencies on other prerelease packages).
+Wyam includes an official [Cake Build](http://cakebuild.net/) addin called [Cake.Wyam](https://www.nuget.org/packages/Cake.Wyam). This allows you to integrate Wyam into a more general Cake-based build and deployment process. To use it, you must include the appropriate `#tool` and `#addin` directive at the top of your Cake script (to load the Wyam engine and the Cake addin respectively).
 
 ```
-#tool nuget:?package=Wyam&prerelease
-#addin nuget:?package=Cake.Wyam&prerelease
+#tool nuget:?package=Wyam
+#addin nuget:?package=Cake.Wyam
 
 // ...
 
