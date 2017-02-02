@@ -122,9 +122,6 @@ These tools let you add structured or unstructured search to your static site.
 - **[lunr.js](http://lunrjs.com/)**  
   Simple full-text search in your browser.
 
-- **[Swiftype](https://swiftype.com/)**  
-  Smart search made simple.
-
 # Sharing
 
 Sharing is caring.
