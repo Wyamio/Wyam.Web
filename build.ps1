@@ -80,6 +80,7 @@ function MD5HashFile([string] $filePath)
     }
 }
 
+$VerbosePreference = "continue"
 Write-Host "Preparing to run build script..."
 
 if(!$PSScriptRoot){
@@ -94,8 +95,8 @@ $PACKAGES_CONFIG = Join-Path $TOOLS_DIR "packages.config"
 $PACKAGES_CONFIG_MD5 = Join-Path $TOOLS_DIR "packages.config.md5sum"
 
 # Delete the Wyam tool and addin folders
-Remove-Item $TOOLS_DIR\Wyam* -Force -Recurse
-Remove-Item $TOOLS_DIR\Addins\Cake.Wyam* -Force -Recurse
+Remove-Item $TOOLS_DIR\Wyam* -Force -Recurse -ErrorAction Ignore
+Remove-Item $TOOLS_DIR\Addins\Cake.Wyam* -Force -Recurse -ErrorAction Ignore
 
 # Should we use mono?
 $UseMono = "";
