@@ -36,6 +36,14 @@ wyam -r Docs
 
 # Usage Notes
 
+## Source Files
+
+By default, your source files should be located in a "src" folder *either* under your "input" folder or alongside your "input" folder. You can also change where the recipe looks for source files from within the configuration file with the `SourceFiles` setting. Note that this setting doesn't point to a directory, but should rather be a string containing a [globbing pattern](/docs/concepts/io#globbing) for each source file:
+
+```
+Settings[DocsKeys.SourceFiles] = @"C:/MySource/**/{!bin,!obj,!packages,!*.Tests,}/**/*.cs";
+```
+
 ## Blog Post Published Dates
 
 To find the published date for blog posts, the metadata will first be searched for a `Published` value. If one cannot be found (or it can't be converted to a `DateTime`) then the filename of the input file for the post will be checked for a date that appears in the beginning of the file name of the format `YYYY-MM-DD-`.
