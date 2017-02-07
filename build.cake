@@ -1,3 +1,6 @@
+// The following environment variables need to be set for Publish target:
+// WYAM_GITHUB_TOKEN
+
 #tool "nuget:https://api.nuget.org/v3/index.json?package=Wyam"
 #addin "nuget:https://api.nuget.org/v3/index.json?package=Cake.Wyam"
 #addin "nuget:https://api.nuget.org/v3/index.json?package=Octokit"
@@ -35,7 +38,11 @@ Task("GetSource")
     .IsDependentOn("CleanSource")
     .Does(() =>
     {
-        GitHubClient github = new GitHubClient(new ProductHeaderValue("WyamDocs"));
+        var githubToken = EnvironmentVariable("WYAM_GITHUB_TOKEN");
+        GitHubClient github = new GitHubClient(new ProductHeaderValue("WyamDocs"))
+        {
+            Credentials = new Credentials(githubToken)
+        };
 	    // The GitHub releases API returns Not Found if all are pre-release, so need workaround below
         //Release release = github.Repository.Release.GetLatest("Wyamio", "Wyam").Result;        
 	    Release release = github.Repository.Release.GetAll("Wyamio", "Wyam").Result.First();
