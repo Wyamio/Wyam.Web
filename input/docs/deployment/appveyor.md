@@ -46,8 +46,8 @@ on_success:
   # See http://www.appveyor.com/docs/how-to/git-push for more info
   - git config --global credential.helper store
   # EDIT your Git email and name
-  - git config --global user.email "dave@daveaglick.com"
-  - git config --global user.name "Dave Glick"
+  - git config --global user.email $env:op_build_user_email
+  - git config --global user.name $env:op_build_user
   - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
   - git checkout gh-pages
   - git rm -rf .
