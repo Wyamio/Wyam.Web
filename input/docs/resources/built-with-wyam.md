@@ -6,6 +6,9 @@ Many sites and blogs are realizing the benefits of an extensible, flexible, nati
 
 <!-- Use two spaces after the title for proper formatting -->
 
+- **[Improv Hero](http://www.improvhero.com/)**  
+  A blog about Comedy Improv by Jon Douglas.
+
 - **[Arjan van Rijn](http://arjanvanrijn.com)**  
   The personal blog of Arjan van Rijn. 
 
