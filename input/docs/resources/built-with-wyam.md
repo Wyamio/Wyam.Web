@@ -32,6 +32,9 @@ Many sites and blogs are realizing the benefits of an extensible, flexible, nati
 
 - **[Ian Bebbington](http://ian.bebbs.co.uk)** ([source code](https://github.com/ibebbs/ibebbs.github.io))  
   The personal blog of Ian Bebbington.
+  
+- **[Improv Hero](http://www.improvhero.com/)**  
+  A blog about Comedy Improv by Jon Douglas.
 
 - **[Jamie Phillips](http://www.phillipsj.net)** ([source code](https://github.com/phillipsj/phillipsj))  
   The personal blog of Jamie Phillips.
