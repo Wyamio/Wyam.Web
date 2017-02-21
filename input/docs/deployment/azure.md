@@ -25,4 +25,6 @@ One note is that you'll probably want support for extensionless URLs like most o
 </configuration>
  ```
 
- You can either upload this file to your `/site/wwwroot` folder seperatly or place it in your Wyam `input` folder so it always gets copied to the `output` folder for upload.
+ You can either upload this file to your `/site/wwwroot` folder separately or place it in your Wyam `input` folder so it always gets copied to the `output` folder for upload.
+
+ If you want to automate the upload process, you can consider using [Kudu](https://github.com/projectkudu/kudu/wiki/Deployment) or [read this blog post](https://daveaglick.com/posts/synchronizing-files-with-azure-web-apps-over-ftp) for an approach that uses FTP.
