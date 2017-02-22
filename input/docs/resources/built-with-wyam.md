@@ -6,6 +6,9 @@ Many sites and blogs are realizing the benefits of an extensible, flexible, nati
 
 <!-- Use two spaces after the title for proper formatting -->
 
+- **[Andy Hansen](http://andyhansen.co.nz)**  
+  The personal blog of Andy Hansen.
+
 - **[Arjan van Rijn](http://arjanvanrijn.com)**  
   The personal blog of Arjan van Rijn. 
 
@@ -23,6 +26,9 @@ Many sites and blogs are realizing the benefits of an extensible, flexible, nati
 
 - **[Digital Tapestry](http://digitaltapestry.net)** ([source code](https://github.com/wekempf/wekempf.github.io))  
   The personal blog of William E. Kempf.
+
+- **[Erik Onarheim](https://erikonarheim.com/)** ([source code](https://github.com/eonarheim/eonarheim.github.io))  
+  The personal blog of Erik Onarheim.
 
 - **[Gary Ewan Park](http://www.gep13.co.uk/)** ([source code](https://github.com/gep13/gep13))  
   The personal blog of Gary Ewan Park.

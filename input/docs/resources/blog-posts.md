@@ -11,6 +11,12 @@ There is a growing community of developers exploring static generators and Wyam.
 - **[Migrating to Wyam in GH Pages from WordPress](https://erikonarheim.com/posts/using-wyam-blog)**  
   Erik Onarheim, February 17, 2017
 
+- **[Web.config for a Static Site](http://andyhansen.co.nz/posts/web-config-for-a-static-site)**  
+  Andy Hansen, February 12, 2017
+
+- **[Deploying a Wyam Blog to Azure](http://andyhansen.co.nz/posts/deploying-a-wyam-blog-to-azure)**  
+  Andy Hansen, January 29, 2017
+
 - **[PoshWyam](http://www.digitaltapestry.net/posts/poshwyam)**  
   William E. Kempf, January 23, 2017
 
