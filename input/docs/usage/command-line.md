@@ -170,6 +170,14 @@ You can serve files under a virtual directory with the `--virtual-dir` option. T
 
 You can turn on file watching with the `-w` or `--watch` argument. When file watching is enabled, the generation will be re-run any time a file in one of the input folders changes. Some modules can cache information from one generation to the next, so re-generations after a watched file changes should be somewhat faster. Note that because Wyam makes no assumptions about dependencies between files, modules, and pipelines, it is not possible to only regenerate the effects of the file that changed. We don't know what modules that file may have impacted indirectly and therefore need to regenerate everything (it's possible that in the future this could get smarter, but it's a very hard problem). Also note that some modules like [Less](/modules/less) may not reflect changes to their underlying files due to the mechanics of the module.
 
+# LiveReload
+
+> Requires Wyam 0.16.4 or greater.
+
+Wyam comes with LiveReload support built-in and is enabled when file watching. LiveReload works by injecting JavaScript into HTML pages when served using the embedded preview server - no changes to your content need to be made. When any input files are re-generated, Wyam will refresh all connected browsers automagically.
+
+Note that there are two LiveReload servers that run depending on what options are being used, one server on the default LiveReload port of `35729` and another server hosted on Wyam's embedded web server. When using LiveReload in conjunction with the preview server, ensure that any relevant HTML files have a closing `<body/>` tag as this is required for `<script>` injection.
+
 # Paths
 
 The paths that Wyam uses can be specified on the command line. This includes the input path(s) specified by `--input` where Wyam will look for files, the output path specified by `--output` where Wyam will place the output of modules like [WriteFiles](/modules/writefiles), the config file path specified by `--config` where Wyam will look for a configuration file, and the root path specified as the final argument that Wyam considers the base path for all other relative paths. By default, the root path is set to the path from where Wyam is executed. You may want to specify a different base path (for example, if running from a build script or as part of a larger process). In this case, just supply an alternate absolute path at the end of the command line. This new root path will be the base for all other relative paths including input and output paths. This is a good way to ensure consistency regardless of which path Wyam is run from.
