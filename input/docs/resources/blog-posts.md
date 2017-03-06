@@ -8,6 +8,9 @@ There is a growing community of developers exploring static generators and Wyam.
 
 <!-- Use two spaces after the title for proper formatting -->
 
+- **[Paged index with Wyam.io](https://www.martinvich.net/posts/paged-index-with-wyam)**  
+  Martin Vích, March 6, 2017
+
 - **[Migrating to Wyam in GH Pages from WordPress](https://erikonarheim.com/posts/using-wyam-blog)**  
   Erik Onarheim, February 17, 2017
 
