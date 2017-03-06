@@ -6,6 +6,9 @@ Many sites and blogs are realizing the benefits of an extensible, flexible, nati
 
 <!-- Use two spaces after the title for proper formatting -->
 
+- **[alFador.mx](http://www.alfador.mx)**  
+  The personal blog of Hector Hernandez.
+
 - **[Andy Hansen](http://andyhansen.co.nz)**  
   The personal blog of Andy Hansen.
 
@@ -59,9 +62,6 @@ Many sites and blogs are realizing the benefits of an extensible, flexible, nati
 
 - **[Siwawi](http://siwawi.com/)**  
   Travel and informational site for Siwa Oasis, Egypt. 300,000 palm trees, 70,000 olive trees, 300 freshwater springs, 25,000 amazing people.
-
-  - **[alFador.mx](http://www.alfador.mx)**  
-  The personal blog of Hector Hernandez.
 
 - **[Wyam](https://wyam.io)** ([source code](https://github.com/Wyamio/Wyam.Web))  
   It's so meta!

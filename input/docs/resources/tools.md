@@ -75,6 +75,9 @@ These tools help edit your static site, and some even provide full CMS capabilit
 - **[Netlify CMS](https://github.com/netlify/netlify-cms)**  
   An open source CMS for static site generators.
 
+- **[prismic.io](https://prismic.io)**  
+  A CMS backend for your websites & apps.
+
 - **[Prose](http://prose.io/#about)**  
   Prose is a content editor for GitHub designed for managing websites.
 
@@ -115,6 +118,12 @@ Collecting data can often be just as important as publishing it. These services 
 # Search
 
 These tools let you add structured or unstructured search to your static site.
+
+- **[Algolia](https://www.algolia.com)**  
+  Hosted Search API that delivers instant and relevant results from the first keystroke.
+
+- **[Azure Search](https://azure.microsoft.com/en-us/services/search/)**  
+  Cloud search service for web and mobile app development.
 
 - **[Google Custom Search](https://cse.google.com/cse/)**  
   Add a search box to your homepage to help people find what they need on your website.

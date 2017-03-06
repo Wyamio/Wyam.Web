@@ -172,11 +172,11 @@ You can turn on file watching with the `-w` or `--watch` argument. When file wat
 
 # LiveReload
 
-> Requires Wyam 0.16.4 or greater.
+> Requires Wyam 0.17.0 or greater.
 
-Wyam comes with LiveReload support built-in and is enabled when file watching. LiveReload works by injecting JavaScript into HTML pages when served using the embedded preview server - no changes to your content need to be made. When any input files are re-generated, Wyam will refresh all connected browsers automagically.
+Wyam comes with [LiveReload](http://livereload.com) support built-in and it is automatically enabled when the preview server is used while file watching. LiveReload works by injecting JavaScript into HTML pages when served using the embedded preview server, no changes to your content need to be made. When any input files are re-generated, Wyam will refresh all connected browsers automagically.
 
-Note that there are two LiveReload servers that run depending on what options are being used, one server on the default LiveReload port of `35729` and another server hosted on Wyam's embedded web server. When using LiveReload in conjunction with the preview server, ensure that any relevant HTML files have a closing `<body/>` tag as this is required for `<script>` injection.
+The LiveReload server listens on port `35729` by default. When using LiveReload in conjunction with the preview server, ensure that any relevant HTML files have a closing `<body/>` tag as this is required for `<script>` injection.
 
 # Paths
 
