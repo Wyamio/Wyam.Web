@@ -7,3 +7,4 @@ nuget.exe
 /debug.log
 /node_modules/
 /output.zip
+/packages.xml
