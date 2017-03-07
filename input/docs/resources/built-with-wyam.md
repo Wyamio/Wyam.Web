@@ -48,6 +48,9 @@ Many sites and blogs are realizing the benefits of an extensible, flexible, nati
 - **[Jamie Phillips](http://www.phillipsj.net)** ([source code](https://github.com/phillipsj/phillipsj))  
   The personal blog of Jamie Phillips.
 
+- **[Jason Newell](http://jasonnewell.net/)** ([source code](https://github.com/jlnewell/jlnewell.github.io))  
+  The personal blog of Jason Newell.
+
 - **[Kamranicus](https://kamranicus.com/)** ([source code](https://github.com/kamranayub/kamranayub.github.io/tree/source))  
   The personal blog of Kamran Ayub.
 
