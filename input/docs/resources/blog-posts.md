@@ -8,6 +8,9 @@ There is a growing community of developers exploring static generators and Wyam.
 
 <!-- Use two spaces after the title for proper formatting -->
 
+- **[Contentful ❤️️ Wyam == true](https://www.contentful.com/blog/2017/03/07/contentful-loves-wyam/)**  
+  Robert Linde, March 7, 2017
+
 - **[Paged index with Wyam.io](https://www.martinvich.net/posts/paged-index-with-wyam)**  
   Martin Vích, March 6, 2017
 

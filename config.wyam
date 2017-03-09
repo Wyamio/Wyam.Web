@@ -25,8 +25,8 @@ public class KeysModel
     }
 }
 
-Pipelines.InsertBefore(DocsPipelines.RenderPages, "Modules",
-	Documents(DocsPipelines.Code),
+Pipelines.InsertBefore(Docs.RenderPages, "Modules",
+	Documents(Docs.Code),
 	AnalyzeCSharp()
 		.WithNamedTypes(x => x.AllInterfaces.Any(y => y.Name == "IModule") && !x.IsAbstract)
 		.WhereNamespaces(x => !x.StartsWith("Wyam.Testing"))
