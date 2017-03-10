@@ -11,6 +11,7 @@ public class KeysModel
     public string ContainerClass { get; set; }
     public string Scope { get; set; }
     public bool AlphaSort { get; set; }
+    public string Intro { get; set; }
 
     public KeysModel(string containerClass, string scope = null, bool alphaSort = true)
     {
