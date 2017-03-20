@@ -24,7 +24,7 @@
                 }
                 @Html.Partial("_Keys", new KeysModel(pipeline.Document(CodeAnalysisKeys.Type).String(CodeAnalysisKeys.QualifiedName), false)
                 {
-                    Intro = "<p><i>The following named modules are part of this pipeline (not every module in the pipeline may have a name). These give insight into how the pipeline operates and provide defined insertion points for pipeline overrides if needed.</i></p>"
+                    Intro = "<p><strong>Named Modules</strong></p><p><i>The following named modules are part of this pipeline (not every module in the pipeline may have a name). These give insight into how the pipeline operates and provide defined insertion points for pipeline overrides if needed.</i></p>"
                 })
             </li>
         }
