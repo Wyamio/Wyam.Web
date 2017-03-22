@@ -6,5 +6,11 @@ environment:
   access_token:
     secure: jf56pSYTaUx5sBJCVt2IDCzmPrZ2iOTYrSVvCzEt17UhGKq3RfqlO4aIZ3bRlZSX
 
+# Temporarily needed until curl added to PATH
+# See http://help.appveyor.com/discussions/problems/6312-curl-command-not-found
+# And https://github.com/appveyor/ci/issues/1431
+install:
+- set PATH=C:\Program Files\Git\mingw64\bin;%PATH%
+
 build_script:
   - ps: .\build.ps1 -Target "AppVeyor"
