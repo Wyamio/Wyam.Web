@@ -10,6 +10,6 @@ RedirectFrom: recipes/docs/global-metadata
 
 <p>While most generated links are relative to ensure local testing works, some links need to be absolute such as feeds. This setting ensures the correct URL is generated for those links.</p>
 
-<p>Note that this list isn't exhaustive. Some modules used by the recipe may have their own settings that you can set as well.</p>
+<p>Note that this list isn't exhaustive. Some modules used by the recipe may have their own settings that you can set as well. Also note that these keys exist in the `DocsKeys` static class so to set them you should use `DocsKeys.KeyName`.</p>
 
-@Html.Partial("_Keys", new KeysModel("DocsKeys", "Global"))
+@Html.Partial("_Keys", new KeysModel("Wyam.Docs.DocsKeys", "Global"))
