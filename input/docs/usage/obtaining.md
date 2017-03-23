@@ -41,7 +41,11 @@ For more information about how tools packages work, see the excellent blog post 
 
 # Chocolatey
 
-Wyam will be added to Chocolatey soon, see [issue #95](https://github.com/Wyamio/Wyam/issues/95) for more details.
+Wyam will be added to Chocolatey soon, see [issue #95](https://github.com/Wyamio/Wyam/issues/95) for more details. In the meantime, you can use the following command to install Wyam as a tool from Chocolatey:
+
+```
+choco install Wyam -s https://www.nuget.org/api/v2/
+```
 
 # Libraries
 
