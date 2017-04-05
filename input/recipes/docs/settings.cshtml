@@ -2,14 +2,4 @@ Order: 2
 Description: Settings that can be configured to control the generation process.
 RedirectFrom: recipes/docs/global-metadata
 ---
-<p>The settings listed below apply globally and can be set from the <a href="/docs/usage/command-line">command line</a> or from a <a href="/docs/usage/configuration#settings">configuration file</a>. They are used to configure options and otherwise control the generation process.</p>
-
-<p>In addition to the optional settings listed below, you should also set <code>Settings[Keys.Host]</code> in your configuration file:</p>
-
-<pre><code>Settings[Keys.Host] = "mysite.com";</code></pre>
-
-<p>While most generated links are relative to ensure local testing works, some links need to be absolute such as feeds. This setting ensures the correct URL is generated for those links.</p>
-
-<p>Note that this list isn't exhaustive. Some modules used by the recipe may have their own settings that you can set as well.</p>
-
-@Html.Partial("_Keys", new KeysModel("Wyam.Docs.DocsKeys", "Global"))
+@Html.Partial("_Recipesettings", "Wyam.Docs.Docs")

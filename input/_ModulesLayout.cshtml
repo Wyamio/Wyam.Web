@@ -139,7 +139,7 @@
 		}
 		if(methods != null && methods.Count > 0)
 		{
-			<h2>Fluent Methods</h2>
+			<h1 id="methods">Fluent Methods</h1>
 			<p>Chain these methods together after the constructor to modify behavior.</p>
 			<ul>
 				@foreach(IDocument method in methods)
@@ -177,37 +177,17 @@
 		}
 		
 		// Metadata
-		IReadOnlyList<OtherComment> metadata =
-			Model.List<OtherComment>("MetadataComments")
-				?.Where(x => x.Attributes.ContainsKey("name"))
-				.OrderBy(x => x.Attributes["name"])
-				.ToList();
-		if(metadata != null && metadata.Count > 0)
+		@Html.Partial("_Keys", new KeysModel(Model.String(CodeAnalysisKeys.QualifiedName), "Setting")
 		{
-			<h1 id="Metadata">Metadata</h1>
-			<p>The following metadata is added to each document.</p>
-			<ul>
-				@foreach(OtherComment meta in metadata)
-				{
-					<li>
-						<p>
-							@{
-								string type = string.Empty;
-								if(meta.Attributes.ContainsKey("type"))
-								{
-									type = ": <code>" + System.Net.WebUtility.HtmlEncode(meta.Attributes["type"]) + "</code>";
-								}
-							}
-							<strong><code>@(meta.Attributes["name"])</code></strong>@Html.Raw(type)
-						</p>
-						@if(!string.IsNullOrWhiteSpace(meta.Html))
-						{							
-							<p>@Html.Raw(meta.Html)</p>
-						}
-					</li>
-				}
-			</ul>
-		}	
-		
+			Intro = @"<h1 id=""settings"">Settings</h1><p>The settings listed below apply globally and can be set from the <a href=""/docs/usage/command-line"">command line</a> or from a <a href=""/docs/usage/settings"">configuration file</a>. They are used to configure options and otherwise control module behavior.</p>"
+		})
+		@Html.Partial("_Keys", new KeysModel(Model.String(CodeAnalysisKeys.QualifiedName), "Input")
+		{
+			Intro = @"<h1 id=""input-metadata"">Input Metadata</h1><p>The metadata values listed below apply to individual documents and are typically set from <a href=""/docs/concepts/metadata#front-matter"">front matter</a> (with just the name of the key) and used as inputs to the module to control behavior.</p>"
+		})
+		@Html.Partial("_Keys", new KeysModel(Model.String(CodeAnalysisKeys.QualifiedName), "Output")
+		{
+			Intro = @"<h1 id=""output-metadata"">Output Metadata</h1><p>The metadata values listed below apply to individual documents and are created and set by the module as indicated in their descriptions.</p>"
+		})		
 	}	
 </section>

@@ -138,16 +138,6 @@ Note that namespaces for all found modules as well as the following namespaces a
 * `System.IO`
 * `System.Diagnostics`
 
-# Settings
-
-You can specify global settings that are available from the current `IExecutionContext`. This is often used by recipes to configure the generation and control different options. You can also use settings to pass information from your configuration file to [Razor](/modules/razor) templates or anything else that has access to the current `IExecutionContext`. Note that the settings dictionary values are objects, so you can store simple primitive values or complex structures as well.
-
-```
-Settings["Foo"] = "Bar";
-```
-
-Additionally, settings are inherited as metadata in each document. Every pipeline starts with a single document that has had it's metadata populated with the settings you specify in the configuration file. You can use this facility to introduce variables that can influence the way the pipeline behaves or to initialize documents with initial values for document-specific metadata.
-
 # Pipelines
 
 Configuring a pipeline is easy, and Wyam configuration files are designed to be simple and straightforward:

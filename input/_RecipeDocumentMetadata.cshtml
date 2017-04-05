@@ -1,0 +1,11 @@
+@model string
+
+@Html.Partial("_Keys", new KeysModel(Model, "Input")
+{
+    Intro = @"<h1 id=""input-metadata"">Input Metadata</h1><p>The metadata values listed below apply to individual documents and are typically set from <a href=""/docs/concepts/metadata#front-matter"">front matter</a> (with just the name of the key) and used as inputs to the recipes in the pipeline to control behavior.</p>"
+})
+@Html.Partial("_Keys", new KeysModel(Model, "Output")
+{
+    Intro = @"<h1 id=""output-metadata"">Output Metadata</h1><p>The metadata values listed below apply to individual documents and are created and set by the recipe as indicated in their descriptions and are available for use from your own pages and templates.</p>"
+})
+<p>Note that these lists aren't exhaustive. Some modules used by the recipe may have their own document metadata that you can set as well.</p>

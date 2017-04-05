@@ -1,6 +1,6 @@
 Title: Embedding
 Description: Wyam can be embedded into your own application.
-Order: 4
+Order: 5
 RedirectFrom: knowledgebase/embedded-use
 ---
 While Wyam is usually executed from the command line application, this is just a thin wrapper around a core library that you can include in your own applications. The core Wyam library is available on NuGet as [Wyam.Core](https://www.nuget.org/packages/Wyam.Core). Once you've included it in your application, you will need to create an instance of the `Wyam.Core.Execution.Engine` class.

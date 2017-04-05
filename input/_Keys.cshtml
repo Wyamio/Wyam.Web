@@ -1,14 +1,29 @@
 @model KeysModel
 
-@{
-    IEnumerable<IDocument> keys = Documents
+@{    
+    List<Tuple<IDocument, string>> keys = null; // Item1 = key field document, Item2 = summary
+    IDocument targetType = Documents
         .FromPipeline(Docs.Api)
-        .FirstOrDefault(x => x.String(CodeAnalysisKeys.QualifiedName) == Model.ContainerClass)
-        .DocumentList(CodeAnalysisKeys.Members)
-        ?.Where(x => x.String(CodeAnalysisKeys.Kind) == "Field" 
-            && x.String("Accessibility") == "Public" 
-            && (Model.Scope == null || (x.List<OtherComment>("ScopeComments") ?? Array.Empty<OtherComment>()).Any(y => y.Html == Model.Scope)));
-    if(keys != null)
+        .FirstOrDefault(x => x.String(CodeAnalysisKeys.QualifiedName) == Model.TargetType);
+    if(targetType != null)
+    {
+        keys = Model.Usage == null
+            ? targetType.DocumentList(CodeAnalysisKeys.Members)
+                ?.Where(x => x.String(CodeAnalysisKeys.Kind) == "Field" && x.String("Accessibility") == "Public")
+                ?.Select(x => new Tuple<IDocument, string>(x, x.String(CodeAnalysisKeys.Summary)))
+                ?.ToList()
+            : targetType.List<OtherComment>("MetadataComments")
+                ?.Where(x => x.Attributes.ContainsKey("cref") && x.Attributes.ContainsKey("usage") && x.Attributes["usage"] == Model.Usage)
+                ?.Select(x => new Tuple<IDocument, string>(
+                    Documents
+                        .FromPipeline(Docs.Api)
+                        .FirstOrDefault(y => y.String(CodeAnalysisKeys.CommentId) == x.Attributes["cref"]),
+                    x.Html))
+                ?.Where(x => x.Item1 != null)
+                ?.Select(x => new Tuple<IDocument, string>(x.Item1, string.IsNullOrWhiteSpace(x.Item2) ? x.Item1.String(CodeAnalysisKeys.Summary) : x.Item2))
+                ?.ToList();
+    }
+    if(keys != null && keys.Count > 0)
     {
         if(Model.Intro != null)
         {
@@ -18,26 +33,25 @@
             @{
                 if(Model.AlphaSort)
                 {
-                    keys = keys.OrderBy(x => x.String(CodeAnalysisKeys.DisplayName));
+                    keys = keys.OrderBy(x => x.Item1.String(CodeAnalysisKeys.DisplayName)).ToList();
                 }
-                foreach(IDocument key in keys)
+                foreach(Tuple<IDocument, string> key in keys)
                 {
                     <li>        
                         <p>
                             @{
-                                string type = string.Join(", ", key.List<OtherComment>("TypeComments")?.Select(x => x.Html) ?? Array.Empty<string>());
+                                string type = string.Join(", ", key.Item1.List<OtherComment>("TypeComments")?.Select(x => x.Html) ?? Array.Empty<string>());
                                 if(type != string.Empty)
                                 {
                                     type = ": " + type;
                                 }
                             }
-                            <strong><code>@(key.Document(CodeAnalysisKeys.ContainingType).String(CodeAnalysisKeys.DisplayName)).@(key.String(CodeAnalysisKeys.DisplayName))</code></strong>@Html.Raw(type)
+                            <strong><code>@(key.Item1.Document(CodeAnalysisKeys.ContainingType).String(CodeAnalysisKeys.DisplayName)).@(key.Item1.String(CodeAnalysisKeys.DisplayName))</code></strong>@Html.Raw(type)
                         </p>
-                        @{
-                            string summary = key.String(CodeAnalysisKeys.Summary);            
-                            if(!string.IsNullOrWhiteSpace(summary))
+                        @{    
+                            if(!string.IsNullOrWhiteSpace(key.Item2))
                             {							
-                                <p>@Html.Raw(summary)</p>
+                                <p>@Html.Raw(key.Item2)</p>
                             }
                         }
                     </li>

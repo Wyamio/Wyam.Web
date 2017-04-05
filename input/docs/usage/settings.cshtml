@@ -1,0 +1,25 @@
+Title: Settings
+Description: How to set global settings and a list of all general settings metadata.
+Order: 4
+---
+<p>
+    You can specify global settings that are available from the current `IExecutionContext`. This is often used by recipes
+    to configure the generation and control different options. You can also use settings to pass information from your
+    configuration file to [Razor](/modules/razor) templates or anything else that has access to the current `IExecutionContext`.
+    Note that the settings dictionary values are objects, so you can store simple primitive values or complex structures as well.
+</p>
+
+<pre><code>Settings["Foo"] = "Bar";</code></pre>
+
+<p>
+    Additionally, settings are inherited as metadata in each document. Every pipeline starts with a single document that
+    has had it's metadata populated with the settings you specify in the configuration file. You can use this facility to
+    introduce variables that can influence the way the pipeline behaves or to initialize documents with initial values
+    for document-specific metadata.
+</p>
+
+<p>Recipes and themes may also introduce their own settings.</p>
+
+<p>The following is a list of all global settings that you can set in the configuration file:</p>
+
+@Html.Partial("_Keys", new KeysModel("Wyam.Common.Configuration.ISettings", "Setting"))

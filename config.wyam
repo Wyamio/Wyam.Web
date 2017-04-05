@@ -8,20 +8,20 @@ Settings[DocsKeys.NetlifyRedirects] = true;
 
 public class KeysModel
 {
-    public string ContainerClass { get; set; }
-    public string Scope { get; set; }
+    public string TargetType { get; set; }
+    public string Usage { get; set; } // If null, type will be scanned for const fields, otherwise <metadata> comments will be used
     public bool AlphaSort { get; set; }
     public string Intro { get; set; }
 
-    public KeysModel(string containerClass, string scope = null, bool alphaSort = true)
+    public KeysModel(string targetType, string usage, bool alphaSort = true)
     {
-        ContainerClass = containerClass;
-        Scope = scope;
+        TargetType = targetType;
+        Usage = usage;
         AlphaSort = alphaSort;
     }
 
-    public KeysModel(string containerClass, bool alphaSort = true)
-        : this(containerClass, null, alphaSort)
+    public KeysModel(string targetType, bool alphaSort = true)
+        : this(targetType, null, alphaSort)
     {        
     }
 }

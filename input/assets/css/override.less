@@ -3,6 +3,29 @@
 @import "adminlte/variables.less";
 @import "adminlte/mixins.less";
 
+body.layout-boxed {
+	#gradient > .vertical(#183a4e, #275d7c);
+}
+
+@media (min-width: 1250px) { 
+	.infobar {
+		color: #fff;
+		
+		a,
+		a:link,
+		a:visited {
+			color: lighten(#3c8dbc, 25%);
+		}
+
+		a:hover,
+		a:active {
+			color: #3c8dbc;
+		}
+	}
+}
+
+
+
 .jumbotron {
 	padding: 0;
 	color: #fff;
@@ -69,6 +92,19 @@
 /* For Gitter and GitHub */
 .bottom-footer {
 	margin-bottom: 40px !important;  // Make room for Gitter and GitHub buttons
+	
+	color: #fff;
+	
+	a,
+	a:link,
+	a:visited {
+		color: lighten(#3c8dbc, 25%);
+	}
+
+	a:hover,
+	a:active {
+		color: #3c8dbc;
+	}
 }
 
 .gitter-open-chat-button {
