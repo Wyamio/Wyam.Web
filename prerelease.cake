@@ -75,9 +75,10 @@ Task("Preview")
                 Source = new [] { "https://www.myget.org/F/wyam/api/v3/index.json" },
                 Package = x
             }),
-            UpdatePackages = true
-            //Preview = true,
-            //Watch = true
+            UpdatePackages = true,
+            Verbose = true,
+            Preview = true,
+            Watch = true
         });
     });
 
