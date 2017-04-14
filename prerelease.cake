@@ -17,6 +17,7 @@ var target = Argument("target", "Default");
 // Define directories.
 var releaseDir = Directory("./release");
 var sourceDir = releaseDir + Directory("repo");
+var addinDir = releaseDir + Directory("addins");
 
 //////////////////////////////////////////////////////////////////////
 // TASKS
@@ -46,11 +47,41 @@ Task("GetSource")
         var containerDir = GetDirectories(releaseDir.Path.FullPath + "/*").First(x => x.GetDirectoryName().StartsWith("Wyamio"));
         MoveDirectory(containerDir, sourceDir);
     });
+
+Task("CleanAddinPackages")
+    .Does(() =>
+{
+    CleanDirectory(addinDir);
+});
+
+Task("GetAddinPackages")
+    .IsDependentOn("CleanAddinPackages")
+    .Does(() => 
+{
+    string[] addinLines = System.IO.File.ReadAllLines(GetFiles("./addins.txt").First().FullPath);
+    foreach(string addinLine in addinLines)
+    {
+        string[] addinColumns = addinLine.Split(' ');
+        NuGetInstall(addinColumns[0],
+            new NuGetInstallSettings
+            {
+                OutputDirectory = addinDir,
+                Prerelease = true,
+                Verbosity = NuGetVerbosity.Quiet,
+                Source = new [] { "https://api.nuget.org/v3/index.json" },
+                NoCache = true
+            });
+    }
+});
     
 Task("Preview")
     .IsDependentOn("GetSource")
+    .IsDependentOn("GetAddinPackages")
     .Does(() =>
     {
+        var addinAssemblies = System.IO.File.ReadAllLines(GetFiles("./addins.txt").First().FullPath)
+            .SelectMany(x => x.Split(' ').Skip(1))
+            .Select(x => "../release/addins/**/" + x);
         Wyam(new WyamSettings
         {
             Recipe = "Docs -i",
@@ -73,7 +104,11 @@ Task("Preview")
             }),
             UpdatePackages = true,
             Preview = true,
-            Watch = true
+            Watch = true,
+            Settings = new Dictionary<string, object>
+            {
+                { "AssemblyFiles",  addinAssemblies }
+            }
         });
     });
 

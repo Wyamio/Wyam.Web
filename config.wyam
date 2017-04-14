@@ -2,7 +2,8 @@ Settings[Keys.Host] = "wyam.io";
 Settings[Keys.LinksUseHttps] = true;
 Settings[DocsKeys.Title] = "Wyam";
 Settings[DocsKeys.Logo] = "/assets/img/logo.png";
-Settings[DocsKeys.SourceFiles] = "../release/repo/src/**/{!bin,!obj,!packages,!*.Tests,}/**/*.cs";
+Settings[DocsKeys.SourceFiles] = null;
+Settings[DocsKeys.ProjectFiles] = "../release/repo/src/**/*.csproj";
 Settings[DocsKeys.BaseEditUrl] = "https://github.com/Wyamio/Wyam.Web/tree/master/input/";
 Settings[DocsKeys.NetlifyRedirects] = true;
 
@@ -27,28 +28,31 @@ public class KeysModel
 }
 
 Pipelines.InsertBefore(Docs.RenderPages, "Modules",
-	Documents(Docs.Code),
-	AnalyzeCSharp()
-		.WithNamedTypes(x => x.AllInterfaces.Any(y => y.Name == "IModule") && !x.IsAbstract)
-		.WhereNamespaces(x => !x.StartsWith("Wyam.Testing"))
-		.WherePublic()
-		.WithDocsForImplicitSymbols()
-		.WithWritePath(x => {
-			string name = x.String("DisplayName").ToLower();
-			if(name == "index")
-			{
-				name = "indx";  // Special case for the Index module
-			}
-            
-            // Remove generic types
-            int genericParamsIndex = name.IndexOf("<");
-            if(genericParamsIndex != -1)
-            {
-                name = name.Substring(0, genericParamsIndex);
-            }
-            
-			return new FilePath($"modules/{name}.html");
-		}),
+    Execute(ctx =>
+	    AnalyzeCSharp()
+            .WithAssemblies(ctx.List<string>(DocsKeys.AssemblyFiles))
+            .WithProjects(ctx.List<string>(DocsKeys.ProjectFiles))
+            .WithNamedTypes(x => x.AllInterfaces.Any(y => y.Name == "IModule") && !x.IsAbstract)
+            .WhereNamespaces(x => !x.StartsWith("Wyam.Testing"))
+            .WherePublic()
+            .WithDocsForImplicitSymbols()
+            .WithWritePath(x => {
+                string name = x.String("DisplayName").ToLower();
+                if(name == "index")
+                {
+                    name = "indx";  // Special case for the Index module
+                }
+                
+                // Remove generic types
+                int genericParamsIndex = name.IndexOf("<");
+                if(genericParamsIndex != -1)
+                {
+                    name = name.Substring(0, genericParamsIndex);
+                }
+                
+                return new FilePath($"modules/{name}.html");
+            })
+    ),
     Branch(
         SearchIndex(new SearchIndexItem(
             @ctx.GetLink(@doc), 

@@ -20,6 +20,7 @@ var target = Argument("target", "Default");
 // Define directories.
 var releaseDir = Directory("./release");
 var sourceDir = releaseDir + Directory("repo");
+var addinDir = releaseDir + Directory("addins");
 
 //////////////////////////////////////////////////////////////////////
 // TASKS
@@ -54,27 +55,68 @@ Task("GetSource")
         MoveDirectory(containerDir, sourceDir);
     });
 
+Task("CleanAddinPackages")
+    .Does(() =>
+{
+    CleanDirectory(addinDir);
+});
+
+Task("GetAddinPackages")
+    .IsDependentOn("CleanAddinPackages")
+    .Does(() => 
+{
+    string[] addinLines = System.IO.File.ReadAllLines(GetFiles("./addins.txt").First().FullPath);
+    foreach(string addinLine in addinLines)
+    {
+        string[] addinColumns = addinLine.Split(' ');
+        NuGetInstall(addinColumns[0],
+            new NuGetInstallSettings
+            {
+                OutputDirectory = addinDir,
+                Prerelease = true,
+                Verbosity = NuGetVerbosity.Quiet,
+                Source = new [] { "https://api.nuget.org/v3/index.json" },
+                NoCache = true
+            });
+    }
+});
+
 Task("Build")
     .IsDependentOn("GetSource")
+    .IsDependentOn("GetAddinPackages")
     .Does(() =>
     {
+        var addinAssemblies = System.IO.File.ReadAllLines(GetFiles("./addins.txt").First().FullPath)
+            .SelectMany(x => x.Split(' ').Skip(1))
+            .Select(x => "../release/addins/**/" + x);
         Wyam(new WyamSettings
         {
             Recipe = "Docs",
             Theme = "Samson",
-            UpdatePackages = true
+            UpdatePackages = true,
+            Settings = new Dictionary<string, object>
+            {
+                { "AssemblyFiles",  addinAssemblies }
+            }
         });        
     });
     
 Task("Preview")
     .Does(() =>
     {
+        var addinAssemblies = System.IO.File.ReadAllLines(GetFiles("./addins.txt").First().FullPath)
+            .SelectMany(x => x.Split(' ').Skip(1))
+            .Select(x => "../release/addins/**/" + x);
         Wyam(new WyamSettings
         {
             Recipe = "Docs",
             Theme = "Samson",
             UpdatePackages = true,
-            Preview = true
+            Preview = true,
+            Settings = new Dictionary<string, object>
+            {
+                { "AssemblyFiles",  addinAssemblies }
+            }
         });
     });
 
@@ -82,7 +124,9 @@ Task("Debug")
     .Does(() =>
     {
         StartProcess("../Wyam/src/clients/Wyam/bin/Debug/wyam.exe",
-            "-a \"../Wyam/src/**/bin/Debug/*.dll\" -r \"docs -i\" -t \"../Wyam/themes/Docs/Samson\" -p");
+            "-a \"../Wyam/src/**/bin/Debug/*.dll\" -r \"docs -i\" -t \"../Wyam/themes/Docs/Samson\" -p"
+            //+ " --setting \"AssemblyFiles=[../release/addins/**/Contentful.Wyam.dll]\""
+            );
     });
 
 Task("Deploy")
