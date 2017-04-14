@@ -35,7 +35,11 @@ Task("GetSource")
     .IsDependentOn("CleanSource")
     .Does(() =>
     {
-        GitHubClient github = new GitHubClient(new ProductHeaderValue("WyamDocs"));
+        var githubToken = EnvironmentVariable("WYAM_GITHUB_TOKEN");
+        GitHubClient github = new GitHubClient(new ProductHeaderValue("WyamDocs"))
+        {
+            Credentials = new Credentials(githubToken)
+        };
 	    // The GitHub releases API returns Not Found if all are pre-release, so need workaround below
         //Release release = github.Repository.Release.GetLatest("Wyamio", "Wyam").Result;        
 	    Release release = github.Repository.Release.GetAll("Wyamio", "Wyam").Result.First();
@@ -71,9 +75,9 @@ Task("Preview")
                 Source = new [] { "https://www.myget.org/F/wyam/api/v3/index.json" },
                 Package = x
             }),
-            UpdatePackages = true,
-            Preview = true,
-            Watch = true
+            UpdatePackages = true
+            //Preview = true,
+            //Watch = true
         });
     });
 

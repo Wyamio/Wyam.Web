@@ -13,4 +13,4 @@ install:
 - set PATH=C:\Program Files\Git\mingw64\bin;%PATH%
 
 build_script:
-  - ps: .\build.ps1 -Target "AppVeyor"
+  - ps: .\build.ps1 -Target "Preview" -Script "prerelease.cake"
