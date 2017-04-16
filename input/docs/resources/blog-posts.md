@@ -8,6 +8,9 @@ There is a growing community of developers exploring static generators and Wyam.
 
 <!-- Use two spaces after the title for proper formatting -->
 
+- **[Wyam with Nginx, url rewrite and custom 404 page](http://alexvab.com/posts/wyam-with-nginx-url-rewrite-and-custom-404-page)**  
+  Alex V., April 15, 2017
+
 - **[Contentful ❤️️ Wyam == true](https://www.contentful.com/blog/2017/03/07/contentful-loves-wyam/)**  
   Robert Linde, March 7, 2017
 
