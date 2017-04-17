@@ -6,6 +6,9 @@ Many sites and blogs are realizing the benefits of an extensible, flexible, nati
 
 <!-- Use two spaces after the title for proper formatting -->
 
+- **[Alex V. Blog](http://alexvab.com)**  
+  The personal blog of Alex V.
+
 - **[alFador.mx](http://www.alfador.mx)**  
   The personal blog of Hector Hernandez.
 
