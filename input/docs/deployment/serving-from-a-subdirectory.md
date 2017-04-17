@@ -6,9 +6,9 @@ Some hosts place your web site under a subdirectory on the server. For example, 
 To make all generated links use the subdirectory name, place the following at the top of your [configuration file](/docs/usage/configuration) and set the appropriate subdirectory:
 
 ```
-Settings.LinkRoot = "/subdirectory";
+Settings[Keys.LinkRoot] = "/subdirectory";
 ```
 
-That will result in all the links that were created using `IExecutionContext.GetLink()` having the correct subdirectory. While the [recipes and themes](/recipes) are designed to automatically support this convention, you may need to make changes to your own files or custom generatation logic to take advantage of the setting. Make sure that all of the links you specify without using the `GetLink()` method point to the correct relative URL with the subdirectory.
+That will result in all the links that were created using `IExecutionContext.GetLink()` having the correct subdirectory. While the [recipes and themes](/recipes) are designed to automatically support this convention, you may need to make changes to your own files or custom generation logic to take advantage of the setting. Make sure that all of the links you specify without using the `GetLink()` method point to the correct relative URL with the subdirectory.
 
 To test how the site will work when a host is serving it under a subdirectory, use the `--virtual-dir "/subdirectory"` option when running via the [command line](/docs/usage/command-line). This will tell the preview web server to serve your site under the specified virtual directory.

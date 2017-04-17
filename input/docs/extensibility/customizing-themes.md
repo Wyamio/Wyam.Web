@@ -8,3 +8,5 @@ When customizing a theme, it's important to keep in mind that themes are just fi
 To see which files constitute a theme, take a look at the [themes folder in the Wyam GitHub repository](https://github.com/Wyamio/Wyam/tree/develop/themes). Select the theme file(s) you want to modify or replace and copy them to your input folder. In addition to placing theme overrides in your input folder (typically named "input" unless you specify a different name), you can also place them in a folder named "theme" to keep theme overrides and additions separate from your input content.
 
 Once the specific theme files you want to modify or replace are in your input or local theme folder, you can edit them in any way you see fit. The versions from your local folders will take precedence over the packaged theme and your changes will be included in the build.
+
+You may also want to read the [notes section of the Creating A Theme page](/docs/extensibility/creating-a-theme#notes) as many of the details there also apply to extending or customizing themes.
