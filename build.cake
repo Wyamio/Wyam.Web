@@ -62,8 +62,7 @@ Task("Build")
         {
             Recipe = "Docs",
             Theme = "Samson",
-            UpdatePackages = true,
-            Verbose = true
+            UpdatePackages = true
         });        
     });
     

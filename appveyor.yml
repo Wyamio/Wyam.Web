@@ -6,6 +6,8 @@ environment:
   access_token:
     secure: jf56pSYTaUx5sBJCVt2IDCzmPrZ2iOTYrSVvCzEt17UhGKq3RfqlO4aIZ3bRlZSX
 
+image: Visual Studio 2017
+
 # Temporarily needed until curl added to PATH
 # See http://help.appveyor.com/discussions/problems/6312-curl-command-not-found
 # And https://github.com/appveyor/ci/issues/1431
