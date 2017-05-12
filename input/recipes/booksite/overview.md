@@ -1,44 +1,47 @@
 Order: 1
-Description: An overview of the Blog recipe, including key features and usage notes.
+Description: An overview of the BookSite recipe, including key features and usage notes.
 ---
-The Blog recipe is probably the best way to get an experience similar to other blog-based static site generators like Jekyll. It will pick up all Markdown and Razor files in the `/posts` directory as blog posts, and all Markdown and Razor files in the root site directory as additional information pages. It will also generate Atom and RSS feeds for your posts, as well as create archives by date and by tags.
+The BookSite recipe fills a niche for websites dedicated to book and eBook marketing.
 
 # Key Features
 
-- Content pages in addition to blog posts.
-- Posts and pages can be in [Markdown](/modules/markdown) or [Razor](/modules/razor).
-- Tag engine, including a tag archive and tag lists on every post.
-- Automatic archive page.
-- Meta-refresh redirects and/or a Netlify redirect file.
-- RSS, Atom, and/or RDF feeds.
+- Define chapter content and/or summaries as either Markdown or Razor files.
+- Integrated blog.
+- Support for arbitrary custom pages.
+- Individual Markdown or Razor files for homepage sections.
+- RSS, Atom, and/or RDF feeds for the blog.
 
 # Scaffolding
 
 To scaffold the recipe, run:
 
 ```
-wyam new -r Blog
+wyam new -r BookSite
 ```
 
-This generates a skeleton set of input files that includes a blog post and a content page. You can use this as a starting point for your own site.
+This generates a skeleton set of input files that includes a chapter, blog post, custom page, and homepage sections. You can use this as a starting point for your own site.
 
 # Building
 
 To build a site with this recipe, run:
 
 ```
-wyam -r Blog
+wyam -r BookSite
 ```
 
 # Themes
 
-To select a specific [theme](/recipes/blog/themes), run:
+To select a specific [theme](/recipes/booksite/themes), run:
 
 ```
-wyam -r Blog -t CleanBlog
+wyam -r BookSite -t Velocity
 ```
 
 # Usage Notes
+
+## Example
+
+There's an excellent example of a full BookSite at [https://github.com/Wyamio/Wyam/tree/develop/examples/SherlockHolmes](https://github.com/Wyamio/Wyam/tree/develop/examples/SherlockHolmes).
 
 ## Blog Post Published Dates
 

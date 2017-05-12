@@ -1,5 +1,5 @@
 Order: 1
-Description: An overview of the docs recipe, including key features and usage notes.
+Description: An overview of the Docs recipe, including key features and usage notes.
 ---
 The Docs recipe is designed to cover many different use cases for documentation sites including any combination of blog, content, and API documentation. The generated site will automatically adapt to the input files and will hide navigation sections and other functionality if those types of files aren't available. For example, if you don't specify code or assemblies for the API section, the generated site will still be great for content pages and/or blog posts.
 
