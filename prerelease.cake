@@ -76,7 +76,6 @@ Task("Preview")
                 Package = x
             }),
             UpdatePackages = true,
-            Verbose = true,
             Preview = true,
             Watch = true
         });
