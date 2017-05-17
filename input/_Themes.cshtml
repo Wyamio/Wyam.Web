@@ -1,0 +1,45 @@
+@{
+	// Display the menu
+	IList<IDocument> children = Model
+        .DocumentList(Keys.Children)
+        .OrderBy(x => x.String(Keys.Title))
+        .ToList();
+	if(children != null && children.Count > 0)
+	{
+        <div class="row">
+            @foreach(IDocument child in children)
+            {
+                string preview = null;
+                if(child.ContainsKey("Preview") && child.Bool("Preview", true))
+                {
+                    preview = child.String("Preview");
+                }
+                else
+                {
+                    FilePath childPath = child.FilePath(Keys.RelativeFilePath);
+                    preview = Context.GetLink(childPath.Directory.Combine("preview").CombineFile(childPath.FileNameWithoutExtension)).ToLower();
+                }
+
+                <div class="col-sm-6 col-md-4">                    
+                    <div class="thumbnail">
+                        <a href="@Context.GetLink(child)">
+                            <img src="@(Context.GetLink(child.FilePath(Keys.RelativeFilePath).ChangeExtension("png")))" class="img-responsive" alt="@(child.String(Keys.Title))">
+                        </a>
+                        <div class="caption">
+                            <h2><a href="@Context.GetLink(child)">@(child.String(Keys.Title))</a></h2>
+                            <p><small>
+                                <a href="@Context.GetLink(child)">Details</a> 
+                                @if(preview != null)
+                                {
+                                    <text> | <a href="@(preview)">Preview</a></text>
+                                }
+                            </small></p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+	}
+}
+
+<p>If you've made a theme, we want to hear about it! Please <a href="https://github.com/Wyamio/Wyam.Web/issues/new">open an issue</a> and we'll get it added to the site.</p>

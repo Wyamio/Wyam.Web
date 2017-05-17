@@ -1,32 +1,18 @@
-Order: 6
-Description: Details about the themes that support this recipe and how to customize them.
+Title: CleanBlog
+Description: A clean theme with a large top banner area.
+NuGet: Wyam.Blog.CleanBlog
+Source: https://github.com/Wyamio/Wyam/tree/develop/themes/Blog/CleanBlog
+# Author: Wyam
+# AuthorLink: http://wyam.io
+# Link: http://www.github.com/asdf
+# Preview: http://some.other.preview/ OR false for no preview
+# Git: https://github.com/Wyamio/Wyam.git
 ---
-<div class="row">
-  <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <img src="/assets/img/themes/blog-cleanblog.png" alt="CleanBlog">
-      <div class="caption">
-        <h3>CleanBlog</h3>
-        <p>A clean layout with a large top banner area.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <img src="/assets/img/themes/blog-phantom.png" alt="Phantom">
-      <div class="caption">
-        <h3>Phantom</h3>
-        <p>An airy theme based on the <a href="https://html5up.net/phantom">Phantom</a> template from <a href="https://html5up.net/">HTML5 Up</a>.</p>
-      </div>
-    </div>
-  </div>
-</div>
+This theme is a port of the [Clean Blog](https://startbootstrap.com/template-overviews/clean-blog/) theme from [Start Bootstrap](https://startbootstrap.com/). It contains responsive pages with lots of whitespace and a large top banner area.
 
 # Overriding Theme Files
 
-One way to customize the output of the recipe is to [override specific theme files](/docs/concepts/themes#overriding-theme-files) with your own versions. Some theme files are even designed specifically for this purpose. While any theme file can be overridden, these are some of the more useful ones you should focus on. To implement an override, just create a new file with the same name in your own input path. In many cases you'll also want to start with the original content of the theme file ([as available in the repository](https://github.com/Wyamio/Wyam/tree/master/themes)) and edit it from there.
-
-While anyone can create themes for any recipe, the official themes for the this recipe all follow a similar convention and have the following files (unless otherwise indicated).
+One way to customize the output of the recipe is to [override specific theme files](/docs/concepts/themes#overriding-theme-files) with your own versions. Some theme files are even designed specifically for this purpose. While any theme file can be overridden, these are some of the more useful ones you should focus on. To implement an override, create a new file with the same name in your own input path. In many cases you'll also want to start with the original content of the theme file ([as available in the repository](https://github.com/Wyamio/Wyam/tree/master/themes)) and edit it from there.
 
 - **`/assets/css/override.css`**
   
@@ -68,7 +54,7 @@ While anyone can create themes for any recipe, the official themes for the this 
 
 ## Adding Disqus
 
-Adding Disqus (or any other commenting system) to your blog posts is easy. You'll need to include the Disqus code on every blog post (but not other pages), so `/_PostFooter.cshtml` is probably the best place to put it. Just add the following to a `_PostFooter.cshtml` file in your input folder:
+Adding Disqus (or any other commenting system) to your blog posts is easy. You'll need to include the Disqus code on every blog post (but not other pages), so `/_PostFooter.cshtml` is probably the best place to put it. Add the following to a `_PostFooter.cshtml` file in your input folder:
 
 ```
 <div id="disqus_thread"></div>

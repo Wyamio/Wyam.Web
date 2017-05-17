@@ -1,0 +1,132 @@
+@{
+    Layout = "_Layout";
+}
+
+<p class="lead">@Model.String(DocsKeys.Description)</p>
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-md-push-6">
+        <div class="thumbnail">
+            <img src="@(Context.GetLink(Model.FilePath(Keys.RelativeFilePath).ChangeExtension("png")))" class="img-responsive" alt="@(Model.String(Keys.Title))">
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-md-pull-6">
+        <dl class="dl-horizontal">
+            @if(Model.ContainsKey("Author"))
+            {
+                <dt>Author</dt>
+                @if(Model.ContainsKey("AuthorLink"))
+                {
+                    <dd><a href="@(Model.String("AuthorLink"))">@Model.String("Author")</a></dd>
+                }
+                else
+                {
+                    <dd>@Model.String("Author")</dd>                    
+                }
+            }
+            @if(Model.ContainsKey("NuGet"))
+            {
+                <dt>NuGet Package</dt>
+                <dd><a href="https://www.nuget.org/packages/@(Model.String("NuGet"))">@Model.String("NuGet")</a></dd>
+            }
+            <dt>Links</dt>         
+            @if(Model.ContainsKey("Link"))
+            {
+                <dd><a href="@(Model.String("Link"))">Homepage</a></dd>
+            }       
+            @if(Model.ContainsKey("Source"))
+            {
+                <dd><a href="@(Model.String("Source"))">Source Code</a></dd>
+            }
+            @if(Model.ContainsKey("Preview") && Model.Bool("Preview", true))
+            {
+                // An alternate preview URL was specified
+                <dd><a href="@(Model.String("Preview"))"><strong>Preview</strong></dd>
+            }
+            else
+            {
+                // No preview URL, and not false, so must be a locally generated preview
+                FilePath currentPath = Model.FilePath(Keys.RelativeFilePath);
+                <dd><a href="@(Context.GetLink(currentPath.Directory.Combine("preview").CombineFile(currentPath.FileNameWithoutExtension)).ToLower())"><strong>Preview</strong></a></dd>
+            }
+        </dl>
+    </div>
+</div>
+
+<div class="row">
+    @{
+        string usageGridClass = "col-md-12";
+        if((!Model.ContainsKey("Author") || Model.ContainsKey("NuGet")) && Model.ContainsKey("Git"))
+        {
+            usageGridClass = "col-md-6";
+        }
+    }
+    @if(!Model.ContainsKey("Author") || Model.ContainsKey("NuGet"))
+    {
+        <div class="col-sm-12 @usageGridClass">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Usage Via NuGet</h3>
+                </div>
+                <div class="panel-body">
+                    @if(!Model.ContainsKey("Author"))
+                    {
+                        // If no author, then this is a built-in theme and there will be a lookup
+                        <p>This is an official theme and therefore Wyam already knows about it and no explicit NuGet package needs to be specified.</p>
+                        <p>
+                            To use it, pass the <code>-t</code> argument on the <a href="/docs/usage/command-line">command line</a> to specify the theme
+                            (along with the <code>-r</code> argument to specify the recipe):
+                        </p>
+                        <pre><code>wyam -r @(Model.FilePath(Keys.RelativeFilePath).Directory.Parent.Name) -t @(Model.String("Title"))</code></pre>
+                        <p>Alternativly, you can specify the theme and recipe in your <a href="/docs/usage/configuration">configuration file</a>:</p>
+                        <pre><code>#r @(Model.FilePath(Keys.RelativeFilePath).Directory.Parent.Name)
+#t @(Model.String("Title"))</code></pre>
+                    }
+                    else
+                    {
+                        // Otherwise we need to pull down the NuGet package
+                        <p>This is a third-party theme and the containing NuGet package needs to be installed.</p>
+                        <p>
+                            To use it, pass the <code>-n</code> argument on the <a href="/docs/usage/command-line">command line</a> to install the package
+                            and the <code>-t</code> argument to specify the theme
+                            (along with the <code>-r</code> argument to specify the recipe):
+                        </p>
+                        <pre><code>wyam -r @(Model.FilePath(Keys.RelativeFilePath).Directory.Parent.Name) -n @(Model.String("NuGet")) -t @(Model.String("Title"))</code></pre>
+                        <p>Alternativly, you can specify the package, recipe, and theme in your <a href="/docs/usage/configuration">configuration file</a>:</p>
+                        <pre><code>#r @(Model.FilePath(Keys.RelativeFilePath).Directory.Parent.Name)
+#n @(Model.String("NuGet"))
+#t @(Model.String("Title"))</code></pre>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    @if(Model.ContainsKey("Git"))
+    {
+        <div class="col-sm-12 @usageGridClass">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Usage Via Git</h3>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        This theme can be installed directly from a git repository by copying it's files into the <code>theme</code> directory.
+                        The <code>theme</code> directory is automatically included in every generation, so it doesn't need to be explicity specified as an input path.
+                    </p>
+                    <pre><code>mkdir theme
+cd theme
+git clone @(Model.String("Git"))
+cd ..</code></pre>
+                    <p>
+                        Once the theme is installed in the <code>theme</code> directory it will get automatically picked up by the generation as an input path
+                        and you only need to explicitly specify the recipe using the <code>-r</code> argument on the <a href="/docs/usage/command-line">command line</a>:
+                    </p>
+                    <pre><code>wyam -r @(Model.FilePath(Keys.RelativeFilePath).Directory.Parent.Name)</code></pre>
+                    <p>Alternativly, you can specify the recipe in your <a href="/docs/usage/configuration">configuration file</a>:</p>
+                    <pre><code>#r @(Model.FilePath(Keys.RelativeFilePath).Directory.Parent.Name)</code></pre>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@RenderBody()

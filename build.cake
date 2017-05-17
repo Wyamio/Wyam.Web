@@ -53,13 +53,74 @@ Task("GetSource")
         var containerDir = GetDirectories(releaseDir.Path.FullPath + "/*").First(x => x.GetDirectoryName().StartsWith("Wyamio"));
         MoveDirectory(containerDir, sourceDir);
     });
+    
+Task("Generate-Themes")
+    .Does(() =>
+    {
+        // Clean the output directory
+        var output = Directory("./output");
+        if(DirectoryExists(output))
+        {
+            CleanDirectory(output);
+        }
+
+        // Clean/create the scaffold directory
+        var scaffold = Directory("./scaffold");
+        if(!DirectoryExists(scaffold))
+        {
+            CreateDirectory(scaffold);
+        }
+
+        // Iterate the recipes
+        foreach(DirectoryPath recipe in GetDirectories("./input/recipes/*"))
+        {
+            // Scaffold the recipe into a temporary directory
+            CleanDirectory(scaffold);
+            Wyam(new WyamSettings
+            {
+                Recipe = recipe.GetDirectoryName(),
+                RootPath = scaffold,
+                ArgumentCustomization = args => args.Prepend("new") 
+            });
+
+            // Iterate the themes
+            foreach(FilePath theme in GetFiles(recipe.FullPath + "/themes/*.md"))
+            {
+                // See if this is a built-in theme by checking for "Preview" metadata
+                if(!Context.FileSystem
+                    .GetFile(theme)
+                    .ReadLines(Encoding.UTF8)
+                    .TakeWhile(x => !x.StartsWith("---"))
+                    .Any(x => x.StartsWith("Preview:")))
+                {
+                    // Build the theme preview
+                    string linkRoot = "/recipes/" + recipe.GetDirectoryName() + "/themes/preview/" + theme.GetFilenameWithoutExtension().FullPath;
+                    Wyam(new WyamSettings
+                    {
+                        Recipe = recipe.GetDirectoryName(),
+                        RootPath = scaffold,
+                        Theme = theme.GetFilenameWithoutExtension().FullPath,
+                        OutputPath = MakeAbsolute(Directory("./output" + linkRoot)).FullPath,
+                        Settings = new Dictionary<string, object>
+                        {
+                            { "LinkRoot", linkRoot }
+                        }
+                    });
+                }
+            }
+        }
+        CleanDirectory(scaffold);
+        DeleteDirectory(scaffold, true);
+    });
 
 Task("Build")
     .IsDependentOn("GetSource")
+    .IsDependentOn("Generate-Themes")
     .Does(() =>
     {
         Wyam(new WyamSettings
         {
+            NoClean = true,  // Cleaned in Generate-Themes task
             Recipe = "Docs",
             Theme = "Samson",
             UpdatePackages = true
@@ -67,14 +128,16 @@ Task("Build")
     });
     
 Task("Preview")
+    .IsDependentOn("Generate-Themes")
     .Does(() =>
     {
         Wyam(new WyamSettings
         {
+            NoClean = true,  // Cleaned in Generate-Themes task
             Recipe = "Docs",
             Theme = "Samson",
             UpdatePackages = true,
-            Preview = true
+            Preview = true            
         });
     });
 

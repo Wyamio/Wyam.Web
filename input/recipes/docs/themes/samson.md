@@ -1,11 +1,13 @@
-Order: 5
-Description: Details about the theme that supports this recipe and how to customize them.
+Title: Samson
+Description: The primary theme for documentation.
+NuGet: Wyam.Docs.Samson
+Source: https://github.com/Wyamio/Wyam/tree/develop/themes/Docs/Samson
 ---
-The Docs recipe only contains a single theme given how complex a documentation site is. It's conceivable that additional themes could be added in the future.
+The Docs recipe only contains a single theme given how complex a documentation site is. It's conceivable that additional themes could be added in the future. This theme is a port of [AdminLTE](https://github.com/almasaeed2010/AdminLTE) with very heavy customization to make it appropriate for documentation.
 
 # Overriding Theme Files
 
-One way to customize the output of the recipe is to [override specific theme files](/docs/concepts/themes#overriding-theme-files) with your own versions. Some theme files are even designed specifically for this purpose. While any theme file can be overridden, these are some of the more useful ones you should focus on. To implement an override, just create a new file with the same name in your own input path. In many cases you'll also want to start with the original content of the theme file ([as available in the repository](https://github.com/Wyamio/Wyam/tree/master/themes)) and edit it from there.
+One way to customize the output of the recipe is to [override specific theme files](/docs/concepts/themes#overriding-theme-files) with your own versions. Some theme files are even designed specifically for this purpose. While any theme file can be overridden, these are some of the more useful ones you should focus on. To implement an override, create a new file with the same name in your own input path. In many cases you'll also want to start with the original content of the theme file ([as available in the repository](https://github.com/Wyamio/Wyam/tree/master/themes)) and edit it from there.
 
 - **`/assets/css/bootstrap/variables.less`**
   
