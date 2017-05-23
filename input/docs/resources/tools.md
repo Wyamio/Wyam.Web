@@ -27,6 +27,9 @@ Building a community is an important part of many sites, and these tools help wi
 - **[Krowdify](http://www.krowdify.com/)**  
   Inline discussion widget similar to Medium.
 
+- **[Utterances](https://utteranc.es)**  
+  A GitHub issue based commenting system.
+
 # Commerce
 
 Turn your static site into a revenue generating machine with these tools that add commercial capabilities.
