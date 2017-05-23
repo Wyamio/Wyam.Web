@@ -44,6 +44,37 @@ wyam -r Blog -t CleanBlog
 
 To find the published date for blog posts, the metadata will first be searched for a `Published` value. If one cannot be found (or it can't be converted to a `DateTime`) then the filename of the input file for the post will be checked for a date that appears in the beginning of the file name of the format `YYYY-MM-DD-`.
 
+## Index and Archive Pages
+
+The Blog recipe is very flexible in terms of how your posts are presented. You can display them on the index page, on an archive page, with or without excerpts, and control things like page counts. This is all managed using the following [settings](/recipes/blog/settings):
+
+* `BlogKeys.IndexPageSize`
+* `BlogKeys.IndexPaging`
+* `BlogKeys.IndexFullPosts`
+* `BlogKeys.ArchivePageSize`
+* `BlogKeys.ArchiveExcerpts`
+* `BlogKeys.GenerateArchive`
+
+You can display your posts on either the index, a separate archive, or both.
+
+For example, to display the full content of your most recent post on the index and the remaining posts in the archive in pages of 10, add the following to your [configuration file](/docs/usage/configuration):
+
+```
+Settings[BlogKeys.IndexPageSize] = 1;
+Settings[BlogKeys.IndexFullPosts] = true;
+Settings[BlogKeys.ArchivePageSize] = 10;
+```
+
+Alternatively, to display all of your posts on the index page in groups of 5 and turn off the archive section, add the following:
+
+```
+Settings[BlogKeys.IndexPageSize] = 5;
+Settings[BlogKeys.IndexPaging] = true;
+Settings[BlogKeys.GenerateArchive] = false;
+```
+
+For more information about these settings including their types and default values, see [the settings page](/recipes/blog/settings).
+
 ## Redirects
 
 If migrating your site from another generator, the paths may not match up exactly. This recipe supports multiple styles of redirects. To activate, add `RedirectFrom` metadata to the [front matter](/docs/concepts/metadata#front-matter) of each page that should be the endpoint of a redirection. You can control what gets generated to support redirection with the `MetaRefreshRedirects` and `NetlifyRedirects` global metadata values. By default, [meta refresh redirects](https://www.w3.org/TR/WCAG20-TECHS/H76.html) are generated. These are small HTML files that contain a `<meta>` header tag redirecting the client. They are also [supported by Google](https://support.google.com/webmasters/answer/79812) and other search engines.
