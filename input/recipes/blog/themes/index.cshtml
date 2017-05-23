@@ -7,26 +7,47 @@ Description: Details about the themes that support this recipe and how to custom
 
 @Html.Partial("_Themes")
 
-# Creating A New Theme
+<h1>Creating A New Theme</h1>
 
-In addition to the general [theme creation instructions](/docs/extensibility/creating-a-theme), each recipe has specific requirements about what pages the theme must contain. This recipe requires the following pages to be present in the theme:
+<p>In addition to the general <a href="/docs/extensibility/creating-a-theme">theme creation instructions</a>, each recipe has specific requirements about what pages the theme must contain. This recipe requires the following pages to be present in the theme:</p>
 
-* `index.cshtml`  
-  The home page for the site.
+<ul>
+  <li>
+    <p>
+      <code>index.cshtml</code><br/>
+      The home page for the site.
+    </p>
+  </li>
+  <li>
+    <p>
+      <code>_Layout.cshtml</code><br/>
+      The main layout for the theme including the HTML header, scripts, etc.
+    </p>
+  </li>
+  <li>
+    <p>
+      <code>_Archive.cshtml</code><br/>
+      The template for the main archive page.
+    </p>
+  </li>
+  <li>
+    <p>
+      <code>_Tags.cshtml</code><br/>
+      The main tag index listing all the tags.
+    </p>
+  </li>
+  <li>
+    <p>
+      <code>_Tag.cshtml</code><br/>
+      The template for each individual tag listing all of the posts for that tag.
+    </p>
+  </li>
+  <li>
+    <p>
+      <code>_PostLayout.cshtml</code><br/>
+      The layout applied to each post (this is separate from the primary layout to allow for post-specific features like commenting systems).
+    </p>
+  </li>
+</ul>
 
-* `_Layout.cshtml`
-  The main layout for the theme including the HTML header, scripts, etc.
-
-* `_Archive.cshtml`
-  The template for the main archive page.
-
-* `_Tags.cshtml`
-  The main tag index listing all the tags.
-
-* `_Tag.cshtml`
-  The template for each individual tag listing all of the posts for that tag.
-
-* `_PostLayout.cshtml`
-  The layout applied to each post (this is separate from the primary layout to allow for post-specific features like commenting systems).
-
-A theme will probably also have many files that aren't required, but it must have these ones at a minimum.
+<p>A theme will probably also have many files that aren't required, but it must have these ones at a minimum.</p>
