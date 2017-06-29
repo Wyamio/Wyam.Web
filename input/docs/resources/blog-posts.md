@@ -8,6 +8,9 @@ There is a growing community of developers exploring static generators and Wyam.
 
 <!-- Use two spaces after the title for proper formatting -->
 
+- **[Deploying a Wyam Blog to AWS S3 with Cake Build](http://gniriki.com/posts/Using-Cake-To-Build-And-Publish)**  
+Bartosz Borowiecki, June 29, 2017
+
 - **[Wyam with Nginx, url rewrite and custom 404 page](http://alexvab.com/posts/wyam-with-nginx-url-rewrite-and-custom-404-page)**  
   Alex V., April 15, 2017
 
