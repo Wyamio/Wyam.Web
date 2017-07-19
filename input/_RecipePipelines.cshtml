@@ -2,13 +2,15 @@
 
 <ul>
     @{
-        IEnumerable<IDocument> pipelines = Documents
+        List<IDocument> pipelines = Documents
             .FromPipeline(Docs.Api)
-            .First(x => x.String(CodeAnalysisKeys.QualifiedName) == Model)
-                .DocumentList(CodeAnalysisKeys.Members)
-                .Where(x => x.String(CodeAnalysisKeys.Kind) == "Property" 
+            .FirstOrDefault(x => x.String(CodeAnalysisKeys.QualifiedName) == Model)
+                ?.DocumentList(CodeAnalysisKeys.Members)
+                ?.Where(x => x.String(CodeAnalysisKeys.Kind) == "Property" 
                     && x.String(CodeAnalysisKeys.Accessibility) == "Public" 
-                    && x.Document(CodeAnalysisKeys.Type).DocumentList(CodeAnalysisKeys.BaseTypes)?.FirstOrDefault()?.String(CodeAnalysisKeys.Name) == "Pipeline");
+                    && x.Document(CodeAnalysisKeys.Type).DocumentList(CodeAnalysisKeys.BaseTypes)?.FirstOrDefault()?.String(CodeAnalysisKeys.Name) == "Pipeline")
+                ?.ToList()
+            ?? new List<IDocument>();
         foreach(IDocument pipeline in pipelines)
         {
             <li>        

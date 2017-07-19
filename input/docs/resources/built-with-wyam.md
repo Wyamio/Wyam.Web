@@ -20,6 +20,9 @@ Many sites and blogs are realizing the benefits of an extensible, flexible, nati
 
 - **[await Wisdom()](https://blog.awaitwisdom.com/)** ([source code](https://github.com/jcgillespie/awaitWisdom))  
   The personal blog of Joshua Gillespie.
+  
+- **[Bartosz Borowiecki](http://gniriki.com)** ([source code](https://github.com/gniriki/gniriki.com))  
+  The personal blog of Bartosz Borowiecki.
 
 - **[Ben Hyrman](http://hyr.mn)** ([source code](https://github.com/hyrmn/hyr.mn))  
   The personal blog of Ben Hyrman.
@@ -41,9 +44,6 @@ Many sites and blogs are realizing the benefits of an extensible, flexible, nati
 
 - **[Gary Ewan Park](http://www.gep13.co.uk/)** ([source code](https://github.com/gep13/gep13))  
   The personal blog of Gary Ewan Park.
-
-- **[Bartosz Borowiecki](http://gniriki.com)** ([source code](https://github.com/gniriki/gniriki.com))  
-  The personal blog of Bartosz Borowiecki.
 
 - **[Ian Bebbington](http://ian.bebbs.co.uk)** ([source code](https://github.com/ibebbs/ibebbs.github.io))  
   The personal blog of Ian Bebbington.

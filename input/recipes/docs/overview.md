@@ -36,6 +36,10 @@ wyam -r Docs
 
 # Usage Notes
 
+## MSBuild Tools
+
+Depending on the type of projects you're building documentation for and what versions of Visual Studio you have installed (if any), you may need to install the [Microsoft Build Tools 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48159). Specifically, if you see project loading errors that reference `System.Threading.Tasks.Dataflow` from your project files when verbose output is turned on you'll need to install the build tools.
+
 ## Source Files
 
 By default, your source files should be located in a "src" folder *either* under your "input" folder or alongside your "input" folder. You can also change where the recipe looks for source files from within the configuration file with the `SourceFiles` setting. Note that this setting doesn't point to a directory, but should rather be a string containing a [globbing pattern](/docs/concepts/io#globbing) for each source file:

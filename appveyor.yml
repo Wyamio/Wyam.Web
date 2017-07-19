@@ -1,6 +1,9 @@
 branches:
   only:
     - master
+
+hosts:
+  api.nuget.org: 93.184.221.200
     
 environment:
   access_token:
