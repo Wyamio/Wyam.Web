@@ -42,8 +42,8 @@ Many sites and blogs are realizing the benefits of an extensible, flexible, nati
 - **[Gary Ewan Park](http://www.gep13.co.uk/)** ([source code](https://github.com/gep13/gep13))  
   The personal blog of Gary Ewan Park.
 
-- **[Gniriki Games](http://gniriki.com)**  
-  The blog of Gniriki Games / Bartosz Borowiecki.
+- **[Bartosz Borowiecki](http://gniriki.com)** ([source code](https://github.com/gniriki/gniriki.com))  
+  The personal blog of Bartosz Borowiecki.
 
 - **[Ian Bebbington](http://ian.bebbs.co.uk)** ([source code](https://github.com/ibebbs/ibebbs.github.io))  
   The personal blog of Ian Bebbington.
