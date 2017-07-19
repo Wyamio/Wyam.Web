@@ -1,7 +1,7 @@
 Title: Customizing Recipe Pipelines
 Description: Tips for customizing recipes by modifying their pipelines and modules.
 ---
-The [official recipes](/recipes) are designed to work without modification for the most common scenarios. However, there may be times when you want to customize the behavior of a [recipe](/docs/concepts/recipes) without totally recreating all of it's [pipelines](/docs/concepts/pipelines) and [modules](/docs/concepts/modules). Thankfully there are several ways to remove, replace, or modify recipe pipelines. Alternatively (or in addition) you can also look at [customizing recipe themes](/docs/extensibility/customizing-recipe-themes).
+The [official recipes](/recipes) are designed to work without modification for the most common scenarios. However, there may be times when you want to customize the behavior of a [recipe](/docs/concepts/recipes) without totally recreating all of it's [pipelines](/docs/concepts/pipelines) and [modules](/docs/concepts/modules). Thankfully there are several ways to remove, replace, or modify recipe pipelines. Alternatively (or in addition) you can also look at [customizing recipe themes](/docs/extensibility/customizing-themes).
 
 # Customizing Pipelines
 
