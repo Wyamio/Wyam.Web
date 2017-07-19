@@ -6,7 +6,7 @@ It's relatively easy to achieve site deployment nirvana with Wyam, GitHub Pages,
 
 1. Create a repository for your web site code if you haven't already done so. You should typically structure this with a default `input` folder under the root where your web site content will go, but you can adjust these instructions and the call to Wyam if you want to use a different folder name.
 
-2. You'll probably want to add a `.gitignore` file that excludes the `output` folder, that way you can execute Wyam locally for testing without checking in the results.
+2. You'll probably want to add a `.gitignore` file that excludes the `output` folder and `packages.xml`, that way you can execute Wyam locally for testing without checking in the results.
 
 ```
 output/
