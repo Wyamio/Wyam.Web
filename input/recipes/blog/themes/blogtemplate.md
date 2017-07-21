@@ -1,4 +1,4 @@
-Title: Blog Template
+Title: BlogTemplate
 Description: A bare minimum theme to use as a starting point for new themes.
 NuGet: Wyam.Blog.BlogTemplate
 Source: https://github.com/Wyamio/Wyam/tree/develop/themes/Blog/BlogTemplate
