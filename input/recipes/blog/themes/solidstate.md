@@ -1,4 +1,4 @@
-Title: Solid State
+Title: SolidState
 Description: Lots of white space on a dark theme with some edge.
 NuGet: Wyam.Blog.SolidState
 Source: https://github.com/Wyamio/Wyam/tree/develop/themes/Blog/SolidState
