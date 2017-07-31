@@ -8,6 +8,9 @@ There is a growing community of developers exploring static generators and Wyam.
 
 <!-- Use two spaces after the title for proper formatting -->
 
+- **[Deciding to switch from WordPress to Wyam](http://peterjohnlightfoot.com/deciding-to-switch-from-wordpress-to-wyam/)**  
+Peter-John Lightfoot, July 31, 2017
+
 - **[Deploying a Wyam Blog to AWS S3 with Cake Build](http://gniriki.com/posts/Using-Cake-To-Build-And-Publish)**  
 Bartosz Borowiecki, June 29, 2017
 
