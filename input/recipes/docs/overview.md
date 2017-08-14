@@ -56,6 +56,14 @@ To find the published date for blog posts, the metadata will first be searched f
 
 The XML documentation standard is ambiguous on how you should defined comments for namespaces. Wyam will pick up standard XML documentation comments on any arbitrary namespace usage within your code. Alternatively, you can use a class named `NamespaceDoc` and place your namespace XML documentation comments on that class. Note that the former will not work if generating documentation from an assembly since the MSBuild XML documentation file does not output XML documentation comments for namespace usages.
 
+## Inheriting Documentation and Implicit Inheritance
+
+Normally you have to include a special `<inheritdoc/>` XML comment to indicate that you want documentation comments from a base class or interface to be inherited. This is fully supported automatically and any use of `<inheritdoc/>` will be expanded. However, that adds a lot duplication to your codebase. If you would prefer assume `<inheritdoc/>` for any symbols that don't have their own XML documentation comments, add the following to your [configuration file](/docs/usage/configuration):
+
+```
+Settings[DocsKeys.ImplicitInheritDoc] = true;
+```
+
 ## Redirects
 
 If migrating your site from another generator, the paths may not match up exactly. This recipe supports multiple styles of redirects. To activate, add `RedirectFrom` metadata to the [front matter](/docs/concepts/metadata#front-matter) of each page that should be the endpoint of a redirection. You can control what gets generated to support redirection with the `MetaRefreshRedirects` and `NetlifyRedirects` global metadata values. By default, [meta refresh redirects](https://www.w3.org/TR/WCAG20-TECHS/H76.html) are generated. These are small HTML files that contain a `<meta>` header tag redirecting the client. They are also [supported by Google](https://support.google.com/webmasters/answer/79812) and other search engines.

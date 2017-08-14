@@ -6,6 +6,7 @@ Settings[DocsKeys.SourceFiles] = null;
 Settings[DocsKeys.ProjectFiles] = "../release/repo/src/**/*.csproj";
 Settings[DocsKeys.BaseEditUrl] = "https://github.com/Wyamio/Wyam.Web/tree/master/input/";
 Settings[DocsKeys.NetlifyRedirects] = true;
+Settings[DocsKeys.ImplicitInheritDoc] = true;
 
 public class KeysModel
 {
