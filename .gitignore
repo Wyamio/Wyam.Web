@@ -8,3 +8,5 @@ nuget.exe
 /node_modules/
 /output.zip
 /packages.xml
+/config.wyam.hash
+/config.wyam.dll
