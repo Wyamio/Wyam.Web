@@ -16,6 +16,8 @@ A configuration file typically looks like this:
 // ...
 ```
 
+When Wyam starts, the configuration file is compiled by Roslyn (a C# compiler) and strting with Wyam 1.0 a cached copy of the resulting compilation is stored on disk at `config.wyam.dll` by default. A hash of the config file is also stored at `config.wyam.hash`. These two files improve startup performance by allowing Wyam to skip the compilation phase if the config file has previously been processed and its contents haven't changed.
+
 # Preprocessor Directives
 
 Preprocessor directives establish the Wyam environment and get evaluated before the rest of the configuration file. They're typically responsible for declaring things like NuGet packages and assemblies. Every preprocessor directive starts with `#` at the beginning of a line and extend for the rest of the line. The following directives are available (the current set of directives can always be seen by calling `wyam help --directives`).
@@ -88,6 +90,8 @@ You can also specify the special `Wyam.All` package which will download all of t
 ```
 #n Wyam.All
 ```
+
+All NuGet packages you specify, along with their dependencies, are located and downloaded at startup. Walking the full dependency tree can be time consuming since queries have to be issued to the NuGet server(s) for each individual package. To improve performance, the full set of packages and their dependencies is cached in a `packages.xml` file. If Wyam has already calculated the dependency tree for a given package and version, that entire tree will be stored in this cache file and it won't need to be rewalked on the next run. This means that the first execution of Wyam may take longer as the dependency cache is populated but subsiquent executions should be much faster.
 
 ## Assemblies
 
