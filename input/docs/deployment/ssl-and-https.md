@@ -6,5 +6,5 @@ While getting SSL and HTTPS up and running on your web host and DNS server may h
 Most of the links to other sections of your site will be relative and will use whatever HTTP/HTTPS protocol the rest of your site uses. However, some links such as those used in feeds may have a full URL. To make sure these are generated with the HTTPS protocol, just add the following to your [configuration file](/docs/usage/configuration):
 
 ```
-Settings.LinksUseHttps = true;
+Settings[Keys.LinksUseHttps] = true;
 ```
