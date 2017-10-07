@@ -77,7 +77,7 @@
                             (along with the <code>-r</code> argument to specify the recipe):
                         </p>
                         <pre><code>wyam -r @(Model.FilePath(Keys.RelativeFilePath).Directory.Parent.Name) -t @(Model.String("Title"))</code></pre>
-                        <p>Alternativly, you can specify the theme and recipe in your <a href="/docs/usage/configuration">configuration file</a>:</p>
+                        <p>Alternatively, you can specify the theme and recipe in your <a href="/docs/usage/configuration">configuration file</a>:</p>
                         <pre><code>#r @(Model.FilePath(Keys.RelativeFilePath).Directory.Parent.Name)
 #t @(Model.String("Title"))</code></pre>
                     }
@@ -91,7 +91,7 @@
                             (along with the <code>-r</code> argument to specify the recipe):
                         </p>
                         <pre><code>wyam -r @(Model.FilePath(Keys.RelativeFilePath).Directory.Parent.Name) -n @(Model.String("NuGet")) -t @(Model.String("Title"))</code></pre>
-                        <p>Alternativly, you can specify the package, recipe, and theme in your <a href="/docs/usage/configuration">configuration file</a>:</p>
+                        <p>Alternatively, you can specify the package, recipe, and theme in your <a href="/docs/usage/configuration">configuration file</a>:</p>
                         <pre><code>#r @(Model.FilePath(Keys.RelativeFilePath).Directory.Parent.Name)
 #n @(Model.String("NuGet"))
 #t @(Model.String("Title"))</code></pre>
