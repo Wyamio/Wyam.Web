@@ -24,7 +24,7 @@ To scaffold the recipe, run:
 wyam new -r Docs
 ```
 
-This generates a skeleton set of input files that includes a blog post and a content page. You can use this as a starting point for your own site.
+This generates a skeleton set of input files that includes a blog post and two docs content pages. You can use this as a starting point for your own site.
 
 # Building
 
