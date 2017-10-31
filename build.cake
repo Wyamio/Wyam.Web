@@ -30,7 +30,11 @@ Task("CleanSource")
 {
     if(DirectoryExists(sourceDir))
     {
-        DeleteDirectory(sourceDir, true);
+        DeleteDirectory(sourceDir, new DeleteDirectorySettings
+        {
+            Force = true,
+            Recursive = true
+        });
     }    
 });
 
@@ -110,7 +114,11 @@ Task("Generate-Themes")
             }
         }
         CleanDirectory(scaffold);
-        DeleteDirectory(scaffold, true);
+        DeleteDirectory(scaffold, new DeleteDirectorySettings
+        {
+            Force = true,
+            Recursive = true
+        });
     });
 
 Task("Build")
@@ -144,8 +152,8 @@ Task("Preview")
 Task("Debug")
     .Does(() =>
     {
-        StartProcess("../Wyam/src/clients/Wyam/bin/Debug/wyam.exe",
-            "-a \"../Wyam/src/**/bin/Debug/*.dll\" -r \"docs -i\" -t \"../Wyam/themes/Docs/Samson\" -p -w");
+        StartProcess("../Wyam/src/clients/Wyam/bin/Debug/net462/wyam.exe",
+            "-a \"../Wyam/src/**/bin/Debug/**/*.dll\" -r \"docs -i\" -t \"../Wyam/themes/Docs/Samson\" -p -w");
     });
 
 Task("Deploy")

@@ -27,7 +27,11 @@ Task("CleanSource")
 {
     if(DirectoryExists(sourceDir))
     {
-        DeleteDirectory(sourceDir, true);
+        DeleteDirectory(sourceDir, new DeleteDirectorySettings
+        {
+            Force = true,
+            Recursive = true
+        });
     }    
 });
 
@@ -139,7 +143,11 @@ Task("Generate-Themes")
             }
         }
         CleanDirectory(scaffold);
-        DeleteDirectory(scaffold, true);
+        DeleteDirectory(scaffold, new DeleteDirectorySettings
+        {
+            Force = true,
+            Recursive = true
+        });
     });
     
 Task("Preview")
