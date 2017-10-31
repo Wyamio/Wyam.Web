@@ -6,6 +6,7 @@ hosts:
   api.nuget.org: 93.184.221.200
     
 environment:
+  VisualStudioVersion: 15.0
   access_token:
     secure: jf56pSYTaUx5sBJCVt2IDCzmPrZ2iOTYrSVvCzEt17UhGKq3RfqlO4aIZ3bRlZSX
 
