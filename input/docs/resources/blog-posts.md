@@ -8,6 +8,9 @@ There is a growing community of developers exploring static generators and Wyam.
 
 <!-- Use two spaces after the title for proper formatting -->
 
+- **[Serverless Blogging](https://joe.brinkman.me/posts/serverless-blogs)**
+Joe Brinkman, October 18, 2017
+
 - **[Deciding to switch from WordPress to Wyam](http://peterjohnlightfoot.com/deciding-to-switch-from-wordpress-to-wyam/)**  
 Peter-John Lightfoot, July 31, 2017
 
