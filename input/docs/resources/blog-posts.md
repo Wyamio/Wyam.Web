@@ -8,17 +8,38 @@ There is a growing community of developers exploring static generators and Wyam.
 
 <!-- Use two spaces after the title for proper formatting -->
 
-- **[Serverless Blogging](https://joe.brinkman.me/posts/serverless-blogs)**
-Joe Brinkman, October 18, 2017
+- **[How to setup a blog with Wyam and GitHub pages](http://win32.io/posts/Wyam-GitHub-Pages)**  
+  November 4, 2017
+  
+- **[Deploying Wyam To GitHub Using Visual Studio Online](https://reubenbond.github.io/posts/2017-Oct-30-setting-up-wyam)**  
+  Reuben Bond, October 30, 2017
+
+- **[Serverless Blogging](https://joe.brinkman.me/posts/serverless-blogs)**  
+  Joe Brinkman, October 18, 2017
+
+- **[Creating A One-Page GitHub Profile With Wyam](https://daveaglick.com/posts/creating-a-one-page-github-profile-with-wyam)**  
+  Dave Glick, October 13, 2017
+  
+- **[Blog Migration to Wyam](http://win32.io/posts/BlogMigrationToWyam)**  
+  November 11, 2017
+
+- **[Wyam 1.0](https://daveaglick.com/posts/wyam-10)**  
+  Dave Glick, September 14, 2017
 
 - **[Deciding to switch from WordPress to Wyam](http://peterjohnlightfoot.com/deciding-to-switch-from-wordpress-to-wyam/)**  
-Peter-John Lightfoot, July 31, 2017
+  Peter-John Lightfoot, July 31, 2017
 
 - **[Deploying a Wyam Blog to AWS S3 with Cake Build](http://gniriki.com/posts/Using-Cake-To-Build-And-Publish)**  
-Bartosz Borowiecki, June 29, 2017
+  Bartosz Borowiecki, June 29, 2017
+
+- **[Generate C# API Documentation with Wyam](https://codeopinion.com/generating-c-api-documentation-with-wyam/)**  
+  Derek Comartin, June 27, 2017
 
 - **[Wyam with Nginx, url rewrite and custom 404 page](http://alexvab.com/posts/wyam-with-nginx-url-rewrite-and-custom-404-page)**  
   Alex V., April 15, 2017
+  
+- **[Static Generators, Powerful Pipelines and Wyam Websites](https://endpointsystems.com/blog/static-generators.html)**  
+  Endpoint Systems, April 13, 2017
 
 - **[Contentful ❤️️ Wyam == true](https://www.contentful.com/blog/2017/03/07/contentful-loves-wyam/)**  
   Robert Linde, March 7, 2017

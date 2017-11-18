@@ -37,7 +37,7 @@ Many sites and blogs are realizing the benefits of an extensible, flexible, nati
   The personal blog of William E. Kempf.
 
 - **[Endpoint Systems](http://endpointsystems.com)**  
-  The website for Endpoint Systems
+  The website for Endpoint Systems.
 
 - **[Erik Onarheim](https://erikonarheim.com/)** ([source code](https://github.com/eonarheim/eonarheim.github.io))  
   The personal blog of Erik Onarheim.
@@ -56,6 +56,9 @@ Many sites and blogs are realizing the benefits of an extensible, flexible, nati
 
 - **[Jason Newell](http://jasonnewell.net/)** ([source code](https://github.com/jlnewell/jlnewell.github.io))  
   The personal blog of Jason Newell.
+  
+- **[Joe Brinkman](http://joe.brinkman.me/)** ([source code](https://github.com/jbrinkman/joe.brinkman.me))  
+  The personal blog of Joe Brinkman.
 
 - **[Kamranicus](https://kamranicus.com/)** ([source code](https://github.com/kamranayub/kamranayub.github.io/tree/source))  
   The personal blog of Kamran Ayub.
@@ -67,7 +70,16 @@ Many sites and blogs are realizing the benefits of an extensible, flexible, nati
   The personal blog of Martin Vích.
 
 - **[Mind Vortex](http://www.petrikvandervelde.nl/)** ([source code](https://github.com/pvandervelde/mindvortex))  
-  The personal blog of Patrick van der Velde
+  The personal blog of Patrick van der Velde.
+  
+- **[Patrik Svensson](http://patriksvensson.se)**  
+  The personal blog of Patrik Svensson.
+  
+- **[ReactiveUI](https://reactiveui.net)**  
+  The docs site for the popular ReactiveUI open source project.
+  
+- **[reublog](https://reubenbond.github.io)**  
+  The personal blog of Reuben Bond.
 
 - **[Richter-Notizen](http://richter-notizen.de/)**  
   The personal blog of Lars Richter.
@@ -75,8 +87,7 @@ Many sites and blogs are realizing the benefits of an extensible, flexible, nati
 - **[Siwawi](http://siwawi.com/)**  
   Travel and informational site for Siwa Oasis, Egypt. 300,000 palm trees, 70,000 olive trees, 300 freshwater springs, 25,000 amazing people.
   
-  **[Joe Brinkman](http://joe.brinkman.me/)** ([source code](https://github.com/jbrinkman/joe.brinkman.me))
-  The personal blog of Joe Brinkman.
+- **[win32.io](http://win32.io)**  
 
 - **[Wyam](https://wyam.io)** ([source code](https://github.com/Wyamio/Wyam.Web))  
   It's so meta!
