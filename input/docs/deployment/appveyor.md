@@ -62,7 +62,7 @@ on_success:
 
 ```
 
-Note that you will need to replace the `secure` value with your own GitHub access token as [described here](http://www.appveyor.com/docs/how-to/git-push). Also look for the other `EDIT` comments in the file and change as appropriate.
+Note that you will need to replace the `secure` value with your own GitHub access token as [described here](http://www.appveyor.com/docs/how-to/git-push). You will also need to encrypt your token in [AppVeyor encrypt tool](https://ci.appveyor.com/tools/encrypt). Also look for the other `EDIT` comments in the file and change as appropriate.
 
 5. Create an account on AppVeyor if you haven't done so and add the GitHub repository as a new project. AppVeyor will pick up commits to the repository, run the build script above, and publish your new site on every commit!
 
