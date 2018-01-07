@@ -7,7 +7,9 @@ RedirectFrom: community
 There is a growing community of developers exploring static generators and Wyam. If you've written a blog post that involves Wyam, or know of one, please let us know by submitting a PR with additions to this page.
 
 <!-- Use two spaces after the title for proper formatting -->
-
+- **[Converting from Word Press to Static Content Site](https://salvoz.com/posts/2018-01-01-static-content.html)**  
+  January 1, 2018
+  
 - **[How to setup a blog with Wyam and GitHub pages](http://win32.io/posts/Wyam-GitHub-Pages)**  
   November 4, 2017
   
