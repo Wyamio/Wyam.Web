@@ -84,6 +84,9 @@ Many sites and blogs are realizing the benefits of an extensible, flexible, nati
 - **[Richter-Notizen](http://richter-notizen.de/)**  
   The personal blog of Lars Richter.
 
+- **[Salvo(z)](https://salvoz.com/)**  
+  The personal blog of Adam and Jennifer Salvo.
+
 - **[Siwawi](http://siwawi.com/)**  
   Travel and informational site for Siwa Oasis, Egypt. 300,000 palm trees, 70,000 olive trees, 300 freshwater springs, 25,000 amazing people.
   
