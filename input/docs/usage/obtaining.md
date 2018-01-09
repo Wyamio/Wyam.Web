@@ -13,26 +13,6 @@ To download Wyam as a zip file, visit the [Releases](https://github.com/Wyamio/W
 
 **Note that you may also need to right-click the zip file after download and select "Unblock" in the Security section of the properties dialog, otherwise you could get strange errors when using the application.**
 
-# Windows Installer
-
-To download Wyam as an installable Windows application, visit the [Releases](https://github.com/Wyamio/Wyam/releases) page and download the most recent `Setup.exe`. That will install Wyam along with a utility application called Wyam.Windows. It will also add Wyam to the Programs and Features control panel and create a Wyam.Windows Start Menu group. It also creates a shortcut that opens a command prompt with the current version of Wyam in the path.
-
-Note that when you install Wyam from the installer, it is placed on your system at `%LocalAppData%\Wyam` (on most systems this is located at `C:\Users\username\AppData\Local\Wyam`).
-
-The Wyam.Windows application contains some helpful commands to configure and control your environment:
-
-```
-usage:  <command> [<args>]
-
-    update         Update to the latest version.
-    add-path       Add the installation path to the PATH system
-                   environment variable.
-    remove-path    Remove the installation path from the PATH system
-                   environment variable.
-```
-
-Of particular note, run `wyam.windows.cmd update` to perform an update of Wyam to the latest version. Note that this utility application is different from the main `wyam.exe` that you should use to actually run Wyam.
-
 # Tools Package
 
 [One of the NuGet packages provided by Wyam](https://www.nuget.org/packages/Wyam) is a "tools package". This means that it includes the wyam executable as well as all other required libraries in a special "tools" subfolder that gets unpacked when the package is downloaded. This is helpful in cases where you want to obtain the Wyam command line application from NuGet (as opposed to downloading it directly). For example, a tools package allows you to easily use Wyam in [Cake](http://cakebuild.net/) build scripts.
