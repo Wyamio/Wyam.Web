@@ -2,7 +2,7 @@ Title: Metadata
 Description: Metadata is the primary means of passing information between modules and pipelines.
 Order: 2
 ---
-Along with it's content, every document contains *metadata*. As with documents, metadata is immutable and you must clone a document to add additional metadata. Several modules, such as [Meta](/modules/meta), are designed to allow you to manipulate document metadata as part of your pipeline.
+Along with its content, every document contains *metadata*. As with documents, metadata is immutable and you must clone a document to add additional metadata. Several modules, such as [Meta](/modules/meta), are designed to allow you to manipulate document metadata as part of your pipeline.
 
 Metadata is the primary means of passing information between modules and pipelines. For example, when a file is [read from disk](/modules/readfiles), metadata is set that records where on disk the file came from, it's file name, and other information. When the file is later [written back to disk](/modules/writefiles), this metadata is used to determine where the file should go and what filename to use.
 
