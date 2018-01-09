@@ -21,11 +21,17 @@ Building a community is an important part of many sites, and these tools help wi
 - **[Facebook Comments](https://developers.facebook.com/docs/plugins/comments)**  
   Lets people comment on content on your site using their Facebook account.
 
+- **[Just Comments](https://just-comments.com/)**  
+  A hosted comment system that works for every website.
+
 - **[IntenseDebate](http://www.intensedebate.com/)**  
   IntenseDebate is a feature-rich comment system.
 
 - **[Krowdify](http://www.krowdify.com/)**  
   Inline discussion widget similar to Medium.
+
+- **[Remarkbox](https://www.remarkbox.com/)**  
+  A hosted comment system to help engage readers with your content.
 
 - **[Utterances](https://utteranc.es)**  
   A GitHub issue based commenting system.
@@ -83,6 +89,9 @@ These tools help edit your static site, and some even provide full CMS capabilit
 
 - **[Prose](http://prose.io/#about)**  
   Prose is a content editor for GitHub designed for managing websites.
+
+- **[Sanity](https://www.sanity.io/)**  
+  The fully customizable, headless CMS.
 
 - **[Surreal CMS](https://www.surrealcms.com/)**  
   A simple, powerful, hosted CMS.
