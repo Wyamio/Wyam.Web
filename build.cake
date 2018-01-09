@@ -153,7 +153,7 @@ Task("Debug")
     .Does(() =>
     {
         StartProcess("../Wyam/src/clients/Wyam/bin/Debug/net462/wyam.exe",
-            "-a \"../Wyam/src/**/bin/Debug/**/*.dll\" -r \"docs -i\" -t \"../Wyam/themes/Docs/Samson\" -p -w");
+            "-a \"../Wyam/src/**/bin/Debug/**/*.dll\" -r \"docs -i\" -t \"../Wyam/themes/Docs/Samson\" -p -w -l -v");
     });
 
 Task("Deploy")
