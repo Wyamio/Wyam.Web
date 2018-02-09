@@ -7,8 +7,17 @@ RedirectFrom: community
 There is a growing community of developers exploring static generators and Wyam. If you've written a blog post that involves Wyam, or know of one, please let us know by submitting a PR with additions to this page.
 
 <!-- Use two spaces after the title for proper formatting -->
+- **[Introducing Cake Kudu Client - Ship remotely to Azure App Services using Cake](https://hackernoon.com/introducing-cake-kudu-client-abda40d15f38)**  
+  Mattias Karlsson, February 8, 2018
+
+- **[Static sites with Kentico Cloud, Wyam and Netlify](https://www.kenticotricks.com/blog/static-sites-with-kentico-cloud)**
+  Kristian Bortnik, January 31, 2018
+
 - **[Converting from Word Press to Static Content Site](https://salvoz.com/posts/2018-01-01-static-content.html)**  
   January 1, 2018
+
+- **[Breaking the shackles of server frameworks with static content ](https://blog.maximerouiller.com/post/breaking-the-shackles-of-server-frameworks-with-static-content/)**  
+  Maxime Rouiller, November 1, 2017
   
 - **[How to setup a blog with Wyam and GitHub pages](http://win32.io/posts/Wyam-GitHub-Pages)**  
   November 4, 2017
@@ -28,6 +37,9 @@ There is a growing community of developers exploring static generators and Wyam.
 - **[Wyam 1.0](https://daveaglick.com/posts/wyam-10)**  
   Dave Glick, September 14, 2017
 
+- **[Setting up a Wyam blog with Cake.Recipe and GitHub pages](http://wbates.net/posts/setting-up-a-wyam-blog-with-cake-recipe-and-github-pages)**  
+  Warren Bates, August 24, 2017
+
 - **[Deciding to switch from WordPress to Wyam](http://peterjohnlightfoot.com/deciding-to-switch-from-wordpress-to-wyam/)**  
   Peter-John Lightfoot, July 31, 2017
 
@@ -36,6 +48,9 @@ There is a growing community of developers exploring static generators and Wyam.
 
 - **[Generate C# API Documentation with Wyam](https://codeopinion.com/generating-c-api-documentation-with-wyam/)**  
   Derek Comartin, June 27, 2017
+
+- **[Moving from Ghost to Wyam](https://timothy-quinn.com/moving-from-ghost-to-wyam)**  
+  Timothy Quinn, May 8, 2017
 
 - **[Wyam with Nginx, url rewrite and custom 404 page](http://alexvab.com/posts/wyam-with-nginx-url-rewrite-and-custom-404-page)**  
   Alex V., April 15, 2017
