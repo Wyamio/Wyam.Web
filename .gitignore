@@ -7,6 +7,6 @@ nuget.exe
 /debug.log
 /node_modules/
 /output.zip
-/packages.xml
+/config.wyam.packages.xml
 /config.wyam.hash
 /config.wyam.dll

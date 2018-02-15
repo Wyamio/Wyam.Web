@@ -7,6 +7,9 @@ RedirectFrom: community
 There is a growing community of developers exploring static generators and Wyam. If you've written a blog post that involves Wyam, or know of one, please let us know by submitting a PR with additions to this page.
 
 <!-- Use two spaces after the title for proper formatting -->
+- **[Setting up NetlifyCMS with Wyam - Part 1](https://blog.mark-burton.com/posts/Setting-up-NetlifyCMS-with-Wyam---Part-1)**  
+  Mark Burton, February 9, 2018
+
 - **[Introducing Cake Kudu Client - Ship remotely to Azure App Services using Cake](https://hackernoon.com/introducing-cake-kudu-client-abda40d15f38)**  
   Mattias Karlsson, February 8, 2018
 
