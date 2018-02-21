@@ -13,7 +13,7 @@ There is a growing community of developers exploring static generators and Wyam.
 - **[Introducing Cake Kudu Client - Ship remotely to Azure App Services using Cake](https://hackernoon.com/introducing-cake-kudu-client-abda40d15f38)**  
   Mattias Karlsson, February 8, 2018
 
-- **[Static sites with Kentico Cloud, Wyam and Netlify](https://www.kenticotricks.com/blog/static-sites-with-kentico-cloud)**
+- **[Static sites with Kentico Cloud, Wyam and Netlify](https://www.kenticotricks.com/blog/static-sites-with-kentico-cloud)**  
   Kristian Bortnik, January 31, 2018
 
 - **[Converting from Word Press to Static Content Site](https://salvoz.com/posts/2018-01-01-static-content.html)**  
@@ -45,6 +45,9 @@ There is a growing community of developers exploring static generators and Wyam.
 
 - **[Deciding to switch from WordPress to Wyam](http://peterjohnlightfoot.com/deciding-to-switch-from-wordpress-to-wyam/)**  
   Peter-John Lightfoot, July 31, 2017
+  
+- **[From Jekyll to Wyam](https://miroslavpopovic.com/posts/2017/07/from-jekyll-to-wyam)**  
+  Miroslav Popovic, July 19, 2017
 
 - **[Deploying a Wyam Blog to AWS S3 with Cake Build](http://gniriki.com/posts/Using-Cake-To-Build-And-Publish)**  
   Bartosz Borowiecki, June 29, 2017
