@@ -1,8 +1,8 @@
 // The following environment variables need to be set for Publish target:
 // WYAM_GITHUB_TOKEN
 
-#tool "nuget:https://api.nuget.org/v3/index.json?package=Wyam"
-#addin "nuget:https://api.nuget.org/v3/index.json?package=Cake.Wyam"
+#tool "nuget:https://api.nuget.org/v3/index.json?package=Wyam&version=1.4.0"
+#addin "nuget:https://api.nuget.org/v3/index.json?package=Cake.Wyam&version=1.4.0"
 #addin "nuget:https://api.nuget.org/v3/index.json?package=Octokit"
 
 using Octokit;
@@ -153,7 +153,7 @@ Task("Debug")
     .Does(() =>
     {
         StartProcess("../Wyam/src/clients/Wyam/bin/Debug/net462/wyam.exe",
-            "-a \"../Wyam/src/**/bin/Debug/**/*.dll\" -r \"docs -i\" -t \"../Wyam/themes/Docs/Samson\" -p -w -l -v");
+            "-a \"../Wyam/tests/integration/Wyam.Examples.Tests/bin/Debug/net462/**/*.dll\" -r \"docs -i\" -t \"../Wyam/themes/Docs/Samson\" -p -w");
     });
 
 Task("Deploy")
