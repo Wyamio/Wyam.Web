@@ -1,17 +1,12 @@
 branches:
   only:
     - master
-
-hosts:
-  api.nuget.org: 93.184.221.200
     
 environment:
-  VisualStudioVersion: 15.0
-  MSBuildToolsVersion: 15.0
   access_token:
     secure: jf56pSYTaUx5sBJCVt2IDCzmPrZ2iOTYrSVvCzEt17UhGKq3RfqlO4aIZ3bRlZSX
 
-image: Previous Visual Studio 2017
+image: Visual Studio 2017
 
 # Temporarily needed until curl added to PATH
 # See http://help.appveyor.com/discussions/problems/6312-curl-command-not-found
