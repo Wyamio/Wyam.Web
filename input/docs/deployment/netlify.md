@@ -55,7 +55,7 @@ Task("Deploy")
         }
 
         // Install the Netlify CLI locally and then run the deploy command
-        Npm.Install(x => x.Package("netlify-cli"));
+        NpmInstall("netlify-cli");
         StartProcess(
             MakeAbsolute(File("./node_modules/.bin/netlify.cmd")), 
             "deploy -p output -s yoursite -t " + token);
