@@ -69,6 +69,9 @@ Many sites and blogs are realizing the benefits of an extensible, flexible, nati
 - **[Lee Kelleher](https://leekelleher.com)** ([source code](https://github.com/leekelleher/leekelleher.com))  
   The personal blog of Lee Kelleher.
 
+- **[LitJSON](https://litjson.net/)** ([source code](https://github.com/LitJSON/litjson.github.io/))  
+  The documentation site & blog for the .NET JSON serializer LitJSON.
+
 - **[Martin Vích](https://www.martinvich.net)**  
   The personal blog of Martin Vích.
 
