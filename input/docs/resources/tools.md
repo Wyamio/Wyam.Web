@@ -118,6 +118,9 @@ Collecting data can often be just as important as publishing it. These services 
 - **[Google Forms](https://www.google.com/forms/about/)**  
   Collect and organize information big & small with Google Forms.
 
+- **[Jumprock](https://jumprock.co)**  
+  Send a form from your static site to our url and we'll deliver it to your inbox.
+
 - **[MailThis.to](http://mailthis.to/)**  
   Turn form submissions into emails.
 

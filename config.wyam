@@ -3,7 +3,8 @@ Settings[Keys.LinksUseHttps] = true;
 Settings[DocsKeys.Title] = "Wyam";
 Settings[DocsKeys.Logo] = "/assets/img/logo.png";
 Settings[DocsKeys.SourceFiles] = null;
-Settings[DocsKeys.ProjectFiles] = "../release/repo/src/**/{!Wyam.Windows,!Cake.Wyam,*}.csproj";
+//Settings[DocsKeys.ProjectFiles] = "../release/repo/src/{!clients,*}/**/*.csproj";
+Settings[DocsKeys.ProjectFiles] = "../../Wyam/src/{!clients,*}/**/*.csproj";
 Settings[DocsKeys.BaseEditUrl] = "https://github.com/Wyamio/Wyam.Web/tree/master/input/";
 Settings[DocsKeys.NetlifyRedirects] = true;
 Settings[DocsKeys.ImplicitInheritDoc] = true;
@@ -65,21 +66,34 @@ Pipelines.InsertBefore(Docs.RenderPages, "Modules",
                 // Use a custom tokenizer that splits on camel case characters
                 // https://github.com/olivernn/lunr.js/issues/230#issuecomment-244790648
                 scriptBuilder.Insert(0, @"
-var camelCaseTokenizer = function (obj) {
-    var previous = '';
-    return obj.toString().trim().split(/[\s\-]+|(?=[A-Z])/).reduce(function(acc, cur) {
-        var current = cur.toLowerCase();
-        if(acc.length === 0) {
-            previous = current;
-            return acc.concat(current);
-        }
-        previous = previous.concat(current);
-        return acc.concat([current, previous]);
-    }, []);
-}
-lunr.tokenizer.registerFunction(camelCaseTokenizer, 'camelCaseTokenizer')");
+var camelCaseTokenizer = function (builder) {
+    var pipelineFunction = function (token) {
+        var previous = '';
+        var tokenStrings = token.toString().trim().split(/[\s\-]+|(?=[A-Z])/).reduce(function(acc, cur) {
+            var current = cur.toLowerCase();
+            if (acc.length === 0) {
+                previous = current;
+                return acc.concat(current);
+            }
+            previous = previous.concat(current);
+            return acc.concat([current, previous]);
+        }, []);
+
+    // return token for each string
+    // will copy any metadata on input token
+    return tokenStrings.map(function(tokenString) {
+      return token.clone(function(str) {
+        return tokenString;
+      })
+    });
+  }
+    
+  lunr.Pipeline.registerFunction(pipelineFunction, 'camelCaseTokenizer')
+
+  builder.pipeline.before(lunr.stemmer, pipelineFunction)
+}");
                 scriptBuilder.Replace("this.ref('id');", @"this.ref('id');
-        this.tokenizer(camelCaseTokenizer);");
+        this.use(camelCaseTokenizer);");
                 return scriptBuilder.ToString();
             })
             .WithPath("assets/js/modulesSearchIndex.js"),
