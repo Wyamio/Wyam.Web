@@ -56,6 +56,7 @@ Task("GetSource")
         // Need to rename the container directory in the zip file to something consistent
         var containerDir = GetDirectories(releaseDir.Path.FullPath + "/*").First(x => x.GetDirectoryName().StartsWith("Wyamio"));
         MoveDirectory(containerDir, sourceDir);
+        Information($"Downloaded and unzipped { GetFiles(sourceDir.Path.FullPath + "/**/*").Count } files in { GetSubDirectories(sourceDir).Count } directories");
     });
     
 Task("Generate-Themes")
