@@ -1,5 +1,5 @@
-#tool "nuget:https://www.myget.org/F/wyam?package=Wyam&prerelease"
-#addin "nuget:https://www.myget.org/F/wyam?package=Cake.Wyam&prerelease"
+#tool "nuget:https://www.myget.org/F/wyam?package=Wyam&prerelease&version=2.0.0-build-1240"
+#addin "nuget:https://www.myget.org/F/wyam?package=Cake.Wyam&prerelease&version=2.0.0-build-1240"
 #addin "nuget:https://api.nuget.org/v3/index.json?package=Octokit"
 
 using Octokit;
@@ -152,7 +152,7 @@ Task("Generate-Themes")
     
 Task("Preview")
     .IsDependentOn("GetSource")
-    .IsDependentOn("Generate-Themes")
+    //.IsDependentOn("Generate-Themes")
     .Does(() =>
     {
         Wyam(new WyamSettings

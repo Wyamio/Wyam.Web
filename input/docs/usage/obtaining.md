@@ -5,13 +5,31 @@ RedirectFrom:
   - getting-started/obtaining
   - knowledgebase/tools-package
 ---
-There are several ways to download and install Wyam depending on which platform you're using and how much automation and control you want. **Note that Wyam currently runs on the [.NET Framework 4.6.2](https://www.microsoft.com/en-us/download/details.aspx?id=53345) and is therefore Windows-only. It also does not support Mono at this time.** Plans to port to .NET Core and enable cross-platform execution are already in the works.
+There are several ways to download and install Wyam depending on which platform you're using and how much automation and control you want. Wyam currently requires [.NET Core 2.x](https://www.microsoft.com/net/download) to be installed on your system.
+
+# Global Tool
+
+The easiest way to install Wyam is via the [global tool package](https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools) named [Wyam.Tool](https://www.nuget.org/packages/Wyam.Tool/). You can install it like this:
+
+```
+dotnet tool install -g Wyam.Tool
+```
+
+Then you can use it with the `wyam` command:
+
+```
+wyam ...
+```
 
 # Zip File
 
-To download Wyam as a zip file, visit the [Releases](https://github.com/Wyamio/Wyam/releases) page and download the most recent archive. Then unzip it into a folder of your choice. That's it. The zip archive contains an executable `wyam.exe` as well as all the required libraries. You may also want to add the folder where you unzipped Wyam to your path, but that step is optional.
+To download Wyam as a zip file, visit the [Releases](https://github.com/Wyamio/Wyam/releases) page and download the most recent archive. Then unzip it into a folder of your choice. That's it. .NET Core [framework-dependent deployment](https://docs.microsoft.com/en-us/dotnet/core/deploying/#framework-dependent-deployments-fdd), which means it's shipped as a DLL assembly that requires the `dotnet` CLI bootstrapper to run. You may also want to add the folder where you unzipped Wyam to your path, but that step is optional.
 
-**Note that you may also need to right-click the zip file after download and select "Unblock" in the Security section of the properties dialog, otherwise you could get strange errors when using the application.**
+Once you download the [ZIP archive](https://github.com/Wyamio/Wyam/releases) and extract it somewhere, running Wyam looks like:
+
+```
+dotnet /path/to/wyam/Wyam.dll ...
+```
 
 # Tools Package
 

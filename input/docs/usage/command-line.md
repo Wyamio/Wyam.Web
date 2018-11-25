@@ -3,7 +3,7 @@ Description: Describes how to run Wyam from the command line and the available o
 Order: 2
 RedirectFrom: getting-started/usage
 ---
-You typically run Wyam using the command line application `wyam`. If you don't specify any arguments, the root folder will be set to the current folder and if a file named `config.wyam` is found, it will be used as the configuration file. You can also specify a root folder that's different than the current folder after the `wyam` command. For example:
+To execute Wyam you need to run either `wyam` (if you installed it as a global tool) or `dotnet /path/to/wyam/Wyam.dll` (if you downloaded the ZIP archive) followed by any Wyam arguments. If you don't specify any arguments, the root folder will be set to the current folder and if a file named `config.wyam` is found, it will be used as the configuration file. You can also specify a root folder that's different than the current folder after the `wyam` command. For example:
 
 ```
 wyam
