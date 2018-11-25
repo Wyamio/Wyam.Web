@@ -66,9 +66,10 @@ NoGutter: true
 	
 	<h1>Usage</h1>
 	<hr />
-	<p><strong><a href="https://github.com/Wyamio/Wyam/releases">Go download the latest version now</a></strong> (look at <em>Downloads</em> under each release). Then unzip the Wyam.zip archive. The easiest way to get started is to use a <a href="/recipes">recipe and theme</a>.</p>
-	<p><b>1.</b> Scaffold a new blog: <pre><code>wyam.exe new --recipe Blog</code></pre></p>
-	<p><b>2.</b> Edit the scaffolded files.</p>
-	<p><b>3.</b> Build the blog with a theme: <pre><code>wyam.exe --recipe Blog --theme CleanBlog</code></pre></p>
+	<p>The easiest way to get started is to install as a .NET Core global tool and use a <a href="/recipes">recipe and theme</a>.</p>
+	<p><b>1.</b> Download and install Wyam as a global tool: <pre><code>dotnet tool install -g Wyam.Tool</code></pre></p>
+	<p><b>2.</b> Scaffold a new blog: <pre><code>wyam new --recipe Blog</code></pre></p>
+	<p><b>3.</b> Edit the scaffolded files.</p>
+	<p><b>4.</b> Build the blog with a theme: <pre><code>wyam --recipe Blog --theme CleanBlog</code></pre></p>
 	<p>To go deeper, read more about the <a href="/docs/concepts">underlying concepts</a> and then read about <a href="/docs/usage/configuration">configuration files</a> and the <a href="/docs/usage/command-line">available command line arguments</a>. Then check out the full list of <a href="/modules">modules</a>.</p>
 </div>
