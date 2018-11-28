@@ -39,7 +39,7 @@ install:
   - 7z x ..\Wyam\Wyam.zip -o..\Wyam -r
 
 build_script:
-  - ..\Wyam\wyam --output ..\output
+  - dotnet ..\Wyam\Wyam.dll --output ..\output
 
 on_success:
   # Switch branches to gh-pages, clean the folder, copy everything in from the Wyam output, and commit/push
