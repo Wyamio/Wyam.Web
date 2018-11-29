@@ -30,7 +30,7 @@ Many sites and blogs are realizing the benefits of an extensible, flexible, nati
 - **[Cake](http://cakebuild.net/)** ([source code](https://github.com/cake-build/website))  
   The documentation site for the Cake build automation platform.
 
-- **[Colectica](https://www.colectica.com/)**
+- **[Colectica](https://www.colectica.com/)**  
   The company website for Colectica metadata management software.
 
 - **[Dave Glick](https://daveaglick.com)** ([source code](https://github.com/daveaglick/daveaglick))  
