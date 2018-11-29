@@ -21,6 +21,14 @@ Then you can use it with the `wyam` command:
 wyam ...
 ```
 
+On non-Windows systems you might need to add .NET Global tool folder to the environment path variable, for your shell to find the `wyam` command. If running Bash you can add it to your `.bash_profile` like below (`echo ~/.dotnet/tools` will give your absolute path to .NET global tool folder):
+```
+cat << \EOF >> ~/.bash_profile
+# Add .NET Core SDK tools
+export PATH="$PATH:/home/{username}/.dotnet/tools"
+EOF
+```
+
 # Zip File
 
 To download Wyam as a zip file, visit the [Releases](https://github.com/Wyamio/Wyam/releases) page and download the most recent archive. Then unzip it into a folder of your choice. That's it. .NET Core [framework-dependent deployment](https://docs.microsoft.com/en-us/dotnet/core/deploying/#framework-dependent-deployments-fdd), which means it's shipped as a DLL assembly that requires the `dotnet` CLI bootstrapper to run. You may also want to add the folder where you unzipped Wyam to your path, but that step is optional.
