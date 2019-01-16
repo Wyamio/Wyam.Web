@@ -4,3 +4,4 @@ steps:
   - script: build -target BuildServer
     env:
       NETLIFY_TOKEN: $(NETLIFY_TOKEN)
+      WYAM_GITHUB_TOKEN: $(WYAM_GITHUB_TOKEN)
