@@ -1,7 +1,5 @@
 Title: Version 2.0
 Published: 11/24/2018
-Category: Release Notes
-Author: dglick
 ---
 <div style="width:100%;height:0;padding-bottom:68%;position:relative;"><iframe src="https://giphy.com/embed/rl0FOxdz7CcxO" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/excited-ron-paul-its-happening-rl0FOxdz7CcxO">via GIPHY</a></p>
 

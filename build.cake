@@ -1,11 +1,13 @@
 // The following environment variables need to be set for Publish target:
 // WYAM_GITHUB_TOKEN
 
-#tool "nuget:https://api.nuget.org/v3/index.json?package=Wyam&version=2.0.0"
-#addin "nuget:https://api.nuget.org/v3/index.json?package=Cake.Wyam&version=2.0.0"
+#tool "nuget:https://api.nuget.org/v3/index.json?package=Wyam&version=2.1.2"
+#addin "nuget:https://api.nuget.org/v3/index.json?package=Cake.Wyam&version=2.1.2"
 #addin "nuget:https://api.nuget.org/v3/index.json?package=Octokit"
+#addin "NetlifySharp"
 
 using Octokit;
+using NetlifySharp;
 
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -153,29 +155,23 @@ Task("Preview")
 Task("Debug")
     .Does(() =>
     {
-        StartProcess("../Wyam/src/clients/Wyam/bin/Debug/net462/wyam.exe",
-            "-a \"../Wyam/tests/integration/Wyam.Examples.Tests/bin/Debug/net462/**/*.dll\" -r \"docs -i\" -t \"../Wyam/themes/Docs/Samson\" -p");
+        DotNetCoreBuild("../Wyam/tests/integration/Wyam.Examples.Tests/Wyam.Examples.Tests.csproj");        
+        DotNetCoreExecute("../Wyam/tests/integration/Wyam.Examples.Tests/bin/Debug/netcoreapp2.1/Wyam.dll",
+            "-a \"../Wyam/tests/integration/Wyam.Examples.Tests/bin/Debug/netcoreapp2.1/**/*.dll\" -r \"docs -i\" -t \"../Wyam/themes/Docs/Samson\" -p");
     });
 
 Task("Deploy")
     .Does(() =>
     {
-        string token = EnvironmentVariable("NETLIFY_WYAM");
-        if(string.IsNullOrEmpty(token))
+        var netlifyToken = EnvironmentVariable("NETLIFY_TOKEN");
+        if(string.IsNullOrEmpty(netlifyToken))
         {
-            throw new Exception("Could not get NETLIFY_WYAM environment variable");
+            throw new Exception("Could not get Netlify token environment variable");
         }
-        
-        // This uses the Netlify CLI, but it hits the 200/min API rate limit
-        // To use this, also need #addin "Cake.Npm"
-        // Npm.Install(x => x.Package("netlify-cli"));
-        // StartProcess(
-        //    MakeAbsolute(File("./node_modules/.bin/netlify.cmd")), 
-        //    "deploy -p output -s wyam -t " + token);
 
-        // Upload via curl and zip instead
-        Zip("./output", "output.zip", "./output/**/*");
-        StartProcess("curl", "--header \"Content-Type: application/zip\" --header \"Authorization: Bearer " + token + "\" --data-binary \"@output.zip\" --url https://api.netlify.com/api/v1/sites/wyam.netlify.com/deploys");
+        Information("Deploying output to Netlify");
+        var client = new NetlifyClient(netlifyToken);
+        client.UpdateSite($"wyam.netlify.com", MakeAbsolute(Directory("./output")).FullPath).SendAsync().Wait();
     });
 
 //////////////////////////////////////////////////////////////////////
@@ -185,7 +181,7 @@ Task("Deploy")
 Task("Default")
     .IsDependentOn("Build");
     
-Task("AppVeyor")
+Task("BuildServer")
     .IsDependentOn("Build")
     .IsDependentOn("Deploy");
 

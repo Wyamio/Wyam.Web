@@ -1,5 +1,5 @@
-#tool "nuget:https://www.myget.org/F/wyam?package=Wyam&prerelease&version=2.0.0-build-1240"
-#addin "nuget:https://www.myget.org/F/wyam?package=Cake.Wyam&prerelease&version=2.0.0-build-1240"
+#tool "nuget:https://www.myget.org/F/wyam?package=Wyam&prerelease&version=2.1.1-build-20181217-3"
+#addin "nuget:https://www.myget.org/F/wyam?package=Cake.Wyam&prerelease&version=2.1.1-build-20181217-3"
 #addin "nuget:https://api.nuget.org/v3/index.json?package=Octokit"
 
 using Octokit;
@@ -157,7 +157,7 @@ Task("Preview")
     {
         Wyam(new WyamSettings
         {
-            NoClean = true,  // Cleaned in Generate-Themes task
+            //NoClean = true,  // Cleaned in Generate-Themes task
             Recipe = "Docs -i",
             Theme = "Samson -i",
             NuGetPackages = new []
