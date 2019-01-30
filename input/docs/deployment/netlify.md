@@ -37,7 +37,7 @@ Task("Deploy")
 
 # Use The Netlify Node CLI
 
-Finally, you can use the Netlify Node CLI to upload your site. The advantage of this over uploading a zip file is that it will automatically check whether a file is updated and only transfer new content since your last publish. Once again, you can automate this is a Cake script:
+You can use the Netlify Node CLI to upload your site. The advantage of this over uploading a zip file is that it will automatically check whether a file is updated and only transfer new content since your last publish. Once again, you can automate this is a Cake script:
 
 ```
 #addin "Cake.Npm"
@@ -59,5 +59,31 @@ Task("Deploy")
         StartProcess(
             MakeAbsolute(File("./node_modules/.bin/netlify.cmd")), 
             "deploy -p output -s yoursite -t " + token);
+    });
+```
+
+# Use NetlifySharp
+You can use the NetlifySharp client to upload to the server. This plugin also has the advantage of supporting selective uploads. Once again you can use Cake to automate the deployment.
+
+```cs
+#addin "nuget:?package=NetlifySharp&version=0.1.0"
+
+using NetlifySharp;
+
+// ...
+
+Task("Netlify")
+    .Does(() =>
+    {
+        var netlifyToken = EnvironmentVariable("NETLIFY_TOKEN");
+        if(string.IsNullOrEmpty(netlifyToken))
+        {
+            throw new Exception("Could not get Netlify token environment variable");
+        }
+
+        // Install the Netlify CLI locally and then run the deploy command
+        Information("Deploying output to Netlify");
+        var client = new NetlifyClient(netlifyToken);
+        client.UpdateSite($"daveaglick.netlify.com", MakeAbsolute(Directory("./output")).FullPath).SendAsync().Wait();
     });
 ```
