@@ -7,6 +7,9 @@ RedirectFrom: community
 There is a growing community of developers exploring static generators and Wyam. If you've written a blog post that involves Wyam, or know of one, please let us know by submitting a PR with additions to this page.
 
 <!-- Use two spaces after the title for proper formatting -->
+- **[Deploying a Wyam site to Netlify with Azure Devops](https://blizard.io/posts/deploying-a-wyam-site-using-azure-devops-to-netlify)**  
+  Liam Blizard, December 29, 2018
+
 - **[Blogging with Wyam - The evolution of my blogging platform](http://www.imtraum.com/blog/blogging-with-wyam)**  
   Joshua Gall, April 15, 2018
 
