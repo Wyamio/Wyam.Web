@@ -48,7 +48,8 @@ Many sites and blogs are realizing the benefits of an extensible, flexible, nati
 - **[Gary Ewan Park](http://www.gep13.co.uk/)** ([source code](https://github.com/gep13/gep13))  
   The personal blog of Gary Ewan Park.
   
-- **[Glenn Watson](https://glennwatson.net/)** ([source code](https://github.com/glennawatson/personal-website)) The personal blog of Glenn Watson.
+- **[Glenn Watson](https://glennwatson.net/)** ([source code](https://github.com/glennawatson/personal-website))  
+  The personal blog of Glenn Watson.
 
 - **[Ian Bebbington](http://ian.bebbs.co.uk)** ([source code](https://github.com/ibebbs/ibebbs.github.io))  
   The personal blog of Ian Bebbington.
