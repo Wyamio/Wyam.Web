@@ -12,6 +12,9 @@ There is a growing community of developers exploring static generators and Wyam.
   
 - **[Deploying a Wyam site to Netlify with Azure Devops](https://blizard.io/posts/deploying-a-wyam-site-using-azure-devops-to-netlify)**  
   Liam Blizard, December 29, 2018
+  
+- **[Using Wyam on GitLab Pages with Continuous Integration](https://digitalmccullough.com/posts/wyam-ci-on-gitlab-pages.html)**  
+  David McCullough, May 2, 2018
 
 - **[Blogging with Wyam - The evolution of my blogging platform](http://www.imtraum.com/blog/blogging-with-wyam)**  
   Joshua Gall, April 15, 2018
