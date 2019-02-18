@@ -1,0 +1,10 @@
+@foreach(IDocument childDoc in Documents.FromPipeline("Shortcodes")
+	.OrderBy(x => x.String("DisplayName")))
+{
+	string selectedClass = Model.String("RelativeFilePath") == childDoc.String("RelativeFilePath") ? "selected" : null;
+	<li class="@selectedClass">
+		<a href="@Context.GetLink(childDoc)">
+			@(childDoc.String("DisplayName"))
+		</a>
+	</li>
+}

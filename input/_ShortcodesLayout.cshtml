@@ -1,0 +1,91 @@
+@{
+	Layout = @"/_Master.cshtml";
+	ViewData["Title"] = "Shortcodes - " + Model["DisplayName"];
+}
+
+@section Infobar {			
+    @Html.Partial("_Infobar") 
+}
+
+@section Search {
+    @Html.Partial("_ShortcodesSearch")
+    <hr />
+}
+
+@section Sidebar {
+	@Html.Partial("_ShortcodesSidebar")
+}
+
+<section class="content-header">
+    <h1>
+		@Model.Name()
+		@{
+			string ns = null;
+			IDocument containingNamespace = Model.Get<IDocument>("ContainingNamespace");
+			if(containingNamespace != null)
+			{
+				ns = containingNamespace.String("DisplayName");
+				if(!ns.StartsWith("Wyam.Core"))
+				{
+					<small><span class="label label-default">@ns</span></small>
+				}
+			}
+		}
+	</h1>
+</section>
+<section class="content">
+	@RenderBody()  @* Empty, but needs to be here *@
+	
+	@{
+		// Summary
+		string summary = Model.String("Summary");
+		if(!string.IsNullOrWhiteSpace(summary))
+		{
+			<div class="lead">@Html.Raw(summary)</div>
+		}
+		
+		// Remarks
+		string remarks = Model.String("Remarks");
+		if(!string.IsNullOrWhiteSpace(remarks))
+		{
+			<div>@Html.Raw(remarks)</div>
+		}
+		
+		// Package
+		if(!ns.StartsWith("Wyam.Core"))
+		{
+			<h1 id="Package">Package</h1>
+			<div>This module exists in the <strong>@ns</strong> package which is not part of the core distribution. Add the following preprocessor directive to your <a href="/docs/usage/configuration">configuration file</a> to use it:</div>
+			<pre class="prettyprint"><code>#n @ns</code></pre>
+			<div>Alternatively, you can add all modules at once with the following preprocessor directive:</div>
+			<pre class="prettyprint"><code>#n Wyam.All</code></pre>
+		}
+		
+		// Examples
+		string examples = Model.String("Example");
+		if(!string.IsNullOrWhiteSpace(examples))
+		{
+			<h1 id="Examples">Examples</h1>
+			<div>@Html.Raw(examples)</div>
+		}
+
+		// Parameters
+		IReadOnlyList<OtherComment> parameterComments = Model.List<OtherComment>("ParameterComments");
+		if(parameterComments != null && parameterComments.Count > 0)
+		{
+			<h1 id="parameters">Parameters</h1>
+			<ul>
+				@foreach(OtherComment parameterComment in parameterComments)
+				{
+					<li>
+						@if(parameterComment.Attributes.ContainsKey("name"))
+						{
+							<p><strong><code>@(parameterComment.Attributes["name"])</code></strong></p>
+						}
+						<p>@Html.Raw(parameterComment.Html)</p>
+					</li>
+				}
+			</ul>
+		}	
+	}	
+</section>
