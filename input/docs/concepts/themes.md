@@ -1,6 +1,6 @@
 Title: Themes
 Description: Each theme contains a set of content such as CSS files, layouts, etc. that apply to a specific recipe.
-Order: 6
+Order: 7
 ---
 Each *theme* contains a set of content such as CSS files, layouts, etc. that apply to a specific recipe. A theme can be used to get up and running quickly with a given recipe by providing the set of resources the recipe requires. Because each recipe is a totally different set of modules, pipelines, metadata, etc. a given theme is only applicable to a specific recipe. The way a theme works is by providing an [input path](/docs/concepts/io#input-paths) that takes less precedence than the main input path. The theme itself is simply a bunch of files that would act the same way if they were sitting in your own `input` path.
 

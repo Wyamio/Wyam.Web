@@ -1,6 +1,6 @@
 Title: Recipes
 Description: A recipe is a pre-configured series of modules and pipelines.
-Order: 5
+Order: 6
 ---
 A *recipe* is a pre-configured series of modules and pipelines. <a href="/recipes">Each recipe</a> can be thought of as it's own special purpose static site generator. For example, the <a href="/recipes/blog">Blog</a> recipe can be thought of as analogous to a tool like Jekyll. Recipes can still make use of <a href="/docs/usage/configuration">configuration files</a> to further tweak the generation process, but they aren't required. 
 

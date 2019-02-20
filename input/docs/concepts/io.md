@@ -1,6 +1,6 @@
 Title: I/O
 Description: Explains Wyam's powerful I/O abstraction.
-Order: 7
+Order: 8
 RedirectFrom: getting-started/io
 ---
 

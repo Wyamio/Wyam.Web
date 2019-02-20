@@ -1,6 +1,6 @@
 Title: Pipelines
 Description: A pipeline is a series of modules executed in sequence.
-Order: 4
+Order: 5
 ---
 A *pipeline* is a series of modules executed in sequence that results in final output documents. A given Wyam configuration can have multiple pipelines which are executed in sequence, and subsequent pipelines have access to the documents from the previous pipelines.
 
