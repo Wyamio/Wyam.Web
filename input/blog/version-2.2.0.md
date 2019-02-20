@@ -21,12 +21,12 @@ Version 2.2.0 is now available.
 
 - Fixed a bug when the `Sass` module processes Sass files that have includes which aren't under an `input` folder
 
-# Significant Updates
-
 ## Refactoring
 
 - New `IExecutionContext.HttpClient` and `IExecutionContext.GetHttpClient(HttpMessageHandler)` to manage a single shared `HttpClient` instance
 - New support in `Wyam.Testing` and `TestExecutionContext` for testing modules that use a `HttpClient`
+
+# Significant Updates
 
 ## Shortcodes!
 
