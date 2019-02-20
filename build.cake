@@ -1,8 +1,8 @@
 // The following environment variables need to be set for Publish target:
 // WYAM_GITHUB_TOKEN
 
-#tool "nuget:https://api.nuget.org/v3/index.json?package=Wyam&version=2.1.3"
-#addin "nuget:https://api.nuget.org/v3/index.json?package=Cake.Wyam&version=2.1.3"
+#tool "nuget:https://api.nuget.org/v3/index.json?package=Wyam&version=2.2.0"
+#addin "nuget:https://api.nuget.org/v3/index.json?package=Cake.Wyam&version=2.2.0"
 #addin "nuget:https://api.nuget.org/v3/index.json?package=Octokit"
 #addin "NetlifySharp"
 

@@ -2,7 +2,7 @@ Title: Shortcodes
 Description: Shortcodes are small but powerful macros that can generate content in your documents.
 Order: 4
 ---
-Wyam supports several templating engines like Markdown and Razor, but sometimes you need to generate some content regardless of the templating language you're using. Shortcodes are small text macros that can do big things and work across any templating engine. Wyam comes with several helpful shortcodes built-in and it's easy to add your own.
+Wyam supports several templating engines like Markdown and Razor, but sometimes you need to generate some content regardless of the templating language you're using. Shortcodes are small text macros that can do big things and work across any templating engine. Wyam comes with [several helpful shortcodes built-in (click here to view them)](/shortcodes) and it's easy to add your own.
 
 # Using Shortcodes
 
@@ -58,13 +58,61 @@ Note that unnamed positional parameters almost always must appear before named p
 
 ## Content
 
-passing through with processing instructions
+In addition to parameters, some shortcodes accept or expect content. Shortcode content goes between the opening and closing shortcode tag and is sent verbatim to the shortcode:
+
+```
+<?# ShortcodeName "parameter 1" ?>
+Here is
+Some Shortcode
+Content
+<?#/ ShortcodeName ?>
+```
+
+Because shortcode content is just text in your file, it will be changed by any templating engine(s) the file gets processed by before reaching the `Shortcodes` module. For example, if the shortcode about was part of a Markdown file, it would end up looking like this before being processed by the shortcode (notice the surrounding `<p>` that the Markdown engine added):
+
+```
+<?# ShortcodeName "parameter 1" ?>
+<p>Here is
+Some Shortcode
+Content</p>
+<?#/ ShortcodeName ?>
+```
+
+Many times that behavior is desirable because we want to use the templating language for the shortcode content. Other times you may want the shortcode content to stay unprocessed by templating engines. In that case, you can surround the content inside an XML processing instruction. This works because like the shortcodes themselves, most templating engines will ignore XML processing instructions. The shortcode processor will remove the wrapping XML processing instruction tags inside the content before processing.
+
+For example, this:
+
+```
+<?# ShortcodeName "parameter 1" ?>
+<?
+Here is
+Some Shortcode
+Content
+?>
+<?#/ ShortcodeName ?>
+```
+
+Will not get an added `<p>` from the Markdown engine and instead will get processed by the shortcode as:
+
+```
+<?# ShortcodeName "parameter 1" ?>
+Here is
+Some Shortcode
+Content
+<?#/ ShortcodeName ?>
+```
 
 # Writing Shortcodes
 
 ## Config File
 
+You can define shortcodes in the config file by using the `ShortcodeCollection` property which is an `IShortcodeCollection` that contains several methods for defining delegate-based shortcodes.
+
+Examples to come...
+
 ## As A Class
+
+To write a shortcode as a class, implement `IShortcode` from `Wyam.Common`. Wyam will scan loaded assemblies prior to execution and make any shortcodes it finds available for use. The shortcode name will be the same as the implementing class name.
 
 # Rendering Shortcodes
 
