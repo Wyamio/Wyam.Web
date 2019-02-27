@@ -20,14 +20,14 @@
     <h1>
 		@Model.Name()
 		@{
-			string ns = null;
+			string package = null;
 			IDocument containingNamespace = Model.Get<IDocument>("ContainingNamespace");
 			if(containingNamespace != null)
 			{
-				ns = containingNamespace.String("DisplayName");
-				if(!ns.StartsWith("Wyam.Core"))
+				package = string.Join(".", containingNamespace.String("DisplayName").Split('.').Take(2));
+				if(!package.StartsWith("Wyam.Core"))
 				{
-					<small><span class="label label-default">@ns</span></small>
+					<small><span class="label label-default">@package</span></small>
 				}
 			}
 		}
@@ -52,13 +52,11 @@
 		}
 		
 		// Package
-		if(!ns.StartsWith("Wyam.Core"))
+		if(!package.StartsWith("Wyam.Core"))
 		{
 			<h1 id="Package">Package</h1>
-			<div>This module exists in the <strong>@ns</strong> package which is not part of the core distribution. Add the following preprocessor directive to your <a href="/docs/usage/configuration">configuration file</a> to use it:</div>
-			<pre class="prettyprint"><code>#n @ns</code></pre>
-			<div>Alternatively, you can add all modules at once with the following preprocessor directive:</div>
-			<pre class="prettyprint"><code>#n Wyam.All</code></pre>
+			<div>This module exists in the <strong>@package</strong> package which is not part of the core distribution. Add the following preprocessor directive to your <a href="/docs/usage/configuration">configuration file</a> to use it:</div>
+			<pre class="prettyprint"><code>#n @package</code></pre>
 		}
 		
 		// Examples

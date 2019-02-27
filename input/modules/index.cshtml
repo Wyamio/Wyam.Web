@@ -38,10 +38,10 @@ NoSidebar: false
 										IDocument containingNamespace = childDoc.Get<IDocument>("ContainingNamespace");
 										if(containingNamespace != null)
 										{
-											string ns = containingNamespace.String("DisplayName");
-											if(!ns.StartsWith("Wyam.Core"))
+											string package = string.Join(".", containingNamespace.String("DisplayName").Split('.').Take(2));
+											if(!package.StartsWith("Wyam.Core"))
 											{
-												<small><span class="label label-default">@ns</span></small>
+												<small><span class="label label-default">@package</span></small>
 											}
 										}
 									}
